@@ -1,3 +1,5 @@
+import React from "react";
+
 const EventCard = ({ event, onClick }) => {
   return (
     <div
@@ -19,3 +21,5 @@ const EventCard = ({ event, onClick }) => {
     </div>
   );
 };
+
+export default EventCard; 
