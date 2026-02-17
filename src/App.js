@@ -4,7 +4,8 @@ import EventCard from "./components/EventCard";
 import EventDetails from "./components/EventDetails";
 import MyReminders from "./components/MyReminders";
 import eventsData from "./data/events.json";
-import { toGregorian, toEthiopian } from "./utils/dateConverter"; 
+import { convertToGregorian, convertToEthiopian } from "./utils/dateConverter";
+
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -36,9 +37,10 @@ function App() {
   const eventsForDate = selectedDate
     ? eventsData.filter((e) => {
         const eventDate = isEthiopian ? e.eth_date : e.greg_date;
-        const selected = isEthiopian
-          ? toEthiopian(selectedDate)
-          : toGregorian(selectedDate);
+const selected = isEthiopian
+  ? convertToEthiopian(selectedDate)
+  : convertToGregorian(selectedDate);
+
         return eventDate === selected;
       })
     : [];
