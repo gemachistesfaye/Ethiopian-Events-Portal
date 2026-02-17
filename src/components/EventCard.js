@@ -1,8 +1,9 @@
-import React from "react";
-
-const EventCard = ({ event }) => {
+const EventCard = ({ event, onClick }) => {
   return (
-    <div className="bg-white shadow rounded p-4 mb-4 flex items-center">
+    <div
+      className="bg-white shadow rounded p-4 mb-4 flex items-center cursor-pointer hover:bg-gray-100"
+      onClick={onClick}
+    >
       <img
         src={event.image}
         alt={event.name}
@@ -18,5 +19,3 @@ const EventCard = ({ event }) => {
     </div>
   );
 };
-
-export default EventCard;
