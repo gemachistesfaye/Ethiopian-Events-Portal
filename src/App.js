@@ -64,6 +64,7 @@ const selected = isEthiopian
       {/* Calendar */}
       <EventCalendar onDateClick={handleDateClick} isEthiopian={isEthiopian} />
 
+
       {/* Events for selected date */}
       <div className="mt-6">
         {selectedDate && eventsForDate.length === 0 && (
