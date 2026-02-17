@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import EventCalendar from "./components/Calendar";
 import EventCard from "./components/EventCard";
+import EventDetails from "./components/EventDetails";
 import eventsData from "./data/events.json";
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
   };
 
-  // Filter events for selected date
+  const handleAddReminder = (event) => {
+    console.log("Reminder added for:", event.name);
+    // Later: store reminder in localStorage or Firebase per user
+    alert(`Reminder added for ${event.name}`);
+  };
+
   const eventsForDate = selectedDate
     ? eventsData.filter(
         (e) =>
@@ -28,15 +35,26 @@ function App() {
 
       <div className="mt-6">
         {selectedDate && eventsForDate.length === 0 && (
-          <p className="text-center text-gray-500">
-            No events on this date.
-          </p>
+          <p className="text-center text-gray-500">No events on this date.</p>
         )}
 
         {eventsForDate.map((event) => (
-          <EventCard key={event.id} event={event} />
+          <EventCard
+            key={event.id}
+            event={event}
+            onClick={() => setSelectedEvent(event)}
+          />
         ))}
       </div>
+
+      {/* Event Details Modal */}
+      {selectedEvent && (
+        <EventDetails
+          event={selectedEvent}
+          onClose={() => setSelectedEvent(null)}
+          onAddReminder={handleAddReminder}
+        />
+      )}
     </div>
   );
 }
