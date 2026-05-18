@@ -221,6 +221,8 @@ const App: React.FC = () => {
       if (event === 'PASSWORD_RECOVERY') {
         setIsResettingPassword(true);
         setActiveTab('account');
+      } else if (event === 'SIGNED_IN') {
+        setActiveTab('home');
       }
     });
 
@@ -584,7 +586,7 @@ const App: React.FC = () => {
             />
           </div>
         ) : activeTab === 'home' ? (
-          <LandingPage onExplore={() => setActiveTab('calendar')} />
+          user ? <Dashboard user={user} onNavigate={setActiveTab} /> : <LandingPage onExplore={() => setActiveTab('account')} />
         ) : activeTab === 'map' ? (
           <CulturalMap />
         ) : activeTab === 'timeline' ? (
