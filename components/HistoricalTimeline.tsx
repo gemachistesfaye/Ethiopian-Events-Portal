@@ -224,11 +224,11 @@ const HistoricalTimeline: React.FC = () => {
     : TIMELINE_DATA.filter(e => e.category === filter);
 
   return (
-    <div className="min-h-screen bg-stone-950 p-6 lg:p-10 font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-stone-50 p-6 lg:p-10 font-sans relative overflow-hidden">
       
-      {/* Sci-Fi Grid Background */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#f59e0b 1px, transparent 1px), linear-gradient(90deg, #f59e0b 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-transparent to-stone-950 pointer-events-none"></div>
+      {/* Sci-Fi Grid Background - Light Mode */}
+      <div className="absolute inset-0 opacity-[0.4] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#e7e5e4 1px, transparent 1px), linear-gradient(90deg, #e7e5e4 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-stone-50 via-transparent to-stone-50 pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         
@@ -236,32 +236,32 @@ const HistoricalTimeline: React.FC = () => {
         <header className="mb-16 text-center pt-8">
           <div className="inline-block relative">
              <span className="absolute -inset-1 bg-amber-500/20 blur-lg rounded-full"></span>
-             <span className="relative bg-stone-900 border border-amber-500/30 text-amber-400 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-[0_0_15px_rgba(245,158,11,0.2)] backdrop-blur-md">
+             <span className="relative bg-white border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
                Animus Archive System
              </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mb-4 uppercase drop-shadow-2xl">
-            Chronicles of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500">Ethiopia</span>
+          <h1 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter leading-none mb-4 uppercase drop-shadow-sm">
+            Chronicles of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500">Ethiopia</span>
           </h1>
-          <p className="text-stone-400 text-base md:text-lg font-medium max-w-2xl mx-auto uppercase tracking-widest text-[10px]">
+          <p className="text-stone-500 text-base md:text-lg font-medium max-w-2xl mx-auto uppercase tracking-widest text-[10px]">
             Unlock the epic eras, legendary battles, and ancient secrets of the Horn of Africa.
           </p>
         </header>
 
-        {/* HUD Filters */}
+        {/* HUD Filters - Light Mode */}
         <div className="flex flex-wrap justify-center gap-3 mb-20 relative z-20">
           {CATEGORIES.map(c => (
             <button
               key={c}
               onClick={() => setFilter(c)}
-              className={`relative overflow-hidden px-6 py-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all duration-300 group ${
+              className={`relative overflow-hidden px-6 py-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all duration-300 group shadow-sm ${
                 filter === c 
-                  ? 'bg-amber-500 text-stone-900 shadow-[0_0_20px_rgba(245,158,11,0.4)]' 
-                  : 'bg-stone-900/50 border border-stone-800 text-stone-400 hover:border-amber-500/50 hover:text-amber-400 backdrop-blur-sm'
+                  ? 'bg-amber-500 text-white shadow-[0_4px_15px_rgba(245,158,11,0.3)] border border-amber-400' 
+                  : 'bg-white border border-stone-200 text-stone-500 hover:border-amber-300 hover:text-amber-600'
               }`}
             >
               {/* Scanline hover effect */}
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-y-full group-hover:animate-[scan_2s_ease-in-out_infinite]"></span>
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-b from-transparent via-stone-100/50 to-transparent -translate-y-full group-hover:animate-[scan_2s_ease-in-out_infinite]"></span>
               <span className="relative z-10">{c}</span>
             </button>
           ))}
@@ -270,9 +270,9 @@ const HistoricalTimeline: React.FC = () => {
         {/* Tech Tree Timeline */}
         <div className="relative pb-24">
           {/* Glowing Central Power Line */}
-          <div className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-stone-800 rounded-full overflow-hidden shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+          <div className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-stone-200 rounded-full overflow-hidden shadow-inner">
              <motion.div 
-               className="w-full h-1/3 bg-gradient-to-b from-transparent via-amber-500 to-transparent blur-sm"
+               className="w-full h-1/3 bg-gradient-to-b from-transparent via-amber-400 to-transparent blur-[2px]"
                animate={{ y: ["-100%", "300%"] }}
                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
              ></motion.div>
@@ -288,37 +288,37 @@ const HistoricalTimeline: React.FC = () => {
                 transition={{ duration: 0.6, delay: index % 2 === 0 ? 0 : 0.2 }}
                 className={`relative flex flex-col md:flex-row items-center justify-between w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8 md:gap-0`}
               >
-                {/* Content Card (Gaming Style) */}
+                {/* Content Card (Gaming Style - Light) */}
                 <div className="w-full md:w-[42%] ml-16 md:ml-0 group perspective-1000">
                   <div 
-                    className="relative bg-stone-900/80 backdrop-blur-xl p-8 rounded-2xl border border-stone-800 transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-500/50 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]"
+                    className="relative bg-white/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-200 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
                     onClick={() => setSelectedEvent(event)}
                   >
                     {/* Corner accents */}
-                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-stone-600 group-hover:border-amber-500 transition-colors"></div>
-                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-stone-600 group-hover:border-amber-500 transition-colors"></div>
+                    <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-stone-300 group-hover:border-amber-500 transition-colors"></div>
+                    <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-stone-300 group-hover:border-amber-500 transition-colors"></div>
 
                     <div className="flex items-center gap-4 mb-4">
-                      <span className="text-sm font-black text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">{event.year}</span>
-                      <div className="h-px flex-1 bg-gradient-to-r from-amber-500/50 to-transparent"></div>
-                      <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-800 border border-stone-700 text-stone-400 px-3 py-1.5 rounded-sm">
+                      <span className="text-sm font-black text-amber-600">{event.year}</span>
+                      <div className="h-px flex-1 bg-gradient-to-r from-amber-200 to-transparent"></div>
+                      <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-50 border border-stone-200 text-stone-500 px-3 py-1.5 rounded-sm">
                         {event.category}
                       </span>
                     </div>
                     
-                    <h3 className="text-2xl font-black text-white mb-3 tracking-tight group-hover:text-amber-400 transition-colors">{event.title}</h3>
-                    <p className="text-stone-400 text-sm leading-relaxed font-medium">{event.description}</p>
+                    <h3 className="text-2xl font-black text-stone-900 mb-3 tracking-tight group-hover:text-amber-600 transition-colors">{event.title}</h3>
+                    <p className="text-stone-600 text-sm leading-relaxed font-medium">{event.description}</p>
                     
-                    <div className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-stone-500 group-hover:text-amber-500 transition-colors">
+                    <div className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-stone-400 group-hover:text-amber-600 transition-colors">
                       <span>Access Archive</span>
                       <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </div>
                   </div>
                 </div>
 
-                {/* Cyberpunk Node */}
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full border-2 border-stone-800 bg-stone-950 flex items-center justify-center shadow-xl z-10 group cursor-pointer" onClick={() => setSelectedEvent(event)}>
-                   <div className="w-3 h-3 bg-stone-600 rounded-full transition-all duration-300 group-hover:bg-amber-400 group-hover:shadow-[0_0_15px_rgba(245,158,11,1)]"></div>
+                {/* Cyberpunk Node - Light */}
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full border-[3px] border-white bg-stone-100 flex items-center justify-center shadow-md z-10 group cursor-pointer" onClick={() => setSelectedEvent(event)}>
+                   <div className="w-3 h-3 bg-stone-300 rounded-full transition-all duration-300 group-hover:bg-amber-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.6)]"></div>
                    <div className="absolute inset-0 rounded-full border border-amber-500/0 group-hover:border-amber-500/50 group-hover:animate-ping"></div>
                 </div>
 
@@ -329,7 +329,7 @@ const HistoricalTimeline: React.FC = () => {
           </div>
         </div>
 
-        {/* Cinematic Modal */}
+        {/* Cinematic Modal - Light Theme */}
         <AnimatePresence>
           {selectedEvent && (
             <motion.div
@@ -338,57 +338,57 @@ const HistoricalTimeline: React.FC = () => {
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10"
             >
-              <div className="absolute inset-0 bg-stone-950/90 backdrop-blur-xl" onClick={() => setSelectedEvent(null)}></div>
+              <div className="absolute inset-0 bg-stone-900/40 backdrop-blur-md" onClick={() => setSelectedEvent(null)}></div>
               
               <motion.div
                 initial={{ scale: 0.95, opacity: 0, rotateX: 10 }}
                 animate={{ scale: 1, opacity: 1, rotateX: 0 }}
                 exit={{ scale: 0.95, opacity: 0, rotateX: -10 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative w-full max-w-5xl bg-stone-900 border border-stone-800 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col md:flex-row max-h-[90vh]"
+                className="relative w-full max-w-5xl bg-white border border-stone-200 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Image Section */}
                 <div className="w-full md:w-1/2 h-64 md:h-auto relative">
                   <img src={selectedEvent.imageUrl} alt={selectedEvent.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-stone-900 via-stone-900/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-stone-900/60 md:from-transparent via-transparent to-transparent"></div>
                   
                   {/* Digital Glitch Overlay */}
-                  <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIiAvPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjZmZmIiAvPgo8L3N2Zz4=')] mix-blend-overlay"></div>
+                  <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIiAvPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjZmZmIiAvPgo8L3N2Zz4=')] mix-blend-overlay"></div>
                 </div>
 
                 {/* Content Section */}
                 <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative overflow-y-auto custom-scrollbar">
                   <button 
                     onClick={() => setSelectedEvent(null)}
-                    className="absolute top-6 right-6 w-10 h-10 bg-stone-800 text-stone-400 hover:text-white hover:bg-stone-700 rounded-full flex items-center justify-center transition-all z-20"
+                    className="absolute top-6 right-6 w-10 h-10 bg-stone-100 text-stone-500 hover:text-stone-900 hover:bg-stone-200 rounded-full flex items-center justify-center transition-all z-20"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
                   </button>
 
                   <div className="flex items-center gap-4 mb-6">
-                    <span className="text-amber-500 font-black text-xl drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]">{selectedEvent.year}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-stone-600"></span>
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-stone-800 text-amber-400/80 px-3 py-1 rounded border border-amber-500/20">
+                    <span className="text-amber-600 font-black text-xl drop-shadow-sm">{selectedEvent.year}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-stone-300"></span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-stone-50 text-amber-700 px-3 py-1 rounded border border-amber-200">
                       {selectedEvent.category} Database
                     </span>
                   </div>
                   
-                  <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-8 tracking-tighter">
+                  <h2 className="text-4xl md:text-5xl font-black text-stone-900 leading-tight mb-8 tracking-tighter">
                     {selectedEvent.title}
                   </h2>
                   
                   <div className="relative">
-                    <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-500 to-transparent rounded-full"></div>
-                    <p className="text-stone-300 text-lg leading-relaxed font-medium">
+                    <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-400 to-transparent rounded-full"></div>
+                    <p className="text-stone-600 text-lg leading-relaxed font-medium">
                       {selectedEvent.description}
                     </p>
                   </div>
 
-                  <div className="mt-12 flex items-center justify-between border-t border-stone-800 pt-8">
-                    <div className="flex items-center gap-3 opacity-50">
-                       <svg className="w-5 h-5 text-stone-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                       <span className="text-[10px] font-black uppercase tracking-widest text-stone-400">Historical Record Verified</span>
+                  <div className="mt-12 flex items-center justify-between border-t border-stone-100 pt-8">
+                    <div className="flex items-center gap-3 opacity-60">
+                       <svg className="w-5 h-5 text-stone-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                       <span className="text-[10px] font-black uppercase tracking-widest text-stone-500">Historical Record Verified</span>
                     </div>
                   </div>
                 </div>
