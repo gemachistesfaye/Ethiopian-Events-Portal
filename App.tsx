@@ -386,17 +386,7 @@ const App: React.FC = () => {
           <HeritageChat />
         ) : (
           user ? (
-            <div className="text-center py-20 bg-white p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10">
-              <div className="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">👤</div>
-              <p className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1">Logged in as</p>
-              <h2 className="text-xl font-black mb-6 text-stone-900">{user.email}</h2>
-              <button 
-                onClick={() => supabase.auth.signOut()}
-                className="w-full h-12 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors"
-              >
-                Logout
-              </button>
-            </div>
+            <Profile user={user} />
           ) : (
             <Auth />
           )
@@ -417,6 +407,64 @@ const App: React.FC = () => {
           }}
         />
       )}
+    </div>
+  );
+};
+
+const Profile: React.FC<{ user: any }> = ({ user }) => {
+  const [newEmail, setNewEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleUpdateEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+    try {
+      const { error } = await supabase.auth.updateUser({ email: newEmail });
+      if (error) throw error;
+      setMessage('Check your new email for a confirmation link!');
+    } catch (error: any) {
+      setMessage(error.message || 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="text-center py-10 bg-white p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10">
+      <div className="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">👤</div>
+      <p className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1">Logged in as</p>
+      <h2 className="text-xl font-black mb-6 text-stone-900">{user.email}</h2>
+      
+      <form onSubmit={handleUpdateEmail} className="space-y-4 mb-6">
+        <div>
+          <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block text-left">New Email</label>
+          <input 
+            type="email" 
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+            className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+            required
+          />
+        </div>
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="w-full h-12 bg-amber-500 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
+        >
+          {loading ? 'Updating...' : 'Change Email'}
+        </button>
+      </form>
+
+      {message && <p className="text-xs font-bold text-amber-600 mb-4">{message}</p>}
+
+      <button 
+        onClick={() => supabase.auth.signOut()}
+        className="w-full h-12 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors"
+      >
+        Logout
+      </button>
     </div>
   );
 };
