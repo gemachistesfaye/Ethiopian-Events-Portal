@@ -24,6 +24,7 @@ const App: React.FC = () => {
   const [reminders, setReminders] = useState<UserReminder[]>([]);
   const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'narrator' | 'reminders' | 'culture' | 'chat' | 'account'>('home');
   const [user, setUser] = useState<User | null>(null);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -113,18 +114,52 @@ const App: React.FC = () => {
             </div>
           </div>
           
-          <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner overflow-x-auto max-w-[50%]">
+          <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner">
             {[
               { id: 'home', label: 'Home', icon: '🏛️' },
               { id: 'calendar', label: t('nav.explore'), icon: '🌍' },
-              { id: 'map', label: 'Atlas', icon: '🗺️' },
-              { id: 'timeline', label: 'Timeline', icon: '📜' },
-              { id: 'narrator', label: 'Narrator', icon: '🎙️' },
               { id: 'reminders', label: t('nav.saved'), icon: '🏺' },
-              { id: 'culture', label: t('nav.zone'), icon: '✨' },
-              { id: 'chat', label: t('nav.guide'), icon: '🤖' },
-              { id: 'account', label: user ? 'Profile' : 'Login', icon: '👤' }
             ].map(tab => (
+              <button 
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${activeTab === tab.id ? 'bg-white shadow-xl text-stone-900 border border-stone-100 scale-[1.02]' : 'text-stone-400 hover:text-stone-600'}`}
+              >
+                <span className="text-base">{tab.icon}</span>
+                {tab.label}
+              </button>
+            ))}
+            
+            {/* Dropdown for More */}
+            <div className="relative">
+              <button 
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className="px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-stone-400 hover:text-stone-900 transition-all flex items-center gap-2 h-full"
+              >
+                <span>➕</span> More
+              </button>
+              {isMoreOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-stone-200 rounded-2xl shadow-2xl py-2 z-50">
+                  {[
+                    { id: 'map', label: 'Atlas', icon: '🗺️' },
+                    { id: 'timeline', label: 'Timeline', icon: '📜' },
+                    { id: 'narrator', label: 'Narrator', icon: '🎙️' },
+                    { id: 'culture', label: t('nav.zone'), icon: '✨' },
+                    { id: 'chat', label: t('nav.guide'), icon: '🤖' },
+                    { id: 'account', label: user ? 'Profile' : 'Login', icon: '👤' }
+                  ].map(tab => (
+                    <button 
+                      key={tab.id}
+                      onClick={() => { setActiveTab(tab.id as any); setIsMoreOpen(false); }}
+                      className="w-full text-left px-4 py-2.5 text-[10px] font-black uppercase tracking-widest text-stone-400 hover:text-stone-900 hover:bg-stone-50 flex items-center gap-2"
+                    >
+                      <span className="text-base">{tab.icon}</span>
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
               <button 
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
@@ -162,16 +197,11 @@ const App: React.FC = () => {
       </header>
 
       {/* Mobile Nav */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 z-50 px-4 h-20 flex items-center gap-6 overflow-x-auto shadow-2xl">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 z-50 px-6 h-20 flex items-center justify-around shadow-2xl">
         {[
           { id: 'home', label: 'Home', icon: '🏛️' },
           { id: 'calendar', label: 'Explore', icon: '🌍' },
-          { id: 'map', label: 'Atlas', icon: '🗺️' },
-          { id: 'timeline', label: 'Timeline', icon: '📜' },
-          { id: 'narrator', label: 'Narrator', icon: '🎙️' },
           { id: 'reminders', label: 'Saved', icon: '🏺' },
-          { id: 'culture', label: 'Zone', icon: '✨' },
-          { id: 'chat', label: 'Guide', icon: '🤖' }
         ].map(tab => (
           <button 
             key={tab.id}
@@ -182,6 +212,38 @@ const App: React.FC = () => {
             <span className="text-[8px] font-black uppercase tracking-widest">{tab.label}</span>
           </button>
         ))}
+        
+        {/* More Button */}
+        <button 
+          onClick={() => setIsMoreOpen(!isMoreOpen)}
+          className={`flex flex-col items-center gap-1 transition-all ${isMoreOpen ? 'text-amber-600' : 'text-stone-400'}`}
+        >
+          <span className="text-xl">➕</span>
+          <span className="text-[8px] font-black uppercase tracking-widest">More</span>
+        </button>
+
+        {/* Mobile Dropdown (Popover) */}
+        {isMoreOpen && (
+          <div className="absolute bottom-20 left-0 right-0 bg-white border-t border-stone-200 shadow-2xl py-6 grid grid-cols-3 gap-y-6 px-6 z-50">
+            {[
+              { id: 'map', label: 'Atlas', icon: '🗺️' },
+              { id: 'timeline', label: 'Timeline', icon: '📜' },
+              { id: 'narrator', label: 'Narrator', icon: '🎙️' },
+              { id: 'culture', label: 'Zone', icon: '✨' },
+              { id: 'chat', label: 'Guide', icon: '🤖' },
+              { id: 'account', label: user ? 'Profile' : 'Login', icon: '👤' }
+            ].map(tab => (
+              <button 
+                key={tab.id}
+                onClick={() => { setActiveTab(tab.id as any); setIsMoreOpen(false); }}
+                className={`flex flex-col items-center gap-1 transition-all ${activeTab === tab.id ? 'text-amber-600 font-bold' : 'text-stone-400'}`}
+              >
+                <span className="text-xl">{tab.icon}</span>
+                <span className="text-[8px] font-black uppercase tracking-widest">{tab.id === 'account' ? (user ? 'Profile' : 'Login') : tab.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </nav>
 
       <main className="max-w-7xl mx-auto px-8 py-10 flex-grow w-full">
