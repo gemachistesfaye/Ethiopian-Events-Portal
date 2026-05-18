@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import * as topojson from 'topojson-client';
 
 interface DetailItem {
   name: string;
@@ -362,7 +363,33 @@ const REGIONS_DATA: Record<string, RegionData> = {
   }
 };
 
+const REGION_NAME_MAP: Record<string, string> = {
+  'Benshangul-Gumaz': 'benishangul',
+  'Addis Ababa': 'addis',
+  'Harari People': 'harari',
+  'Southern Nations, Nationalities and Peoples': 'southern',
+  'Gambela Peoples': 'gambela',
+  'Oromiya': 'oromiya',
+  'Somali': 'somali',
+  'Dire Dawa': 'dire_dawa',
+  'Tigray': 'tigray',
+  'Afar': 'afar',
+  'Amhara': 'amhara'
+};
+
 const CulturalMap: React.FC = () => {
+  const [geoData, setGeoData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch('https://code.highcharts.com/mapdata/countries/et/et-all.topo.json')
+      .then(res => res.json())
+      .then(topo => {
+        // Convert TopoJSON to GeoJSON
+        const geojson = topojson.feature(topo, topo.objects.default);
+        setGeoData(geojson);
+      })
+      .catch(err => console.error('Error loading map data:', err));
+  }, []);
   const [selectedRegion, setSelectedRegion] = useState<string>('addis');
   const [activeTab, setActiveTab] = useState<'overview' | 'heritages' | 'culture' | 'gallery'>('overview');
   const [selectedDetail, setSelectedDetail] = useState<DetailItem | null>(null);
@@ -488,29 +515,55 @@ const CulturalMap: React.FC = () => {
              <MapContainer center={[9.145, 40.489]} zoom={5} scrollWheelZoom={true} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                <TileLayer
                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                 url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                />
                <MapController />
                
-               {Object.values(REGIONS_DATA).map((region) => (
-                 <Marker 
-                   key={region.id} 
-                   position={region.coordinates}
-                   icon={createCustomIcon(selectedRegion === region.id ? '#10B981' : region.color)}
-                   eventHandlers={{
-                     click: () => {
-                       setSelectedRegion(region.id);
-                       setActiveTab('overview');
-                     },
+               {geoData && (
+                 <GeoJSON 
+                   key={`geojson-${selectedRegion}`}
+                   data={geoData}
+                   style={(feature: any) => {
+                     const regionId = REGION_NAME_MAP[feature?.properties?.name || ''];
+                     const isSelected = regionId === selectedRegion;
+                     const regionData = regionId ? REGIONS_DATA[regionId] : null;
+                     
+                     return {
+                       color: isSelected ? (regionData?.color || '#10B981') : '#d6d3d1',
+                       weight: isSelected ? 2.5 : 1,
+                       fillColor: regionData?.color || '#a8a29e',
+                       fillOpacity: isSelected ? 0.5 : 0.1,
+                       dashArray: isSelected ? '' : '4',
+                     };
                    }}
-                 >
-                   <Popup className="font-sans border-none rounded-2xl shadow-xl overflow-hidden">
-                     <div className="text-center font-black text-stone-900 py-1 px-2 uppercase tracking-wider text-xs">
-                       {region.name}
-                     </div>
-                   </Popup>
-                 </Marker>
-               ))}
+                   onEachFeature={(feature, layer) => {
+                     const regionId = REGION_NAME_MAP[feature?.properties?.name || ''];
+                     if (regionId) {
+                       layer.bindTooltip(`<div class="font-black text-xs uppercase tracking-widest">${REGIONS_DATA[regionId].name}</div>`, { sticky: true, className: 'bg-white border-none shadow-xl rounded-xl px-3 py-1' });
+                       
+                       layer.on({
+                         click: () => {
+                           setSelectedRegion(regionId);
+                           setActiveTab('overview');
+                         },
+                         mouseover: (e) => {
+                           const l = e.target;
+                           if (regionId !== selectedRegion) {
+                             l.setStyle({ fillOpacity: 0.3, weight: 2, color: '#a8a29e' });
+                           }
+                           l.bringToFront();
+                         },
+                         mouseout: (e) => {
+                           const l = e.target;
+                           if (regionId !== selectedRegion) {
+                             l.setStyle({ fillOpacity: 0.1, weight: 1, color: '#d6d3d1', dashArray: '4' });
+                           }
+                         }
+                       });
+                     }
+                   }}
+                 />
+               )}
              </MapContainer>
           </div>
         </div>
