@@ -7,6 +7,7 @@ import MyReminders from './components/MyReminders';
 import CultureZone from './components/CultureZone';
 import HeritageChat from './components/HeritageChat';
 import CulturalMap from './components/CulturalMap';
+import HistoricalTimeline from './components/HistoricalTimeline';
 import Auth from './components/Auth';
 import { supabase } from './services/supabase';
 import { User } from '@supabase/supabase-js';
@@ -19,7 +20,7 @@ const App: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
-  const [activeTab, setActiveTab] = useState<'calendar' | 'map' | 'reminders' | 'culture' | 'chat' | 'account'>('calendar');
+  const [activeTab, setActiveTab] = useState<'calendar' | 'map' | 'timeline' | 'reminders' | 'culture' | 'chat' | 'account'>('calendar');
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -114,6 +115,7 @@ const App: React.FC = () => {
             {[
               { id: 'calendar', label: t('nav.explore'), icon: '🌍' },
               { id: 'map', label: 'Atlas', icon: '🗺️' },
+              { id: 'timeline', label: 'Timeline', icon: '📜' },
               { id: 'reminders', label: t('nav.saved'), icon: '🏺' },
               { id: 'culture', label: t('nav.zone'), icon: '✨' },
               { id: 'chat', label: t('nav.guide'), icon: '🤖' },
@@ -160,6 +162,7 @@ const App: React.FC = () => {
         {[
           { id: 'calendar', label: 'Explore', icon: '🌍' },
           { id: 'map', label: 'Atlas', icon: '🗺️' },
+          { id: 'timeline', label: 'Timeline', icon: '📜' },
           { id: 'reminders', label: 'Saved', icon: '🏺' },
           { id: 'culture', label: 'Zone', icon: '✨' },
           { id: 'chat', label: 'Guide', icon: '🤖' }
@@ -311,6 +314,8 @@ const App: React.FC = () => {
           </div>
         ) : activeTab === 'map' ? (
           <CulturalMap />
+        ) : activeTab === 'timeline' ? (
+          <HistoricalTimeline />
         ) : activeTab === 'culture' ? (
           <CultureZone />
         ) : activeTab === 'chat' ? (
