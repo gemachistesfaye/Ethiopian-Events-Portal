@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "የኢትዮጵያ ቅርስ",
+    "subtitle": "የዕውቀት ፖርታል",
+    "search_placeholder": "ዝግጅቶችን፣ ታሪክን ወይም ቦታዎችን ይፈልጉ...",
+    "explorer_tag": "አሳሹ",
+    "portal_title": "የቅርስ ፖርታል",
+    "local_time": "የአከባቢ ሰዓት",
+    "select_date_msg": "ታሪክን ለመዳሰስ የፖርታል ቀንን ይምረጡ",
+    "no_records": "ምንም የቅርስ መዛግብት የለም",
+    "manage_reminders": "የግል ቅርስ ሳጥንን ያስተዳድሩ →",
+    "quick_fact_title": "💡 ፈጣን የባህል እውነታ",
+    "quick_fact_fallback": "የኢትዮጵያ ካላንደር 13 ወራት አሉት። 12 ወራት እያንዳንዳቸው 30 ቀናት ሲኖሯቸው 13ኛው ወር ጳጉሜ እንደ ዘመነ መግለጫው አምስት ወይም ስድስት ቀናት አሉት።",
+    "categories": {
+      "all": "ሁሉም ምድቦች",
+      "religious": "ሃይማኖታዊ",
+      "public": "ህዝባዊ",
+      "cultural": "ባህላዊ"
+    }
+  },
+  "nav": {
+    "explore": "አስስ",
+    "saved": "የተቀመጡ",
+    "zone": "ዞን",
+    "guide": "መመሪያ"
+  },
+  "footer": {
+    "dev_profile": "የዴቭ ፕሮፋይል",
+    "tagline": "የቅርሶች እና የቴክኖሎጂ መገናኛ ላይ ያሉ ብልጥ መፍትሄዎች።",
+    "rights": "© 2026 መብቱ በህግ የተጠበቀ ነው"
+  },
+  "reminders": {
+    "clear_confirm": "ሁሉንም የባህል መዛግብት ያጥፉ? ይህ ድርጊት ቋሚ ነው።"
+  }
+}

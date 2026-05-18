@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "ETHIOPIAN HERITAGE",
+    "subtitle": "Intelligence Portal",
+    "search_placeholder": "Search events, history, or locations...",
+    "explorer_tag": "The Explorer",
+    "portal_title": "Heritage Portal",
+    "local_time": "Local Time",
+    "select_date_msg": "Select a portal date to explore history",
+    "no_records": "No Heritage Records",
+    "manage_reminders": "Manage Personal Heritage Box →",
+    "quick_fact_title": "💡 Quick Cultural Fact",
+    "quick_fact_fallback": "The Ethiopian calendar has 13 months. 12 months have 30 days each, and the 13th month, Pagumē, has five or six days depending on if it's a leap year.",
+    "categories": {
+      "all": "All Categories",
+      "religious": "Religious",
+      "public": "Public",
+      "cultural": "Cultural"
+    }
+  },
+  "nav": {
+    "explore": "Explore",
+    "saved": "Saved",
+    "zone": "Zone",
+    "guide": "Guide"
+  },
+  "footer": {
+    "dev_profile": "Dev Profile",
+    "tagline": "Intelligent solutions at the intersection of heritage and tech.",
+    "rights": "© 2026 Rights Reserved"
+  },
+  "reminders": {
+    "clear_confirm": "Destroy all cultural records? This action is permanent."
+  }
+}

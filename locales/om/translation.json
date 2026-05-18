@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "Hamba Itoophiyaa",
+    "subtitle": "Poortaalii Hubannoo",
+    "search_placeholder": "Taateewwan, seenaa ykn iddoowwan barbaadi...",
+    "explorer_tag": "Sakatta'aa",
+    "portal_title": "Poortaalii Hamba",
+    "local_time": "Sa'aatii Naannoo",
+    "select_date_msg": "Seenaa sakatta'uuf guyyaa poortaalii filadhu",
+    "no_records": "Galmeen Hamba Hin Jiru",
+    "manage_reminders": "Saanduqa Hamba Dhuunfaa Bulchi →",
+    "quick_fact_title": "💡 Dhugaa Aadaa Ariifachiisaa",
+    "quick_fact_fallback": "Kalandarri Itoophiyaa baatii 13 qaba. Baatiwwan 12 tokkoon tokkoon isaanii guyyoota 30 kan qaban yoo ta'u, baatiin 13ffaan, Phaagumee, akka waggaa irratti hundaa'uun guyyoota shan ykn ja'a qaba.",
+    "categories": {
+      "all": "Ramaddii Hundaa",
+      "religious": "Afaan Amantii",
+      "public": "Hawaasummaa",
+      "cultural": "Aadaa"
+    }
+  },
+  "nav": {
+    "explore": "Barbaadi",
+    "saved": "Kan Olkaa'ame",
+    "zone": "Zoonii",
+    "guide": "Qajeelcha"
+  },
+  "footer": {
+    "dev_profile": "Piroofayilii Dev",
+    "tagline": "Furmaata qaroomaa walquन्नी hamba fi teeknooloojii irratti.",
+    "rights": "© 2026 Mirgi Hunduu Kan Olkaa'ame"
+  },
+  "reminders": {
+    "clear_confirm": "Galmeewwan aadaa hundaa balleessi? Tarkaanfiin kun dhaabbataadha."
+  }
+}

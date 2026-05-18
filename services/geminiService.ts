@@ -1,99 +1,231 @@
-
-import { GoogleGenAI, Modality } from "@google/genai";
 import { ChatMessage } from "../types";
 
-const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY });
+/* ================================
+   CONFIG (VITE)
+================================ */
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
-/**
- * Fetches a short cultural insight.
- */
-export async function getCulturalInsight(eventName: string, description: string): Promise<string> {
-  try {
-    const ai = getAI();
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: `Provide a short, fascinating cultural insight or historical fact about the Ethiopian festival "${eventName}". Context: ${description}. Max 60 words.`,
-    });
-    return response.text || "Insight unavailable.";
-  } catch (error) {
-    return "Unable to fetch AI insights.";
-  }
+if (!API_KEY) {
+  console.warn("⚠️ Gemini API key is missing");
+  throw new Error("Missing Gemini API key");
 }
 
-/**
- * Generates a random piece of Ethiopian cultural trivia.
- */
-export async function generateCulturalTrivia(): Promise<{question: string, answer: string, explanation: string} | null> {
-  try {
-    const ai = getAI();
-    const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: "Generate one interesting multiple-choice trivia question about Ethiopian culture, history, or geography. Return the result in a clean JSON format with keys: 'question', 'answer' (the correct option), and 'explanation'.",
-      config: {
-        responseMimeType: "application/json",
-      }
-    });
-    return JSON.parse(response.text);
-  } catch (error) {
-    console.error("Trivia error:", error);
-    return null;
-  }
+const TEXT_MODEL = "gemini-2.0-flash";
+const TTS_MODEL = "gemini-2.0-flash-exp";
+
+const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
+
+/* ================================
+   TYPES
+================================ */
+export interface Trivia {
+  question: string;
+  answer: string;
+  explanation: string;
 }
 
-/**
- * Generates audio for Amharic pronunciation using Gemini TTS.
- */
-export async function speakAmharic(text: string): Promise<Uint8Array | null> {
-  try {
-    const ai = getAI();
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash-preview-tts",
-      contents: [{ parts: [{ text: `Pronounce the following Amharic word or phrase clearly: ${text}` }] }],
-      config: {
-        responseModalities: [Modality.AUDIO],
-        speechConfig: {
-          voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: 'Kore' },
-          },
-        },
-      },
-    });
+/* ================================
+   FETCH WITH RETRY
+================================ */
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  retries = 2
+) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch(url, options);
+      const data = await res.json().catch(() => ({}));
 
-    const base64Audio = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-    if (base64Audio) {
-      const binaryString = atob(base64Audio);
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
+      if (res.ok) return data;
+
+      console.error("❌ Gemini error:", res.status, data);
+
+      /* 🟡 RATE LIMIT HANDLING */
+      if (res.status === 429) {
+        console.warn("⏳ Rate limited — waiting before retry...");
+        await new Promise(r => setTimeout(r, 5000));
+        continue;
       }
-      return bytes;
+
+      /* ❌ STOP retrying for client errors */
+      if (res.status < 500) break;
+
+      /* 🔁 exponential backoff for server errors */
+      await new Promise(r => setTimeout(r, 2 ** i * 3000));
+    } catch (err) {
+      if (i === retries - 1) throw err;
     }
-    return null;
-  } catch (error) {
-    console.error("TTS Error:", error);
+  }
+
+  return null;
+}
+
+/* ================================
+   TRIVIA
+================================ */
+export async function generateCulturalTrivia(): Promise<Trivia> {
+  try {
+    const result = await fetchWithRetry(
+      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `Generate one Ethiopian culture, history, or geography trivia.
+Return STRICT JSON:
+{
+ "question": "...",
+ "answer": "...",
+ "explanation": "..."
+}`
+                }
+              ]
+            }
+          ],
+          generationConfig: {
+            responseMimeType: "application/json"
+          }
+        })
+      }
+    );
+
+    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!text) throw new Error("Empty trivia response");
+
+    return JSON.parse(text.replace(/```json|```/g, "").trim());
+  } catch {
+    console.warn("⚠️ Using fallback trivia");
+
+    return {
+      question:
+        "Which Ethiopian city is known as the political capital of Africa?",
+      answer: "Addis Ababa",
+      explanation:
+        "Addis Ababa hosts the African Union headquarters and many international organizations."
+    };
+  }
+}
+
+/* ================================
+   CULTURAL INSIGHT
+================================ */
+export async function getCulturalInsight(
+  eventName: string,
+  description: string
+): Promise<string> {
+  try {
+    const result = await fetchWithRetry(
+      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `Provide a short cultural insight about the Ethiopian festival "${eventName}".
+Context: ${description}
+Max 60 words.`
+                }
+              ]
+            }
+          ]
+        })
+      }
+    );
+
+    return (
+      result?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Insight unavailable."
+    );
+  } catch {
+    return "Insight unavailable.";
+  }
+}
+
+/* ================================
+   AMHARIC TTS
+================================ */
+export async function speakAmharic(
+  text: string
+): Promise<Uint8Array | null> {
+  try {
+    const result = await fetchWithRetry(
+      `${BASE_URL}/${TTS_MODEL}:generateContent?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text }] }],
+          generationConfig: {
+            responseModalities: ["AUDIO"]
+          }
+        })
+      }
+    );
+
+    const base64 =
+      result?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+
+    if (!base64) return null;
+
+    const binary = atob(base64);
+    return Uint8Array.from(binary, c => c.charCodeAt(0));
+  } catch (err) {
+    console.error("TTS error:", err);
     return null;
   }
 }
 
-/**
- * Heritage Guide Chat functionality.
- */
-export async function chatWithHeritageGuide(history: ChatMessage[], message: string): Promise<string> {
+/* ================================
+   HERITAGE GUIDE CHAT
+================================ */
+export async function chatWithHeritageGuide(
+  history: ChatMessage[],
+  message: string
+): Promise<string> {
   try {
-    const ai = getAI();
-    const chat = ai.chats.create({
-      model: 'gemini-3-flash-preview',
-      config: {
-        systemInstruction: "You are an expert Ethiopian Heritage Guide. You have deep knowledge of Ethiopian history, geography, languages (Amharic, Oromo, Tigrinya, etc.), and diverse cultures. Answer questions about Ethiopia with respect, accuracy, and passion. Keep responses engaging and informative.",
-      },
+    const contents = history.map(msg => ({
+      role: msg.role === "user" ? "user" : "model",
+      parts: [{ text: msg.text }]
+    }));
+
+    contents.push({
+      role: "user",
+      parts: [{ text: message }]
     });
-    
-    // Add history
-    // Note: sendMessage usually takes the text directly
-    const response = await chat.sendMessage({ message });
-    return response.text || "I apologize, I'm unable to answer that right now.";
-  } catch (error) {
-    console.error("Chat Error:", error);
-    return "The guide is currently resting. Please try again soon.";
+
+    const result = await fetchWithRetry(
+      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents,
+          systemInstruction: {
+            parts: [
+              {
+                text:
+                  "You are an expert Ethiopian Heritage Guide. Answer with passion, clarity, and cultural pride."
+              }
+            ]
+          }
+        })
+      }
+    );
+
+    return (
+      result?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "The guide is resting right now."
+    );
+  } catch {
+    return "The guide is resting right now.";
   }
 }

@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import Calendar from './components/Calendar';
 import EventDetails from './components/EventDetails';
 import MyReminders from './components/MyReminders';
@@ -10,6 +11,7 @@ import { EVENTS_DATA, ETHIOPIAN_MONTHS_AMHARIC } from './constants';
 import { toEthiopianDate } from './utils/dateConverter';
 
 const App: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
@@ -86,17 +88,17 @@ const App: React.FC = () => {
               E
             </div>
             <div>
-              <h1 className="text-xl font-black tracking-tighter text-stone-900 leading-none">ETHIOPIAN <span className="text-amber-600">HERITAGE</span></h1>
-              <p className="text-[9px] text-stone-400 font-black uppercase tracking-[0.3em] mt-1">Intelligence Portal</p>
+              <h1 className="text-xl font-black tracking-tighter text-stone-900 leading-none">{t('app.title')}</h1>
+              <p className="text-[9px] text-stone-400 font-black uppercase tracking-[0.3em] mt-1">{t('app.subtitle')}</p>
             </div>
           </div>
           
           <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner">
             {[
-              { id: 'calendar', label: 'Explore', icon: '🌍' },
-              { id: 'reminders', label: 'Saved', icon: '🏺' },
-              { id: 'culture', label: 'Zone', icon: '✨' },
-              { id: 'chat', label: 'Guide', icon: '🤖' }
+              { id: 'calendar', label: t('nav.explore'), icon: '🌍' },
+              { id: 'reminders', label: t('nav.saved'), icon: '🏺' },
+              { id: 'culture', label: t('nav.zone'), icon: '✨' },
+              { id: 'chat', label: t('nav.guide'), icon: '🤖' }
             ].map(tab => (
               <button 
                 key={tab.id}
@@ -113,6 +115,16 @@ const App: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-6">
+            <select 
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              value={i18n.language}
+              className="bg-stone-100 border border-stone-200 rounded-xl px-3 py-2 text-xs font-black cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+            >
+              <option value="en">EN</option>
+              <option value="am">አማ</option>
+              <option value="om">ORM</option>
+            </select>
+
             <div className="hidden xl:flex flex-col items-end">
                <p className="text-[10px] font-black text-amber-600 uppercase tracking-widest leading-none mb-1">Local Time</p>
                <p className="text-stone-900 font-bold text-sm tracking-tight">{todayInfo.ethAmharic}</p>
