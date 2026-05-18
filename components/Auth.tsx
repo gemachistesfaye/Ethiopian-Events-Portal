@@ -92,7 +92,7 @@ const Auth: React.FC = () => {
         <div className="relative flex justify-center text-xs uppercase font-black text-stone-300"><span className="bg-white px-4">Or continue with</span></div>
       </div>
 
-      <div className="space-y-3">
+      <div className="grid grid-cols-2 gap-3">
         <button 
           onClick={handleGoogleLogin}
           className="w-full h-12 bg-white border border-stone-200 text-stone-700 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-50 transition-colors flex items-center justify-center gap-2"
