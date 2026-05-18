@@ -79,7 +79,7 @@ const Auth: React.FC = () => {
         <button 
           type="submit" 
           disabled={loading}
-          className="w-full h-12 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors disabled:opacity-50"
+          className="w-full h-12 bg-amber-500 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
         >
           {loading ? 'Processing...' : isSignUp ? 'Sign Up' : 'Login'}
         </button>
