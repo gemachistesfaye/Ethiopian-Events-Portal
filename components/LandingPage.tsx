@@ -111,7 +111,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1543728269-b3a1a6245084?auto=format&fit=crop&w=800&q=80')` }}
+                style={{ backgroundImage: `url('/timkat.png')` }}
               ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">January 19</span>
@@ -124,7 +124,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1517400508447-f8dd518b86db?auto=format&fit=crop&w=800&q=80')` }}
+                style={{ backgroundImage: `url('/meskel.png')` }}
               ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">September 27</span>
@@ -137,7 +137,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80')` }}
+                style={{ backgroundImage: `url('/irreecha.png')` }}
               ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Sep / Oct</span>
@@ -150,7 +150,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1564182842-7642939856a9?auto=format&fit=crop&w=800&q=80')` }}
+                style={{ backgroundImage: `url('/eid_fitr.png')` }}
               ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
