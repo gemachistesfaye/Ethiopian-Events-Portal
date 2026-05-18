@@ -1,9 +1,18 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+interface Heritage {
+  name: string;
+  type: 'UNESCO World Heritage' | 'National Park' | 'Historic Site' | 'Intangible Heritage' | 'Cultural Landscape' | 'Modern Marvel';
+  description: string;
+}
 
 interface RegionData {
   id: string;
   name: string;
+  capital: string;
+  population: string;
+  heritages: Heritage[];
   traditions: string[];
   festivals: string[];
   foods: string[];
@@ -11,278 +20,489 @@ interface RegionData {
   clothing: string;
   history: string;
   music: string;
-  summary?: string;
+  summary: string;
   images: string[];
+  color: string;
 }
 
 const REGIONS_DATA: Record<string, RegionData> = {
   tigray: {
     id: 'tigray',
-    name: 'Tigray',
+    name: 'Tigray Region',
+    capital: 'Mekelle',
+    population: '7+ Million',
+    heritages: [
+      { name: 'Aksum Obelisks', type: 'UNESCO World Heritage', description: 'Ancient monolithic stelae marking the tombs of Aksumite kings.' },
+      { name: 'Rock-Hewn Churches of Gheralta', type: 'Historic Site', description: 'Spectacular ancient churches carved into sheer sandstone cliffs.' },
+      { name: 'Al Nejashi Mosque', type: 'Historic Site', description: 'One of the oldest mosques in Africa, marking the first migration of Muslims.' },
+      { name: 'Debre Damo Monastery', type: 'Historic Site', description: 'A 6th-century monastery accessible only by climbing a 15-meter leather rope.' },
+      { name: 'Temple of Yeha', type: 'Historic Site', description: 'The oldest standing structure in Ethiopia, dating back to 700 BC.' }
+    ],
     traditions: ['Ashenda Festival', 'Traditional coffee ceremony', 'Deep Orthodox Christian heritage'],
-    festivals: ['Ashenda', 'Timkat in Axum'],
-    foods: ['Tihlo', 'Injera with Sebhi'],
-    languages: ['Tigrinya'],
-    clothing: ['Tilfi (Embroidered dresses)'],
-    history: 'Heart of the ancient Aksumite Empire, home to the Ark of the Covenant according to tradition.',
-    music: 'Guayla (dynamic, circular dance music)',
-    images: ['https://picsum.photos/id/1011/800/600', 'https://picsum.photos/id/1012/800/600'],
-    summary: 'The northernmost region of Ethiopia, rich in ancient history and monolithic churches.'
-  },
-  oromiya: {
-    id: 'oromiya',
-    name: 'Oromia',
-    traditions: ['Gadaa System (indigenous democratic system)', 'Irreechaa festival'],
-    festivals: ['Irreechaa (Thanksgiving)'],
-    foods: ['Chumbo', 'Oatmeal with butter', 'Ancootee'],
-    languages: ['Afaan Oromo'],
-    clothing: ['Kuandee', 'Aadaa Oromo attire'],
-    history: 'Birthplace of coffee (Kaffa region historically connected). Home to the ancient Gadaa system.',
-    music: 'Ragada and Shaggooyyee dance styles',
-    images: ['https://picsum.photos/id/1015/800/600', 'https://picsum.photos/id/1016/800/600'],
-    summary: 'The largest region in Ethiopia, known for its diverse landscapes, coffee, and rich Gadaa heritage.'
+    festivals: ['Ashenda (Girls\' Festival)', 'Timkat in Axum', 'Mariam Tsion'],
+    foods: ['Tihlo', 'Injera with Sebhi', 'Himbasha', 'Mies (Honey wine)'],
+    languages: ['Tigrinya', 'Saho', 'Kunama'],
+    clothing: 'Tilfi (Embroidered white cotton dresses with intricate cross patterns)',
+    history: 'Heart of the ancient Aksumite Empire. Home to the Ark of the Covenant according to Ethiopian Orthodox tradition.',
+    music: 'Guayla (dynamic, circular dance music with rapid drum beats and shoulder movements)',
+    images: ['https://images.unsplash.com/photo-1548651877-3e11400e930f?q=80&w=800', 'https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800'],
+    summary: 'The northernmost region of Ethiopia, rich in ancient history, majestic mountains, and the cradle of the Aksumite civilization.',
+    color: '#F59E0B'
   },
   amhara: {
     id: 'amhara',
-    name: 'Amhara',
-    traditions: ['Eskista dance', 'Stretching religious fasts', 'Intricate weaving'],
-    festivals: ['Genna in Lalibela', 'Timkat in Gondar'],
-    foods: ['Doro Wat', 'Kitfo (influenced)', 'Injera'],
-    languages: ['Amharic'],
-    clothing: ['Habesha Kemis'],
-    history: 'Home to the rock-hewn churches of Lalibela and the castles of Gondar.',
-    music: 'Eskista (shoulder-focused dance music)',
-    images: ['https://picsum.photos/id/1018/800/600', 'https://picsum.photos/id/1019/800/600'],
-    summary: 'A region characterized by high mountains, ancient castles, and deep Christian orthodox traditions.'
+    name: 'Amhara Region',
+    capital: 'Bahir Dar',
+    population: '30+ Million',
+    heritages: [
+      { name: 'Rock-Hewn Churches of Lalibela', type: 'UNESCO World Heritage', description: '11 medieval monolithic cave churches dubbed the "New Jerusalem".' },
+      { name: 'Fasil Ghebbi (Gondar)', type: 'UNESCO World Heritage', description: 'A fortress-city containing castles and palaces of Ethiopian emperors.' },
+      { name: 'Simien Mountains National Park', type: 'UNESCO World Heritage', description: 'Spectacular landscapes with jagged mountain peaks and endemic wildlife.' },
+      { name: 'Lake Tana Monasteries', type: 'Historic Site', description: 'Ancient isolated monasteries located on the islands of Lake Tana.' },
+      { name: 'Blue Nile Falls (Tis Abay)', type: 'Cultural Landscape', description: 'The majestic waterfall on the Blue Nile river.' }
+    ],
+    traditions: ['Eskista dance', 'Intricate cotton weaving', 'Religious fasting traditions'],
+    festivals: ['Genna (Christmas) in Lalibela', 'Timkat (Epiphany) in Gondar', 'Fasilides Bath celebrations'],
+    foods: ['Doro Wat', 'Tibs', 'Tej (Honey Wine)', 'Gomen'],
+    languages: ['Amharic', 'Awngi', 'Oromo'],
+    clothing: 'Habesha Kemis (Elegant white woven dresses with colorful borders)',
+    history: 'The historic center of the Solomonic dynasty. Features the medieval castles of Gondar and the source of the Blue Nile at Lake Tana.',
+    music: 'Eskista (highly energetic, shoulder-focused dance music)',
+    images: ['https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800', 'https://images.unsplash.com/photo-1651493638407-742bc54e2bc5?q=80&w=800'],
+    summary: 'A dramatic region characterized by high mountains, medieval castles, and deep Christian orthodox traditions.',
+    color: '#3B82F6'
   },
-  somalia: {
-    id: 'somalia',
-    name: 'Somali',
-    traditions: ['Nomadic pastoralism', 'Camel herding culture', 'Storytelling and poetry'],
-    festivals: ['Eid celebrations'],
-    foods: ['Bariis (Rice with meat)', 'Muqmad (Dried meat)'],
-    languages: ['Somali'],
-    clothing: ['Koofiyad and Macawiis for men, Dirac for women'],
-    history: 'Historically part of trade routes connecting the horn to the Arab world.',
-    music: 'Dhaanto (traditional folk dance and music)',
-    images: ['https://picsum.photos/id/1021/800/600', 'https://picsum.photos/id/1022/800/600'],
-    summary: 'An arid and beautiful region dominated by pastoralist culture and vibrant trade history.'
+  oromiya: {
+    id: 'oromiya',
+    name: 'Oromia Region',
+    capital: 'Finfinnee (Addis Ababa)',
+    population: '40+ Million',
+    heritages: [
+      { name: 'Bale Mountains National Park', type: 'UNESCO World Heritage', description: 'A massive afro-alpine plateau, home to the endemic Ethiopian wolf.' },
+      { name: 'Gadaa System', type: 'Intangible Heritage', description: 'An ancient indigenous democratic socio-political system of the Oromo people.' },
+      { name: 'Sof Omar Caves', type: 'Cultural Landscape', description: 'The longest cave system in Africa, carved by the Weyib River.' },
+      { name: 'Awash National Park', type: 'National Park', description: 'Spectacular gorge and falls, rich in wildlife and arid landscapes.' },
+      { name: 'Irreechaa Festival', type: 'Intangible Heritage', description: 'A massive thanksgiving festival celebrating peace and nature.' }
+    ],
+    traditions: ['Gadaa System', 'Irreechaa thanksgiving', 'Ateetee women\'s peace rituals'],
+    festivals: ['Irreechaa', 'Ayyana', 'Gubaa'],
+    foods: ['Chumbo', 'Anchote', 'Marqaa', 'Besso'],
+    languages: ['Afaan Oromoo'],
+    clothing: 'Aadaa Oromoo attire (Waaqoo, Kuandee, Ruufa)',
+    history: 'Birthplace of Arabica coffee (Kaffa/Jimma regions). Home to the egalitarian Gadaa system, a framework that predates modern democracy.',
+    music: 'Ragada and Shaggooyyee dance styles with intricate shoulder and neck movements',
+    images: ['https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=800', 'https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?q=80&w=800'],
+    summary: 'The largest and most populous region in Ethiopia, known for its diverse landscapes, the origin of coffee, and rich Gadaa heritage.',
+    color: '#10B981'
   },
   afar: {
     id: 'afar',
-    name: 'Afar',
-    traditions: ['Nomadic lifestyle', 'Salt mining in Danakil'],
-    festivals: ['Tribal gatherings'],
-    foods: ['Milk and meat-based diet'],
+    name: 'Afar Region',
+    capital: 'Semera',
+    population: '2+ Million',
+    heritages: [
+      { name: 'Lower Valley of the Awash', type: 'UNESCO World Heritage', description: 'Paleontological site where the 3.2 million-year-old hominid "Lucy" was discovered.' },
+      { name: 'Erta Ale Volcano', type: 'Cultural Landscape', description: 'A continuously active basaltic shield volcano featuring a persistent lava lake.' },
+      { name: 'Danakil Depression', type: 'Cultural Landscape', description: 'One of the lowest and hottest places on Earth, famous for its neon acid springs.' },
+      { name: 'Dallol', type: 'Cultural Landscape', description: 'A stunning hydrothermal field with bright yellow and green sulfur springs.' }
+    ],
+    traditions: ['Nomadic desert lifestyle', 'Traditional salt mining caravans (Amolé)'],
+    festivals: ['Islamic holidays', 'Tribal leadership gatherings'],
+    foods: ['Milk and meat-based pastoral diet', 'Salt-cured provisions'],
     languages: ['Afar'],
-    clothing: ['Sanafil (wraparound skirt)'],
-    history: 'The Danakil Depression is one of the hottest places on earth. Discovery site of "Lucy" (Dinknesh).',
-    music: 'High-energy warrior dances',
-    images: ['https://picsum.photos/id/1024/800/600', 'https://picsum.photos/id/1025/800/600'],
-    summary: 'A land of extremes, featuring active volcanoes, salt flats, and the cradle of humanity.'
+    clothing: 'Sanafil (distinctive wraparound skirts) and curved jile daggers',
+    history: 'The Danakil Depression is the cradle of humanity. Historically, the Afar people controlled the vital salt trade connecting the coast to the highlands.',
+    music: 'High-energy warrior dances with chanting and rhythmic stepping',
+    images: ['https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800', 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'],
+    summary: 'A land of extremes, featuring active volcanoes, neon acid lakes, salt flats, and the cradle of humanity.',
+    color: '#EF4444'
+  },
+  somali: {
+    id: 'somali',
+    name: 'Somali Region',
+    capital: 'Jigjiga',
+    population: '6+ Million',
+    heritages: [
+      { name: 'Karamara Mountains', type: 'Historic Site', description: 'A culturally and historically significant mountain range.' },
+      { name: 'Babile Elephant Sanctuary', type: 'National Park', description: 'A massive wildlife reserve home to the rare African savanna elephant.' },
+      { name: 'Taleex Historic Architecture', type: 'Historic Site', description: 'Ancient structures reflecting deep Islamic trade history.' }
+    ],
+    traditions: ['Nomadic pastoralism', 'Camel herding culture', 'Deep oral storytelling and poetry'],
+    festivals: ['Eid al-Fitr', 'Eid al-Adha', 'Traditional clan gatherings'],
+    foods: ['Bariis (Spiced Rice with meat)', 'Muqmad (Dried meat)', 'Camel milk', 'Xalwo (Halwa)'],
+    languages: ['Somali'],
+    clothing: 'Koofiyad and Macawiis for men, colorful Dirac for women',
+    history: 'Historically part of vital ancient trade routes connecting the Horn of Africa to the Arabian peninsula. Known for deep Islamic heritage and poetic traditions.',
+    music: 'Dhaanto (traditional folk dance and music mimicking camel gaits)',
+    images: ['https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800', 'https://images.unsplash.com/photo-1506505494950-8438ebccba56?q=80&w=800'],
+    summary: 'An expansive, arid region dominated by pastoralist culture, camels, and vibrant trade history.',
+    color: '#EAB308'
+  },
+  southern: {
+    id: 'southern',
+    name: 'Southern Ethiopia (SNNPR, Sidama, SWEPR)',
+    capital: 'Hawassa / Arba Minch',
+    population: '20+ Million',
+    heritages: [
+      { name: 'Lower Valley of the Omo', type: 'UNESCO World Heritage', description: 'A prehistoric site crucial for understanding human evolution, and home to diverse indigenous tribes.' },
+      { name: 'Konso Cultural Landscape', type: 'UNESCO World Heritage', description: 'A highly organized landscape of walled terraces and fortified settlements.' },
+      { name: 'Tiya Megaliths', type: 'UNESCO World Heritage', description: 'Ancient standing stones adorned with mysterious carvings of swords and symbols.' },
+      { name: 'Nechisar National Park', type: 'National Park', description: 'The "Bridge of Heaven", a stunning isthmus between Lake Abaya and Lake Chamo.' },
+      { name: 'Fichee-Chambalaalla', type: 'Intangible Heritage', description: 'The Sidama people\'s New Year festival.' }
+    ],
+    traditions: ['Body painting (Omo Valley tribes)', 'Terraced agriculture (Konso)', 'Bull jumping ceremony (Hamer)'],
+    festivals: ['Fichee-Chambalaalla', 'Evangadi (Night dancing)'],
+    foods: ['Kocho (False banana bread)', 'Bulla', 'Kitfo (Gurage)'],
+    languages: ['Sidama', 'Wolaytta', 'Gurage', 'Hamer', '40+ others'],
+    clothing: 'Diverse tribal wear, ranging from woven cotton to intricate beadwork and animal skins.',
+    history: 'The most ethnically diverse region of Ethiopia, home to over 45 distinct ethnic groups, preserving ancient tribal customs and agro-pastoralist systems.',
+    music: 'Highly rhythmic tribal music using diverse instruments like the lyre and polyphonic singing.',
+    images: ['https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800', 'https://images.unsplash.com/photo-1532585227763-7e4b2d39df16?q=80&w=800'],
+    summary: 'A melting pot of over 45 distinct ethnic groups, featuring ancient megaliths, the Great Rift Valley, and vibrant tribal cultures.',
+    color: '#8B5CF6'
+  },
+  harari: {
+    id: 'harari',
+    name: 'Harari Region',
+    capital: 'Harar',
+    population: '250,000+',
+    heritages: [
+      { name: 'Harar Jugol', type: 'UNESCO World Heritage', description: 'The fortified historic walled city of Harar, featuring 82 mosques.' },
+      { name: 'Arthur Rimbaud House', type: 'Historic Site', description: 'A museum dedicated to the French poet who lived in Harar in the 1880s.' },
+      { name: 'Hyena Feeding Tradition', type: 'Intangible Heritage', description: 'A unique nightly ritual where local "Hyena men" feed wild hyenas by hand.' }
+    ],
+    traditions: ['Hyena feeding', 'Coffee roasting ceremonies', 'Islamic scholarship'],
+    festivals: ['Eid al-Fitr', 'Shuwal Eid (A unique post-Ramadan celebration)'],
+    foods: ['Fatira', 'Hulbet', 'Harari Coffee'],
+    languages: ['Harari', 'Oromo', 'Amharic'],
+    clothing: 'Vibrant, brightly colored garments and traditional Harari woven textiles.',
+    history: 'Harar is considered the fourth holiest city of Islam. It served as a major commercial hub linking African and Islamic trade routes for centuries.',
+    music: 'Traditional Harari songs accompanied by the Kabaro drum.',
+    images: ['https://images.unsplash.com/photo-1588612143491-0fcf05a6efc1?q=80&w=800', 'https://images.unsplash.com/photo-1550993510-9b0f48039600?q=80&w=800'],
+    summary: 'A small but historically massive region centered around the ancient, walled Islamic city of Harar.',
+    color: '#EC4899'
+  },
+  addis: {
+    id: 'addis',
+    name: 'Addis Ababa',
+    capital: 'Addis Ababa (Chartered City)',
+    population: '5+ Million',
+    heritages: [
+      { name: 'National Museum of Ethiopia', type: 'Historic Site', description: 'Home to the fossilized remains of "Lucy" (Dinknesh).' },
+      { name: 'Holy Trinity Cathedral', type: 'Historic Site', description: 'A massive ornate cathedral, the final resting place of Emperor Haile Selassie.' },
+      { name: 'Addis Ababa Mercato', type: 'Cultural Landscape', description: 'The largest open-air market in Africa.' },
+      { name: 'Entoto Mountains', type: 'National Park', description: 'The eucalyptus-covered mountains offering panoramic views of the city.' }
+    ],
+    traditions: ['Urban coffee culture', 'Diverse cultural integration'],
+    festivals: ['Meskel at Meskel Square', 'Great Ethiopian Run', 'Timkat at Jan Meda'],
+    foods: ['All Ethiopian cuisines', 'Shiro', 'Tibs', 'Modern fusion'],
+    languages: ['Amharic', 'Oromo', 'English', 'All national languages'],
+    clothing: 'A mix of modern urban wear and traditional Habesha clothing on holidays.',
+    history: 'Founded in 1886 by Emperor Menelik II and Empress Taytu. It is the diplomatic capital of Africa, hosting the African Union headquarters.',
+    music: 'Ethio-Jazz (originating in the city), modern pop, and traditional fusion.',
+    images: ['https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800', 'https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800'],
+    summary: 'The bustling capital city, acting as the diplomatic hub of Africa and a melting pot of all Ethiopian cultures.',
+    color: '#64748B'
+  },
+  gambela: {
+    id: 'gambela',
+    name: 'Gambela Region',
+    capital: 'Gambela',
+    population: '400,000+',
+    heritages: [
+      { name: 'Gambela National Park', type: 'National Park', description: 'The largest national park in Ethiopia, famous for the massive White-eared kob antelope migration.' },
+      { name: 'Baro River', type: 'Cultural Landscape', description: 'A major river and historically the only navigable river in Ethiopia.' }
+    ],
+    traditions: ['Riverine lifestyle', 'Fishing traditions', 'Unique body scarification'],
+    festivals: ['Local harvest festivals'],
+    foods: ['Fish-based dishes', 'Sorghum and maize'],
+    languages: ['Nuer', 'Anywaa', 'Majang'],
+    clothing: 'Light clothing suited for the hot, humid lowland climate.',
+    history: 'A lush, low-lying region that shares strong cultural and ecological ties with South Sudan. Historically a major river port.',
+    music: 'Rhythmic drum-based music and synchronized dances.',
+    images: ['https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800', 'https://images.unsplash.com/photo-1532585227763-7e4b2d39df16?q=80&w=800'],
+    summary: 'A hot, lush lowland region famous for massive wildlife migrations and majestic rivers.',
+    color: '#06B6D4'
+  },
+  benishangul: {
+    id: 'benishangul',
+    name: 'Benishangul-Gumuz',
+    capital: 'Asosa',
+    population: '1.2+ Million',
+    heritages: [
+      { name: 'Grand Ethiopian Renaissance Dam (GERD)', type: 'Modern Marvel', description: 'The largest hydroelectric dam in Africa, built on the Blue Nile.' },
+      { name: 'Blue Nile Gorge', type: 'Cultural Landscape', description: 'Often compared to the Grand Canyon, carved by the majestic Blue Nile.' }
+    ],
+    traditions: ['Traditional gold mining', 'Berta music and dance'],
+    festivals: ['Local cultural celebrations'],
+    foods: ['Sorghum', 'Root crops', 'Forest honey'],
+    languages: ['Berta', 'Gumuz', 'Amharic'],
+    clothing: 'Colorful, lightweight fabrics suitable for the tropical climate.',
+    history: 'A historically significant region for gold mining. Now famous globally as the home of the monumental GERD project.',
+    music: 'Berta traditional music featuring long bamboo flutes and gourds.',
+    images: ['https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800', 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'],
+    summary: 'A frontier region defined by the Blue Nile river, rich in gold and modern energy marvels.',
+    color: '#F97316'
+  },
+  dire_dawa: {
+    id: 'dire_dawa',
+    name: 'Dire Dawa',
+    capital: 'Dire Dawa (Chartered City)',
+    population: '500,000+',
+    heritages: [
+      { name: 'Ethio-Djibouti Railway Station', type: 'Historic Site', description: 'The historic railway station that birthed the city in the early 20th century.' },
+      { name: 'Kefira Market', type: 'Cultural Landscape', description: 'A vibrant, colorful traditional market showcasing the fusion of cultures.' },
+      { name: 'Legedadi Cave Paintings', type: 'Historic Site', description: 'Prehistoric rock art found near the city.' }
+    ],
+    traditions: ['Trade and commerce', 'Chewing Khat (Qat) socially'],
+    festivals: ['Islamic and Christian holidays'],
+    foods: ['Camel meat', 'Samosas', 'Vibrant street food'],
+    languages: ['Oromo', 'Somali', 'Amharic'],
+    clothing: 'Urban fusion of Somali Macawiis, Harari fabrics, and modern wear.',
+    history: 'Created directly as a result of the Addis Ababa-Djibouti railway bypassing Harar. It became Ethiopia\'s first modern planned city.',
+    music: 'A fusion of Somali, Harari, and modern Ethiopian music.',
+    images: ['https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800', 'https://images.unsplash.com/photo-1506505494950-8438ebccba56?q=80&w=800'],
+    summary: 'A vibrant, culturally diverse railway city born out of trade and modern transport.',
+    color: '#84CC16'
   }
 };
 
 const CulturalMap: React.FC = () => {
-  const [selectedRegion, setSelectedRegion] = useState<string | null>('oromiya');
-  const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<string>('amhara');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState<'overview' | 'heritages' | 'culture' | 'gallery'>('overview');
 
   const filteredRegions = useMemo(() => {
     return Object.values(REGIONS_DATA).filter(region => 
       region.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      region.traditions.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()))
+      region.heritages.some(h => h.name.toLowerCase().includes(searchQuery.toLowerCase()))
     );
   }, [searchQuery]);
 
-  const activeRegionData = selectedRegion ? REGIONS_DATA[selectedRegion] : null;
+  const activeData = REGIONS_DATA[selectedRegion];
 
   return (
-    <div className="min-h-screen bg-stone-50 p-6 lg:p-10 font-sans">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <header className="mb-10 text-center lg:text-left">
-          <span className="bg-amber-500 text-stone-900 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg">Interactive Experience</span>
-          <h1 className="text-5xl font-black text-stone-900 tracking-tighter leading-none mb-2">Cultural <span className="text-amber-600">Atlas</span> of Ethiopia</h1>
-          <p className="text-stone-500 text-sm font-medium">Explore the rich diversity, traditions, and history of Ethiopia's regions.</p>
-        </header>
-
-        {/* Search Bar */}
-        <div className="relative mb-10 max-w-2xl mx-auto lg:mx-0">
+    <div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700">
+      
+      <header className="mb-10 text-center lg:text-left bg-stone-900 rounded-[3rem] p-10 md:p-14 text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-8 opacity-10 transform scale-150 translate-x-10 -translate-y-10">
+           <svg className="w-64 h-64" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </div>
+        <span className="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-4 inline-block backdrop-blur-sm border border-amber-500/20">All 11 Regions Included</span>
+        <h1 className="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-4">Cultural <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-rose-400">Atlas</span></h1>
+        <p className="text-stone-400 text-lg font-medium max-w-2xl">A comprehensive database of all Ethiopian regional states, chartered cities, and their exhaustive heritage sites.</p>
+        
+        <div className="relative mt-8 max-w-xl z-20">
           <input 
             type="text"
-            placeholder="Search regions, traditions, or festivals..."
+            placeholder="Search all 11 regions or specific heritage sites..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-14 bg-white border-2 border-stone-100 rounded-2xl px-14 text-sm font-bold focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-sm"
+            className="w-full h-14 bg-stone-800/80 backdrop-blur-md border border-stone-700 rounded-2xl px-14 text-sm font-bold text-white placeholder-stone-500 focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/20 transition-all shadow-inner"
           />
-          <svg className="w-5 h-5 absolute left-5 top-4.5 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          <svg className="w-5 h-5 absolute left-5 top-4.5 text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+        </div>
+      </header>
+
+      <div className="grid xl:grid-cols-12 gap-8 items-start">
+        
+        <div className="xl:col-span-4 bg-white p-6 rounded-[3rem] border border-stone-200 shadow-2xl relative sticky top-28 h-[80vh] overflow-hidden flex flex-col">
+          <div className="mb-6 px-4 pt-2">
+            <h3 className="text-xl font-black text-stone-900 tracking-tight">Atlas Navigator</h3>
+            <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mt-1">Select a Territory</p>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto pr-2 space-y-3 custom-scrollbar">
+            {(searchQuery ? filteredRegions : Object.values(REGIONS_DATA)).map((region) => (
+              <button
+                key={region.id}
+                onClick={() => { setSelectedRegion(region.id); setActiveTab('overview'); }}
+                className={`w-full text-left p-5 rounded-[2rem] transition-all duration-300 border-2 ${
+                  selectedRegion === region.id 
+                    ? 'bg-stone-900 border-stone-900 shadow-xl scale-[1.02]' 
+                    : 'bg-stone-50 border-stone-100 hover:bg-stone-100 hover:border-stone-200'
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner" style={{ backgroundColor: `${region.color}20` }}>
+                     <div className="w-4 h-4 rounded-full" style={{ backgroundColor: region.color }}></div>
+                  </div>
+                  <div>
+                    <h4 className={`text-base font-black ${selectedRegion === region.id ? 'text-white' : 'text-stone-900'}`}>{region.name}</h4>
+                    <p className={`text-[10px] font-bold uppercase tracking-widest mt-1 ${selectedRegion === region.id ? 'text-stone-400' : 'text-stone-500'}`}>
+                      {region.heritages.length} Heritages
+                    </p>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-10">
-          {/* Map Column */}
-          <div className="lg:col-span-7 bg-white p-6 rounded-[2.5rem] border border-stone-200 shadow-xl flex items-center justify-center min-h-[500px]">
-            <div className="relative w-full max-w-2xl">
-              {/* Fallback list for search on mobile/small screens */}
-              {searchQuery && (
-                <div className="absolute top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-10 p-4 rounded-2xl border border-stone-100 shadow-lg">
-                  <p className="text-xs font-black text-stone-400 uppercase mb-2">Search Results</p>
-                  <div className="flex flex-wrap gap-2">
-                    {filteredRegions.map(r => (
-                      <button 
-                        key={r.id}
-                        onClick={() => setSelectedRegion(r.id)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${selectedRegion === r.id ? 'bg-amber-500 text-stone-900' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}
-                      >
-                        {r.name}
-                      </button>
+        <div className="xl:col-span-8">
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={activeData.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="bg-white rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden"
+            >
+              <div className="h-72 relative flex items-end p-10">
+                 <div className="absolute inset-0 bg-stone-900">
+                   <img src={activeData.images[0]} alt={activeData.name} className="w-full h-full object-cover opacity-50 mix-blend-overlay" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/60 to-transparent"></div>
+                 </div>
+                 
+                 <div className="relative z-10 w-full flex justify-between items-end">
+                   <div>
+                     <span className="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg backdrop-blur-md border border-white/20" style={{ backgroundColor: activeData.color, color: '#fff' }}>
+                       Territory Profile
+                     </span>
+                     <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none shadow-sm">{activeData.name}</h2>
+                   </div>
+                   <div className="hidden md:block text-right">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-white/70 mb-1">Population</p>
+                      <p className="text-2xl font-black text-white">{activeData.population}</p>
+                   </div>
+                 </div>
+              </div>
+
+              <div className="flex overflow-x-auto border-b border-stone-100 px-6 pt-2 bg-stone-50 custom-scrollbar">
+                 {[
+                   { id: 'overview', label: 'Overview' },
+                   { id: 'heritages', label: 'All Heritages' },
+                   { id: 'culture', label: 'Culture & Food' },
+                   { id: 'gallery', label: 'Gallery' }
+                 ].map(tab => (
+                   <button
+                     key={tab.id}
+                     onClick={() => setActiveTab(tab.id as any)}
+                     className={`px-6 py-5 text-xs font-black uppercase tracking-widest border-b-4 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-stone-900 text-stone-900' : 'border-transparent text-stone-400 hover:text-stone-700'}`}
+                   >
+                     {tab.label}
+                   </button>
+                 ))}
+              </div>
+
+              <div className="p-8 md:p-10 min-h-[500px]">
+                
+                {activeTab === 'overview' && (
+                  <div className="animate-in fade-in duration-500 space-y-8">
+                     <p className="text-lg text-stone-600 font-medium leading-relaxed bg-stone-50 p-6 rounded-[2rem] border border-stone-100">{activeData.summary}</p>
+                     
+                     <div className="grid grid-cols-2 gap-6">
+                       <div className="bg-white rounded-[2rem] p-6 border border-stone-100 shadow-sm flex items-center gap-4">
+                         <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">🏛️</div>
+                         <div>
+                           <h4 className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1">Capital City</h4>
+                           <p className="text-lg font-black text-stone-900 leading-none">{activeData.capital}</p>
+                         </div>
+                       </div>
+                       <div className="bg-white rounded-[2rem] p-6 border border-stone-100 shadow-sm flex items-center gap-4">
+                         <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">🗣️</div>
+                         <div>
+                           <h4 className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1">Languages</h4>
+                           <p className="text-sm font-black text-stone-900 leading-tight">{activeData.languages.join(', ')}</p>
+                         </div>
+                       </div>
+                     </div>
+
+                     <div className="bg-stone-900 rounded-[2rem] p-8 text-white relative overflow-hidden group shadow-xl">
+                       <div className="absolute top-0 right-0 p-8 opacity-5 transform group-hover:scale-110 transition-transform duration-700">
+                          <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                       </div>
+                       <h4 className="text-xs font-black text-stone-400 uppercase tracking-widest mb-2">Historical Significance</h4>
+                       <p className="text-base font-medium leading-relaxed relative z-10">{activeData.history}</p>
+                     </div>
+                  </div>
+                )}
+
+                {activeTab === 'heritages' && (
+                  <div className="animate-in fade-in duration-500">
+                    <div className="mb-6 flex items-center justify-between">
+                       <h3 className="text-xl font-black text-stone-900">Exhaustive Heritage Index</h3>
+                       <span className="bg-stone-100 text-stone-600 px-3 py-1 rounded-lg text-xs font-bold">{activeData.heritages.length} Official Sites</span>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {activeData.heritages.map((heritage, idx) => (
+                        <div key={idx} className="bg-white border border-stone-200 p-6 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow group flex flex-col md:flex-row md:items-center gap-6">
+                           <div className="flex-1">
+                             <div className="flex items-center gap-3 mb-2">
+                               <h4 className="text-lg font-black text-stone-900 group-hover:text-amber-600 transition-colors">{heritage.name}</h4>
+                               {heritage.type === 'UNESCO World Heritage' && (
+                                 <span className="bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md">UNESCO</span>
+                               )}
+                             </div>
+                             <p className="text-sm font-medium text-stone-500 leading-relaxed">{heritage.description}</p>
+                           </div>
+                           <div className="md:w-48">
+                              <span className="block text-center bg-stone-50 border border-stone-100 text-stone-600 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl">
+                                {heritage.type}
+                              </span>
+                           </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'culture' && (
+                  <div className="animate-in fade-in duration-500 space-y-8">
+                     <div className="grid md:grid-cols-2 gap-8">
+                       <div className="bg-stone-50 p-8 rounded-[2rem] border border-stone-100">
+                         <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-6 flex items-center gap-3"><span className="text-2xl">🎪</span> Traditions</h4>
+                         <ul className="space-y-4">
+                           {activeData.traditions.map((t, i) => (
+                             <li key={i} className="flex items-start gap-3 text-sm font-bold text-stone-700">
+                               <span className="text-amber-500 mt-0.5">●</span> {t}
+                             </li>
+                           ))}
+                         </ul>
+                       </div>
+
+                       <div className="space-y-8">
+                         <div className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                           <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🍲</span> Culinary Heritage</h4>
+                           <div className="flex flex-wrap gap-2">
+                             {activeData.foods.map((f, i) => (
+                               <span key={i} className="bg-stone-900 text-white text-xs font-bold px-4 py-2 rounded-xl">{f}</span>
+                             ))}
+                           </div>
+                         </div>
+
+                         <div className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
+                           <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🎵</span> Music & Dance</h4>
+                           <p className="text-sm font-medium text-stone-600 leading-relaxed">{activeData.music}</p>
+                         </div>
+                       </div>
+                     </div>
+                  </div>
+                )}
+
+                {activeTab === 'gallery' && (
+                  <div className="animate-in fade-in duration-500 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {activeData.images.map((img, i) => (
+                      <div key={i} className="group relative h-64 rounded-[2.5rem] overflow-hidden shadow-lg border border-stone-200">
+                        <img src={img} alt={`${activeData.name} heritage`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                           <div>
+                             <span className="text-amber-400 text-[10px] font-black uppercase tracking-widest block mb-1">Archive View</span>
+                             <span className="text-white text-lg font-bold">{activeData.name}</span>
+                           </div>
+                        </div>
+                      </div>
                     ))}
                   </div>
-                </div>
-              )}
+                )}
 
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 441.853 328.295"
-                className="w-full h-auto"
-              >
-                {/* Tigray Region */}
-                <motion.polygon
-                  id="tigray"
-                  points="202.882 11.743 200.309 11.296 193.93 11.403 188.826 9.383 185.105 12.36 182.766 7.894 180.427 7.15 177.875 7.15 175.643 9.383 164.913 12.18 163.203 12.572 161.396 12.679 155.867 6.937 148.106 2.578 146.085 0.771 143.853 4.386 139.964 13.087 138.537 14.805 131.626 11.297 123.333 12.785 120.037 15.124 119.186 17.038 116.499 17.038 113.551 15.656 110.716 16.365 106.003 16.612 102.494 24.268 102.281 27.457 103.238 30.221 101.407 33.683 104.553 36.007 104.856 36.585 107.835 36.958 108.378 37.683 111.006 37.683 116.034 42.368 119.653 42.996 122.548 41.225 126.09 41.111 126.834 42.506 134.547 43.054 139.46 39.283 139.689 36.883 141.289 35.054 143.231 37.797 146.888 38.94 157.058 39.397 161.058 37.226 163.801 39.625 167.343 39.397 168.714 40.54 169.4 46.368 175.257 46.584 178.084 48.481 177.883 53.167 184.027 53.453 185.627 62.023 182.676 63.393 184.255 67.81 184.141 72.308 185.741 73.45 192.712 72.879 194.54 74.199 196.826 73.222 200.482 73.222 200.593 66.388 203.111 62.48 203.453 59.395 199.568 56.995 199.682 47.625 198.197 46.482 198.882 44.196 199.225 38.14 201.625 37.111 201.511 34.369 200.939 33.798 200.597 22.827 196.94 19.97 198.654 16.885 197.168 15.171 201.396 13.8 202.882 11.743"
-                  className="cursor-pointer"
-                  fill={selectedRegion === 'tigray' ? '#F59E0B' : hoveredRegion === 'tigray' ? '#FBBF24' : '#E7E5E4'}
-                  stroke="#FFFFFF"
-                  strokeWidth="1"
-                  whileHover={{ scale: 1.02, filter: 'brightness(1.05)' }}
-                  onClick={() => setSelectedRegion('tigray')}
-                  onMouseEnter={() => setHoveredRegion('tigray')}
-                  onMouseLeave={() => setHoveredRegion(null)}
-                />
-
-                {/* Oromiya Region */}
-                <motion.path
-                  id="oromiya"
-                  d="M293.615,182.664l-1.974-3.509.439-3.509-6.58-6.361-.691-3.365L280.3,155.6l-1.594-.354-1.974-5.264-2.576,1.522-2.232.268-.714.893-.179,2.857-.714.714-4.115.727-7.58.523-2.053-1.518-3.661.447-.982,1.16-1.339-.178-3.571-1.34-3.035.447-9.553,5.446-2.465-1.531,2.69-1.014.222-1.83-.983-.8h-2.344l-.869.892h-1.161l-1.695-1.375-.634,2.812-5.273.692-.317,1.581-6.812,7.548-.3,2.251-3.951,3.951-1.983-.029,1.674-3.952-2.852-.6-3.793-4.129-2.687.81-.155,7.112-2.532.632-4.267,2.845-2.371-2.055-1.739,1.581-2.1.752-.889-6.216,2.836-4.335-2.853-2.106-.466-2.794,5.374-1.9-.153-2.6-4.019-1.168.055-1.527,1.763-.13,1.722-5.165-1.739-1.422-4.583,1.738-1.22,3.66-2.574-.341-1.9-4.267-3.278.5-2.775-1.536-.263-5.083-3.8-2.888,4.8-2.32-.053-6.689-8.693-.474-2.949,3.881-.36,2.061-3.217,1.744-11.966,5.748h-1.9l-.949,1.9-4.425-.158-4.267-4.425-2.061.259-.143-1.663-3.4,1.352-4.509-3.168v-2.944l-3.813-1.624-1.369,1.895-3.465.192-1.867-2.2-2.97.112-4.171,2.305-2.324-2.325-1.89-.192-1.756,1.775-.292,2.609-1.62,1.769-4.862.868.109,11.437,5.469,4.387,1,.2.889-1.085,3.329.859L103.7,157.94l-.329,1.868-.908,1.11-2.388-1.33-.311,1.661-1.423-.6-2.551.153-1.208,1.318,2.145,1.609-.5,2.456-3.3,1.1-2.087-2.967-3.956-3.076-3.185.22-.536-3.75-2.76-2.4.2-1.406-3.429-3.258-2.512-.06-.3-.769H71.617l-.158-2.689-2.479-2.7-3.845-1.538-2.637.989-1.487-2.019-2.578-.508-.854,5.339-2,1.3-.529,4.678L53,155.237l-2.7-1.131-3.181-2.757-3.076.219.549,2.637,2.21,1.263-.672,1.154-2.237,1.385.146,4.482-1.425,1.933-3.076,1.1-5.158-.1.936,16.424,2.415.384.125-1.292,2.274.155,10.55,9.4-.005.638,3.37-.065,1.4,2.438,7.676.24-5.267,3.795,2,1.372-3.227,3.1.541,2.546,3.241,2.868.918,3.307,2.777,1.3,0,1.677,1.671.7,2.554-.334-.212-6.34,6.15-5.131,3.651,1.718,4.7-1.279,1.538-1.978-2.417-2.856,1.318-2.418,3.306,1.4.641,5.556-1.222,1.308,5.076,3.53.53,4.478,2.324-.417,3.076,2.085,2.531.521,1.659,1.866,5.08.112,8.513,5.193,9.647-.183,7.464-4.905,1.26-4.061-.879-3.3-.65-4.767,1.063-2.856-1.624-1.413,2.749-1.073,1.946,1.514,1.711-.4.518-7.491-3.037-.513-1.8-1.685,1.978-3.516,2.856,2.2,8.865.439,5.074-2.145,5.18.607,2.123,2.971,1.868.909,2.568-5.565,2.812.355,3.741,6.259-.366,2.323L166.1,192.8l1.539,4.664-2.09,4.523-3.158,5.225-1.1,5.933-3.673,4.754-5.26,3.979-.719,6.477.019.153,4.8-1.3,3.076-3.077h7.472l3.077,6.373-1.539,3.3,2.933,1.369,3.22,2.147,5.118,1.493,2.354,4,.835,4.176-1.274,2.417.879,2.637-1.978,1.538-9.669-8.131-6.593-1.318-1.978,2.857h0l-.659,3.516-1.319,1.538-2.2,4.175,2.417,1.758-.22,1.978L156.866,261l-.848-.165-4.4-7.471.22-1.319,2.417-.659.879-3.736,2.2-2.2.439-1.041,2.308-.184h-2.53l-1.316-.752-2.2.439L150.3,240.4h-3.516l.143-.114-4.1,2.531,1.1,2.2.219,5.494-1.977,3.736,1.1,2.2,4.592,1.461,3.851,6.02-.673,2.413-2.843.428-.312,5.5L145.47,274.9l1.454,2.285-1.333,1.625-5.176-2.372-10.328,4.175-3.956-1.538-6.812.22-3.077,4.175.648,6.476-2.57,5.925-3.775,4.671-.331.466,3.572-.068,38.807,23.709s31.969,1.93,41.571,5.635l9.144-9.994.85-2.658,25.853-11.271.439-5.264-2.632-2.632,2.851-.658h3.32l6.769-4.167,1.96-4.029,1.33,1.178,10.747-.219-3.29-4.387H249.98l-3.3-6.579-.878-2.852v-1.535l-3.289-4.386,2.193-2.413.438-4.825-2.193-.658-9.65-9.65,1.1-7.676h1.754l3.948-4.168-.219-4.825,9.65,14.037h.658l2.632,3.509,4.386-3.728-1.316-5.264,4.825-4.606,4.606.219,3.28-6.153.449-3.058,3.509-7.018v-5.484l-1.316-1.1.658-1.535-4.387-4.168-.658-9.43,5.376-14.645.546-3.34-.219-2.412,1.563-.977,3.481,3.389,4.825.219.658,4.606,3.29,5.7,3.948-7.019,3.34-.626Z"
-                  className="cursor-pointer"
-                  fill={selectedRegion === 'oromiya' ? '#F59E0B' : hoveredRegion === 'oromiya' ? '#FBBF24' : '#E7E5E4'}
-                  stroke="#FFFFFF"
-                  strokeWidth="1"
-                  whileHover={{ scale: 1.02, filter: 'brightness(1.05)' }}
-                  onClick={() => setSelectedRegion('oromiya')}
-                  onMouseEnter={() => setHoveredRegion('oromiya')}
-                  onMouseLeave={() => setHoveredRegion(null)}
-                />
-
-                {/* Amhara Region */}
-                <motion.polygon
-                  id="amhara"
-                  points="202.279 164.013 199.592 164.645 199.434 171.916 196.905 172.39 192.638 175.235 190.267 173.18 188.528 174.761 186.316 175.551 185.525 169.229 188.272 165.108 185.525 162.907 185.051 160.062 190.425 158.165 190.267 155.478 186.157 154.372 186.303 152.921 187.917 152.791 189.793 147.576 188.054 146.153 183.471 147.892 182.252 151.549 179.638 151.122 177.781 146.944 174.539 147.561 171.617 145.837 171.459 140.622 167.774 138.011 172.565 135.564 172.407 128.926 163.714 128.452 160.711 132.403 160.41 134.362 157.076 136.196 154.073 137.461 145.222 141.886 143.326 141.886 142.377 143.783 137.952 143.625 133.685 139.199 131.63 139.515 131.472 137.935 128.268 139.155 123.569 136.038 123.569 133.035 119.513 131.191 114.718 129.716 108.185 129.347 105.235 128.61 104.919 126.239 100.652 125.765 100.02 125.133 97.649 124.342 97.965 120.707 99.565 118.09 97.807 116.124 97.965 114.859 98.439 113.595 102.232 109.011 102.877 109.162 105.235 107.747 102.232 105.376 105.077 101.741 103.655 97.79 99.546 93.048 98.439 87.2 94.08 91.108 88.008 81.985 83.899 81.195 80.105 83.723 76.312 85.936 75.68 87.833 68.701 87.816 67.303 86.884 67.461 84.988 65.194 84.167 70.323 77.54 78.147 65.414 79.908 63.555 89.514 61.627 92.885 61.488 94.201 60.31 93.35 55.845 93.563 52.549 101.407 33.683 104.596 36.055 104.723 36.569 108.149 36.997 108.378 37.683 110.759 37.683 116.129 42.384 119.051 42.888 122.548 41.225 126.09 41.111 127.005 42.825 134.547 43.054 139.46 39.283 139.689 36.883 141.289 35.054 143.231 37.797 146.743 38.894 157.058 39.397 161.058 37.226 163.801 39.625 167.343 39.397 168.714 40.54 169.4 46.368 175.571 46.596 178.313 48.653 177.881 53.195 184.027 53.453 185.627 62.023 182.427 63.509 184.37 68.08 184.141 72.308 185.741 73.45 192.712 72.879 194.562 74.216 196.826 73.222 199.414 73.118 200.55 81.048 202.753 83.723 203.069 88.781 206.546 92.89 206.388 93.997 208.443 97.316 208.443 100.477 212.078 105.85 212.552 109.96 211.288 111.224 210.673 117.861 211.273 123.259 212.236 126.397 211.288 131.138 210.023 133.983 210.497 136.67 207.178 136.67 205.598 137.302 209.119 140.211 208.117 143.529 206.704 146.944 202.121 146.627 202.874 150.093 203.069 155.004 200.698 157.059 202.911 159.113 203.004 160.942 202.279 164.013"
-                  className="cursor-pointer"
-                  fill={selectedRegion === 'amhara' ? '#F59E0B' : hoveredRegion === 'amhara' ? '#FBBF24' : '#E7E5E4'}
-                  stroke="#FFFFFF"
-                  strokeWidth="1"
-                  whileHover={{ scale: 1.02, filter: 'brightness(1.05)' }}
-                  onClick={() => setSelectedRegion('amhara')}
-                  onMouseEnter={() => setHoveredRegion('amhara')}
-                  onMouseLeave={() => setHoveredRegion(null)}
-                />
-
-                {/* Somalia Region */}
-                <motion.polygon
-                  id="somalia"
-                  points="435.339 196.127 429.429 196.825 412.524 196.825 353.82 177.356 325.342 167.481 307.161 152.915 303.227 146.19 301.845 143.24 298.544 141.514 290.362 131.864 286.641 122.189 289.937 115.809 293.432 111.361 285.79 108.792 269.842 111.557 263.782 112.088 258.577 111.075 244.32 111.382 244.162 113.121 239.105 119.759 238.472 124.026 237.208 126.871 236.027 131.888 233.731 138.409 236.892 141.254 233.025 143.931 230.886 144.573 230.412 146.311 227.087 152.024 226.52 153.823 228.215 155.088 229.376 155.088 230.001 154.195 232.59 154.195 233.572 154.999 233.482 156.784 230.536 157.766 232.956 159.268 237.927 156.778 242.678 153.927 245.713 153.481 249.284 154.82 250.623 154.999 251.605 153.838 255.266 153.392 257.319 154.909 256.646 154.412 257.765 151.338 258.212 149.196 260.533 149.196 262.318 148.035 265.979 150.267 270.889 145.446 273.032 145.446 275.016 147.405 273.005 148.828 270.621 149.196 272.941 148.871 275.174 147.41 275.429 147.405 277.403 152.669 278.938 152.888 283.544 163.416 284.202 166.706 290.782 173.066 290.388 176.215 292.317 180.084 292.524 184.847 289.027 185.787 286.078 191.474 285.079 192.805 281.77 186.97 281.131 182.497 276.306 182.278 273.016 178.768 271.262 179.865 271.458 182.44 270.933 185.621 267.095 195.218 265.559 200.262 266.202 209.448 270.604 213.86 269.946 215.395 271.077 216.338 271.262 221.975 267.753 228.993 267.533 231.625 264.024 238.205 259.418 237.986 254.593 242.591 255.909 247.855 251.674 251.455 248.891 248.075 248.233 248.075 238.739 234.265 238.802 238.863 234.854 243.03 233.1 243.03 232.031 250.511 241.469 260.173 243.846 261.015 243.408 265.84 241.215 268.252 244.504 272.639 244.504 274.174 245.491 277.23 248.891 283.605 250.207 283.605 253.497 287.991 242.75 288.211 241.434 287.333 239.46 291.062 232.886 295.436 229.371 295.229 226.52 295.887 229.152 298.519 228.79 302.472 229.266 303.435 241.455 313.034 253.949 312.321 263.357 311.12 266.759 308.249 287.81 305.06 296.741 295.703 303.546 290.706 313.482 287.4 326.192 284.54 338.465 285.172 354.032 284.865 374.372 264.99 384.356 254.783 400.074 238.589 410.702 227.549 421.928 215.724 432.514 205.234 440.805 197.038 435.339 196.127"
-                  className="cursor-pointer"
-                  fill={selectedRegion === 'somalia' ? '#F59E0B' : hoveredRegion === 'somalia' ? '#FBBF24' : '#E7E5E4'}
-                  stroke="#FFFFFF"
-                  strokeWidth="1"
-                  whileHover={{ scale: 1.02, filter: 'brightness(1.05)' }}
-                  onClick={() => setSelectedRegion('somalia')}
-                  onMouseEnter={() => setHoveredRegion('somalia')}
-                  onMouseLeave={() => setHoveredRegion(null)}
-                />
-
-                {/* Afar Region */}
-                <motion.polygon
-                  id="afar"
-                  points="202.279 163.697 206.072 167.964 208.759 168.597 207.178 172.706 209.233 172.548 213.184 168.597 213.5 166.226 220.296 158.797 220.613 157.217 225.71 156.753 227.06 152.122 230.412 146.311 230.886 144.573 232.782 144.099 236.828 141.298 233.731 138.409 235.88 132.423 237.185 126.97 238.472 124.026 239.104 119.759 244.162 113.121 244.28 111.223 258.577 111.075 258.998 94.758 275.371 71.155 265.909 54.888 243.934 33.241 233.442 23.995 211.963 10.169 208.708 10.127 204.881 12.679 202.874 11.829 201.52 13.643 197.168 15.171 198.485 16.69 197.004 19.854 200.497 22.75 200.935 33.643 201.42 34.278 201.62 36.997 199.225 38.14 198.891 44.043 198.197 46.482 199.641 47.593 199.568 56.995 203.453 59.395 203.111 62.48 203.453 59.395 199.568 56.995 199.682 47.625 198.197 46.482 199.641 47.593 199.568 56.995 203.453 59.395 203.111 62.48 200.597 66.137 200.482 73.222 199.414 73.267 200.53 80.965 202.753 83.723 203.065 88.71 206.546 92.89 206.399 93.917 208.39 97.23 208.443 100.417 212.078 105.85 212.552 109.96 211.288 111.224 210.655 117.704 211.288 123.394 212.212 126.323 211.288 131.138 210.034 134.042 210.466 136.492 207.178 136.67 205.536 137.236 209.111 140.205 206.767 146.801 202.121 146.627 202.911 150.263 203.064 154.867 200.734 157.027 202.805 159.015 203.069 160.694 202.279 163.697"
-                  className="cursor-pointer"
-                  fill={selectedRegion === 'afar' ? '#F59E0B' : hoveredRegion === 'afar' ? '#FBBF24' : '#E7E5E4'}
-                  stroke="#FFFFFF"
-                  strokeWidth="1"
-                  whileHover={{ scale: 1.02, filter: 'brightness(1.05)' }}
-                  onClick={() => setSelectedRegion('afar')}
-                  onMouseEnter={() => setHoveredRegion('afar')}
-                  onMouseLeave={() => setHoveredRegion(null)}
-                />
-              </svg>
-            </div>
-          </div>
-
-          {/* Details Column */}
-          <div className="lg:col-span-5">
-            <AnimatePresence mode="wait">
-              {activeRegionData ? (
-                <motion.div 
-                  key={activeRegionData.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl"
-                >
-                  <div className="mb-6">
-                    <span className="bg-stone-900 text-amber-500 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-2 inline-block shadow-lg">Region Details</span>
-                    <h2 className="text-4xl font-black text-stone-900 tracking-tighter leading-none">{activeRegionData.name}</h2>
-                  </div>
-
-                  <p className="text-stone-600 text-sm mb-6 leading-relaxed">{activeRegionData.summary}</p>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-xs font-black text-amber-600 uppercase tracking-widest mb-2">Traditions</h4>
-                      <ul className="text-sm text-stone-800 list-disc list-inside space-y-1">
-                        {activeRegionData.traditions.map((t, i) => <li key={i}>{t}</li>)}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs font-black text-amber-600 uppercase tracking-widest mb-2">Local Foods</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {activeRegionData.foods.map((f, i) => (
-                          <span key={i} className="bg-stone-100 text-stone-800 text-xs font-bold px-3 py-1.5 rounded-lg">{f}</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs font-black text-amber-600 uppercase tracking-widest mb-2">Music Style</h4>
-                      <p className="text-sm text-stone-800 font-medium">{activeRegionData.music}</p>
-                    </div>
-
-                    <div className="pt-6 border-t border-stone-100">
-                      <h4 className="text-xs font-black text-stone-400 uppercase tracking-widest mb-3">Gallery</h4>
-                      <div className="grid grid-cols-2 gap-4">
-                        {activeRegionData.images.map((img, i) => (
-                          <div key={i} className="relative h-24 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                            <img src={img} alt={`${activeRegionData.name} gallery ${i}`} className="w-full h-full object-cover" />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ) : (
-                <div className="bg-white p-10 rounded-[2.5rem] border border-stone-200 shadow-xl text-center py-32">
-                  <div className="w-20 h-20 bg-stone-50 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border border-stone-100">
-                    <svg className="w-10 h-10 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                  </div>
-                  <p className="text-stone-400 font-black text-[10px] uppercase tracking-widest max-w-[200px] mx-auto">Select a region on the map to explore its heritage</p>
-                </div>
-              )}
-            </AnimatePresence>
-          </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
+
       </div>
     </div>
   );
