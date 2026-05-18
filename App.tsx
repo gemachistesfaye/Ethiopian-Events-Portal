@@ -17,7 +17,7 @@ import { EthiopianEvent, UserReminder, CalendarDay, ReminderPriority, ReminderCa
 import { EVENTS_DATA, ETHIOPIAN_MONTHS_AMHARIC } from './constants';
 import { toEthiopianDate } from './utils/dateConverter';
 
-const Profile: React.FC<{ user: any }> = ({ user }) => {
+const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({ user, onNavigate }) => {
   const [newEmail, setNewEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -38,42 +38,97 @@ const Profile: React.FC<{ user: any }> = ({ user }) => {
   };
 
   return (
-    <div className="text-center py-10 bg-white p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10">
-      <div className="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">👤</div>
-      <p className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1">Logged in as</p>
-      <h2 className="text-xl font-black mb-6 text-stone-900">{user.email}</h2>
-      
-      <form onSubmit={handleUpdateEmail} className="space-y-4 mb-6">
-        <div>
-          <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block text-left">New Email</label>
-          <input 
-            type="email" 
-            value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)}
-            className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
-            required
-          />
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      {/* Welcome Header */}
+      <div className="bg-stone-900 rounded-[3rem] p-10 md:p-16 text-white shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
+        <div className="absolute top-0 right-0 p-10 opacity-5">
+           <svg className="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
         </div>
-        <button 
-          type="submit" 
-          disabled={loading}
-          className="w-full h-12 bg-amber-500 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
-        >
-          {loading ? 'Updating...' : 'Change Email'}
+        
+        <div className="w-32 h-32 bg-stone-800 border-4 border-amber-500 rounded-full flex items-center justify-center text-5xl flex-shrink-0 relative z-10 shadow-2xl">
+          👋
+        </div>
+        
+        <div className="relative z-10 text-center md:text-left">
+          <span className="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-4 inline-block">Explorer Dashboard</span>
+          <h2 className="text-4xl md:text-5xl font-black mb-2 tracking-tight">Welcome back!</h2>
+          <p className="text-stone-400 font-medium text-lg mb-4">{user.email}</p>
+          <p className="text-sm text-stone-500 max-w-md">Your gateway to Ethiopian heritage is ready. Where would you like to explore today?</p>
+        </div>
+      </div>
+
+      {/* Quick Access Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <button onClick={() => onNavigate('calendar')} className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left">
+          <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          </div>
+          <h3 className="text-xl font-black text-stone-900 mb-2">Heritage Calendar</h3>
+          <p className="text-xs text-stone-500 leading-relaxed font-medium">Explore upcoming events, festivals, and religious holidays.</p>
         </button>
-      </form>
 
-      {message && <p className="text-xs font-bold text-amber-600 mb-4">{message}</p>}
+        <button onClick={() => onNavigate('chat')} className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left">
+          <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+          </div>
+          <h3 className="text-xl font-black text-stone-900 mb-2">AI Storyteller</h3>
+          <p className="text-xs text-stone-500 leading-relaxed font-medium">Chat with our intelligent guide about Ethiopian history and myths.</p>
+        </button>
 
-      <button 
-        onClick={() => supabase.auth.signOut()}
-        className="w-full h-12 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors"
-      >
-        Logout
-      </button>
+        <button onClick={() => onNavigate('map')} className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left">
+          <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+          </div>
+          <h3 className="text-xl font-black text-stone-900 mb-2">Cultural Map</h3>
+          <p className="text-xs text-stone-500 leading-relaxed font-medium">Discover geographical roots of traditions across Ethiopia.</p>
+        </button>
+      </div>
+
+      {/* Account Settings */}
+      <div className="bg-white rounded-[3rem] border border-stone-200 shadow-xl overflow-hidden">
+        <div className="p-10 border-b border-stone-100 flex items-center gap-4">
+           <div className="w-10 h-10 bg-stone-100 rounded-full flex items-center justify-center">⚙️</div>
+           <h3 className="text-xl font-black text-stone-900">Account Settings</h3>
+        </div>
+        <div className="p-10 flex flex-col md:flex-row gap-10">
+          <form onSubmit={handleUpdateEmail} className="flex-1 space-y-4">
+            <div>
+              <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block">Update Email Address</label>
+              <div className="flex gap-4">
+                <input 
+                  type="email" 
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                  placeholder={user.email}
+                  className="flex-1 h-12 bg-stone-50 border border-stone-200 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+                  required
+                />
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className="h-12 px-6 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors disabled:opacity-50 whitespace-nowrap"
+                >
+                  {loading ? 'Saving...' : 'Save'}
+                </button>
+              </div>
+            </div>
+            {message && <p className="text-xs font-bold text-amber-600">{message}</p>}
+          </form>
+
+          <div className="md:border-l md:border-stone-100 md:pl-10 flex items-center">
+            <button 
+              onClick={() => supabase.auth.signOut()}
+              className="h-12 px-8 bg-rose-50 text-rose-600 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-rose-100 transition-colors w-full md:w-auto"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
+
 
 const UpdatePassword: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   const [password, setPassword] = useState('');
@@ -542,7 +597,7 @@ const App: React.FC = () => {
           <HeritageChat />
         ) : (
           user ? (
-            <Profile user={user} />
+            <Dashboard user={user} onNavigate={setActiveTab} />
           ) : (
             <Auth />
           )
