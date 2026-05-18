@@ -548,8 +548,7 @@ const App: React.FC = () => {
                       { id: 'timeline', label: 'Timeline', icon: '📜' },
                       { id: 'narrator', label: 'Narrator', icon: '🎙️' },
                       { id: 'culture', label: t('nav.zone'), icon: '✨' },
-                      { id: 'chat', label: t('nav.guide'), icon: '🤖' },
-                      { id: 'account', label: 'Profile', icon: '👤' }
+                      { id: 'chat', label: t('nav.guide'), icon: '🤖' }
                     ].map(tab => (
                       <button 
                         key={tab.id}
@@ -582,9 +581,13 @@ const App: React.FC = () => {
                <p className="text-[10px] font-black text-amber-600 uppercase tracking-widest leading-none mb-1">Local Time</p>
                <p className="text-stone-900 font-bold text-sm tracking-tight">{todayInfo.ethAmharic}</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center text-stone-400">
+            <button 
+               onClick={() => setActiveTab('account')}
+               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${activeTab === 'account' ? 'bg-amber-600 border-amber-700 text-white shadow-lg' : 'bg-stone-100 border-stone-200 text-stone-400 hover:bg-stone-200 hover:text-stone-600'}`}
+               title="Profile"
+            >
                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
-            </div>
+            </button>
           </div>
         </div>
       </header>
@@ -629,8 +632,7 @@ const App: React.FC = () => {
                   { id: 'timeline', label: 'Timeline', icon: '📜' },
                   { id: 'narrator', label: 'Narrator', icon: '🎙️' },
                   { id: 'culture', label: 'Zone', icon: '✨' },
-                  { id: 'chat', label: 'Guide', icon: '🤖' },
-                  { id: 'account', label: 'Profile', icon: '👤' }
+                  { id: 'chat', label: 'Guide', icon: '🤖' }
                 ].map(tab => (
               <button 
                 key={tab.id}
@@ -638,7 +640,7 @@ const App: React.FC = () => {
                 className={`flex flex-col items-center gap-1 transition-all ${activeTab === tab.id ? 'text-amber-600 font-bold' : 'text-stone-400'}`}
               >
                 <span className="text-xl">{tab.icon}</span>
-                <span className="text-[8px] font-black uppercase tracking-widest">{tab.id === 'account' ? (user ? 'Profile' : 'Login') : tab.label}</span>
+                <span className="text-[8px] font-black uppercase tracking-widest">{tab.label}</span>
               </button>
             ))}
           </div>

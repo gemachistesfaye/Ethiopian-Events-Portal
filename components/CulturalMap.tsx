@@ -484,8 +484,8 @@ const CulturalMap: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex-1 w-full h-full relative z-0">
-             <MapContainer center={[9.145, 40.489]} zoom={5} scrollWheelZoom={true} className="w-full h-full" style={{ zIndex: 0 }}>
+          <div className="flex-1 w-full h-full relative z-0 min-h-[500px]">
+             <MapContainer center={[9.145, 40.489]} zoom={5} scrollWheelZoom={true} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                <TileLayer
                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                  url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
