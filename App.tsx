@@ -410,7 +410,13 @@ const App: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
-  const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'narrator' | 'reminders' | 'culture' | 'chat' | 'account'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'narrator' | 'reminders' | 'culture' | 'chat' | 'account'>(() => {
+    return (localStorage.getItem('ethio_active_tab') as any) || 'home';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('ethio_active_tab', activeTab);
+  }, [activeTab]);
   const [user, setUser] = useState<User | null>(null);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isResettingPassword, setIsResettingPassword] = useState(false);
@@ -426,7 +432,7 @@ const App: React.FC = () => {
         setIsResettingPassword(true);
         setActiveTab('account');
       } else if (event === 'SIGNED_IN') {
-        setActiveTab('home');
+        setActiveTab(prev => prev === 'account' ? 'home' : prev);
       }
     });
 
