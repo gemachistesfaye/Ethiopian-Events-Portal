@@ -107,9 +107,12 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Event 1 */}
+            {/* Event 1: Timkat */}
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div className="h-48 bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center text-white font-black text-4xl group-hover:scale-105 transition-transform duration-500">🌊</div>
+              <div 
+                className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1543728269-b3a1a6245084?auto=format&fit=crop&w=800&q=80')` }}
+              ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">January 19</span>
                 <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Timkat (Epiphany)</h3>
@@ -117,9 +120,12 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               </div>
             </div>
 
-            {/* Event 2 */}
+            {/* Event 2: Meskel */}
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div className="h-48 bg-gradient-to-br from-amber-500 to-rose-500 flex items-center justify-center text-white font-black text-4xl group-hover:scale-105 transition-transform duration-500">🔥</div>
+              <div 
+                className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1517400508447-f8dd518b86db?auto=format&fit=crop&w=800&q=80')` }}
+              ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">September 27</span>
                 <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Meskel</h3>
@@ -127,13 +133,55 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               </div>
             </div>
 
-            {/* Event 3 */}
+            {/* Event 3: Irreecha */}
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div className="h-48 bg-gradient-to-br from-stone-700 to-stone-900 flex items-center justify-center text-white font-black text-4xl group-hover:scale-105 transition-transform duration-500">🎵</div>
+              <div 
+                className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80')` }}
+              ></div>
               <div className="p-6">
-                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">August 19</span>
-                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Buhe</h3>
-                <p className="text-stone-500 text-xs leading-relaxed">A traditional summer festival where young boys sing songs and receive bread, celebrating Transfiguration.</p>
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Sep / Oct</span>
+                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Irreecha</h3>
+                <p className="text-stone-500 text-xs leading-relaxed">Oromo thanksgiving festival marking the end of the rainy season and the arrival of spring.</p>
+              </div>
+            </div>
+
+            {/* Event 4: Eid al-Fitr */}
+            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+              <div 
+                className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1564182842-7642939856a9?auto=format&fit=crop&w=800&q=80')` }}
+              ></div>
+              <div className="p-6">
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
+                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Eid al-Fitr</h3>
+                <p className="text-stone-500 text-xs leading-relaxed">Celebrates the end of Ramadan with prayers, feasting, and community charity.</p>
+              </div>
+            </div>
+
+            {/* Event 5: Eid al-Adha */}
+            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+              <div 
+                className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1542834759-42993f707f14?auto=format&fit=crop&w=800&q=80')` }}
+              ></div>
+              <div className="p-6">
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
+                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Eid al-Adha</h3>
+                <p className="text-stone-500 text-xs leading-relaxed">The Feast of Sacrifice, honoring Abraham's willingness to sacrifice his son.</p>
+              </div>
+            </div>
+
+            {/* Event 6: Fichee Chambalaalla */}
+            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+              <div 
+                className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1523240715632-d984bb4a990a?auto=format&fit=crop&w=800&q=80')` }}
+              ></div>
+              <div className="p-6">
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
+                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Fichee-Chambalaalla</h3>
+                <p className="text-stone-500 text-xs leading-relaxed">The traditional New Year festival of the Sidama people, promoting social cohesion and peace.</p>
               </div>
             </div>
           </div>
