@@ -97,6 +97,49 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
         </div>
       </section>
 
+      {/* FEATURED FESTIVALS SECTION */}
+      <section className="py-24 px-6 bg-stone-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-xs font-black text-amber-600 uppercase tracking-widest">Glimpse of Heritage</span>
+            <h2 className="text-4xl font-black text-stone-900 tracking-tight mt-1">Featured Festivals</h2>
+            <p className="text-stone-500 text-sm font-medium mt-2">Discover some of the most vibrant celebrations in Ethiopia.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Event 1 */}
+            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+              <div className="h-48 bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center text-white font-black text-4xl group-hover:scale-105 transition-transform duration-500">🌊</div>
+              <div className="p-6">
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">January 19</span>
+                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Timkat (Epiphany)</h3>
+                <p className="text-stone-500 text-xs leading-relaxed">The most important festival of the Ethiopian Orthodox Church, celebrating the baptism of Jesus.</p>
+              </div>
+            </div>
+
+            {/* Event 2 */}
+            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+              <div className="h-48 bg-gradient-to-br from-amber-500 to-rose-500 flex items-center justify-center text-white font-black text-4xl group-hover:scale-105 transition-transform duration-500">🔥</div>
+              <div className="p-6">
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">September 27</span>
+                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Meskel</h3>
+                <p className="text-stone-500 text-xs leading-relaxed">The commemoration of the discovery of the True Cross, marked by the lighting of a massive bonfire.</p>
+              </div>
+            </div>
+
+            {/* Event 3 */}
+            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+              <div className="h-48 bg-gradient-to-br from-stone-700 to-stone-900 flex items-center justify-center text-white font-black text-4xl group-hover:scale-105 transition-transform duration-500">🎵</div>
+              <div className="p-6">
+                <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">August 19</span>
+                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Buhe</h3>
+                <p className="text-stone-500 text-xs leading-relaxed">A traditional summer festival where young boys sing songs and receive bread, celebrating Transfiguration.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* STATS SECTION */}
       <section className="bg-stone-900 text-white py-24 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
