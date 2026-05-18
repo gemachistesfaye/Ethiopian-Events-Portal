@@ -25,14 +25,19 @@ const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'narrator' | 'reminders' | 'culture' | 'chat' | 'account'>('home');
   const [user, setUser] = useState<User | null>(null);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const [isResettingPassword, setIsResettingPassword] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
+      if (event === 'PASSWORD_RECOVERY') {
+        setIsResettingPassword(true);
+        setActiveTab('account');
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -385,7 +390,9 @@ const App: React.FC = () => {
         ) : activeTab === 'chat' ? (
           <HeritageChat />
         ) : (
-          user ? (
+          isResettingPassword ? (
+            <UpdatePassword onComplete={() => setIsResettingPassword(false)} />
+          ) : user ? (
             <Profile user={user} />
           ) : (
             <Auth />
@@ -465,6 +472,77 @@ const Profile: React.FC<{ user: any }> = ({ user }) => {
       >
         Logout
       </button>
+    </div>
+  );
+};
+
+const UpdatePassword: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage('');
+
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match!');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) throw error;
+      setMessage('Password updated successfully!');
+      setTimeout(() => {
+        onComplete();
+      }, 2000);
+    } catch (error: any) {
+      setMessage(error.message || 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="text-center py-10 bg-white p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10">
+      <div className="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🔑</div>
+      <h2 className="text-xl font-black mb-6 text-stone-900">Set New Password</h2>
+      
+      <form onSubmit={handleUpdatePassword} className="space-y-4">
+        <div>
+          <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block text-left">New Password</label>
+          <input 
+            type="password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+            required
+          />
+        </div>
+        <div>
+          <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block text-left">Confirm Password</label>
+          <input 
+            type="password" 
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+            required
+          />
+        </div>
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="w-full h-12 bg-amber-500 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
+        >
+          {loading ? 'Updating...' : 'Update Password'}
+        </button>
+      </form>
+
+      {message && <p className="text-xs font-bold text-amber-600 mt-4">{message}</p>}
     </div>
   );
 };
