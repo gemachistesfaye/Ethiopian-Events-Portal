@@ -113,7 +113,7 @@ const App: React.FC = () => {
             </div>
           </div>
           
-          <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner">
+          <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner overflow-x-auto max-w-[50%]">
             {[
               { id: 'home', label: 'Home', icon: '🏛️' },
               { id: 'calendar', label: t('nav.explore'), icon: '🌍' },
@@ -162,7 +162,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Mobile Nav */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 z-50 px-6 h-20 flex items-center justify-around shadow-2xl">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 z-50 px-4 h-20 flex items-center gap-6 overflow-x-auto shadow-2xl">
         {[
           { id: 'home', label: 'Home', icon: '🏛️' },
           { id: 'calendar', label: 'Explore', icon: '🌍' },
@@ -176,7 +176,7 @@ const App: React.FC = () => {
           <button 
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`flex flex-col items-center gap-1 transition-all ${activeTab === tab.id ? 'text-amber-600 scale-110' : 'text-stone-400'}`}
+            className={`flex flex-col items-center gap-1 transition-all flex-shrink-0 min-w-[60px] ${activeTab === tab.id ? 'text-amber-600 scale-110 font-bold' : 'text-stone-400'}`}
           >
             <span className="text-xl">{tab.icon}</span>
             <span className="text-[8px] font-black uppercase tracking-widest">{tab.label}</span>
