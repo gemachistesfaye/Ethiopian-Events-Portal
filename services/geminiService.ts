@@ -3,27 +3,18 @@ import { ChatMessage } from "../types";
 /* ================================
    CONFIG (VITE)
 ================================ */
-const API_KEYS = [
-  import.meta.env.VITE_GEMINI_API_KEY,
-  import.meta.env.VITE_GEMINI_API_KEY_2
-].filter(Boolean) as string[];
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
-if (API_KEYS.length === 0) {
-  console.warn("⚠️ No Gemini API keys found");
+if (!API_KEY) {
+  console.warn("⚠️ Gemini API key is missing");
   throw new Error("Missing Gemini API key");
 }
 
-let currentKeyIndex = 0;
-const getApiKey = () => API_KEYS[currentKeyIndex];
-const rotateKey = () => {
-  if (API_KEYS.length > 1) {
-    currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;
-    console.log("🔄 Switched to API key", currentKeyIndex + 1);
-  }
-};
+const getApiKey = () => API_KEY;
+const rotateKey = () => {};
 
-const TEXT_MODEL = "gemini-2.5-flash";
-const TTS_MODEL = "gemini-2.5-flash";
+const TEXT_MODEL = "gemini-2.0-flash";
+const TTS_MODEL = "gemini-2.0-flash";
 
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
 
@@ -199,33 +190,86 @@ export async function speakAmharic(
 }
 
 /* ================================
-   HERITAGE GUIDE CHAT
+   OPENAI CONFIG
 ================================ */
-export async function chatWithHeritageGuide(
+const OPENAI_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+
+/* ================================
+   HERITAGE GUIDE CHAT (OpenAI Primary + Gemini Fallback)
+================================ */
+const SYSTEM_INSTRUCTIONS: Record<string, string> = {
+  guide: "You are an expert Ethiopian Heritage Guide. Answer with passion, clarity, and cultural pride. Keep answers concise but informative.",
+  storyteller: "You are a master Ethiopian historical storyteller. Narrate events as if they are epic tales, with rich descriptions and emotional weight. Make the user feel like they are there. Use cinematic language.",
+  teacher: "You are a patient and knowledgeable Ethiopian cultural teacher. Explain traditions, rituals, and customs step-by-step, making them easy to understand for students.",
+  festival: "You are a vibrant festival explainer. Describe Ethiopian festivals with colors, sounds, and excitement, as if the user is attending them.",
+  myth: "You are a keeper of Ethiopian myths and legends. Narrate ancient stories, folktales, and mysteries with a sense of wonder and magic."
+};
+
+async function chatWithOpenAI(
   history: ChatMessage[],
   message: string,
-  mode: 'guide' | 'storyteller' | 'teacher' | 'festival' | 'myth' = 'guide'
-): Promise<string> {
+  mode: string
+): Promise<string | null> {
+  if (!OPENAI_KEY) return null;
+
   try {
+    console.log("🟢 Calling OpenAI with mode:", mode);
+
+    const messages = [
+      { role: "system", content: SYSTEM_INSTRUCTIONS[mode] || SYSTEM_INSTRUCTIONS.guide },
+      ...history.map(msg => ({
+        role: msg.role === "user" ? "user" as const : "assistant" as const,
+        content: msg.text
+      })),
+      { role: "user" as const, content: message }
+    ];
+
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENAI_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages,
+        max_tokens: 1000
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error("❌ OpenAI error:", res.status, data);
+      return null;
+    }
+
+    const text = data?.choices?.[0]?.message?.content;
+    if (text) {
+      console.log("✅ OpenAI response received");
+      return text;
+    }
+
+    return null;
+  } catch (err) {
+    console.error("❌ OpenAI fetch error:", err);
+    return null;
+  }
+}
+
+async function chatWithGemini(
+  history: ChatMessage[],
+  message: string,
+  mode: string
+): Promise<string | null> {
+  try {
+    console.log("🟡 Falling back to Gemini...");
+
     const contents = history.map(msg => ({
       role: msg.role === "user" ? "user" : "model",
       parts: [{ text: msg.text }]
     }));
-
-    contents.push({
-      role: "user",
-      parts: [{ text: message }]
-    });
-
-    const instructions = {
-      guide: "You are an expert Ethiopian Heritage Guide. Answer with passion, clarity, and cultural pride.",
-      storyteller: "You are a master Ethiopian historical storyteller. Narrate events as if they are epic tales, with rich descriptions and emotional weight. Make the user feel like they are there. Use cinematic language.",
-      teacher: "You are a patient and knowledgeable Ethiopian cultural teacher. Explain traditions, rituals, and customs step-by-step, making them easy to understand for students.",
-      festival: "You are a vibrant festival explainer. Describe Ethiopian festivals with colors, sounds, and excitement, as if the user is attending them.",
-      myth: "You are a keeper of Ethiopian myths and legends. Narrate ancient stories, folktales, and mysteries with a sense of wonder and magic."
-    };
-
-    console.log("🟢 Calling Gemini API with mode:", mode, "message:", message);
+    contents.push({ role: "user", parts: [{ text: message }] });
 
     const result = await fetchWithRetry(
       `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${getApiKey()}`,
@@ -235,28 +279,30 @@ export async function chatWithHeritageGuide(
         body: JSON.stringify({
           contents,
           systemInstruction: {
-            parts: [
-              {
-                text: instructions[mode]
-              }
-            ]
+            parts: [{ text: SYSTEM_INSTRUCTIONS[mode] || SYSTEM_INSTRUCTIONS.guide }]
           }
         })
       }
     );
 
-    console.log("🔵 Gemini API result:", JSON.stringify(result)?.slice(0, 500));
-
-    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!text) {
-      console.error("🔴 No text in result. Full result:", JSON.stringify(result));
-      return "The guide could not generate a response. Please try again.";
-    }
-
-    return text;
-  } catch (err) {
-    console.error("🔴 Heritage Guide error:", err);
-    return "The guide encountered an error. Please try again.";
+    return result?.candidates?.[0]?.content?.parts?.[0]?.text || null;
+  } catch {
+    return null;
   }
+}
+
+export async function chatWithHeritageGuide(
+  history: ChatMessage[],
+  message: string,
+  mode: 'guide' | 'storyteller' | 'teacher' | 'festival' | 'myth' = 'guide'
+): Promise<string> {
+  // Try OpenAI first
+  const openaiResult = await chatWithOpenAI(history, message, mode);
+  if (openaiResult) return openaiResult;
+
+  // Fallback to Gemini
+  const geminiResult = await chatWithGemini(history, message, mode);
+  if (geminiResult) return geminiResult;
+
+  return "The guide is temporarily unavailable. Please try again in a moment.";
 }
