@@ -6,6 +6,7 @@ import EventDetails from './components/EventDetails';
 import MyReminders from './components/MyReminders';
 import CultureZone from './components/CultureZone';
 import HeritageChat from './components/HeritageChat';
+import CulturalMap from './components/CulturalMap';
 import { EthiopianEvent, UserReminder, CalendarDay, ReminderPriority, ReminderCategory } from './types';
 import { EVENTS_DATA, ETHIOPIAN_MONTHS_AMHARIC } from './constants';
 import { toEthiopianDate } from './utils/dateConverter';
@@ -15,7 +16,7 @@ const App: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
-  const [activeTab, setActiveTab] = useState<'calendar' | 'reminders' | 'culture' | 'chat'>('calendar');
+  const [activeTab, setActiveTab] = useState<'calendar' | 'map' | 'reminders' | 'culture' | 'chat'>('calendar');
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<'All' | 'Religious' | 'Public' | 'Cultural'>('All');
 
@@ -96,6 +97,7 @@ const App: React.FC = () => {
           <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner">
             {[
               { id: 'calendar', label: t('nav.explore'), icon: '🌍' },
+              { id: 'map', label: 'Atlas', icon: '🗺️' },
               { id: 'reminders', label: t('nav.saved'), icon: '🏺' },
               { id: 'culture', label: t('nav.zone'), icon: '✨' },
               { id: 'chat', label: t('nav.guide'), icon: '🤖' }
@@ -140,6 +142,7 @@ const App: React.FC = () => {
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 z-50 px-6 h-20 flex items-center justify-around shadow-2xl">
         {[
           { id: 'calendar', label: 'Explore', icon: '🌍' },
+          { id: 'map', label: 'Atlas', icon: '🗺️' },
           { id: 'reminders', label: 'Saved', icon: '🏺' },
           { id: 'culture', label: 'Zone', icon: '✨' },
           { id: 'chat', label: 'Guide', icon: '🤖' }
@@ -289,6 +292,8 @@ const App: React.FC = () => {
               onClearAll={handleClearAllReminders}
             />
           </div>
+        ) : activeTab === 'map' ? (
+          <CulturalMap />
         ) : activeTab === 'culture' ? (
           <CultureZone />
         ) : (
