@@ -189,7 +189,8 @@ export async function speakAmharic(
 ================================ */
 export async function chatWithHeritageGuide(
   history: ChatMessage[],
-  message: string
+  message: string,
+  mode: 'guide' | 'storyteller' | 'teacher' | 'festival' | 'myth' = 'guide'
 ): Promise<string> {
   try {
     const contents = history.map(msg => ({
@@ -202,6 +203,14 @@ export async function chatWithHeritageGuide(
       parts: [{ text: message }]
     });
 
+    const instructions = {
+      guide: "You are an expert Ethiopian Heritage Guide. Answer with passion, clarity, and cultural pride.",
+      storyteller: "You are a master Ethiopian historical storyteller. Narrate events as if they are epic tales, with rich descriptions and emotional weight. Make the user feel like they are there. Use cinematic language.",
+      teacher: "You are a patient and knowledgeable Ethiopian cultural teacher. Explain traditions, rituals, and customs step-by-step, making them easy to understand for students.",
+      festival: "You are a vibrant festival explainer. Describe Ethiopian festivals with colors, sounds, and excitement, as if the user is attending them.",
+      myth: "You are a keeper of Ethiopian myths and legends. Narrate ancient stories, folktales, and mysteries with a sense of wonder and magic."
+    };
+
     const result = await fetchWithRetry(
       `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
       {
@@ -212,8 +221,7 @@ export async function chatWithHeritageGuide(
           systemInstruction: {
             parts: [
               {
-                text:
-                  "You are an expert Ethiopian Heritage Guide. Answer with passion, clarity, and cultural pride."
+                text: instructions[mode]
               }
             ]
           }
