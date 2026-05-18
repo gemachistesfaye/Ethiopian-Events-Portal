@@ -163,7 +163,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1542834759-42993f707f14?auto=format&fit=crop&w=800&q=80')` }}
+                style={{ backgroundImage: `url('/eid_adha.png')` }}
               ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
@@ -176,7 +176,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1523240715632-d984bb4a990a?auto=format&fit=crop&w=800&q=80')` }}
+                style={{ backgroundImage: `url('/fichee.png')` }}
               ></div>
               <div className="p-6">
                 <span className="bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>

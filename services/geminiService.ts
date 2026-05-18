@@ -3,15 +3,27 @@ import { ChatMessage } from "../types";
 /* ================================
    CONFIG (VITE)
 ================================ */
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const API_KEYS = [
+  import.meta.env.VITE_GEMINI_API_KEY,
+  import.meta.env.VITE_GEMINI_API_KEY_2
+].filter(Boolean) as string[];
 
-if (!API_KEY) {
-  console.warn("⚠️ Gemini API key is missing");
+if (API_KEYS.length === 0) {
+  console.warn("⚠️ No Gemini API keys found");
   throw new Error("Missing Gemini API key");
 }
 
-const TEXT_MODEL = "gemini-2.0-flash";
-const TTS_MODEL = "gemini-2.0-flash-exp";
+let currentKeyIndex = 0;
+const getApiKey = () => API_KEYS[currentKeyIndex];
+const rotateKey = () => {
+  if (API_KEYS.length > 1) {
+    currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;
+    console.log("🔄 Switched to API key", currentKeyIndex + 1);
+  }
+};
+
+const TEXT_MODEL = "gemini-2.5-flash";
+const TTS_MODEL = "gemini-2.5-flash";
 
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
 
@@ -211,6 +223,8 @@ export async function chatWithHeritageGuide(
       myth: "You are a keeper of Ethiopian myths and legends. Narrate ancient stories, folktales, and mysteries with a sense of wonder and magic."
     };
 
+    console.log("🟢 Calling Gemini API with mode:", mode, "message:", message);
+
     const result = await fetchWithRetry(
       `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
       {
@@ -229,11 +243,18 @@ export async function chatWithHeritageGuide(
       }
     );
 
-    return (
-      result?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "The guide is resting right now."
-    );
-  } catch {
-    return "The guide is resting right now.";
+    console.log("🔵 Gemini API result:", JSON.stringify(result)?.slice(0, 500));
+
+    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!text) {
+      console.error("🔴 No text in result. Full result:", JSON.stringify(result));
+      return "The guide could not generate a response. Please try again.";
+    }
+
+    return text;
+  } catch (err) {
+    console.error("🔴 Heritage Guide error:", err);
+    return "The guide encountered an error. Please try again.";
   }
 }
