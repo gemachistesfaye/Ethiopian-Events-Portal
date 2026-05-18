@@ -1,10 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Heritage {
+interface DetailItem {
   name: string;
-  type: 'UNESCO World Heritage' | 'National Park' | 'Historic Site' | 'Intangible Heritage' | 'Cultural Landscape' | 'Modern Marvel';
   description: string;
+  category?: string;
 }
 
 interface RegionData {
@@ -12,14 +12,13 @@ interface RegionData {
   name: string;
   capital: string;
   population: string;
-  heritages: Heritage[];
-  traditions: string[];
-  festivals: string[];
-  foods: string[];
+  heritages: DetailItem[];
+  traditions: DetailItem[];
+  foods: DetailItem[];
+  music: DetailItem[];
+  clothing: DetailItem[];
   languages: string[];
-  clothing: string;
   history: string;
-  music: string;
   summary: string;
   images: string[];
   color: string;
@@ -34,22 +33,30 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '7+ Million',
     coordinates: { x: 480, y: 150 },
     heritages: [
-      { name: 'Aksum Obelisks', type: 'UNESCO World Heritage', description: 'Ancient monolithic stelae marking the tombs of Aksumite kings.' },
-      { name: 'Rock-Hewn Churches of Gheralta', type: 'Historic Site', description: 'Spectacular ancient churches carved into sheer sandstone cliffs.' },
-      { name: 'Al Nejashi Mosque', type: 'Historic Site', description: 'One of the oldest mosques in Africa, marking the first migration of Muslims.' },
-      { name: 'Debre Damo Monastery', type: 'Historic Site', description: 'A 6th-century monastery accessible only by climbing a 15-meter leather rope.' },
-      { name: 'Temple of Yeha', type: 'Historic Site', description: 'The oldest standing structure in Ethiopia, dating back to 700 BC.' }
+      { name: 'Aksum Obelisks', category: 'UNESCO World Heritage', description: 'Ancient monolithic stelae marking the tombs of Aksumite kings. The largest of these obelisks weighs over 500 tonnes and represents the architectural prowess of the ancient Aksumite Empire.' },
+      { name: 'Rock-Hewn Churches of Gheralta', category: 'Historic Site', description: 'Spectacular ancient churches carved into sheer sandstone cliffs. Monks and pilgrims must scale vertical rock faces using carved handholds to reach these isolated sanctuaries.' },
+      { name: 'Al Nejashi Mosque', category: 'Historic Site', description: 'One of the oldest mosques in Africa, marking the first migration of Muslims who fled persecution in Mecca and were granted refuge by the Aksumite King.' },
+      { name: 'Debre Damo', category: 'Historic Site', description: 'A 6th-century monastery accessible only by climbing a 15-meter leather rope up a sheer cliff face. It houses some of the oldest illuminated manuscripts in Ethiopia.' }
     ],
-    traditions: ['Ashenda Festival', 'Traditional coffee ceremony', 'Deep Orthodox Christian heritage'],
-    festivals: ['Ashenda (Girls\' Festival)', 'Timkat in Axum', 'Mariam Tsion'],
-    foods: ['Tihlo', 'Injera with Sebhi', 'Himbasha', 'Mies (Honey wine)'],
+    traditions: [
+      { name: 'Ashenda Festival', description: 'A vibrant cultural festival celebrated by girls and young women in August, marking the end of the fasting period of Filseta. Women wear traditional dresses and perform songs.' },
+      { name: 'Orthodox Christian Devotion', description: 'The region holds deep roots in Ethiopian Orthodox Christianity, with widespread fasting traditions and monastic lifestyles preserved for millennia.' }
+    ],
+    foods: [
+      { name: 'Tihlo', description: 'A unique traditional dish made from roasted barley flour rolled into small balls, eaten by dipping them into a rich, spicy meat stew (sebhi) using a specialized wooden fork.' },
+      { name: 'Mies (Honey Wine)', description: 'A traditional fermented honey wine, highly popular during weddings, holidays, and cultural gatherings.' }
+    ],
+    music: [
+      { name: 'Guayla', description: 'A dynamic, highly energetic circular dance and music style characterized by rapid drum beats, rhythmic clapping, and intense shoulder movements.' }
+    ],
+    clothing: [
+      { name: 'Tilfi', description: 'Elegant white cotton dresses adorned with intricate cross patterns and colorful embroidery at the borders, entirely handwoven by local artisans.' }
+    ],
     languages: ['Tigrinya', 'Saho', 'Kunama'],
-    clothing: 'Tilfi (Embroidered white cotton dresses with intricate cross patterns)',
-    history: 'Heart of the ancient Aksumite Empire. Home to the Ark of the Covenant according to Ethiopian Orthodox tradition.',
-    music: 'Guayla (dynamic, circular dance music with rapid drum beats and shoulder movements)',
+    history: 'Heart of the ancient Aksumite Empire. Home to the Ark of the Covenant according to Ethiopian Orthodox tradition. Tigray has historically been the epicenter of ancient Ethiopian civilization.',
     images: ['https://images.unsplash.com/photo-1548651877-3e11400e930f?q=80&w=800', 'https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800'],
     summary: 'The northernmost region of Ethiopia, rich in ancient history, majestic mountains, and the cradle of the Aksumite civilization.',
-    color: '#F59E0B' // Amber
+    color: '#F59E0B'
   },
   amhara: {
     id: 'amhara',
@@ -58,22 +65,30 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '30+ Million',
     coordinates: { x: 350, y: 300 },
     heritages: [
-      { name: 'Rock-Hewn Churches of Lalibela', type: 'UNESCO World Heritage', description: '11 medieval monolithic cave churches dubbed the "New Jerusalem".' },
-      { name: 'Fasil Ghebbi (Gondar)', type: 'UNESCO World Heritage', description: 'A fortress-city containing castles and palaces of Ethiopian emperors.' },
-      { name: 'Simien Mountains National Park', type: 'UNESCO World Heritage', description: 'Spectacular landscapes with jagged mountain peaks and endemic wildlife.' },
-      { name: 'Lake Tana Monasteries', type: 'Historic Site', description: 'Ancient isolated monasteries located on the islands of Lake Tana.' },
-      { name: 'Blue Nile Falls (Tis Abay)', type: 'Cultural Landscape', description: 'The majestic waterfall on the Blue Nile river.' }
+      { name: 'Rock-Hewn Churches of Lalibela', category: 'UNESCO World Heritage', description: '11 medieval monolithic cave churches dubbed the "New Jerusalem", carved entirely downward out of solid volcanic rock by King Lalibela in the 12th century.' },
+      { name: 'Fasil Ghebbi (Gondar)', category: 'UNESCO World Heritage', description: 'A fortress-city containing castles and palaces of Ethiopian emperors from the 17th and 18th centuries, blending Ethiopian, Indian, and Portuguese architectural styles.' },
+      { name: 'Simien Mountains', category: 'UNESCO World Heritage', description: 'Spectacular landscapes with jagged mountain peaks and deep valleys. It is home to rare endemic wildlife such as the Gelada baboon, Walia ibex, and Ethiopian wolf.' },
+      { name: 'Lake Tana Monasteries', category: 'Historic Site', description: 'Ancient, isolated monasteries located on the islands of Lake Tana, preserving medieval artifacts, royal crowns, and mummified remains of past emperors.' }
     ],
-    traditions: ['Eskista dance', 'Intricate cotton weaving', 'Religious fasting traditions'],
-    festivals: ['Genna (Christmas) in Lalibela', 'Timkat (Epiphany) in Gondar', 'Fasilides Bath celebrations'],
-    foods: ['Doro Wat', 'Tibs', 'Tej (Honey Wine)', 'Gomen'],
+    traditions: [
+      { name: 'Timkat (Epiphany)', description: 'A massive religious festival celebrating the baptism of Jesus. Replicas of the Ark of the Covenant (Tabots) are paraded through the streets to bodies of water.' },
+      { name: 'Cotton Weaving', description: 'A deeply entrenched cultural practice where artisans hand-spin and weave pure cotton to create intricate traditional garments.' }
+    ],
+    foods: [
+      { name: 'Doro Wat', description: 'The undisputed king of Ethiopian cuisine. A rich, heavily spiced chicken stew slow-cooked for hours with berbere, onions, and boiled eggs.' },
+      { name: 'Tej', description: 'A sweet, potent honey wine flavored with indigenous hops called gesho, traditionally served in a rounded glass flask known as a berele.' }
+    ],
+    music: [
+      { name: 'Eskista', description: 'A highly energetic, shoulder-focused dance music. The dance involves complex, rapid chest and shoulder shaking that requires immense physical control.' }
+    ],
+    clothing: [
+      { name: 'Habesha Kemis', description: 'The iconic Ethiopian elegant white woven dress. It features a colorful, heavily embroidered border known as "Tibeb" and is paired with a matching shawl (Netela).' }
+    ],
     languages: ['Amharic', 'Awngi', 'Oromo'],
-    clothing: 'Habesha Kemis (Elegant white woven dresses with colorful borders)',
     history: 'The historic center of the Solomonic dynasty. Features the medieval castles of Gondar and the source of the Blue Nile at Lake Tana.',
-    music: 'Eskista (highly energetic, shoulder-focused dance music)',
     images: ['https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800', 'https://images.unsplash.com/photo-1651493638407-742bc54e2bc5?q=80&w=800'],
     summary: 'A dramatic region characterized by high mountains, medieval castles, and deep Christian orthodox traditions.',
-    color: '#3B82F6' // Blue
+    color: '#3B82F6'
   },
   afar: {
     id: 'afar',
@@ -82,21 +97,28 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '2+ Million',
     coordinates: { x: 680, y: 250 },
     heritages: [
-      { name: 'Lower Valley of the Awash', type: 'UNESCO World Heritage', description: 'Paleontological site where the 3.2 million-year-old hominid "Lucy" was discovered.' },
-      { name: 'Erta Ale Volcano', type: 'Cultural Landscape', description: 'A continuously active basaltic shield volcano featuring a persistent lava lake.' },
-      { name: 'Danakil Depression', type: 'Cultural Landscape', description: 'One of the lowest and hottest places on Earth, famous for its neon acid springs.' },
-      { name: 'Dallol', type: 'Cultural Landscape', description: 'A stunning hydrothermal field with bright yellow and green sulfur springs.' }
+      { name: 'Lower Valley of the Awash', category: 'UNESCO World Heritage', description: 'One of the most important paleontological sites in the world. This is where the 3.2 million-year-old fossil of the famous hominid "Lucy" (Dinknesh) was discovered.' },
+      { name: 'Erta Ale Volcano', category: 'Cultural Landscape', description: 'A continuously active basaltic shield volcano featuring a persistent lava lake, making it one of the most extreme and fascinating geological sites on Earth.' },
+      { name: 'Danakil Depression', category: 'Cultural Landscape', description: 'One of the lowest and hottest places on Earth, famous for its neon-colored acid springs, vast salt pans, and brutal but mesmerizing landscape.' }
     ],
-    traditions: ['Nomadic desert lifestyle', 'Traditional salt mining caravans (Amolé)'],
-    festivals: ['Islamic holidays', 'Tribal leadership gatherings'],
-    foods: ['Milk and meat-based pastoral diet', 'Salt-cured provisions'],
+    traditions: [
+      { name: 'Amolé Salt Mining', description: 'A centuries-old tradition where Afar nomads hack slabs of solid salt from the Danakil Depression, loading them onto massive camel caravans to trade in the highlands.' },
+      { name: 'Pastoral Nomadism', description: 'The Afar people have maintained a resilient nomadic lifestyle for millennia, moving with their herds of camels and goats in search of water and grazing land.' }
+    ],
+    foods: [
+      { name: 'Pastoral Diet', description: 'A diet heavily reliant on camel and goat milk, combined with meat. Due to the extreme heat, traditional food preservation methods like drying meat are common.' }
+    ],
+    music: [
+      { name: 'Warrior Dances', description: 'High-energy, rhythmic dances historically performed by warriors. They feature chanting, rhythmic stepping, and the brandishing of the curved jile dagger.' }
+    ],
+    clothing: [
+      { name: 'Sanafil & Jile', description: 'Traditional wraparound skirts (sanafil) suited for the extreme heat. Men famously carry the "Jile", a sharply curved, double-edged traditional dagger worn at the waist.' }
+    ],
     languages: ['Afar'],
-    clothing: 'Sanafil (distinctive wraparound skirts) and curved jile daggers',
     history: 'The Danakil Depression is the cradle of humanity. Historically, the Afar people controlled the vital salt trade connecting the coast to the highlands.',
-    music: 'High-energy warrior dances with chanting and rhythmic stepping',
     images: ['https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800', 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'],
     summary: 'A land of extremes, featuring active volcanoes, neon acid lakes, salt flats, and the cradle of humanity.',
-    color: '#EF4444' // Red
+    color: '#EF4444'
   },
   benishangul: {
     id: 'benishangul',
@@ -105,19 +127,26 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '1.2+ Million',
     coordinates: { x: 180, y: 380 },
     heritages: [
-      { name: 'Grand Ethiopian Renaissance Dam (GERD)', type: 'Modern Marvel', description: 'The largest hydroelectric dam in Africa, built on the Blue Nile.' },
-      { name: 'Blue Nile Gorge', type: 'Cultural Landscape', description: 'Often compared to the Grand Canyon, carved by the majestic Blue Nile.' }
+      { name: 'Grand Ethiopian Renaissance Dam', category: 'Modern Marvel', description: 'The largest hydroelectric dam in Africa, built on the Blue Nile. It is a symbol of modern Ethiopian engineering and national pride.' },
+      { name: 'Blue Nile Gorge', category: 'Cultural Landscape', description: 'A massive, majestic canyon carved by the Blue Nile river. It is often compared to the Grand Canyon and acts as a massive natural barrier.' }
     ],
-    traditions: ['Traditional gold mining', 'Berta music and dance'],
-    festivals: ['Local cultural celebrations'],
-    foods: ['Sorghum', 'Root crops', 'Forest honey'],
+    traditions: [
+      { name: 'Traditional Gold Mining', description: 'For centuries, locals in the region have panned for gold in the riverbeds, a tradition that predates modern commercial mining.' }
+    ],
+    foods: [
+      { name: 'Sorghum & Root Crops', description: 'The staple diet consists heavily of sorghum-based dishes, yams, and root crops, adapted to the tropical lowland climate.' }
+    ],
+    music: [
+      { name: 'Berta Music', description: 'Traditional music featuring long bamboo flutes (Waza) and gourd instruments, played in polyphonic harmony during communal gatherings.' }
+    ],
+    clothing: [
+      { name: 'Lowland Fabrics', description: 'Colorful, lightweight fabrics designed for breathability in the humid, tropical climate of the western borderlands.' }
+    ],
     languages: ['Berta', 'Gumuz', 'Amharic'],
-    clothing: 'Colorful, lightweight fabrics suitable for the tropical climate.',
     history: 'A historically significant region for gold mining. Now famous globally as the home of the monumental GERD project.',
-    music: 'Berta traditional music featuring long bamboo flutes and gourds.',
     images: ['https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800', 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'],
     summary: 'A frontier region defined by the Blue Nile river, rich in gold and modern energy marvels.',
-    color: '#F97316' // Orange
+    color: '#F97316'
   },
   addis: {
     id: 'addis',
@@ -126,21 +155,28 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '5+ Million',
     coordinates: { x: 450, y: 450 },
     heritages: [
-      { name: 'National Museum of Ethiopia', type: 'Historic Site', description: 'Home to the fossilized remains of "Lucy" (Dinknesh).' },
-      { name: 'Holy Trinity Cathedral', type: 'Historic Site', description: 'A massive ornate cathedral, the final resting place of Emperor Haile Selassie.' },
-      { name: 'Addis Ababa Mercato', type: 'Cultural Landscape', description: 'The largest open-air market in Africa.' },
-      { name: 'Entoto Mountains', type: 'National Park', description: 'The eucalyptus-covered mountains offering panoramic views of the city.' }
+      { name: 'National Museum of Ethiopia', category: 'Historic Site', description: 'The premier museum in the country, home to the fossilized remains of "Lucy" and an extensive collection of ancient artifacts and modern art.' },
+      { name: 'Holy Trinity Cathedral', category: 'Historic Site', description: 'A massive ornate cathedral built to commemorate Ethiopia\'s liberation from Italian occupation. It is the final resting place of Emperor Haile Selassie.' },
+      { name: 'Mercato', category: 'Cultural Landscape', description: 'The largest open-air market in Africa, a sprawling, chaotic, and vibrant hub where absolutely everything can be bought or sold.' }
     ],
-    traditions: ['Urban coffee culture', 'Diverse cultural integration'],
-    festivals: ['Meskel at Meskel Square', 'Great Ethiopian Run', 'Timkat at Jan Meda'],
-    foods: ['All Ethiopian cuisines', 'Shiro', 'Tibs', 'Modern fusion'],
-    languages: ['Amharic', 'Oromo', 'English', 'All national languages'],
-    clothing: 'A mix of modern urban wear and traditional Habesha clothing on holidays.',
+    traditions: [
+      { name: 'Urban Coffee Culture', description: 'Addis is famous for its dense concentration of cafes and traditional coffee stands, acting as the primary social glue for the city\'s residents.' },
+      { name: 'Meskel at Meskel Square', description: 'The massive annual bonfire celebration marking the finding of the True Cross, held in the city\'s central amphitheater plaza.' }
+    ],
+    foods: [
+      { name: 'Modern Fusion', description: 'As the capital, Addis serves every regional Ethiopian dish perfectly, alongside a rapidly growing modern fusion and international culinary scene.' }
+    ],
+    music: [
+      { name: 'Ethio-Jazz', description: 'A unique musical genre born in Addis Ababa in the 1960s, blending traditional Ethiopian pentatonic scales with jazz, funk, and soul.' }
+    ],
+    clothing: [
+      { name: 'Urban & Traditional Blend', description: 'A mix of fast-paced modern urban wear during the week, switching dramatically to pristine traditional white Habesha clothing on Sundays and holidays.' }
+    ],
+    languages: ['Amharic', 'Oromo', 'English'],
     history: 'Founded in 1886 by Emperor Menelik II and Empress Taytu. It is the diplomatic capital of Africa, hosting the African Union headquarters.',
-    music: 'Ethio-Jazz (originating in the city), modern pop, and traditional fusion.',
-    images: ['https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800', 'https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800'], 
+    images: ['https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800', 'https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800'],
     summary: 'The bustling capital city, acting as the diplomatic hub of Africa and a melting pot of all Ethiopian cultures.',
-    color: '#64748B' // Slate
+    color: '#64748B'
   },
   dire_dawa: {
     id: 'dire_dawa',
@@ -149,20 +185,26 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '500,000+',
     coordinates: { x: 680, y: 430 },
     heritages: [
-      { name: 'Ethio-Djibouti Railway Station', type: 'Historic Site', description: 'The historic railway station that birthed the city in the early 20th century.' },
-      { name: 'Kefira Market', type: 'Cultural Landscape', description: 'A vibrant, colorful traditional market showcasing the fusion of cultures.' },
-      { name: 'Legedadi Cave Paintings', type: 'Historic Site', description: 'Prehistoric rock art found near the city.' }
+      { name: 'Ethio-Djibouti Railway Station', category: 'Historic Site', description: 'The historic French-built railway station from 1902 that birthed the city. It features vintage locomotives and historic architecture.' },
+      { name: 'Kefira Market', category: 'Cultural Landscape', description: 'A vibrant, colorful traditional market showcasing the deep fusion of Somali, Oromo, and Harari cultures and trading practices.' }
     ],
-    traditions: ['Trade and commerce', 'Chewing Khat (Qat) socially'],
-    festivals: ['Islamic and Christian holidays'],
-    foods: ['Camel meat', 'Samosas', 'Vibrant street food'],
+    traditions: [
+      { name: 'Chewing Khat (Qat)', description: 'A highly social and deeply ingrained cultural tradition of chewing the stimulant leaf Khat in afternoon gatherings to discuss business and politics.' }
+    ],
+    foods: [
+      { name: 'Street Food & Samosas', description: 'Known for its vibrant street food culture heavily influenced by Arab and Somali traders, particularly savory meat-filled pastries.' }
+    ],
+    music: [
+      { name: 'Cultural Fusion Music', description: 'A vibrant blend of Somali melodies, Harari beats, and modern Ethiopian pop music.' }
+    ],
+    clothing: [
+      { name: 'Macawiis & Dirac', description: 'Men frequently wear the comfortable, colorful Somali Macawiis (sarong), while women wear the elegant, flowing Dirac.' }
+    ],
     languages: ['Oromo', 'Somali', 'Amharic'],
-    clothing: 'Urban fusion of Somali Macawiis, Harari fabrics, and modern wear.',
     history: 'Created directly as a result of the Addis Ababa-Djibouti railway bypassing Harar. It became Ethiopia\'s first modern planned city.',
-    music: 'A fusion of Somali, Harari, and modern Ethiopian music.',
     images: ['https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800', 'https://images.unsplash.com/photo-1506505494950-8438ebccba56?q=80&w=800'],
     summary: 'A vibrant, culturally diverse railway city born out of trade and modern transport.',
-    color: '#84CC16' // Lime
+    color: '#84CC16'
   },
   harari: {
     id: 'harari',
@@ -171,20 +213,27 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '250,000+',
     coordinates: { x: 730, y: 460 },
     heritages: [
-      { name: 'Harar Jugol', type: 'UNESCO World Heritage', description: 'The fortified historic walled city of Harar, featuring 82 mosques.' },
-      { name: 'Arthur Rimbaud House', type: 'Historic Site', description: 'A museum dedicated to the French poet who lived in Harar in the 1880s.' },
-      { name: 'Hyena Feeding Tradition', type: 'Intangible Heritage', description: 'A unique nightly ritual where local "Hyena men" feed wild hyenas by hand.' }
+      { name: 'Harar Jugol', category: 'UNESCO World Heritage', description: 'The fortified historic walled city. It contains 82 mosques (three dating from the 10th century) and 102 shrines, packed into a tiny, colorful maze of alleyways.' },
+      { name: 'Arthur Rimbaud House', category: 'Historic Site', description: 'A gorgeous wooden mansion turned museum dedicated to the famous French poet Arthur Rimbaud, who lived as a trader in Harar in the 1880s.' }
     ],
-    traditions: ['Hyena feeding', 'Coffee roasting ceremonies', 'Islamic scholarship'],
-    festivals: ['Eid al-Fitr', 'Shuwal Eid (A unique post-Ramadan celebration)'],
-    foods: ['Fatira', 'Hulbet', 'Harari Coffee'],
+    traditions: [
+      { name: 'Hyena Feeding', description: 'A unique nightly ritual where designated local "Hyena men" call wild hyenas from the hills and feed them meat by hand, or even mouth-to-mouth.' },
+      { name: 'Islamic Scholarship', description: 'Harar is considered the fourth holiest city of Islam, with a deep, centuries-old tradition of Quranic scholarship and poetry.' }
+    ],
+    foods: [
+      { name: 'Fatira & Harari Coffee', description: 'A popular street food of thin, flaky pastry served with honey or eggs, almost always accompanied by distinctively roasted Harari coffee.' }
+    ],
+    music: [
+      { name: 'Kabaro & Chanting', description: 'Traditional Harari music relies heavily on rhythmic chanting accompanied by the Kabaro drum, often performed during weddings and religious holidays.' }
+    ],
+    clothing: [
+      { name: 'Harari Garments', description: 'Women wear vibrantly colored, distinctly patterned garments often paired with elaborate gold jewelry.' }
+    ],
     languages: ['Harari', 'Oromo', 'Amharic'],
-    clothing: 'Vibrant, brightly colored garments and traditional Harari woven textiles.',
-    history: 'Harar is considered the fourth holiest city of Islam. It served as a major commercial hub linking African and Islamic trade routes for centuries.',
-    music: 'Traditional Harari songs accompanied by the Kabaro drum.',
+    history: 'It served as a major commercial hub linking African and Islamic trade routes for centuries. Surrounded by walls built between the 13th and 16th centuries.',
     images: ['https://images.unsplash.com/photo-1588612143491-0fcf05a6efc1?q=80&w=800', 'https://images.unsplash.com/photo-1550993510-9b0f48039600?q=80&w=800'],
     summary: 'A small but historically massive region centered around the ancient, walled Islamic city of Harar.',
-    color: '#EC4899' // Pink
+    color: '#EC4899'
   },
   gambela: {
     id: 'gambela',
@@ -193,19 +242,27 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '400,000+',
     coordinates: { x: 150, y: 550 },
     heritages: [
-      { name: 'Gambela National Park', type: 'National Park', description: 'The largest national park in Ethiopia, famous for the massive White-eared kob antelope migration.' },
-      { name: 'Baro River', type: 'Cultural Landscape', description: 'A major river and historically the only navigable river in Ethiopia.' }
+      { name: 'Gambela National Park', category: 'National Park', description: 'The largest national park in Ethiopia, famous for hosting the second largest antelope migration in Africa (the White-eared kob).' },
+      { name: 'Baro River', category: 'Cultural Landscape', description: 'A massive, majestic river. Historically, it was the only navigable river in Ethiopia, serving as a major port for British trading ships.' }
     ],
-    traditions: ['Riverine lifestyle', 'Fishing traditions', 'Unique body scarification'],
-    festivals: ['Local harvest festivals'],
-    foods: ['Fish-based dishes', 'Sorghum and maize'],
+    traditions: [
+      { name: 'Riverine Lifestyle', description: 'The local ethnic groups, such as the Nuer and Anywaa, have a deep cultural connection to the river, relying on it for fishing, agriculture, and transport.' },
+      { name: 'Body Scarification', description: 'A traditional practice of elaborate body scarification used as rites of passage and markers of beauty and tribal identity.' }
+    ],
+    foods: [
+      { name: 'Fish & Sorghum', description: 'Due to the riverine ecosystem, fresh fish stews paired with sorghum or maize porridge form the core of the traditional diet.' }
+    ],
+    music: [
+      { name: 'Drum and Dance', description: 'Highly rhythmic drum-based music accompanied by intense, synchronized group dances that reflect the community\'s bond.' }
+    ],
+    clothing: [
+      { name: 'Minimalist Attire', description: 'Historically minimalist clothing suited for the extremely hot and humid lowland climate, often accented with intricate beadwork.' }
+    ],
     languages: ['Nuer', 'Anywaa', 'Majang'],
-    clothing: 'Light clothing suited for the hot, humid lowland climate.',
     history: 'A lush, low-lying region that shares strong cultural and ecological ties with South Sudan. Historically a major river port.',
-    music: 'Rhythmic drum-based music and synchronized dances.',
     images: ['https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800', 'https://images.unsplash.com/photo-1532585227763-7e4b2d39df16?q=80&w=800'],
     summary: 'A hot, lush lowland region famous for massive wildlife migrations and majestic rivers.',
-    color: '#06B6D4' // Cyan
+    color: '#06B6D4'
   },
   oromiya: {
     id: 'oromiya',
@@ -214,22 +271,29 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '40+ Million',
     coordinates: { x: 420, y: 620 },
     heritages: [
-      { name: 'Bale Mountains National Park', type: 'UNESCO World Heritage', description: 'A massive afro-alpine plateau, home to the endemic Ethiopian wolf.' },
-      { name: 'Gadaa System', type: 'Intangible Heritage', description: 'An ancient indigenous democratic socio-political system of the Oromo people.' },
-      { name: 'Sof Omar Caves', type: 'Cultural Landscape', description: 'The longest cave system in Africa, carved by the Weyib River.' },
-      { name: 'Awash National Park', type: 'National Park', description: 'Spectacular gorge and falls, rich in wildlife and arid landscapes.' },
-      { name: 'Irreechaa Festival', type: 'Intangible Heritage', description: 'A massive thanksgiving festival celebrating peace and nature.' }
+      { name: 'Bale Mountains National Park', category: 'UNESCO World Heritage', description: 'A massive afro-alpine plateau, home to the highest road in Africa and the rare, endemic Ethiopian wolf.' },
+      { name: 'Gadaa System', category: 'Intangible Heritage', description: 'An ancient indigenous democratic socio-political system of the Oromo people, recognized by UNESCO for its complexity and egalitarian nature.' },
+      { name: 'Sof Omar Caves', category: 'Cultural Landscape', description: 'The longest cave system in Africa, an extraordinary natural marvel carved by the Weyib River, featuring massive limestone pillars.' }
     ],
-    traditions: ['Gadaa System', 'Irreechaa thanksgiving', 'Ateetee women\'s peace rituals'],
-    festivals: ['Irreechaa', 'Ayyana', 'Gubaa'],
-    foods: ['Chumbo', 'Anchote', 'Marqaa', 'Besso'],
+    traditions: [
+      { name: 'Irreechaa Festival', description: 'A massive thanksgiving festival celebrating peace and nature, where millions gather at lakes and rivers to offer grass to Waaqa (God).' },
+      { name: 'Ateetee', description: 'A women-led peace-making ritual demonstrating the strong sociopolitical power women hold in traditional Oromo culture.' }
+    ],
+    foods: [
+      { name: 'Chumbo & Anchote', description: 'Traditional thick breads and root crops (like Anchote, unique to the western Oromia region) served with rich, spiced butter and yogurt.' },
+      { name: 'Besso', description: 'A highly nutritious drink and snack made from lightly roasted barley flour, historically fueling travelers and warriors.' }
+    ],
+    music: [
+      { name: 'Shaggooyyee & Ragada', description: 'Vibrant dance styles requiring extreme flexibility, characterized by intricate, rapid neck and shoulder movements.' }
+    ],
+    clothing: [
+      { name: 'Aadaa Oromoo', description: 'Distinctive traditional attire often featuring bold red, black, and white colors, completed with culturally significant wooden staffs and jewelry.' }
+    ],
     languages: ['Afaan Oromoo'],
-    clothing: 'Aadaa Oromoo attire (Waaqoo, Kuandee, Ruufa)',
     history: 'Birthplace of Arabica coffee (Kaffa/Jimma regions). Home to the egalitarian Gadaa system, a framework that predates modern democracy.',
-    music: 'Ragada and Shaggooyyee dance styles with intricate shoulder and neck movements',
     images: ['https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=800', 'https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?q=80&w=800'],
     summary: 'The largest and most populous region in Ethiopia, known for its diverse landscapes, the origin of coffee, and rich Gadaa heritage.',
-    color: '#10B981' // Emerald
+    color: '#10B981'
   },
   somali: {
     id: 'somali',
@@ -238,20 +302,28 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '6+ Million',
     coordinates: { x: 780, y: 620 },
     heritages: [
-      { name: 'Karamara Mountains', type: 'Historic Site', description: 'A culturally and historically significant mountain range.' },
-      { name: 'Babile Elephant Sanctuary', type: 'National Park', description: 'A massive wildlife reserve home to the rare African savanna elephant.' },
-      { name: 'Taleex Historic Architecture', type: 'Historic Site', description: 'Ancient structures reflecting deep Islamic trade history.' }
+      { name: 'Karamara Mountains', category: 'Historic Site', description: 'A culturally and historically significant mountain range that has witnessed major historical events in the region.' },
+      { name: 'Babile Elephant Sanctuary', category: 'National Park', description: 'A massive, semi-arid wildlife reserve home to the rare African savanna elephant, which have uniquely adapted to the harsh environment.' }
     ],
-    traditions: ['Nomadic pastoralism', 'Camel herding culture', 'Deep oral storytelling and poetry'],
-    festivals: ['Eid al-Fitr', 'Eid al-Adha', 'Traditional clan gatherings'],
-    foods: ['Bariis (Spiced Rice with meat)', 'Muqmad (Dried meat)', 'Camel milk', 'Xalwo (Halwa)'],
+    traditions: [
+      { name: 'Camel Pastoralism', description: 'Camels are deeply respected and represent wealth, survival, and cultural pride in the vast arid landscapes of the region.' },
+      { name: 'Poetry & Oral History', description: 'The region has an immensely rich tradition of oral storytelling and complex poetry, used to record history and resolve disputes.' }
+    ],
+    foods: [
+      { name: 'Bariis & Muqmad', description: 'Highly spiced fragrant rice served with Muqmad—small pieces of dried meat preserved in clarified butter for long desert journeys.' },
+      { name: 'Camel Milk', description: 'A staple of the pastoral diet, revered for its high nutritional value and cultural significance.' }
+    ],
+    music: [
+      { name: 'Dhaanto', description: 'A traditional folk dance and music style that historically mimics the gait of camels. It is highly energetic and performed collectively.' }
+    ],
+    clothing: [
+      { name: 'Koofiyad & Dirac', description: 'Men wear the Koofiyad (traditional cap) with a Macawiis (sarong). Women wear the Dirac, a lightweight, brilliantly colored flowing dress.' }
+    ],
     languages: ['Somali'],
-    clothing: 'Koofiyad and Macawiis for men, colorful Dirac for women',
     history: 'Historically part of vital ancient trade routes connecting the Horn of Africa to the Arabian peninsula. Known for deep Islamic heritage and poetic traditions.',
-    music: 'Dhaanto (traditional folk dance and music mimicking camel gaits)',
     images: ['https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800', 'https://images.unsplash.com/photo-1506505494950-8438ebccba56?q=80&w=800'],
     summary: 'An expansive, arid region dominated by pastoralist culture, camels, and vibrant trade history.',
-    color: '#EAB308' // Yellow
+    color: '#EAB308'
   },
   southern: {
     id: 'southern',
@@ -260,22 +332,30 @@ const REGIONS_DATA: Record<string, RegionData> = {
     population: '20+ Million',
     coordinates: { x: 300, y: 680 },
     heritages: [
-      { name: 'Lower Valley of the Omo', type: 'UNESCO World Heritage', description: 'A prehistoric site crucial for understanding human evolution, and home to diverse indigenous tribes.' },
-      { name: 'Konso Cultural Landscape', type: 'UNESCO World Heritage', description: 'A highly organized landscape of walled terraces and fortified settlements.' },
-      { name: 'Tiya Megaliths', type: 'UNESCO World Heritage', description: 'Ancient standing stones adorned with mysterious carvings of swords and symbols.' },
-      { name: 'Nechisar National Park', type: 'National Park', description: 'The "Bridge of Heaven", a stunning isthmus between Lake Abaya and Lake Chamo.' },
-      { name: 'Fichee-Chambalaalla', type: 'Intangible Heritage', description: 'The Sidama people\'s New Year festival.' }
+      { name: 'Lower Valley of the Omo', category: 'UNESCO World Heritage', description: 'A prehistoric site crucial for understanding human evolution, and home to some of the most fascinating and diverse indigenous tribes in the world.' },
+      { name: 'Konso Cultural Landscape', category: 'UNESCO World Heritage', description: 'A highly organized landscape of massive stone-walled terraces and fortified settlements built to combat soil erosion over centuries.' },
+      { name: 'Tiya Megaliths', category: 'UNESCO World Heritage', description: 'Ancient standing stones adorned with mysterious carvings of swords and symbols, marking a prehistoric burial complex.' },
+      { name: 'Nechisar National Park', category: 'National Park', description: 'Known as the "Bridge of Heaven", it is a stunning isthmus between Lake Abaya and Lake Chamo, teeming with crocodiles and zebras.' }
     ],
-    traditions: ['Body painting (Omo Valley tribes)', 'Terraced agriculture (Konso)', 'Bull jumping ceremony (Hamer)'],
-    festivals: ['Fichee-Chambalaalla', 'Evangadi (Night dancing)'],
-    foods: ['Kocho (False banana bread)', 'Bulla', 'Kitfo (Gurage)'],
+    traditions: [
+      { name: 'Bull Jumping Ceremony', description: 'A rite of passage for the Hamer people where young men must run across the backs of a line of bulls to prove their manhood.' },
+      { name: 'Fichee-Chambalaalla', description: 'The vibrant Sidama New Year festival, deeply tied to the lunar calendar and traditional astrology.' }
+    ],
+    foods: [
+      { name: 'Kocho & Bulla', description: 'Staple foods created by harvesting, fermenting, and baking the pulp of the Enset plant (False Banana), providing absolute food security.' },
+      { name: 'Kitfo', description: 'Originating from the Gurage people in this region, it is premium raw minced beef marinated in intensely spiced butter (Niter Kibbeh).' }
+    ],
+    music: [
+      { name: 'Polyphonic Tribal Music', description: 'Highly rhythmic tribal music utilizing diverse instruments like the lyre, accompanied by complex polyphonic singing and jumping dances.' }
+    ],
+    clothing: [
+      { name: 'Diverse Tribal Attire', description: 'Ranging from intricately woven cotton garments of the Dorze, to the spectacular beadwork and animal skin garments of the Omo Valley tribes.' }
+    ],
     languages: ['Sidama', 'Wolaytta', 'Gurage', 'Hamer', '40+ others'],
-    clothing: 'Diverse tribal wear, ranging from woven cotton to intricate beadwork and animal skins.',
     history: 'The most ethnically diverse region of Ethiopia, home to over 45 distinct ethnic groups, preserving ancient tribal customs and agro-pastoralist systems.',
-    music: 'Highly rhythmic tribal music using diverse instruments like the lyre and polyphonic singing.',
     images: ['https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800', 'https://images.unsplash.com/photo-1532585227763-7e4b2d39df16?q=80&w=800'],
     summary: 'A melting pot of over 45 distinct ethnic groups, featuring ancient megaliths, the Great Rift Valley, and vibrant tribal cultures.',
-    color: '#8B5CF6' // Purple
+    color: '#8B5CF6'
   }
 };
 
@@ -303,12 +383,101 @@ const CulturalMap: React.FC = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>('amhara');
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'heritages' | 'culture' | 'gallery'>('overview');
+  
+  // State for the Detail Modal
+  const [selectedDetail, setSelectedDetail] = useState<DetailItem | null>(null);
 
   const activeData = REGIONS_DATA[selectedRegion];
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedDetail) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [selectedDetail]);
+
+  const renderDetailCard = (item: DetailItem, type: string) => (
+    <div 
+      onClick={() => setSelectedDetail({ ...item, category: item.category || type })}
+      className="bg-white border border-stone-200 p-6 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col md:flex-row md:items-center gap-6"
+    >
+       <div className="flex-1">
+         <div className="flex items-center gap-3 mb-2">
+           <h4 className="text-lg font-black text-stone-900 group-hover:text-amber-600 transition-colors">{item.name}</h4>
+           {item.category && item.category === 'UNESCO World Heritage' && (
+             <span className="bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md">UNESCO</span>
+           )}
+         </div>
+         <p className="text-sm font-medium text-stone-500 leading-relaxed line-clamp-2">{item.description}</p>
+       </div>
+       <div className="md:w-48 text-right">
+          <span className="inline-block text-center bg-stone-50 group-hover:bg-amber-50 border border-stone-100 group-hover:border-amber-200 text-stone-600 group-hover:text-amber-700 transition-colors text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl">
+            View Detail &rarr;
+          </span>
+       </div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700 relative">
       
+      {/* --- DETAIL MODAL --- */}
+      <AnimatePresence>
+        {selectedDetail && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-stone-900/80 backdrop-blur-md"
+            onClick={() => setSelectedDetail(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-[3rem] p-10 md:p-14 max-w-2xl w-full shadow-2xl relative border border-stone-200 overflow-hidden"
+            >
+              {/* Decorative Background */}
+              <div className="absolute top-0 right-0 p-8 opacity-5 transform scale-150 translate-x-10 -translate-y-10 pointer-events-none">
+                 <svg className="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+              </div>
+
+              <button 
+                onClick={() => setSelectedDetail(null)}
+                className="absolute top-8 right-8 w-12 h-12 bg-stone-100 text-stone-600 hover:bg-stone-900 hover:text-white rounded-full flex items-center justify-center transition-colors z-20"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+
+              <div className="relative z-10">
+                <span className="bg-amber-100 text-amber-800 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block">
+                  {selectedDetail.category || 'Cultural Detail'}
+                </span>
+                
+                <h2 className="text-4xl md:text-5xl font-black text-stone-900 tracking-tighter leading-none mb-6">
+                  {selectedDetail.name}
+                </h2>
+                
+                <div className="w-20 h-1.5 bg-amber-500 rounded-full mb-8"></div>
+                
+                <p className="text-lg text-stone-600 font-medium leading-relaxed bg-stone-50 p-8 rounded-[2rem] border border-stone-100">
+                  {selectedDetail.description}
+                </p>
+
+                <div className="mt-8 flex justify-end">
+                  <button onClick={() => setSelectedDetail(null)} className="px-8 py-4 bg-stone-900 text-white rounded-2xl text-sm font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+                    Close Profile
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* High-End Header */}
       <header className="mb-10 text-center lg:text-left bg-stone-900 rounded-[3rem] p-10 md:p-14 text-white shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 p-8 opacity-10 transform scale-150 translate-x-10 -translate-y-10">
@@ -514,21 +683,8 @@ const CulturalMap: React.FC = () => {
                     
                     <div className="space-y-4">
                       {activeData.heritages.map((heritage, idx) => (
-                        <div key={idx} className="bg-white border border-stone-200 p-6 rounded-[2rem] shadow-sm hover:shadow-md transition-shadow group flex flex-col md:flex-row md:items-center gap-6">
-                           <div className="flex-1">
-                             <div className="flex items-center gap-3 mb-2">
-                               <h4 className="text-lg font-black text-stone-900 group-hover:text-amber-600 transition-colors">{heritage.name}</h4>
-                               {heritage.type === 'UNESCO World Heritage' && (
-                                 <span className="bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md">UNESCO</span>
-                               )}
-                             </div>
-                             <p className="text-sm font-medium text-stone-500 leading-relaxed">{heritage.description}</p>
-                           </div>
-                           <div className="md:w-48">
-                              <span className="block text-center bg-stone-50 border border-stone-100 text-stone-600 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl">
-                                {heritage.type}
-                              </span>
-                           </div>
+                        <div key={idx}>
+                          {renderDetailCard(heritage, 'Heritage Site')}
                         </div>
                       ))}
                     </div>
@@ -536,35 +692,54 @@ const CulturalMap: React.FC = () => {
                 )}
 
                 {activeTab === 'culture' && (
-                  <div className="animate-in fade-in duration-500 space-y-8">
-                     <div className="grid md:grid-cols-2 gap-8">
-                       <div className="bg-stone-50 p-8 rounded-[2rem] border border-stone-100">
-                         <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-6 flex items-center gap-3"><span className="text-2xl">🎪</span> Traditions</h4>
-                         <ul className="space-y-4">
-                           {activeData.traditions.map((t, i) => (
-                             <li key={i} className="flex items-start gap-3 text-sm font-bold text-stone-700">
-                               <span className="text-amber-500 mt-0.5">●</span> {t}
-                             </li>
-                           ))}
-                         </ul>
+                  <div className="animate-in fade-in duration-500 space-y-10">
+                     
+                     <div>
+                       <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🎪</span> Cultural Traditions</h4>
+                       <div className="grid sm:grid-cols-2 gap-4">
+                         {activeData.traditions.map((item, idx) => (
+                            <div key={idx}>
+                              {renderDetailCard(item, 'Cultural Tradition')}
+                            </div>
+                         ))}
                        </div>
+                     </div>
 
-                       <div className="space-y-8">
-                         <div className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
-                           <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🍲</span> Culinary Heritage</h4>
-                           <div className="flex flex-wrap gap-2">
-                             {activeData.foods.map((f, i) => (
-                               <span key={i} className="bg-stone-900 text-white text-xs font-bold px-4 py-2 rounded-xl">{f}</span>
-                             ))}
-                           </div>
+                     <div>
+                       <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🍲</span> Culinary Heritage</h4>
+                       <div className="grid sm:grid-cols-2 gap-4">
+                         {activeData.foods.map((item, idx) => (
+                            <div key={idx}>
+                              {renderDetailCard(item, 'Culinary Heritage')}
+                            </div>
+                         ))}
+                       </div>
+                     </div>
+
+                     <div className="grid sm:grid-cols-2 gap-6">
+                       <div>
+                         <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🎵</span> Music & Dance</h4>
+                         <div className="space-y-4">
+                           {activeData.music.map((item, idx) => (
+                              <div key={idx}>
+                                {renderDetailCard(item, 'Music & Dance')}
+                              </div>
+                           ))}
                          </div>
-
-                         <div className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-sm">
-                           <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🎵</span> Music & Dance</h4>
-                           <p className="text-sm font-medium text-stone-600 leading-relaxed">{activeData.music}</p>
+                       </div>
+                       
+                       <div>
+                         <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">👗</span> Traditional Clothing</h4>
+                         <div className="space-y-4">
+                           {activeData.clothing.map((item, idx) => (
+                              <div key={idx}>
+                                {renderDetailCard(item, 'Traditional Attire')}
+                              </div>
+                           ))}
                          </div>
                        </div>
                      </div>
+                     
                   </div>
                 )}
 
