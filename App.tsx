@@ -127,6 +127,9 @@ const App: React.FC = () => {
               >
                 <span className="text-base">{tab.icon}</span>
                 {tab.label}
+                {tab.id === 'reminders' && reminders.length > 0 && (
+                   <span className="bg-amber-500 text-stone-900 w-5 h-5 flex items-center justify-center rounded-lg shadow-sm font-bold ml-1">{reminders.length}</span>
+                )}
               </button>
             ))}
             
@@ -160,18 +163,7 @@ const App: React.FC = () => {
                 </div>
               )}
             </div>
-              <button 
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${activeTab === tab.id ? 'bg-white shadow-xl text-stone-900 border border-stone-100 scale-[1.02]' : 'text-stone-400 hover:text-stone-600'}`}
-              >
-                <span className="text-base">{tab.icon}</span>
-                {tab.label}
-                {tab.id === 'reminders' && reminders.length > 0 && (
-                   <span className="bg-amber-500 text-stone-900 w-5 h-5 flex items-center justify-center rounded-lg shadow-sm font-bold">{reminders.length}</span>
-                )}
-              </button>
-            ))}
+
           </nav>
 
           <div className="flex items-center gap-6">
