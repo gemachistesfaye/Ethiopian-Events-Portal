@@ -1,0 +1,202 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { speakAmharic } from '../services/geminiService';
+
+interface VoiceNarratorProps {
+  text?: string;
+  title?: string;
+}
+
+const VoiceNarrator: React.FC<VoiceNarratorProps> = ({ 
+  text = "The Battle of Adwa in 1896 was a stunning victory for Ethiopia against Italian colonial forces. Led by Emperor Menelik II and Empress Taytu Betul, the Ethiopian forces secured their country's independence and became a symbol of anti-colonial resistance worldwide.",
+  title = "The Story of Adwa"
+}) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [speed, setSpeed] = useState(1);
+  const [language, setLanguage] = useState<'en' | 'am' | 'om'>('en');
+  const [style, setStyle] = useState<'documentary' | 'teacher' | 'storyteller'>('storyteller');
+  
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (audioUrl) URL.revokeObjectURL(audioUrl);
+    };
+  }, [audioUrl]);
+
+  const handlePlay = async () => {
+    if (audioRef.current && audioUrl) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // Prompt engineering based on style
+      let promptText = text;
+      if (style === 'storyteller') {
+        promptText = `[Speak as a dramatic storyteller] ${text}`;
+      } else if (style === 'documentary') {
+        promptText = `[Speak as a deep documentary narrator] ${text}`;
+      } else if (style === 'teacher') {
+        promptText = `[Speak as a clear teacher] ${text}`;
+      }
+
+      const audioData = await speakAmharic(promptText);
+      if (audioData) {
+        const blob = new Blob([audioData], { type: 'audio/mp3' });
+        const url = URL.createObjectURL(blob);
+        setAudioUrl(url);
+        
+        const audio = new Audio(url);
+        audioRef.current = audio;
+        
+        audio.onended = () => {
+          setIsPlaying(false);
+          setProgress(100);
+        };
+        
+        audio.ontimeupdate = () => {
+          setProgress((audio.currentTime / audio.duration) * 100);
+        };
+
+        audio.playbackRate = speed;
+        audio.play();
+        setIsPlaying(true);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to generate narration.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseFloat(e.target.value);
+    setProgress(val);
+    if (audioRef.current) {
+      audioRef.current.currentTime = (val / 100) * audioRef.current.duration;
+    }
+  };
+
+  const handleSpeedChange = (newSpeed: number) => {
+    setSpeed(newSpeed);
+    if (audioRef.current) {
+      audioRef.current.playbackRate = newSpeed;
+    }
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-2xl font-sans">
+      <div className="text-center mb-6">
+        <span className="bg-stone-900 text-amber-500 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg">AI Voice Narration</span>
+        <h2 className="text-3xl font-black text-stone-900 tracking-tighter leading-none">{title}</h2>
+      </div>
+
+      {/* Controls */}
+      <div className="space-y-6">
+        {/* Language & Style */}
+        <div className="flex gap-3 justify-center">
+          <select 
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as any)}
+            className="bg-stone-100 border border-stone-200 rounded-xl px-3 py-2 text-xs font-black uppercase tracking-widest cursor-pointer"
+          >
+            <option value="en">English</option>
+            <option value="am">አማርኛ</option>
+            <option value="om">Afaan Oromo</option>
+          </select>
+
+          <select 
+            value={style}
+            onChange={(e) => setStyle(e.target.value as any)}
+            className="bg-stone-100 border border-stone-200 rounded-xl px-3 py-2 text-xs font-black uppercase tracking-widest cursor-pointer"
+          >
+            <option value="storyteller">Storyteller</option>
+            <option value="documentary">Documentary</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
+
+        {/* Player UI */}
+        <div className="bg-stone-50 p-6 rounded-2xl border border-stone-100">
+          <p className="text-stone-700 text-sm leading-relaxed mb-6 font-medium">"{text}"</p>
+
+          <div className="flex items-center gap-4">
+            {/* Play/Pause Button */}
+            <button
+              onClick={handlePlay}
+              disabled={loading}
+              className="w-12 h-12 bg-stone-900 text-amber-500 rounded-full flex items-center justify-center shadow-lg hover:bg-stone-800 transition-colors disabled:opacity-50"
+            >
+              {loading ? (
+                <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+              ) : isPlaying ? (
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5,0a1 1 0 012 0v4a1 1 0 11-2 0V8z" clipRule="evenodd" /></svg>
+              ) : (
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168l4.2 3a1 1 0 010 1.664l-4.2 3A1 1 0 018 13V7a1 1 0 011.555-.832z" clipRule="evenodd" /></svg>
+              )}
+            </button>
+
+            {/* Progress Bar */}
+            <div className="flex-1 flex flex-col">
+              <input 
+                type="range" 
+                min="0" 
+                max="100" 
+                value={progress}
+                onChange={handleSeek}
+                className="w-full h-1 bg-stone-200 rounded-full appearance-none cursor-pointer accent-amber-500"
+              />
+              <div className="flex justify-between text-[10px] font-black text-stone-400 mt-1 uppercase tracking-widest">
+                <span>{isPlaying ? 'Playing' : 'Paused'}</span>
+                <span>{Math.round(progress)}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Speed Controls */}
+        <div className="flex justify-between items-center text-xs font-black text-stone-400 uppercase tracking-widest">
+          <span>Speed</span>
+          <div className="flex gap-2">
+            {[0.8, 1, 1.2, 1.5].map(s => (
+              <button
+                key={s}
+                onClick={() => handleSpeedChange(s)}
+                className={`px-2 py-1 rounded ${speed === s ? 'bg-amber-500 text-stone-900' : 'hover:text-stone-900'}`}
+              >
+                {s}x
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Download Button */}
+        {audioUrl && (
+          <div className="text-center pt-4 border-t border-stone-100">
+            <a 
+              href={audioUrl} 
+              download={`${title.toLowerCase().replace(/\s+/g, '_')}.mp3`}
+              className="text-xs font-black uppercase text-amber-600 hover:text-amber-700 transition-colors flex items-center justify-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Download Audio
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default VoiceNarrator;
