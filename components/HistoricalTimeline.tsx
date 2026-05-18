@@ -13,51 +13,203 @@ interface TimelineEvent {
 const TIMELINE_DATA: TimelineEvent[] = [
   {
     id: '1',
-    year: 'c. 100 AD',
-    title: 'Rise of the Axumite Empire',
-    description: 'Axum becomes a major naval and trading power, bridging the Roman Empire and ancient India.',
-    category: 'Politics',
-    imageUrl: 'https://picsum.photos/id/1011/800/600'
+    year: 'c. 3.2M BC',
+    title: 'Discovery of Lucy (Dinknesh)',
+    description: 'The fossilized remains of Australopithecus afarensis, known as Lucy, lived in the Afar region, establishing Ethiopia as the cradle of humanity.',
+    category: 'Innovation',
+    imageUrl: 'https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800'
   },
   {
     id: '2',
-    year: 'c. 330 AD',
-    title: 'Adoption of Christianity',
-    description: 'King Ezana adopts Christianity, making Axum one of the first polities to do so.',
-    category: 'Religion',
-    imageUrl: 'https://picsum.photos/id/1012/800/600'
+    year: 'c. 8th Century BC',
+    title: 'Kingdom of Dʿmt & Temple of Yeha',
+    description: 'The ancient kingdom of Dʿmt flourished in the north. The Great Temple of Yeha, built in the Sabaean style, remains the oldest standing structure in Ethiopia.',
+    category: 'Culture',
+    imageUrl: 'https://images.unsplash.com/photo-1548651877-3e11400e930f?q=80&w=800'
   },
   {
     id: '3',
-    year: 'c. 500 AD',
-    title: 'Development of Ge\'ez Script',
-    description: 'The Ge\'ez script is fully developed and used for literature and religious texts.',
-    category: 'Innovation',
-    imageUrl: 'https://picsum.photos/id/1013/800/600'
+    year: 'c. 100 AD',
+    title: 'Rise of the Axumite Empire',
+    description: 'Axum emerges as a major global naval and trading power, bridging the Roman Empire and ancient India from the highlands of modern Tigray.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800'
   },
   {
     id: '4',
-    year: 'c. 1200 AD',
-    title: 'Rock-Hewn Churches of Lalibela',
-    description: 'King Lalibela orders the construction of 11 monolithic churches carved from living rock.',
-    category: 'Culture',
-    imageUrl: 'https://picsum.photos/id/1014/800/600'
+    year: 'c. 330 AD',
+    title: 'Adoption of Christianity',
+    description: 'King Ezana adopts Christianity, making Axum one of the first polities to do so, deeply shaping the cultural fabric of the northern highlands.',
+    category: 'Religion',
+    imageUrl: 'https://images.unsplash.com/photo-1651493638407-742bc54e2bc5?q=80&w=800'
   },
   {
     id: '5',
-    year: '1896',
-    title: 'Battle of Adwa',
-    description: 'Ethiopian forces under Emperor Menelik II defeat the Italian army, securing independence.',
-    category: 'Warfare',
-    imageUrl: 'https://picsum.photos/id/1015/800/600'
+    year: 'c. 500 AD',
+    title: 'Development of Ge\'ez Script',
+    description: 'The indigenous Ge\'ez script is fully developed and used for literature, administration, and religious texts.',
+    category: 'Innovation',
+    imageUrl: 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'
   },
   {
     id: '6',
+    year: '615 AD',
+    title: 'First Hijra to Axum (Al Nejashi)',
+    description: 'Seeking refuge from persecution in Mecca, early companions of the Prophet Muhammad were granted asylum by the Axumite King (Nejashi), establishing a deep-rooted Islamic history in Ethiopia.',
+    category: 'Religion',
+    imageUrl: 'https://images.unsplash.com/photo-1588612143491-0fcf05a6efc1?q=80&w=800'
+  },
+  {
+    id: '7',
+    year: 'c. 1200 AD',
+    title: 'Rock-Hewn Churches of Lalibela',
+    description: 'King Lalibela of the Zagwe dynasty orders the construction of 11 monolithic churches carved entirely downward from living rock in the Amhara region.',
+    category: 'Culture',
+    imageUrl: 'https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=800'
+  },
+  {
+    id: '8',
+    year: '13th Century',
+    title: 'Establishment of the Gadaa System',
+    description: 'The Oromo people formalize the Gadaa system, a highly complex, egalitarian, democratic socio-political and chronological system guiding religious and social life.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?q=80&w=800'
+  },
+  {
+    id: '9',
+    year: '1529 - 1543',
+    title: 'Ethiopian–Adal War (Ahmad Gragn)',
+    description: 'A devastating war between the Christian Ethiopian Empire and the Muslim Adal Sultanate under Imam Ahmad ibn Ibrahim al-Ghazi, fundamentally altering the region\'s geopolitics.',
+    category: 'Warfare',
+    imageUrl: 'https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800'
+  },
+  {
+    id: '10',
+    year: '1560s',
+    title: 'Oromo Expansions',
+    description: 'A massive migration and expansion of Oromo pastoralist communities across the Horn of Africa, profoundly changing the demographic and cultural map of Ethiopia.',
+    category: 'Culture',
+    imageUrl: 'https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800'
+  },
+  {
+    id: '11',
+    year: '1636',
+    title: 'Founding of Gondar',
+    description: 'Emperor Fasilides establishes Gondar as the permanent capital of the Ethiopian Empire, launching a century of castle building and a cultural renaissance.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800'
+  },
+  {
+    id: '12',
+    year: '1855',
+    title: 'Rise of Emperor Tewodros II',
+    description: 'Tewodros II ends the Era of the Princes (Zemene Mesafint) and centralizes power, beginning the modern reunification of the Ethiopian state.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1506505494950-8438ebccba56?q=80&w=800'
+  },
+  {
+    id: '13',
+    year: '1875 - 1876',
+    title: 'Ethio-Egyptian War',
+    description: 'Emperor Yohannes IV soundly defeats Egyptian invasion forces at the Battles of Gundet and Gura, halting Egyptian expansion into the Horn of Africa.',
+    category: 'Warfare',
+    imageUrl: 'https://images.unsplash.com/photo-1532585227763-7e4b2d39df16?q=80&w=800'
+  },
+  {
+    id: '14',
+    year: '1887',
+    title: 'Founding of Addis Ababa',
+    description: 'Emperor Menelik II and Empress Taytu Betul found the city of Addis Ababa (New Flower) in the heart of Oromia/Shewa, moving the political center of gravity south.',
+    category: 'Culture',
+    imageUrl: 'https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800'
+  },
+  {
+    id: '15',
+    year: '1887',
+    title: 'Battle of Chelenqo',
+    description: 'Menelik II\'s forces defeat the Emirate of Harar, bringing the ancient, walled Islamic commercial hub of Harar into the Ethiopian Empire.',
+    category: 'Warfare',
+    imageUrl: 'https://images.unsplash.com/photo-1550993510-9b0f48039600?q=80&w=800'
+  },
+  {
+    id: '16',
+    year: '1896',
+    title: 'Battle of Adwa',
+    description: 'A united Ethiopian force representing diverse ethnic groups crushes the invading Italian army, becoming a global symbol of Black independence and anti-colonial resistance.',
+    category: 'Warfare',
+    imageUrl: 'https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800'
+  },
+  {
+    id: '17',
+    year: '1897',
+    title: 'Incorporation of Southern Kingdoms',
+    description: 'The ancient kingdoms of Kaffa, Wolaytta, and Sidama are incorporated into the modern Ethiopian state following protracted military campaigns.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=800'
+  },
+  {
+    id: '18',
     year: '1930',
     title: 'Coronation of Haile Selassie',
-    description: 'Ras Tafari Makonnen is crowned as Emperor Haile Selassie I.',
+    description: 'Ras Tafari Makonnen is crowned Emperor Haile Selassie I. His reign brings modernization, the first written constitution, and global diplomatic prominence.',
     category: 'Politics',
-    imageUrl: 'https://picsum.photos/id/1016/800/600'
+    imageUrl: 'https://images.unsplash.com/photo-1588612143491-0fcf05a6efc1?q=80&w=800'
+  },
+  {
+    id: '19',
+    year: '1935 - 1941',
+    title: 'Second Italo-Ethiopian War & Resistance',
+    description: 'Fascist Italy invades Ethiopia. Ethiopian patriots from all regions mount a fierce guerrilla resistance for five years until liberation in 1941.',
+    category: 'Warfare',
+    imageUrl: 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'
+  },
+  {
+    id: '20',
+    year: '1963',
+    title: 'Creation of the OAU',
+    description: 'Addis Ababa becomes the diplomatic capital of Africa as the Organization of African Unity (now AU) is founded, cementing Ethiopia\'s pan-African legacy.',
+    category: 'Innovation',
+    imageUrl: 'https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800'
+  },
+  {
+    id: '21',
+    year: '1974',
+    title: 'The Derg Revolution',
+    description: 'A Marxist-Leninist military junta (the Derg) overthrows the monarchy, leading to massive social restructuring, the Red Terror, and civil war.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800'
+  },
+  {
+    id: '22',
+    year: '1991',
+    title: 'Fall of the Derg & Ethnic Federalism',
+    description: 'A coalition of rebel forces (EPRDF) topples the Derg regime. Ethiopia adopts a new constitution based on ethnic federalism, reshaping the nation\'s identity.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800'
+  },
+  {
+    id: '23',
+    year: '2015',
+    title: 'Fichee-Chambalaalla UNESCO Recognition',
+    description: 'The ancient Sidama New Year festival is officially inscribed as Intangible Cultural Heritage by UNESCO, highlighting Southern Ethiopia\'s rich cultural diversity.',
+    category: 'Culture',
+    imageUrl: 'https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?q=80&w=800'
+  },
+  {
+    id: '24',
+    year: '2019',
+    title: 'Nobel Peace Prize',
+    description: 'Prime Minister Abiy Ahmed is awarded the Nobel Peace Prize for his efforts in resolving the border conflict with Eritrea and initiating democratic reforms.',
+    category: 'Politics',
+    imageUrl: 'https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800'
+  },
+  {
+    id: '25',
+    year: '2020',
+    title: 'The Grand Ethiopian Renaissance Dam',
+    description: 'Ethiopia begins filling the GERD on the Blue Nile in the Benishangul-Gumuz region. It stands as the largest hydroelectric power plant in Africa.',
+    category: 'Innovation',
+    imageUrl: 'https://images.unsplash.com/photo-1548651877-3e11400e930f?q=80&w=800'
   }
 ];
 
