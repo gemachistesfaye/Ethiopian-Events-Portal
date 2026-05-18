@@ -17,10 +17,11 @@ import { EthiopianEvent, UserReminder, CalendarDay, ReminderPriority, ReminderCa
 import { EVENTS_DATA, ETHIOPIAN_MONTHS_AMHARIC } from './constants';
 import { toEthiopianDate } from './utils/dateConverter';
 
-const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({ user, onNavigate }) => {
+const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
   const [newEmail, setNewEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [activeSettingsTab, setActiveSettingsTab] = useState<'profile' | 'preferences' | 'security'>('profile');
 
   const handleUpdateEmail = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +39,169 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
   };
 
   return (
-    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="mb-8">
+         <h2 className="text-4xl font-black text-stone-900 tracking-tight">Account Settings</h2>
+         <p className="text-stone-500 font-medium mt-2">Manage your portal identity, preferences, and security settings.</p>
+      </div>
+
+      <div className="grid lg:grid-cols-12 gap-8">
+        {/* Settings Sidebar */}
+        <div className="lg:col-span-3">
+           <div className="bg-white rounded-3xl border border-stone-200 shadow-sm p-4 sticky top-28 space-y-2">
+             <button 
+               onClick={() => setActiveSettingsTab('profile')}
+               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'profile' ? 'bg-stone-900 text-white shadow-md' : 'text-stone-500 hover:bg-stone-50 hover:text-stone-900'}`}
+             >
+               <span className="text-lg">👤</span> Profile
+             </button>
+             <button 
+               onClick={() => setActiveSettingsTab('preferences')}
+               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'preferences' ? 'bg-stone-900 text-white shadow-md' : 'text-stone-500 hover:bg-stone-50 hover:text-stone-900'}`}
+             >
+               <span className="text-lg">⚙️</span> Preferences
+             </button>
+             <button 
+               onClick={() => setActiveSettingsTab('security')}
+               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'security' ? 'bg-stone-900 text-white shadow-md' : 'text-stone-500 hover:bg-stone-50 hover:text-stone-900'}`}
+             >
+               <span className="text-lg">🛡️</span> Security
+             </button>
+             
+             <div className="pt-4 mt-4 border-t border-stone-100">
+               <button 
+                 onClick={() => supabase.auth.signOut()}
+                 className="w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest text-rose-500 hover:bg-rose-50 transition-all flex items-center gap-3"
+               >
+                 <span className="text-lg">🚪</span> Sign Out
+               </button>
+             </div>
+           </div>
+        </div>
+
+        {/* Settings Content */}
+        <div className="lg:col-span-9 space-y-8">
+          
+          {activeSettingsTab === 'profile' && (
+            <div className="bg-white rounded-[2.5rem] border border-stone-200 shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+              {/* Profile Cover */}
+              <div className="h-40 bg-gradient-to-r from-stone-900 to-amber-900 relative">
+                 <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+              </div>
+              
+              <div className="px-10 pb-10">
+                <div className="flex flex-col md:flex-row items-start md:items-end gap-6 -mt-16 mb-8 relative z-10">
+                   <div className="w-32 h-32 bg-white rounded-3xl p-2 shadow-2xl">
+                      <div className="w-full h-full bg-amber-100 rounded-2xl flex items-center justify-center text-5xl">
+                         🦅
+                      </div>
+                   </div>
+                   <div className="flex-1">
+                     <div className="flex items-center gap-3 mb-1">
+                       <h3 className="text-3xl font-black text-stone-900">{user.email?.split('@')[0]}</h3>
+                       <span className="bg-amber-500 text-stone-900 px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest shadow-sm">Verified</span>
+                     </div>
+                     <p className="text-stone-500 font-medium">{user.email}</p>
+                   </div>
+                </div>
+
+                <form onSubmit={handleUpdateEmail} className="space-y-6 max-w-xl">
+                  <div>
+                    <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-2 block">Email Address</label>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <input 
+                        type="email" 
+                        value={newEmail}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                        placeholder={user.email}
+                        className="flex-1 h-14 bg-stone-50 border border-stone-200 rounded-xl px-5 text-sm font-medium focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
+                        required
+                      />
+                      <button 
+                        type="submit" 
+                        disabled={loading}
+                        className="h-14 px-8 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors disabled:opacity-50 whitespace-nowrap shadow-lg hover:shadow-stone-900/20"
+                      >
+                        {loading ? 'Saving...' : 'Update Email'}
+                      </button>
+                    </div>
+                  </div>
+                  {message && <p className="text-xs font-bold text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-100">{message}</p>}
+                </form>
+              </div>
+            </div>
+          )}
+
+          {activeSettingsTab === 'preferences' && (
+            <div className="bg-white rounded-[2.5rem] border border-stone-200 shadow-xl p-10 animate-in fade-in zoom-in-95 duration-300">
+              <h3 className="text-2xl font-black text-stone-900 mb-8">Platform Preferences</h3>
+              
+              <div className="space-y-8">
+                <div className="flex items-center justify-between border-b border-stone-100 pb-8">
+                   <div>
+                     <h4 className="font-bold text-stone-900 mb-1">Email Notifications</h4>
+                     <p className="text-sm text-stone-500 font-medium">Receive alerts for upcoming Ethiopian holidays and events.</p>
+                   </div>
+                   <div className="w-14 h-8 bg-amber-500 rounded-full relative cursor-pointer shadow-inner">
+                     <div className="w-6 h-6 bg-white rounded-full absolute right-1 top-1 shadow-sm"></div>
+                   </div>
+                </div>
+
+                <div className="flex items-center justify-between border-b border-stone-100 pb-8">
+                   <div>
+                     <h4 className="font-bold text-stone-900 mb-1">AI Voice Autoplay</h4>
+                     <p className="text-sm text-stone-500 font-medium">Automatically play Amharic audio pronunciations.</p>
+                   </div>
+                   <div className="w-14 h-8 bg-stone-200 rounded-full relative cursor-pointer shadow-inner">
+                     <div className="w-6 h-6 bg-white rounded-full absolute left-1 top-1 shadow-sm"></div>
+                   </div>
+                </div>
+
+                <div className="flex items-center justify-between">
+                   <div>
+                     <h4 className="font-bold text-stone-900 mb-1">Default Calendar View</h4>
+                     <p className="text-sm text-stone-500 font-medium">Choose your primary date system.</p>
+                   </div>
+                   <select className="bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-amber-500 cursor-pointer">
+                      <option>Gregorian First</option>
+                      <option>Ethiopian First</option>
+                   </select>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSettingsTab === 'security' && (
+            <div className="space-y-8 animate-in fade-in zoom-in-95 duration-300">
+              <div className="bg-white rounded-[2.5rem] border border-stone-200 shadow-xl p-10">
+                <h3 className="text-2xl font-black text-stone-900 mb-2">Security Hub</h3>
+                <p className="text-sm text-stone-500 font-medium mb-8">Manage your password and authentication methods.</p>
+                
+                <button className="h-14 px-8 bg-stone-100 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-200 transition-colors w-full sm:w-auto shadow-sm">
+                  Change Password
+                </button>
+              </div>
+
+              <div className="bg-rose-50 rounded-[2.5rem] border border-rose-100 p-10">
+                <h3 className="text-2xl font-black text-rose-900 mb-2">Danger Zone</h3>
+                <p className="text-sm text-rose-700/80 font-medium mb-8">Permanently delete your account and all saved heritage data.</p>
+                
+                <button className="h-14 px-8 bg-rose-600 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-rose-700 transition-colors shadow-lg shadow-rose-600/20">
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({ user, onNavigate }) => {
+  return (
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto">
       {/* Welcome Header */}
       <div className="bg-stone-900 rounded-[3rem] p-10 md:p-16 text-white shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
         <div className="absolute top-0 right-0 p-10 opacity-5">
@@ -49,80 +212,121 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
           👋
         </div>
         
-        <div className="relative z-10 text-center md:text-left">
-          <span className="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-4 inline-block">Explorer Dashboard</span>
+        <div className="relative z-10 text-center md:text-left flex-1">
+          <span className="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-4 inline-block">Pro Explorer</span>
           <h2 className="text-4xl md:text-5xl font-black mb-2 tracking-tight">Welcome back!</h2>
           <p className="text-stone-400 font-medium text-lg mb-4">{user.email}</p>
-          <p className="text-sm text-stone-500 max-w-md">Your gateway to Ethiopian heritage is ready. Where would you like to explore today?</p>
+          <p className="text-sm text-stone-500 max-w-md">Your gateway to Ethiopian heritage is ready. Discover deep historical insights and upcoming events.</p>
+        </div>
+
+        <div className="hidden lg:flex gap-6 relative z-10 bg-stone-800/50 p-6 rounded-[2rem] border border-stone-700 backdrop-blur-sm">
+           <div className="text-center">
+             <div className="text-3xl font-black text-amber-400 mb-1">12</div>
+             <div className="text-[9px] text-stone-400 font-black uppercase tracking-widest">Events<br/>Saved</div>
+           </div>
+           <div className="w-px bg-stone-700"></div>
+           <div className="text-center">
+             <div className="text-3xl font-black text-amber-400 mb-1">LV.4</div>
+             <div className="text-[9px] text-stone-400 font-black uppercase tracking-widest">Heritage<br/>Scholar</div>
+           </div>
         </div>
       </div>
 
-      {/* Quick Access Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <button onClick={() => onNavigate('calendar')} className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left">
-          <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+      <div className="grid lg:grid-cols-12 gap-10">
+        
+        {/* Quick Access Grid */}
+        <div className="lg:col-span-8 space-y-8">
+          <div className="flex items-center justify-between">
+             <h3 className="text-2xl font-black text-stone-900 tracking-tight">Explore Platform</h3>
           </div>
-          <h3 className="text-xl font-black text-stone-900 mb-2">Heritage Calendar</h3>
-          <p className="text-xs text-stone-500 leading-relaxed font-medium">Explore upcoming events, festivals, and religious holidays.</p>
-        </button>
-
-        <button onClick={() => onNavigate('chat')} className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left">
-          <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-          </div>
-          <h3 className="text-xl font-black text-stone-900 mb-2">AI Storyteller</h3>
-          <p className="text-xs text-stone-500 leading-relaxed font-medium">Chat with our intelligent guide about Ethiopian history and myths.</p>
-        </button>
-
-        <button onClick={() => onNavigate('map')} className="bg-white p-8 rounded-[2rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left">
-          <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
-          </div>
-          <h3 className="text-xl font-black text-stone-900 mb-2">Cultural Map</h3>
-          <p className="text-xs text-stone-500 leading-relaxed font-medium">Discover geographical roots of traditions across Ethiopia.</p>
-        </button>
-      </div>
-
-      {/* Account Settings */}
-      <div className="bg-white rounded-[3rem] border border-stone-200 shadow-xl overflow-hidden">
-        <div className="p-10 border-b border-stone-100 flex items-center gap-4">
-           <div className="w-10 h-10 bg-stone-100 rounded-full flex items-center justify-center">⚙️</div>
-           <h3 className="text-xl font-black text-stone-900">Account Settings</h3>
-        </div>
-        <div className="p-10 flex flex-col md:flex-row gap-10">
-          <form onSubmit={handleUpdateEmail} className="flex-1 space-y-4">
-            <div>
-              <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block">Update Email Address</label>
-              <div className="flex gap-4">
-                <input 
-                  type="email" 
-                  value={newEmail}
-                  onChange={(e) => setNewEmail(e.target.value)}
-                  placeholder={user.email}
-                  className="flex-1 h-12 bg-stone-50 border border-stone-200 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
-                  required
-                />
-                <button 
-                  type="submit" 
-                  disabled={loading}
-                  className="h-12 px-6 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors disabled:opacity-50 whitespace-nowrap"
-                >
-                  {loading ? 'Saving...' : 'Save'}
-                </button>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <button onClick={() => onNavigate('calendar')} className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-150 transition-transform duration-700">
+                 <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               </div>
-            </div>
-            {message && <p className="text-xs font-bold text-amber-600">{message}</p>}
-          </form>
+              <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              </div>
+              <h3 className="text-2xl font-black text-stone-900 mb-3 relative z-10">Heritage Calendar</h3>
+              <p className="text-sm text-stone-500 leading-relaxed font-medium relative z-10 flex-1">Explore upcoming events, festivals, and religious holidays synchronized across Gregorian and Ethiopian dates.</p>
+              <div className="mt-8 text-xs font-black uppercase tracking-widest text-amber-600 group-hover:translate-x-2 transition-transform">Launch →</div>
+            </button>
 
-          <div className="md:border-l md:border-stone-100 md:pl-10 flex items-center">
-            <button 
-              onClick={() => supabase.auth.signOut()}
-              className="h-12 px-8 bg-rose-50 text-rose-600 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-rose-100 transition-colors w-full md:w-auto"
-            >
-              Sign Out
+            <button onClick={() => onNavigate('chat')} className="bg-stone-900 p-8 rounded-[2.5rem] border border-stone-800 shadow-xl hover:border-emerald-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-150 transition-transform duration-700">
+                 <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+              </div>
+              <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+              </div>
+              <h3 className="text-2xl font-black text-white mb-3 relative z-10">AI Storyteller</h3>
+              <p className="text-sm text-stone-400 leading-relaxed font-medium relative z-10 flex-1">Chat with our intelligent guide. Uncover ancient Ethiopian history, myths, and deep cultural insights.</p>
+              <div className="mt-8 text-xs font-black uppercase tracking-widest text-emerald-400 group-hover:translate-x-2 transition-transform">Start Chat →</div>
+            </button>
+            
+            <button onClick={() => onNavigate('map')} className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-blue-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
+              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+              </div>
+              <h3 className="text-xl font-black text-stone-900 mb-2 relative z-10">Cultural Atlas</h3>
+              <p className="text-xs text-stone-500 leading-relaxed font-medium relative z-10 flex-1">Interactive map of heritage sites.</p>
+            </button>
+            
+            <button onClick={() => onNavigate('culture')} className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-rose-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
+              <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+              </div>
+              <h3 className="text-xl font-black text-stone-900 mb-2 relative z-10">Culture Zone</h3>
+              <p className="text-xs text-stone-500 leading-relaxed font-medium relative z-10 flex-1">Food, music, and traditions.</p>
             </button>
           </div>
+        </div>
+
+        {/* Right Sidebar - Recent & Upcoming */}
+        <div className="lg:col-span-4 space-y-8">
+           <div className="bg-amber-500 rounded-[2.5rem] p-8 shadow-xl text-stone-900 relative overflow-hidden">
+              <div className="absolute -right-4 -bottom-4 opacity-20 transform rotate-12">
+                 <span className="text-9xl">✨</span>
+              </div>
+              <h4 className="text-sm font-black uppercase tracking-widest mb-2 relative z-10">Next Big Event</h4>
+              <h3 className="text-3xl font-black tracking-tight mb-2 relative z-10">Fichee-Chambalaalla</h3>
+              <p className="text-sm font-bold mb-6 relative z-10">Sidama New Year celebration of unity and peace.</p>
+              <button onClick={() => onNavigate('calendar')} className="bg-stone-900 text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl hover:bg-stone-800 transition-colors relative z-10">
+                 View Details
+              </button>
+           </div>
+
+           <div className="bg-white rounded-[2.5rem] border border-stone-200 shadow-xl p-8">
+              <div className="flex items-center justify-between mb-8">
+                 <h4 className="text-lg font-black text-stone-900">Recent Activity</h4>
+                 <button onClick={() => onNavigate('reminders')} className="text-[10px] font-black uppercase tracking-widest text-amber-600 hover:text-stone-900">View All</button>
+              </div>
+
+              <div className="space-y-6">
+                 <div className="flex gap-4 items-start">
+                    <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-lg flex-shrink-0">💬</div>
+                    <div>
+                       <p className="text-sm font-bold text-stone-900">Asked about Axumite Kingdom</p>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-stone-400 mt-1">2 days ago</p>
+                    </div>
+                 </div>
+                 <div className="flex gap-4 items-start">
+                    <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-lg flex-shrink-0">🔖</div>
+                    <div>
+                       <p className="text-sm font-bold text-stone-900">Saved Timkat Event</p>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-stone-400 mt-1">1 week ago</p>
+                    </div>
+                 </div>
+                 <div className="flex gap-4 items-start">
+                    <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-lg flex-shrink-0">🗺️</div>
+                    <div>
+                       <p className="text-sm font-bold text-stone-900">Explored Lalibela Map</p>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-stone-400 mt-1">2 weeks ago</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
         </div>
       </div>
     </div>
@@ -597,9 +801,11 @@ const App: React.FC = () => {
           <CultureZone />
         ) : activeTab === 'chat' ? (
           <HeritageChat />
+        ) : activeTab === 'account' ? (
+          user ? <ProfileSettings user={user} /> : <Auth />
         ) : (
           user ? (
-            <Dashboard user={user} onNavigate={setActiveTab} />
+            <ProfileSettings user={user} />
           ) : (
             <Auth />
           )
