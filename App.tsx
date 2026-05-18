@@ -7,6 +7,9 @@ import MyReminders from './components/MyReminders';
 import CultureZone from './components/CultureZone';
 import HeritageChat from './components/HeritageChat';
 import CulturalMap from './components/CulturalMap';
+import Auth from './components/Auth';
+import { supabase } from './services/supabase';
+import { User } from '@supabase/supabase-js';
 import { EthiopianEvent, UserReminder, CalendarDay, ReminderPriority, ReminderCategory } from './types';
 import { EVENTS_DATA, ETHIOPIAN_MONTHS_AMHARIC } from './constants';
 import { toEthiopianDate } from './utils/dateConverter';
@@ -16,7 +19,20 @@ const App: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
-  const [activeTab, setActiveTab] = useState<'calendar' | 'map' | 'reminders' | 'culture' | 'chat'>('calendar');
+  const [activeTab, setActiveTab] = useState<'calendar' | 'map' | 'reminders' | 'culture' | 'chat' | 'account'>('calendar');
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<'All' | 'Religious' | 'Public' | 'Cultural'>('All');
 
@@ -100,7 +116,8 @@ const App: React.FC = () => {
               { id: 'map', label: 'Atlas', icon: '🗺️' },
               { id: 'reminders', label: t('nav.saved'), icon: '🏺' },
               { id: 'culture', label: t('nav.zone'), icon: '✨' },
-              { id: 'chat', label: t('nav.guide'), icon: '🤖' }
+              { id: 'chat', label: t('nav.guide'), icon: '🤖' },
+              { id: 'account', label: user ? 'Profile' : 'Login', icon: '👤' }
             ].map(tab => (
               <button 
                 key={tab.id}
@@ -296,8 +313,24 @@ const App: React.FC = () => {
           <CulturalMap />
         ) : activeTab === 'culture' ? (
           <CultureZone />
-        ) : (
+        ) : activeTab === 'chat' ? (
           <HeritageChat />
+        ) : (
+          user ? (
+            <div className="text-center py-20 bg-white p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10">
+              <div className="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">👤</div>
+              <p className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1">Logged in as</p>
+              <h2 className="text-xl font-black mb-6 text-stone-900">{user.email}</h2>
+              <button 
+                onClick={() => supabase.auth.signOut()}
+                className="w-full h-12 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Auth />
+          )
         )}
       </main>
       <Footer />
