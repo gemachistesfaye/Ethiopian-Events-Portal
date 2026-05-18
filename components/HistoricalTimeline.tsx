@@ -98,19 +98,19 @@ const HistoricalTimeline: React.FC = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Central Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-stone-200"></div>
+          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-0.5 h-full bg-stone-200"></div>
 
-          <div className="space-y-16">
+          <div className="space-y-12 md:space-y-16">
             {filteredEvents.map((event, index) => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative flex items-center justify-between w-full ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
+                className={`relative flex flex-col md:flex-row items-center justify-between w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-4 md:gap-0`}
               >
                 {/* Content Card */}
-                <div className="w-[45%]">
+                <div className="w-full md:w-[45%] ml-12 md:ml-0">
                   <div 
                     className="bg-white p-6 rounded-[2rem] border border-stone-200 shadow-xl hover:border-amber-500 transition-all cursor-pointer group"
                     onClick={() => setSelectedEvent(event)}
@@ -123,10 +123,10 @@ const HistoricalTimeline: React.FC = () => {
                 </div>
 
                 {/* Central Node */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-amber-500 rounded-full border-4 border-white shadow-lg"></div>
+                <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-amber-500 rounded-full border-4 border-white shadow-lg"></div>
 
                 {/* Empty space filler for alignment */}
-                <div className="w-[45%]"></div>
+                <div className="hidden md:block w-[45%]"></div>
               </motion.div>
             ))}
           </div>

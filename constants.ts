@@ -134,16 +134,5 @@ export const EVENTS_DATA: EthiopianEvent[] = [
     description: 'Pilgrimage and celebration of the Transfiguration of Jesus, with singing and community rituals.',
     imageUrl: 'https://picsum.photos/id/1024/800/600',
     category: 'Religious'
-  },
-  {
-    id: '12',
-    name: 'Test Event',
-    nameAmharic: 'ሙከራ',
-    ethDate: '10 Yekatit 2018',
-    gregDate: '2026-02-17',
-    location: 'Addis Ababa',
-    description: 'This is a test event to check the calendar and modal functionality.',
-    imageUrl: 'https://picsum.photos/id/1025/800/600',
-    category: 'Cultural'
   }
 ];
