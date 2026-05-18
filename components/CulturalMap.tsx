@@ -1,5 +1,8 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 interface DetailItem {
   name: string;
@@ -22,7 +25,7 @@ interface RegionData {
   summary: string;
   images: string[];
   color: string;
-  coordinates: { x: number; y: number };
+  coordinates: [number, number]; // Latitude, Longitude
 }
 
 const REGIONS_DATA: Record<string, RegionData> = {
@@ -31,7 +34,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Tigray Region',
     capital: 'Mekelle',
     population: '7+ Million',
-    coordinates: { x: 480, y: 150 },
+    coordinates: [13.4967, 39.4753],
     heritages: [
       { name: 'Aksum Obelisks', category: 'UNESCO World Heritage', description: 'Ancient monolithic stelae marking the tombs of Aksumite kings. The largest of these obelisks weighs over 500 tonnes and represents the architectural prowess of the ancient Aksumite Empire.' },
       { name: 'Rock-Hewn Churches of Gheralta', category: 'Historic Site', description: 'Spectacular ancient churches carved into sheer sandstone cliffs. Monks and pilgrims must scale vertical rock faces using carved handholds to reach these isolated sanctuaries.' },
@@ -63,7 +66,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Amhara Region',
     capital: 'Bahir Dar',
     population: '30+ Million',
-    coordinates: { x: 350, y: 300 },
+    coordinates: [11.5936, 37.3908],
     heritages: [
       { name: 'Rock-Hewn Churches of Lalibela', category: 'UNESCO World Heritage', description: '11 medieval monolithic cave churches dubbed the "New Jerusalem", carved entirely downward out of solid volcanic rock by King Lalibela in the 12th century.' },
       { name: 'Fasil Ghebbi (Gondar)', category: 'UNESCO World Heritage', description: 'A fortress-city containing castles and palaces of Ethiopian emperors from the 17th and 18th centuries, blending Ethiopian, Indian, and Portuguese architectural styles.' },
@@ -95,7 +98,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Afar Region',
     capital: 'Semera',
     population: '2+ Million',
-    coordinates: { x: 680, y: 250 },
+    coordinates: [11.7922, 41.0014],
     heritages: [
       { name: 'Lower Valley of the Awash', category: 'UNESCO World Heritage', description: 'One of the most important paleontological sites in the world. This is where the 3.2 million-year-old fossil of the famous hominid "Lucy" (Dinknesh) was discovered.' },
       { name: 'Erta Ale Volcano', category: 'Cultural Landscape', description: 'A continuously active basaltic shield volcano featuring a persistent lava lake, making it one of the most extreme and fascinating geological sites on Earth.' },
@@ -125,7 +128,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Benishangul-Gumuz',
     capital: 'Asosa',
     population: '1.2+ Million',
-    coordinates: { x: 180, y: 380 },
+    coordinates: [10.0667, 34.5333],
     heritages: [
       { name: 'Grand Ethiopian Renaissance Dam', category: 'Modern Marvel', description: 'The largest hydroelectric dam in Africa, built on the Blue Nile. It is a symbol of modern Ethiopian engineering and national pride.' },
       { name: 'Blue Nile Gorge', category: 'Cultural Landscape', description: 'A massive, majestic canyon carved by the Blue Nile river. It is often compared to the Grand Canyon and acts as a massive natural barrier.' }
@@ -153,7 +156,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Addis Ababa',
     capital: 'Addis Ababa',
     population: '5+ Million',
-    coordinates: { x: 450, y: 450 },
+    coordinates: [9.0320, 38.7480],
     heritages: [
       { name: 'National Museum of Ethiopia', category: 'Historic Site', description: 'The premier museum in the country, home to the fossilized remains of "Lucy" and an extensive collection of ancient artifacts and modern art.' },
       { name: 'Holy Trinity Cathedral', category: 'Historic Site', description: 'A massive ornate cathedral built to commemorate Ethiopia\'s liberation from Italian occupation. It is the final resting place of Emperor Haile Selassie.' },
@@ -183,7 +186,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Dire Dawa',
     capital: 'Dire Dawa',
     population: '500,000+',
-    coordinates: { x: 680, y: 430 },
+    coordinates: [9.5931, 41.8661],
     heritages: [
       { name: 'Ethio-Djibouti Railway Station', category: 'Historic Site', description: 'The historic French-built railway station from 1902 that birthed the city. It features vintage locomotives and historic architecture.' },
       { name: 'Kefira Market', category: 'Cultural Landscape', description: 'A vibrant, colorful traditional market showcasing the deep fusion of Somali, Oromo, and Harari cultures and trading practices.' }
@@ -211,7 +214,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Harari Region',
     capital: 'Harar',
     population: '250,000+',
-    coordinates: { x: 730, y: 460 },
+    coordinates: [9.3139, 42.1183],
     heritages: [
       { name: 'Harar Jugol', category: 'UNESCO World Heritage', description: 'The fortified historic walled city. It contains 82 mosques (three dating from the 10th century) and 102 shrines, packed into a tiny, colorful maze of alleyways.' },
       { name: 'Arthur Rimbaud House', category: 'Historic Site', description: 'A gorgeous wooden mansion turned museum dedicated to the famous French poet Arthur Rimbaud, who lived as a trader in Harar in the 1880s.' }
@@ -240,7 +243,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Gambela Region',
     capital: 'Gambela',
     population: '400,000+',
-    coordinates: { x: 150, y: 550 },
+    coordinates: [8.2500, 34.5833],
     heritages: [
       { name: 'Gambela National Park', category: 'National Park', description: 'The largest national park in Ethiopia, famous for hosting the second largest antelope migration in Africa (the White-eared kob).' },
       { name: 'Baro River', category: 'Cultural Landscape', description: 'A massive, majestic river. Historically, it was the only navigable river in Ethiopia, serving as a major port for British trading ships.' }
@@ -269,7 +272,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Oromia Region',
     capital: 'Finfinnee',
     population: '40+ Million',
-    coordinates: { x: 420, y: 620 },
+    coordinates: [8.5000, 39.0000],
     heritages: [
       { name: 'Bale Mountains National Park', category: 'UNESCO World Heritage', description: 'A massive afro-alpine plateau, home to the highest road in Africa and the rare, endemic Ethiopian wolf.' },
       { name: 'Gadaa System', category: 'Intangible Heritage', description: 'An ancient indigenous democratic socio-political system of the Oromo people, recognized by UNESCO for its complexity and egalitarian nature.' },
@@ -300,7 +303,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Somali Region',
     capital: 'Jigjiga',
     population: '6+ Million',
-    coordinates: { x: 780, y: 620 },
+    coordinates: [6.3500, 43.8000],
     heritages: [
       { name: 'Karamara Mountains', category: 'Historic Site', description: 'A culturally and historically significant mountain range that has witnessed major historical events in the region.' },
       { name: 'Babile Elephant Sanctuary', category: 'National Park', description: 'A massive, semi-arid wildlife reserve home to the rare African savanna elephant, which have uniquely adapted to the harsh environment.' }
@@ -330,7 +333,7 @@ const REGIONS_DATA: Record<string, RegionData> = {
     name: 'Southern Ethiopia',
     capital: 'Hawassa / Arba Minch',
     population: '20+ Million',
-    coordinates: { x: 300, y: 680 },
+    coordinates: [6.0504, 37.4768],
     heritages: [
       { name: 'Lower Valley of the Omo', category: 'UNESCO World Heritage', description: 'A prehistoric site crucial for understanding human evolution, and home to some of the most fascinating and diverse indigenous tribes in the world.' },
       { name: 'Konso Cultural Landscape', category: 'UNESCO World Heritage', description: 'A highly organized landscape of massive stone-walled terraces and fortified settlements built to combat soil erosion over centuries.' },
@@ -359,37 +362,13 @@ const REGIONS_DATA: Record<string, RegionData> = {
   }
 };
 
-const MapConnections = [
-  ['tigray', 'amhara'],
-  ['tigray', 'afar'],
-  ['amhara', 'afar'],
-  ['amhara', 'benishangul'],
-  ['amhara', 'addis'],
-  ['afar', 'dire_dawa'],
-  ['benishangul', 'oromiya'],
-  ['benishangul', 'gambela'],
-  ['addis', 'oromiya'],
-  ['addis', 'amhara'],
-  ['oromiya', 'southern'],
-  ['oromiya', 'somali'],
-  ['oromiya', 'gambela'],
-  ['dire_dawa', 'harari'],
-  ['harari', 'somali'],
-  ['dire_dawa', 'oromiya'],
-  ['southern', 'gambela'],
-];
-
 const CulturalMap: React.FC = () => {
-  const [selectedRegion, setSelectedRegion] = useState<string>('amhara');
-  const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<string>('addis');
   const [activeTab, setActiveTab] = useState<'overview' | 'heritages' | 'culture' | 'gallery'>('overview');
-  
-  // State for the Detail Modal
   const [selectedDetail, setSelectedDetail] = useState<DetailItem | null>(null);
 
   const activeData = REGIONS_DATA[selectedRegion];
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedDetail) {
       document.body.style.overflow = 'hidden';
@@ -420,10 +399,28 @@ const CulturalMap: React.FC = () => {
     </div>
   );
 
+  const createCustomIcon = (color: string) => {
+    return L.divIcon({
+      className: 'custom-icon',
+      html: `<div style="background-color: ${color}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.2s;"></div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+  };
+
+  const MapController = () => {
+    const map = useMap();
+    useEffect(() => {
+      if (activeData) {
+        map.flyTo(activeData.coordinates, 6, { duration: 1.5 });
+      }
+    }, [activeData, map]);
+    return null;
+  };
+
   return (
-    <div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700 relative">
+    <div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700 relative bg-stone-50">
       
-      {/* --- DETAIL MODAL --- */}
       <AnimatePresence>
         {selectedDetail && (
           <motion.div 
@@ -440,11 +437,6 @@ const CulturalMap: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-[3rem] p-10 md:p-14 max-w-2xl w-full shadow-2xl relative border border-stone-200 overflow-hidden"
             >
-              {/* Decorative Background */}
-              <div className="absolute top-0 right-0 p-8 opacity-5 transform scale-150 translate-x-10 -translate-y-10 pointer-events-none">
-                 <svg className="w-64 h-64" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
-              </div>
-
               <button 
                 onClick={() => setSelectedDetail(null)}
                 className="absolute top-8 right-8 w-12 h-12 bg-stone-100 text-stone-600 hover:bg-stone-900 hover:text-white rounded-full flex items-center justify-center transition-colors z-20"
@@ -478,119 +470,51 @@ const CulturalMap: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* High-End Header */}
-      <header className="mb-10 text-center lg:text-left bg-stone-900 rounded-[3rem] p-10 md:p-14 text-white shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-8 opacity-10 transform scale-150 translate-x-10 -translate-y-10">
-           <svg className="w-64 h-64" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        </div>
-        <span className="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-4 inline-block backdrop-blur-sm border border-amber-500/20">Interactive Geographic Network</span>
-        <h1 className="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-4">Cultural <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-rose-400">Atlas</span></h1>
-        <p className="text-stone-400 text-lg font-medium max-w-2xl">A geographic node map of all Ethiopian regional states. Click any node to open its telemetry profile.</p>
-      </header>
-
       <div className="grid xl:grid-cols-12 gap-8 items-start">
         
-        {/* LEFT COLUMN: INTERACTIVE NODE MAP */}
-        <div className="xl:col-span-5 bg-stone-900 rounded-[3rem] border border-stone-800 shadow-2xl relative sticky top-28 h-[80vh] overflow-hidden flex flex-col group">
-          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
-          
-          <div className="p-8 absolute top-0 left-0 z-10 w-full flex justify-between items-start pointer-events-none">
+        <div className="xl:col-span-5 bg-white rounded-[3rem] border border-stone-200 shadow-2xl relative sticky top-28 h-[85vh] overflow-hidden flex flex-col">
+          <div className="p-8 absolute top-0 left-0 z-[400] w-full flex justify-between items-start pointer-events-none bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm">
             <div>
-              <h3 className="text-xl font-black text-white tracking-tight">Geographic Hub</h3>
-              <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mt-1">Select a Node</p>
+              <h3 className="text-xl font-black text-stone-900 tracking-tight">Interactive Map</h3>
+              <p className="text-xs font-bold text-stone-500 uppercase tracking-widest mt-1">Select a Region</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm border border-stone-200">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Live</span>
+              <span className="text-[10px] font-black text-stone-600 uppercase tracking-widest">GPS Active</span>
             </div>
           </div>
           
-          <div className="flex-1 w-full h-full relative z-0 flex items-center justify-center p-4">
-             <svg className="w-full h-full max-h-[100%]" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet">
-                
-                {/* Connections */}
-                {MapConnections.map(([r1, r2], idx) => {
-                  const p1 = REGIONS_DATA[r1].coordinates;
-                  const p2 = REGIONS_DATA[r2].coordinates;
-                  const isHighlighted = selectedRegion === r1 || selectedRegion === r2 || hoveredRegion === r1 || hoveredRegion === r2;
-                  
-                  return (
-                    <line 
-                      key={`line-${idx}`} 
-                      x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} 
-                      stroke={isHighlighted ? "#FCD34D" : "#44403C"} 
-                      strokeWidth={isHighlighted ? 4 : 2} 
-                      strokeDasharray={isHighlighted ? "none" : "8 8"}
-                      className="transition-all duration-500"
-                    />
-                  );
-                })}
-
-                {/* Nodes */}
-                {Object.values(REGIONS_DATA).map((region) => {
-                  const isSelected = selectedRegion === region.id;
-                  const isHovered = hoveredRegion === region.id;
-                  
-                  return (
-                    <g 
-                      key={`node-${region.id}`}
-                      className="cursor-pointer"
-                      onClick={() => { setSelectedRegion(region.id); setActiveTab('overview'); }}
-                      onMouseEnter={() => setHoveredRegion(region.id)}
-                      onMouseLeave={() => setHoveredRegion(null)}
-                    >
-                      {/* Outer pulse ring if selected */}
-                      {isSelected && (
-                        <circle 
-                          cx={region.coordinates.x} 
-                          cy={region.coordinates.y} 
-                          r="55" 
-                          fill={region.color} 
-                          className="opacity-20 animate-pulse" 
-                        />
-                      )}
-                      
-                      {/* Node Circle */}
-                      <circle 
-                        cx={region.coordinates.x} 
-                        cy={region.coordinates.y} 
-                        r={isSelected ? "28" : isHovered ? "24" : "18"} 
-                        fill={region.color} 
-                        stroke="#1C1917"
-                        strokeWidth="6"
-                        className="transition-all duration-300"
-                        style={{ filter: isSelected ? `drop-shadow(0 0 20px ${region.color})` : 'none' }}
-                      />
-                      
-                      {/* Node Label Background */}
-                      <rect 
-                        x={region.coordinates.x - 50} 
-                        y={region.coordinates.y + 35} 
-                        width="100" 
-                        height="30" 
-                        rx="15" 
-                        fill={isSelected ? region.color : "#292524"} 
-                        className="transition-all duration-300"
-                      />
-                      
-                      {/* Node Label Text */}
-                      <text 
-                        x={region.coordinates.x} 
-                        y={region.coordinates.y + 55} 
-                        textAnchor="middle" 
-                        fill={isSelected ? "#000000" : "#E7E5E4"} 
-                        className={`text-xs font-black tracking-widest pointer-events-none transition-all duration-300 uppercase`}
-                      >
-                        {region.name.replace(' Region', '')}
-                      </text>
-                    </g>
-                  );
-                })}
-             </svg>
+          <div className="flex-1 w-full h-full relative z-0">
+             <MapContainer center={[9.145, 40.489]} zoom={5} scrollWheelZoom={true} className="w-full h-full" style={{ zIndex: 0 }}>
+               <TileLayer
+                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+               />
+               <MapController />
+               
+               {Object.values(REGIONS_DATA).map((region) => (
+                 <Marker 
+                   key={region.id} 
+                   position={region.coordinates}
+                   icon={createCustomIcon(selectedRegion === region.id ? '#10B981' : region.color)}
+                   eventHandlers={{
+                     click: () => {
+                       setSelectedRegion(region.id);
+                       setActiveTab('overview');
+                     },
+                   }}
+                 >
+                   <Popup className="font-sans border-none rounded-2xl shadow-xl overflow-hidden">
+                     <div className="text-center font-black text-stone-900 py-1 px-2 uppercase tracking-wider text-xs">
+                       {region.name}
+                     </div>
+                   </Popup>
+                 </Marker>
+               ))}
+             </MapContainer>
           </div>
         </div>
 
-        {/* RIGHT COLUMN: DYNAMIC DATA PANEL */}
         <div className="xl:col-span-7">
           <AnimatePresence mode="wait">
             <motion.div 
@@ -601,7 +525,6 @@ const CulturalMap: React.FC = () => {
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="bg-white rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden"
             >
-              {/* Dynamic Banner */}
               <div className="h-72 relative flex items-end p-10">
                  <div className="absolute inset-0 bg-stone-900">
                    <img src={activeData.images[0]} alt={activeData.name} className="w-full h-full object-cover opacity-50 mix-blend-overlay" />
@@ -622,7 +545,6 @@ const CulturalMap: React.FC = () => {
                  </div>
               </div>
 
-              {/* Navigation Tabs */}
               <div className="flex overflow-x-auto border-b border-stone-100 px-6 pt-2 bg-stone-50 custom-scrollbar">
                  {[
                    { id: 'overview', label: 'Overview' },
@@ -633,14 +555,13 @@ const CulturalMap: React.FC = () => {
                    <button
                      key={tab.id}
                      onClick={() => setActiveTab(tab.id as any)}
-                     className={`px-6 py-5 text-xs font-black uppercase tracking-widest border-b-4 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-stone-900 text-stone-900' : 'border-transparent text-stone-400 hover:text-stone-700'}`}
+                     className={`px-6 py-5 text-xs font-black uppercase tracking-widest border-b-4 transition-colors whitespace-nowrap \${activeTab === tab.id ? 'border-stone-900 text-stone-900' : 'border-transparent text-stone-400 hover:text-stone-700'}`}
                    >
                      {tab.label}
                    </button>
                  ))}
               </div>
 
-              {/* Tab Content Areas */}
               <div className="p-8 md:p-10 min-h-[500px]">
                 
                 {activeTab === 'overview' && (
