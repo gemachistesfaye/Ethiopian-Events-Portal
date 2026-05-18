@@ -9,6 +9,7 @@ import HeritageChat from './components/HeritageChat';
 import CulturalMap from './components/CulturalMap';
 import HistoricalTimeline from './components/HistoricalTimeline';
 import VoiceNarrator from './components/VoiceNarrator';
+import LandingPage from './components/LandingPage';
 import Auth from './components/Auth';
 import { supabase } from './services/supabase';
 import { User } from '@supabase/supabase-js';
@@ -21,7 +22,7 @@ const App: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
-  const [activeTab, setActiveTab] = useState<'calendar' | 'map' | 'timeline' | 'narrator' | 'reminders' | 'culture' | 'chat' | 'account'>('calendar');
+  const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'narrator' | 'reminders' | 'culture' | 'chat' | 'account'>('home');
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -114,6 +115,7 @@ const App: React.FC = () => {
           
           <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner">
             {[
+              { id: 'home', label: 'Home', icon: '🏛️' },
               { id: 'calendar', label: t('nav.explore'), icon: '🌍' },
               { id: 'map', label: 'Atlas', icon: '🗺️' },
               { id: 'timeline', label: 'Timeline', icon: '📜' },
@@ -162,6 +164,7 @@ const App: React.FC = () => {
       {/* Mobile Nav */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 z-50 px-6 h-20 flex items-center justify-around shadow-2xl">
         {[
+          { id: 'home', label: 'Home', icon: '🏛️' },
           { id: 'calendar', label: 'Explore', icon: '🌍' },
           { id: 'map', label: 'Atlas', icon: '🗺️' },
           { id: 'timeline', label: 'Timeline', icon: '📜' },
@@ -315,6 +318,8 @@ const App: React.FC = () => {
               onClearAll={handleClearAllReminders}
             />
           </div>
+        ) : activeTab === 'home' ? (
+          <LandingPage onExplore={() => setActiveTab('calendar')} />
         ) : activeTab === 'map' ? (
           <CulturalMap />
         ) : activeTab === 'timeline' ? (
