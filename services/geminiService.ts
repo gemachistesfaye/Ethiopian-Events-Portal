@@ -37,15 +37,16 @@ export interface Trivia {
 }
 
 /* ================================
-   FETCH WITH RETRY
+   FETCH WITH RETRY + KEY ROTATION
 ================================ */
 async function fetchWithRetry(
-  url: string,
+  urlTemplate: string,
   options: RequestInit,
-  retries = 2
+  retries = 3
 ) {
   for (let i = 0; i < retries; i++) {
     try {
+      const url = urlTemplate.replace(/key=[^&]+/, `key=${getApiKey()}`);
       const res = await fetch(url, options);
       const data = await res.json().catch(() => ({}));
 
@@ -53,10 +54,11 @@ async function fetchWithRetry(
 
       console.error("❌ Gemini error:", res.status, data);
 
-      /* 🟡 RATE LIMIT HANDLING */
+      /* 🟡 RATE LIMIT — rotate to next key */
       if (res.status === 429) {
-        console.warn("⏳ Rate limited — waiting before retry...");
-        await new Promise(r => setTimeout(r, 5000));
+        console.warn("⏳ Rate limited — rotating API key...");
+        rotateKey();
+        await new Promise(r => setTimeout(r, 1000));
         continue;
       }
 
@@ -79,7 +81,7 @@ async function fetchWithRetry(
 export async function generateCulturalTrivia(): Promise<Trivia> {
   try {
     const result = await fetchWithRetry(
-      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
+      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${getApiKey()}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -133,7 +135,7 @@ export async function getCulturalInsight(
 ): Promise<string> {
   try {
     const result = await fetchWithRetry(
-      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
+      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${getApiKey()}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -170,7 +172,7 @@ export async function speakAmharic(
 ): Promise<Uint8Array | null> {
   try {
     const result = await fetchWithRetry(
-      `${BASE_URL}/${TTS_MODEL}:generateContent?key=${API_KEY}`,
+      `${BASE_URL}/${TTS_MODEL}:generateContent?key=${getApiKey()}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -226,7 +228,7 @@ export async function chatWithHeritageGuide(
     console.log("🟢 Calling Gemini API with mode:", mode, "message:", message);
 
     const result = await fetchWithRetry(
-      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${API_KEY}`,
+      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${getApiKey()}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
