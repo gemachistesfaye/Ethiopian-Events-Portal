@@ -117,7 +117,7 @@ const HeritageChat: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-white rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden font-sans">
+    <div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-stone-900 rounded-[3rem] border border-stone-800 shadow-2xl overflow-hidden font-sans">
       
       {/* MODES SELECTOR */}
       <div className="bg-stone-900 p-4 flex flex-wrap gap-2 justify-center border-b border-stone-800">
@@ -125,7 +125,7 @@ const HeritageChat: React.FC = () => {
           <button
             key={m.id}
             onClick={() => setMode(m.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2 ${mode === m.id ? 'bg-amber-500 text-stone-900' : 'text-stone-400 hover:text-white'}`}
+            className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2 ${mode === m.id ? 'bg-amber-900/200 text-stone-100' : 'text-stone-400 hover:text-white'}`}
           >
             <span>{m.icon}</span>
             {m.label}
@@ -134,9 +134,9 @@ const HeritageChat: React.FC = () => {
       </div>
 
       {/* HEADER */}
-      <div className="bg-white p-6 border-b border-stone-100 flex justify-between items-center">
+      <div className="bg-stone-900 p-6 border-b border-stone-800 flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-black text-stone-900 tracking-tight">
+          <h3 className="text-xl font-black text-stone-100 tracking-tight">
             {MODES.find(m => m.id === mode)?.label}
           </h3>
           <p className="text-xs text-stone-400 font-medium mt-1">Immersive Heritage Experience</p>
@@ -151,11 +151,11 @@ const HeritageChat: React.FC = () => {
       </div>
 
       {/* CHAT BODY */}
-      <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6 bg-stone-50/50">
+      <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6 bg-stone-950/50">
 
         {messages.length === 0 && (
           <div className="text-center py-10">
-            <div className="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">🤖</div>
+            <div className="w-16 h-16 bg-stone-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">🤖</div>
             <p className="text-stone-400 font-black text-xs uppercase tracking-widest mb-6">Choose a mode or try a quick action</p>
             
             <div className="grid gap-3 max-w-md mx-auto">
@@ -163,10 +163,10 @@ const HeritageChat: React.FC = () => {
                 <button
                   key={i}
                   onClick={() => handleSend(action.text)}
-                  className="bg-white p-4 rounded-xl border border-stone-200 hover:border-amber-500 hover:bg-amber-50/50 text-left transition-all flex items-center gap-3 group"
+                  className="bg-stone-900 p-4 rounded-xl border border-stone-800 hover:border-amber-500 hover:bg-amber-900/20/50 text-left transition-all flex items-center gap-3 group"
                 >
                   <span className="text-xl">{action.icon}</span>
-                  <span className="text-sm font-bold text-stone-700 group-hover:text-stone-900">{action.text}</span>
+                  <span className="text-sm font-bold text-stone-300 group-hover:text-stone-100">{action.text}</span>
                 </button>
               ))}
             </div>
@@ -181,8 +181,8 @@ const HeritageChat: React.FC = () => {
             <div
               className={`max-w-[85%] p-6 rounded-[2rem] text-sm shadow-sm relative group ${
                 m.role === 'user'
-                  ? 'bg-amber-500 text-stone-900 font-bold'
-                  : 'bg-white border border-stone-200 text-stone-800 leading-relaxed'
+                  ? 'bg-amber-900/200 text-stone-100 font-bold'
+                  : 'bg-stone-900 border border-stone-800 text-stone-200 leading-relaxed'
               }`}
             >
               <div style={{ whiteSpace: 'pre-wrap' }}>
@@ -200,7 +200,7 @@ const HeritageChat: React.FC = () => {
                     }
                     parts.push(
                       <strong 
-                        className={`font-black ${m.role === 'user' ? 'text-stone-900 underline' : 'text-stone-950 bg-amber-50/70 px-1 py-0.5 rounded'}`} 
+                        className={`font-black ${m.role === 'user' ? 'text-stone-100 underline' : 'text-stone-950 bg-amber-900/20/70 px-1 py-0.5 rounded'}`} 
                         key={match.index}
                       >
                         {match[2]}
@@ -218,13 +218,13 @@ const HeritageChat: React.FC = () => {
                 })()}
               </div>
               
-              <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-100/20">
+              <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-800/20">
                 <span className="text-[10px] opacity-50 font-black">{m.time}</span>
                 
                 {m.role === 'model' && (
                   <button
                     onClick={() => handleSpeak(m.text, m.id)}
-                    className={`text-xs flex items-center gap-1 font-black uppercase tracking-widest ${speakingId === m.id ? 'text-amber-600 animate-pulse' : 'text-stone-400 hover:text-stone-600'}`}
+                    className={`text-xs flex items-center gap-1 font-black uppercase tracking-widest ${speakingId === m.id ? 'text-amber-600 animate-pulse' : 'text-stone-400 hover:text-stone-300'}`}
                     disabled={speakingId !== null && speakingId !== m.id}
                   >
                     {speakingId === m.id ? '🔊 Speaking...' : '🔈 Listen'}
@@ -237,7 +237,7 @@ const HeritageChat: React.FC = () => {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-white border border-stone-200 p-6 rounded-[2rem] flex items-center gap-3">
+            <div className="bg-stone-900 border border-stone-800 p-6 rounded-[2rem] flex items-center gap-3">
               <div className="flex gap-1">
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce"></span>
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
@@ -250,14 +250,14 @@ const HeritageChat: React.FC = () => {
       </div>
 
       {/* INPUT */}
-      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-6 border-t bg-white flex gap-3">
+      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-6 border-t bg-stone-900 flex gap-3">
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask the Storyteller..."
-          className="flex-1 h-14 px-6 rounded-xl bg-stone-100 border-2 border-transparent focus:border-amber-500 focus:outline-none focus:bg-white font-medium transition-all"
+          className="flex-1 h-14 px-6 rounded-xl bg-stone-800 border-2 border-transparent focus:border-amber-500 focus:outline-none focus:bg-stone-900 font-medium transition-all"
         />
 
         <button
