@@ -551,7 +551,15 @@ function getOfflineHeritageResponse(
   message: string,
   mode: 'guide' | 'storyteller' | 'teacher' | 'festival' | 'myth'
 ): string {
-  const query = message.toLowerCase().trim();
+  let query = message.toLowerCase().trim();
+  
+  // Normalize common typos and alternate spellings
+  query = query
+    .replace(/\badawa\b/g, "adwa")
+    .replace(/\baksum\b/g, "axum")
+    .replace(/\blalibla\b/g, "lalibela")
+    .replace(/\bormo\b/g, "oromo")
+    .replace(/\bgonder\b/g, "gondar");
 
   const selectModeResponse = (options: {
     guide: string;
@@ -571,6 +579,17 @@ function getOfflineHeritageResponse(
       teacher: "Hello, seeker of knowledge! I am your cultural teacher. I am currently running on local backup storage, but we have everything we need to learn. Ask me about Ge'ez writing, the 13-month calendar, the democratic Gadaa system, or our vibrant festivals!",
       festival: "A spectacular welcome! I am your festival explainer. While my servers are taking a brief breath, I am fully ready to describe the dancing, the music, and the sacred dates of Timkat, Meskel, or Enkutatash. Ask away!",
       myth: "Greetings, brave soul. You have stepped into the realm of ancient mysteries and folklore. My live cosmic connection is resting, but the ancient legends of the Ark, the Queen of Sheba, and the angels of Lalibela never fade. Speak, and I shall unveil the mysteries."
+    });
+  }
+
+  // 1.5 Check for confusion / "I don't know" / general help
+  if (query.match(/\b(help|don't know|not sure|am not know|what|confused|dont know|what can you do|what should i ask)\b/) && query.length < 30) {
+    return selectModeResponse({
+      guide: "It's perfectly fine if you're not sure where to start! Ethiopia has an incredibly deep history. I can tell you about our ancient empires (like <b>Axum</b>), the 11 rock-hewn churches of <b>Lalibela</b>, the <b>Battle of Adwa</b>, or our unique 13-month calendar. Just say <b>'Tell me about Adwa'</b> or pick any topic!",
+      storyteller: "Do not worry if the path is unclear, traveler. Every grand epic must start with a single step! Shall I tell you of the mighty <b>Emperor Tewodros II</b> at Maqdala, or perhaps the majestic castles of <b>Gondar</b>? Just ask me for a story!",
+      teacher: "No problem at all! Learning begins with curiosity. Since you're not sure, why don't we start with the absolute beginning? Ask me about <b>Lucy (Dinknesh)</b>, the 3.2-million-year-old fossil that proves Ethiopia is the cradle of humanity!",
+      festival: "If you don't know what to ask, let's talk about a party! Ask me about <b>Timkat</b> (Epiphany) or the beautiful Ethiopian New Year called <b>Enkutatash</b>! There are so many colorful traditions to explore.",
+      myth: "The mists of history can be blinding. If you are lost, simply ask me about the legendary <b>Queen of Sheba</b>, or the ancient secret of the <b>Ark of the Covenant</b> hidden in the northern mountains. The legends are waiting for you."
     });
   }
 
@@ -627,9 +646,77 @@ function getOfflineHeritageResponse(
     }
   }
 
-  // 3. Perform a fuzzy search score match across the combined registry
+  // 3. Add General Knowledge Base entries for nation-wide questions
+  combinedRegistry.push({
+    title: "Ethiopian Country Profile & Geography",
+    category: "Geography / Nation",
+    description: "Ethiopia is a sovereign country located in the Horn of Africa. Known as the Land of Origins.",
+    location: "Horn of Africa",
+    narratives: {
+      guide: "Ethiopia is a beautiful, historically rich sovereign country located in the Horn of Africa. It is the oldest independent country in Africa and one of the oldest in the world, having never been fully colonized.",
+      storyteller: "Behold the ancient Land of Origins! Ethiopia stands proudly in the Horn of Africa, an unconquered fortress of mountains and valleys where humanity itself first walked.",
+      teacher: "Ethiopia is a landlocked country situated in the Horn of Africa. It shares borders with Eritrea, Djibouti, Somalia, Kenya, South Sudan, and Sudan. It has a population of over 120 million people.",
+      festival: "The whole country of Ethiopia is a tapestry of vibrant cultures, celebrating over 80 distinct ethnic groups together in absolute harmony!",
+      myth: "It is said that Ethiopia is a land blessed by the heavens, sitting high upon the mountains, protected by ancient guardians since the dawn of time."
+    }
+  });
+
+  combinedRegistry.push({
+    title: "Regions and Administrative States of Ethiopia",
+    category: "Administration / Politics",
+    description: "Information about the regions, states, and administrative structure of the Ethiopian country.",
+    narratives: {
+      guide: "Ethiopia is a federal democratic republic structured into <b>12 regional states</b> (such as Oromia, Amhara, Somali, Tigray, Afar, Sidama, SWEPR, South Ethiopia, Central Ethiopia, Benishangul-Gumuz, Gambella, Harari) and two chartered cities (Addis Ababa and Dire Dawa).",
+      storyteller: "The great nation is a woven fabric of many vibrant threads! There are 12 grand regional states and two bustling chartered cities that make up the vast and diverse lands of Ethiopia.",
+      teacher: "Administratively, Ethiopia operates under a federal system. It has recently expanded to 12 ethnolinguistically based regional states, plus two self-governing chartered cities (Addis Ababa, the capital, and Dire Dawa).",
+      festival: "Every region in Ethiopia has its own beautiful holidays, dances, and unique foods! From the 12 distinct regional states to the lively streets of Addis Ababa, the celebrations never stop.",
+      myth: "They say that each of the 12 regions is guarded by a different star in the highland sky, together forming a brilliant constellation that illuminates the entire horn of Africa."
+    }
+  });
+  combinedRegistry.push({
+    title: "Languages of Ethiopia",
+    category: "Linguistics / Culture",
+    description: "Ethiopia is a highly multilingual nation with over 80 distinct languages spoken, including Amharic, Afaan Oromoo, Tigrinya, and Somali.",
+    narratives: {
+      guide: "Ethiopia is incredibly linguistically diverse, with over <b>80 distinct languages</b> spoken across the country! The major working languages of the federal government include <b>Amharic</b>, <b>Afaan Oromoo</b>, <b>Tigrinya</b>, <b>Somali</b>, and <b>Afar</b>.",
+      storyteller: "Listen closely to the highland winds, and you will hear a symphony of voices! From the sharp Semitic echoes of Amharic to the rhythmic Cushitic flow of Afaan Oromoo, over 80 tongues weave the stories of this ancient land.",
+      teacher: "Linguistically, Ethiopia is a fascinating case study. The languages belong primarily to the Afroasiatic language family (Semitic, Cushitic, and Omotic branches) and Nilo-Saharan families. The country uses the indigenous Ge'ez script for many of its languages.",
+      festival: "At major festivals, you will hear joyous songs sung in dozens of different languages, proving that while our tongues may differ, our celebrations beat to the exact same drum!",
+      myth: "Legend says that when the Tower of Babel fell, a unique blessing was given to the mountains of Ethiopia, allowing its people to preserve the ancient, sacred languages of the first humans."
+    }
+  });
+
+  combinedRegistry.push({
+    title: "The Ethiopian Flag",
+    category: "National Identity",
+    description: "The green, yellow, and red tricolor flag of Ethiopia, a symbol of Pan-Africanism.",
+    narratives: {
+      guide: "The <b>Ethiopian Flag</b> features horizontal stripes of green, yellow, and red. The green represents the fertility of the land, the yellow represents religious freedom and peace, and the red represents the sacrifice of our ancestors who defended our independence.",
+      storyteller: "Raise your eyes to the tricolor banner! Green as the deep highland valleys, yellow as the brilliant sun of peace, and red as the blood of the patriots who stood unbroken against the invaders. It is a flag that inspired an entire continent!",
+      teacher: "The Ethiopian flag is historically significant because its colors (Green, Yellow, Red) were adopted by many other African nations upon their independence, making it the foundation of the <b>Pan-African colors</b>. The central star represents the unity of all Ethiopian nationalities.",
+      festival: "During every major holiday, the green, yellow, and red flag waves proudly across the streets, painted on faces, and woven into beautiful cultural dresses!",
+      myth: "It is whispered that the colors of the flag were first seen in a divine rainbow stretching over the Ark of the Covenant, promising eternal sovereignty to the nation."
+    }
+  });
+
+  combinedRegistry.push({
+    title: "Geography and Climate of Ethiopia",
+    category: "Geography",
+    description: "Ethiopia features a highly diverse topography, from the cool, towering Simien Mountains to the scorching Danakil Depression.",
+    narratives: {
+      guide: "Ethiopia's geography is spectacular. It features the massive Ethiopian Highlands (the 'Roof of Africa'), deep river canyons like the Blue Nile, and the extreme heat of the <b>Danakil Depression</b>, which is one of the lowest and hottest places on Earth.",
+      storyteller: "A land of fire and ice! You can stand upon the frozen, jagged peaks of the Simien Mountains where the Walia Ibex roam, and then descend into the boiling lava lakes of Erta Ale. The Earth itself is alive here!",
+      teacher: "Topographically, Ethiopia is divided by the Great Rift Valley. This creates a highly varied climate system ranging from cool alpine zones (Dega) to temperate zones (Woina Dega) and hot, arid lowlands (Kolla). This diversity is what allows the cultivation of crops like coffee and teff.",
+      festival: "Our geography shapes our celebrations! From the misty, rainy season (Kiremt) that ends just in time for the sunny Meskel festival, to the hot lowland harvests, every season brings a unique cultural joy.",
+      myth: "The Great Rift Valley is said to be the ancient scar left behind when the heavens separated from the earth, and the mighty Blue Nile river is believed to be the river Gihon that flowed directly out of the Garden of Eden."
+    }
+  });
+  // 4. Perform a fuzzy search score match across the combined registry
   let bestMatch: OfflineItem | null = null;
   let highestScore = 0;
+
+  // Stop words to ignore during search scoring to prevent false positives
+  const stopWords = new Set(['tell', 'me', 'about', 'the', 'how', 'many', 'in', 'of', 'and', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'say', 'i', 'a', 'what', 'is', 'are', 'does', 'have', 'has', 'can', 'you']);
 
   for (const item of combinedRegistry) {
     let score = 0;
@@ -644,7 +731,7 @@ function getOfflineHeritageResponse(
     // Search keywords split
     const searchTerms = query.split(/\s+/);
     for (const term of searchTerms) {
-      if (term.length < 3) continue; // skip tiny words
+      if (term.length < 3 || stopWords.has(term)) continue; // skip tiny words and stop words
       
       if (titleLower.includes(term)) score += 10;
       if (descLower.includes(term)) score += 4;
@@ -655,7 +742,7 @@ function getOfflineHeritageResponse(
     }
 
     // Direct match bonuses
-    if (query.includes(titleLower) || titleLower.includes(query)) score += 25;
+    if (query.includes(titleLower) || titleLower.includes(query)) score += 30;
 
     if (score > highestScore) {
       highestScore = score;
