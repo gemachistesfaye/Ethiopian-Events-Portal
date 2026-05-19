@@ -120,12 +120,12 @@ const HeritageChat: React.FC = () => {
     <div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-stone-50 rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden font-sans">
       
       {/* MODES SELECTOR */}
-      <div className="bg-stone-50 p-4 flex flex-wrap gap-2 justify-center border-b border-stone-200">
+      <div className="bg-stone-900 p-4 flex flex-wrap gap-2 justify-center border-b border-stone-800">
         {MODES.map(m => (
           <button
             key={m.id}
             onClick={() => setMode(m.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2 ${mode === m.id ? 'bg-amber-900/20 text-stone-900' : 'text-stone-500 hover:text-stone-900'}`}
+            className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2 ${mode === m.id ? 'bg-amber-900/200 text-stone-100' : 'text-stone-400 hover:text-white'}`}
           >
             <span>{m.icon}</span>
             {m.label}
@@ -136,15 +136,15 @@ const HeritageChat: React.FC = () => {
       {/* HEADER */}
       <div className="bg-stone-50 p-6 border-b border-stone-100 flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-black text-stone-900 tracking-tight">
+          <h3 className="text-xl font-black text-stone-100 tracking-tight">
             {MODES.find(m => m.id === mode)?.label}
           </h3>
-          <p className="text-xs text-stone-500 font-medium mt-1">Immersive Heritage Experience</p>
+          <p className="text-xs text-stone-400 font-medium mt-1">Immersive Heritage Experience</p>
         </div>
 
         <button
           onClick={() => { if(confirm("Clear history?")) { localStorage.removeItem(STORAGE_KEY); setMessages([]); } }}
-          className="text-xs font-black uppercase text-stone-500 hover:text-red-500 transition-colors"
+          className="text-xs font-black uppercase text-stone-400 hover:text-red-500 transition-colors"
         >
           Clear History
         </button>
@@ -155,8 +155,8 @@ const HeritageChat: React.FC = () => {
 
         {messages.length === 0 && (
           <div className="text-center py-10">
-            <div className="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">🤖</div>
-            <p className="text-stone-500 font-black text-xs uppercase tracking-widest mb-6">Choose a mode or try a quick action</p>
+            <div className="w-16 h-16 bg-stone-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">🤖</div>
+            <p className="text-stone-400 font-black text-xs uppercase tracking-widest mb-6">Choose a mode or try a quick action</p>
             
             <div className="grid gap-3 max-w-md mx-auto">
               {quickActions.map((action, i) => (
@@ -166,7 +166,7 @@ const HeritageChat: React.FC = () => {
                   className="bg-stone-50 p-4 rounded-xl border border-stone-200 hover:border-amber-500 hover:bg-amber-50/50 text-left transition-all flex items-center gap-3 group"
                 >
                   <span className="text-xl">{action.icon}</span>
-                  <span className="text-sm font-bold text-stone-700 group-hover:text-stone-900">{action.text}</span>
+                  <span className="text-sm font-bold text-stone-300 group-hover:text-stone-100">{action.text}</span>
                 </button>
               ))}
             </div>
@@ -200,7 +200,7 @@ const HeritageChat: React.FC = () => {
                     }
                     parts.push(
                       <strong 
-                        className={`font-black ${m.role === 'user' ? 'text-stone-900 underline' : 'text-stone-950 bg-amber-900/20/70 px-1 py-0.5 rounded'}`} 
+                        className={`font-black ${m.role === 'user' ? 'text-stone-100 underline' : 'text-stone-950 bg-amber-900/20/70 px-1 py-0.5 rounded'}`} 
                         key={match.index}
                       >
                         {match[2]}
@@ -218,13 +218,13 @@ const HeritageChat: React.FC = () => {
                 })()}
               </div>
               
-              <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-200/20">
+              <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-800/20">
                 <span className="text-[10px] opacity-50 font-black">{m.time}</span>
                 
                 {m.role === 'model' && (
                   <button
                     onClick={() => handleSpeak(m.text, m.id)}
-                    className={`text-xs flex items-center gap-1 font-black uppercase tracking-widest ${speakingId === m.id ? 'text-amber-600 animate-pulse' : 'text-stone-500 hover:text-stone-700'}`}
+                    className={`text-xs flex items-center gap-1 font-black uppercase tracking-widest ${speakingId === m.id ? 'text-amber-600 animate-pulse' : 'text-stone-400 hover:text-stone-300'}`}
                     disabled={speakingId !== null && speakingId !== m.id}
                   >
                     {speakingId === m.id ? '🔊 Speaking...' : '🔈 Listen'}
@@ -243,7 +243,7 @@ const HeritageChat: React.FC = () => {
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
               </div>
-              <span className="text-xs font-black text-stone-500 uppercase tracking-widest">Storyteller is composing...</span>
+              <span className="text-xs font-black text-stone-400 uppercase tracking-widest">Storyteller is composing...</span>
             </div>
           </div>
         )}
@@ -263,7 +263,7 @@ const HeritageChat: React.FC = () => {
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="bg-stone-50 text-stone-900 px-6 rounded-xl font-black uppercase text-xs tracking-widest disabled:opacity-40 hover:bg-stone-100 transition-colors"
+          className="bg-stone-900 text-white px-6 rounded-xl font-black uppercase text-xs tracking-widest disabled:opacity-40 hover:bg-stone-800 transition-colors"
         >
           Send
         </button>

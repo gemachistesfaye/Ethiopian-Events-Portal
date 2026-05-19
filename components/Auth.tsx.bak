@@ -71,8 +71,8 @@ const Auth: React.FC = () => {
   return (
     <div className="max-w-md mx-auto bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl font-sans mt-10">
       <div className="text-center mb-6">
-        <span className="bg-stone-50 text-amber-600 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg">Secure Access</span>
-        <h2 className="text-3xl font-black text-stone-900 tracking-tighter leading-none">
+        <span className="bg-stone-900 text-amber-500 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg">Secure Access</span>
+        <h2 className="text-3xl font-black text-stone-100 tracking-tighter leading-none">
           {isForgotPassword ? 'Reset Password' : isSignUp ? 'Create Account' : 'Welcome Back'}
         </h2>
       </div>
@@ -80,7 +80,7 @@ const Auth: React.FC = () => {
       <form onSubmit={handleAuth} className="space-y-4">
         {isSignUp && (
           <div>
-            <label className="text-xs font-black text-stone-500 uppercase tracking-widest mb-1 block">Full Name</label>
+            <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block">Full Name</label>
             <input 
               type="text" 
               value={name}
@@ -92,7 +92,7 @@ const Auth: React.FC = () => {
         )}
 
         <div>
-          <label className="text-xs font-black text-stone-500 uppercase tracking-widest mb-1 block">Email</label>
+          <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block">Email</label>
           <input 
             type="email" 
             value={email}
@@ -104,7 +104,7 @@ const Auth: React.FC = () => {
 
         {!isForgotPassword && (
           <div>
-            <label className="text-xs font-black text-stone-500 uppercase tracking-widest mb-1 block">Password</label>
+            <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block">Password</label>
             <input 
               type="password" 
               value={password}
@@ -117,7 +117,7 @@ const Auth: React.FC = () => {
 
         {isSignUp && (
           <div>
-            <label className="text-xs font-black text-stone-500 uppercase tracking-widest mb-1 block">Confirm Password</label>
+            <label className="text-xs font-black text-stone-400 uppercase tracking-widest mb-1 block">Confirm Password</label>
             <input 
               type="password" 
               value={confirmPassword}
@@ -133,7 +133,7 @@ const Auth: React.FC = () => {
             <button 
               type="button"
               onClick={() => setIsForgotPassword(true)}
-              className="text-xs font-black uppercase text-stone-500 hover:text-amber-600 transition-colors"
+              className="text-xs font-black uppercase text-stone-400 hover:text-amber-600 transition-colors"
             >
               Forgot Password?
             </button>
@@ -143,7 +143,7 @@ const Auth: React.FC = () => {
         <button 
           type="submit" 
           disabled={loading}
-          className="w-full h-12 bg-amber-900/20 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
+          className="w-full h-12 bg-amber-900/200 text-stone-100 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
         >
           {loading ? 'Processing...' : isForgotPassword ? 'Send Reset Link' : isSignUp ? 'Sign Up' : 'Login'}
         </button>
@@ -155,7 +155,7 @@ const Auth: React.FC = () => {
         <>
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-stone-100"></div></div>
-            <div className="relative flex justify-center text-xs uppercase font-black text-stone-700"><span className="bg-stone-50 px-4">Or continue with</span></div>
+            <div className="relative flex justify-center text-xs uppercase font-black text-stone-300"><span className="bg-stone-50 px-4">Or continue with</span></div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -174,7 +174,7 @@ const Auth: React.FC = () => {
 
             <button 
               onClick={handleGitHubLogin}
-              className="w-full h-12 bg-stone-50 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-100 transition-colors flex items-center justify-center gap-2"
+              className="w-full h-12 bg-stone-900 text-white rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.011-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.293 0 .322.218.694.825.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -192,7 +192,7 @@ const Auth: React.FC = () => {
             setIsForgotPassword(false);
             setMessage('');
           }}
-          className="text-xs font-black uppercase text-stone-500 hover:text-amber-600 transition-colors"
+          className="text-xs font-black uppercase text-stone-400 hover:text-amber-600 transition-colors"
         >
           {isSignUp ? 'Already have an account? Login' : 'Need an account? Sign Up'}
         </button>
@@ -204,7 +204,7 @@ const Auth: React.FC = () => {
               setIsSignUp(false);
               setMessage('');
             }}
-            className="text-xs font-black uppercase text-stone-500 hover:text-amber-600 transition-colors"
+            className="text-xs font-black uppercase text-stone-400 hover:text-amber-600 transition-colors"
           >
             Back to Login
           </button>
