@@ -497,7 +497,7 @@ const CulturalMap: React.FC = () => {
 
       <div className="grid xl:grid-cols-12 gap-6 items-start">
         
-        <div className="xl:col-span-5 bg-stone-50 rounded-[2rem] border border-stone-200 shadow-xl relative sticky top-24 h-[65vh] max-h-[550px] overflow-hidden flex flex-col">
+        <div className="xl:col-span-6 bg-stone-50 rounded-[2rem] border border-stone-200 shadow-xl relative sticky top-24 h-[65vh] max-h-[550px] overflow-hidden flex flex-col">
           <div className="p-5 absolute top-0 left-0 z-[400] w-full flex justify-between items-start pointer-events-none bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm">
             <div>
               <h3 className="text-lg font-black text-stone-900 tracking-tight">Interactive Map</h3>
@@ -566,7 +566,7 @@ const CulturalMap: React.FC = () => {
           </div>
         </div>
 
-        <div className="xl:col-span-7">
+        <div className="xl:col-span-6">
           <AnimatePresence mode="wait">
             <motion.div 
               key={activeData.id}
@@ -587,11 +587,11 @@ const CulturalMap: React.FC = () => {
                      <span className="px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-[0.2em] mb-2 inline-block shadow-lg backdrop-blur-md border border-white/20" style={{ backgroundColor: activeData.color, color: '#fff' }}>
                        Territory Profile
                      </span>
-                     <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tighter leading-none shadow-sm">{activeData.name}</h2>
+                     <h2 className="text-3xl md:text-4xl font-black text-stone-100 tracking-tighter leading-none shadow-sm">{activeData.name}</h2>
                    </div>
                    <div className="hidden md:block text-right">
-                      <p className="text-[9px] font-black uppercase tracking-widest text-stone-900/70 mb-0.5">Population</p>
-                      <p className="text-xl font-black text-stone-900">{activeData.population}</p>
+                      <p className="text-[9px] font-black uppercase tracking-widest text-stone-200/80 mb-0.5">Population</p>
+                      <p className="text-xl font-black text-stone-100">{activeData.population}</p>
                    </div>
                  </div>
               </div>
