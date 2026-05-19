@@ -410,7 +410,7 @@ const App: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
-  const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'narrator' | 'reminders' | 'culture' | 'chat' | 'account'>(() => {
+  const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'reminders' | 'culture' | 'chat' | 'account'>(() => {
     return (localStorage.getItem('ethio_active_tab') as any) || 'home';
   });
 
@@ -552,7 +552,6 @@ const App: React.FC = () => {
                     {[
                       { id: 'map', label: 'Atlas', icon: '🗺️' },
                       { id: 'timeline', label: 'Timeline', icon: '📜' },
-                      { id: 'narrator', label: 'Narrator', icon: '🎙️' },
                       { id: 'culture', label: t('nav.zone'), icon: '✨' },
                       { id: 'chat', label: t('nav.guide'), icon: '🤖' }
                     ].map(tab => (
@@ -636,7 +635,6 @@ const App: React.FC = () => {
                 {[
                   { id: 'map', label: 'Atlas', icon: '🗺️' },
                   { id: 'timeline', label: 'Timeline', icon: '📜' },
-                  { id: 'narrator', label: 'Narrator', icon: '🎙️' },
                   { id: 'culture', label: 'Zone', icon: '✨' },
                   { id: 'chat', label: 'Guide', icon: '🤖' }
                 ].map(tab => (
@@ -803,8 +801,6 @@ const App: React.FC = () => {
           <CulturalMap />
         ) : activeTab === 'timeline' ? (
           <HistoricalTimeline />
-        ) : activeTab === 'narrator' ? (
-          <VoiceNarrator />
         ) : activeTab === 'culture' ? (
           <CultureZone />
         ) : activeTab === 'chat' ? (
