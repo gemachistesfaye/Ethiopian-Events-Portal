@@ -50,11 +50,7 @@ const CultureZone: React.FC = () => {
               {!showAnswer ? (
                 <button 
                   onClick={() => setShowAnswer(true)}
-<<<<<<< HEAD
                   className="bg-stone-50 text-stone-900 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-500 transition-all shadow-xl active:scale-95"
-=======
-                  className="bg-stone-900 text-stone-100 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-900/200 transition-all shadow-xl active:scale-95"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                 >
                   Reveal Correct Answer
                 </button>
@@ -91,11 +87,7 @@ const CultureZone: React.FC = () => {
           { title: 'Music & Dance', icon: '💃', desc: 'Discover Eskista and the traditional instruments of the highlands.' },
           { title: 'History & Kings', icon: '👑', desc: 'Trace the lineage from Axum to the Solomonic dynasty.' }
         ].map((item, i) => (
-<<<<<<< HEAD
           <div key={i} className="bg-stone-50 p-8 rounded-[2rem] border border-stone-200 shadow-sm hover:shadow-xl transition-all cursor-pointer group">
-=======
-          <div key={i} className="bg-stone-900 p-8 rounded-[2rem] border border-stone-800 shadow-sm hover:shadow-xl transition-all cursor-pointer group">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
             <div className="text-4xl mb-4 group-hover:scale-125 transition-transform duration-500">{item.icon}</div>
             <h4 className="font-black text-stone-100 mb-2">{item.title}</h4>
             <p className="text-stone-400 text-xs font-medium leading-relaxed">{item.desc}</p>

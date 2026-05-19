@@ -407,11 +407,7 @@ const CulturalMap: React.FC = () => {
   const renderDetailCard = (item: DetailItem, type: string) => (
     <div 
       onClick={() => setSelectedDetail({ ...item, category: item.category || type })}
-<<<<<<< HEAD
       className="bg-stone-50 border border-stone-200 p-6 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col md:flex-row md:items-center gap-6"
-=======
-      className="bg-stone-900 border border-stone-800 p-6 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col md:flex-row md:items-center gap-6"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
     >
        <div className="flex-1">
          <div className="flex items-center gap-3 mb-2">
@@ -423,11 +419,7 @@ const CulturalMap: React.FC = () => {
          <p className="text-sm font-medium text-stone-400 leading-relaxed line-clamp-2">{item.description}</p>
        </div>
        <div className="md:w-48 text-right">
-<<<<<<< HEAD
           <span className="inline-block text-center bg-stone-100 group-hover:bg-amber-50 border border-stone-100 group-hover:border-amber-200 text-stone-600 group-hover:text-amber-700 transition-colors text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl">
-=======
-          <span className="inline-block text-center bg-stone-950 group-hover:bg-amber-900/20 border border-stone-800 group-hover:border-amber-200 text-stone-300 group-hover:text-amber-700 transition-colors text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
             View Detail &rarr;
           </span>
        </div>
@@ -454,11 +446,7 @@ const CulturalMap: React.FC = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700 relative bg-stone-100">
-=======
-    <div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700 relative bg-stone-950">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
       
       <AnimatePresence>
         {selectedDetail && (
@@ -474,11 +462,7 @@ const CulturalMap: React.FC = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-<<<<<<< HEAD
               className="bg-stone-50 rounded-[3rem] p-10 md:p-14 max-w-2xl w-full shadow-2xl relative border border-stone-200 overflow-hidden"
-=======
-              className="bg-stone-900 rounded-[3rem] p-10 md:p-14 max-w-2xl w-full shadow-2xl relative border border-stone-800 overflow-hidden"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
             >
               <button 
                 onClick={() => setSelectedDetail(null)}
@@ -498,11 +482,7 @@ const CulturalMap: React.FC = () => {
                 
                 <div className="w-20 h-1.5 bg-amber-900/200 rounded-full mb-8"></div>
                 
-<<<<<<< HEAD
                 <p className="text-lg text-stone-600 font-medium leading-relaxed bg-stone-100 p-8 rounded-[2rem] border border-stone-100">
-=======
-                <p className="text-lg text-stone-300 font-medium leading-relaxed bg-stone-950 p-8 rounded-[2rem] border border-stone-800">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                   {selectedDetail.description}
                 </p>
 
@@ -519,21 +499,13 @@ const CulturalMap: React.FC = () => {
 
       <div className="grid xl:grid-cols-12 gap-8 items-start">
         
-<<<<<<< HEAD
         <div className="xl:col-span-5 bg-stone-50 rounded-[3rem] border border-stone-200 shadow-2xl relative sticky top-28 h-[85vh] overflow-hidden flex flex-col">
-=======
-        <div className="xl:col-span-5 bg-stone-900 rounded-[3rem] border border-stone-800 shadow-2xl relative sticky top-28 h-[85vh] overflow-hidden flex flex-col">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
           <div className="p-8 absolute top-0 left-0 z-[400] w-full flex justify-between items-start pointer-events-none bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm">
             <div>
               <h3 className="text-xl font-black text-stone-100 tracking-tight">Interactive Map</h3>
               <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mt-1">Select a Region</p>
             </div>
-<<<<<<< HEAD
             <div className="flex items-center gap-2 bg-stone-50 px-3 py-1.5 rounded-full shadow-sm border border-stone-200">
-=======
-            <div className="flex items-center gap-2 bg-stone-900 px-3 py-1.5 rounded-full shadow-sm border border-stone-800">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="text-[10px] font-black text-stone-300 uppercase tracking-widest">GPS Active</span>
             </div>
@@ -567,11 +539,7 @@ const CulturalMap: React.FC = () => {
                    onEachFeature={(feature, layer) => {
                      const regionId = REGION_NAME_MAP[feature?.properties?.name || ''];
                      if (regionId) {
-<<<<<<< HEAD
                        layer.bindTooltip(`<div class="font-black text-xs uppercase tracking-widest">${REGIONS_DATA[regionId].name}</div>`, { sticky: true, className: 'bg-stone-50 border-none shadow-xl rounded-xl px-3 py-1' });
-=======
-                       layer.bindTooltip(`<div class="font-black text-xs uppercase tracking-widest">${REGIONS_DATA[regionId].name}</div>`, { sticky: true, className: 'bg-stone-900 border-none shadow-xl rounded-xl px-3 py-1' });
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                        
                        layer.on({
                          click: () => {
@@ -608,11 +576,7 @@ const CulturalMap: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-<<<<<<< HEAD
               className="bg-stone-50 rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden"
-=======
-              className="bg-stone-900 rounded-[3rem] border border-stone-800 shadow-2xl overflow-hidden"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
             >
               <div className="h-72 relative flex items-end p-10">
                  <div className="absolute inset-0 bg-stone-900">
@@ -634,11 +598,7 @@ const CulturalMap: React.FC = () => {
                  </div>
               </div>
 
-<<<<<<< HEAD
               <div className="flex overflow-x-auto border-b border-stone-100 px-6 pt-2 bg-stone-100 custom-scrollbar">
-=======
-              <div className="flex overflow-x-auto border-b border-stone-800 px-6 pt-2 bg-stone-950 custom-scrollbar">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                  {[
                    { id: 'overview', label: 'Overview' },
                    { id: 'heritages', label: 'All Heritages' },
@@ -659,29 +619,17 @@ const CulturalMap: React.FC = () => {
                 
                 {activeTab === 'overview' && (
                   <div className="animate-in fade-in duration-500 space-y-8">
-<<<<<<< HEAD
                      <p className="text-lg text-stone-600 font-medium leading-relaxed bg-stone-100 p-6 rounded-[2rem] border border-stone-100">{activeData.summary}</p>
                      
                      <div className="grid grid-cols-2 gap-6">
                        <div className="bg-stone-50 rounded-[2rem] p-6 border border-stone-100 shadow-sm flex items-center gap-4">
                          <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">🏛️</div>
-=======
-                     <p className="text-lg text-stone-300 font-medium leading-relaxed bg-stone-950 p-6 rounded-[2rem] border border-stone-800">{activeData.summary}</p>
-                     
-                     <div className="grid grid-cols-2 gap-6">
-                       <div className="bg-stone-900 rounded-[2rem] p-6 border border-stone-800 shadow-sm flex items-center gap-4">
-                         <div className="w-12 h-12 bg-amber-900/40 rounded-xl flex items-center justify-center text-2xl">🏛️</div>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                          <div>
                            <h4 className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1">Capital City</h4>
                            <p className="text-lg font-black text-stone-100 leading-none">{activeData.capital}</p>
                          </div>
                        </div>
-<<<<<<< HEAD
                        <div className="bg-stone-50 rounded-[2rem] p-6 border border-stone-100 shadow-sm flex items-center gap-4">
-=======
-                       <div className="bg-stone-900 rounded-[2rem] p-6 border border-stone-800 shadow-sm flex items-center gap-4">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                          <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">🗣️</div>
                          <div>
                            <h4 className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1">Languages</h4>

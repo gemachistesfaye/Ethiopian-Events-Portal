@@ -657,11 +657,7 @@ const HistoricalTimeline: React.FC = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen bg-stone-100 p-6 lg:p-10 font-sans relative overflow-hidden">
-=======
-    <div className="min-h-screen bg-stone-950 p-6 lg:p-10 font-sans relative overflow-hidden">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
       
       {/* Inject custom styled animations inside a style tag */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -714,13 +710,8 @@ const HistoricalTimeline: React.FC = () => {
         {/* Header - Holographic Style */}
         <header className="mb-16 text-center pt-8">
           <div className="inline-block relative">
-<<<<<<< HEAD
              <span className="absolute -inset-1 bg-amber-500/20 blur-lg rounded-full"></span>
              <span className="relative bg-stone-50 border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
-=======
-             <span className="absolute -inset-1 bg-amber-900/200/20 blur-lg rounded-full"></span>
-             <span className="relative bg-stone-900 border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                Animus Archive System
              </span>
           </div>
@@ -740,13 +731,8 @@ const HistoricalTimeline: React.FC = () => {
               onClick={() => setFilter(c)}
               className={`relative overflow-hidden px-6 py-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all duration-300 group shadow-sm ${
                 filter === c 
-<<<<<<< HEAD
                   ? 'bg-amber-500 text-white shadow-[0_4px_15px_rgba(245,158,11,0.3)] border border-amber-400' 
                   : 'bg-stone-50 border border-stone-200 text-stone-500 hover:border-amber-300 hover:text-amber-600'
-=======
-                  ? 'bg-amber-900/200 text-white shadow-[0_4px_15px_rgba(245,158,11,0.3)] border border-amber-400' 
-                  : 'bg-stone-900 border border-stone-800 text-stone-400 hover:border-amber-300 hover:text-amber-600'
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               }`}
             >
               <span className="relative z-10">{c}</span>
@@ -778,11 +764,7 @@ const HistoricalTimeline: React.FC = () => {
                 {/* Content Card (Gaming Style - Light) */}
                 <div className="w-full md:w-[42%] ml-16 md:ml-0 group perspective-1000">
                   <div 
-<<<<<<< HEAD
                     className="relative bg-stone-50/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-200 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
-=======
-                    className="relative bg-stone-950/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-800 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                     onClick={() => setSelectedEvent(event)}
                   >
                     {/* Corner accents */}
@@ -792,11 +774,7 @@ const HistoricalTimeline: React.FC = () => {
                     <div className="flex items-center gap-4 mb-4">
                       <span className="text-sm font-black text-amber-600">{event.year}</span>
                       <div className="h-px flex-1 bg-gradient-to-r from-amber-200 to-transparent"></div>
-<<<<<<< HEAD
                       <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-100 border border-stone-200 text-stone-500 px-3 py-1.5 rounded-sm">
-=======
-                      <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-950 border border-stone-800 text-stone-400 px-3 py-1.5 rounded-sm">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                         {event.category}
                       </span>
                     </div>

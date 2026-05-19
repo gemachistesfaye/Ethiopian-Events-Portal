@@ -48,37 +48,22 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
       <div className="grid lg:grid-cols-12 gap-8">
         {/* Settings Sidebar */}
         <div className="lg:col-span-3">
-<<<<<<< HEAD
-           <div className="bg-stone-50 rounded-3xl border border-stone-200 shadow-sm p-4 sticky top-28 space-y-2">
-             <button 
-               onClick={() => setActiveSettingsTab('profile')}
-               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'profile' ? 'bg-stone-900 text-white shadow-md' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
-=======
            <div className="bg-stone-950 rounded-3xl border border-stone-800 shadow-sm p-4 sticky top-28 space-y-2">
              <button 
                onClick={() => setActiveSettingsTab('profile')}
                className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'profile' ? 'bg-stone-950 text-white shadow-md' : 'text-stone-400 hover:bg-stone-950 hover:text-stone-100'}`}
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
-             >
+            >
                <span className="text-lg">👤</span> Profile
              </button>
              <button 
                onClick={() => setActiveSettingsTab('preferences')}
-<<<<<<< HEAD
-               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'preferences' ? 'bg-stone-900 text-white shadow-md' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
-=======
                className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'preferences' ? 'bg-stone-950 text-white shadow-md' : 'text-stone-400 hover:bg-stone-950 hover:text-stone-100'}`}
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
              >
                <span className="text-lg">⚙️</span> Preferences
              </button>
              <button 
                onClick={() => setActiveSettingsTab('security')}
-<<<<<<< HEAD
-               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'security' ? 'bg-stone-900 text-white shadow-md' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
-=======
                className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'security' ? 'bg-stone-950 text-white shadow-md' : 'text-stone-400 hover:bg-stone-950 hover:text-stone-100'}`}
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
              >
                <span className="text-lg">🛡️</span> Security
              </button>
@@ -98,27 +83,18 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
         <div className="lg:col-span-9 space-y-8">
           
           {activeSettingsTab === 'profile' && (
-<<<<<<< HEAD
-            <div className="bg-stone-50 rounded-[2.5rem] border border-stone-200 shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
-=======
             <div className="bg-stone-950 rounded-[2.5rem] border border-stone-800 shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-300">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               {/* Profile Cover */}
               <div className="h-40 bg-gradient-to-r from-stone-900 to-amber-900 relative">
                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
               </div>
               
               <div className="px-10 pb-10">
-                <div className="flex flex-col md:flex-row items-start md:items-end gap-6 -mt-16 mb-8 relative z-10">
-<<<<<<< HEAD
-                   <div className="w-32 h-32 bg-stone-50 rounded-3xl p-2 shadow-2xl">
-                      <div className="w-full h-full bg-amber-100 rounded-2xl flex items-center justify-center text-5xl">
-=======
+                 <div className="flex flex-col md:flex-row items-start md:items-end gap-6 -mt-16 mb-8 relative z-10">
                    <div className="w-32 h-32 bg-stone-950 rounded-3xl p-2 shadow-2xl">
-                      <div className="w-full h-full bg-amber-900/40 rounded-2xl flex items-center justify-center text-5xl">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
-                         🦅
-                      </div>
+                     <div className="w-full h-full bg-amber-900/40 rounded-2xl flex items-center justify-center text-5xl">
+                       🦅
+                     </div>
                    </div>
                    <div className="flex-1">
                      <div className="flex items-center gap-3 mb-1">
@@ -138,11 +114,7 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
                         value={newEmail}
                         onChange={(e) => setNewEmail(e.target.value)}
                         placeholder={user.email}
-<<<<<<< HEAD
-                        className="flex-1 h-14 bg-stone-100 border border-stone-200 rounded-xl px-5 text-sm font-medium focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
-=======
                         className="flex-1 h-14 bg-stone-950 border border-stone-800 rounded-xl px-5 text-sm font-medium focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                         required
                       />
                       <button 
@@ -161,13 +133,8 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
           )}
 
           {activeSettingsTab === 'preferences' && (
-<<<<<<< HEAD
-            <div className="bg-stone-50 rounded-[2.5rem] border border-stone-200 shadow-xl p-10 animate-in fade-in zoom-in-95 duration-300">
-              <h3 className="text-2xl font-black text-stone-900 mb-8">Platform Preferences</h3>
-=======
             <div className="bg-stone-950 rounded-[2.5rem] border border-stone-800 shadow-xl p-10 animate-in fade-in zoom-in-95 duration-300">
               <h3 className="text-2xl font-black text-stone-100 mb-8">Platform Preferences</h3>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               
               <div className="space-y-8">
                 <div className="flex items-center justify-between border-b border-stone-800 pb-8">
@@ -175,13 +142,8 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
                      <h4 className="font-bold text-stone-100 mb-1">Email Notifications</h4>
                      <p className="text-sm text-stone-400 font-medium">Receive alerts for upcoming Ethiopian holidays and events.</p>
                    </div>
-<<<<<<< HEAD
-                   <div className="w-14 h-8 bg-amber-500 rounded-full relative cursor-pointer shadow-inner">
-                     <div className="w-6 h-6 bg-stone-50 rounded-full absolute right-1 top-1 shadow-sm"></div>
-=======
                    <div className="w-14 h-8 bg-amber-900/200 rounded-full relative cursor-pointer shadow-inner">
                      <div className="w-6 h-6 bg-stone-950 rounded-full absolute right-1 top-1 shadow-sm"></div>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                    </div>
                 </div>
 
@@ -190,13 +152,8 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
                      <h4 className="font-bold text-stone-100 mb-1">AI Voice Autoplay</h4>
                      <p className="text-sm text-stone-400 font-medium">Automatically play Amharic audio pronunciations.</p>
                    </div>
-<<<<<<< HEAD
-                   <div className="w-14 h-8 bg-stone-200 rounded-full relative cursor-pointer shadow-inner">
-                     <div className="w-6 h-6 bg-stone-50 rounded-full absolute left-1 top-1 shadow-sm"></div>
-=======
                    <div className="w-14 h-8 bg-stone-700 rounded-full relative cursor-pointer shadow-inner">
                      <div className="w-6 h-6 bg-stone-950 rounded-full absolute left-1 top-1 shadow-sm"></div>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                    </div>
                 </div>
 
@@ -205,11 +162,7 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
                      <h4 className="font-bold text-stone-100 mb-1">Default Calendar View</h4>
                      <p className="text-sm text-stone-400 font-medium">Choose your primary date system.</p>
                    </div>
-<<<<<<< HEAD
-                   <select className="bg-stone-100 border border-stone-200 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-amber-500 cursor-pointer">
-=======
                    <select className="bg-stone-950 border border-stone-800 rounded-xl px-4 py-3 text-sm font-bold focus:outline-none focus:border-amber-500 cursor-pointer">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                       <option>Gregorian First</option>
                       <option>Ethiopian First</option>
                    </select>
@@ -220,15 +173,9 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
 
           {activeSettingsTab === 'security' && (
             <div className="space-y-8 animate-in fade-in zoom-in-95 duration-300">
-<<<<<<< HEAD
-              <div className="bg-stone-50 rounded-[2.5rem] border border-stone-200 shadow-xl p-10">
-                <h3 className="text-2xl font-black text-stone-900 mb-2">Security Hub</h3>
-                <p className="text-sm text-stone-500 font-medium mb-8">Manage your password and authentication methods.</p>
-=======
               <div className="bg-stone-950 rounded-[2.5rem] border border-stone-800 shadow-xl p-10">
                 <h3 className="text-2xl font-black text-stone-100 mb-2">Security Hub</h3>
                 <p className="text-sm text-stone-400 font-medium mb-8">Manage your password and authentication methods.</p>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                 
                 <button className="h-14 px-8 bg-stone-800 text-stone-100 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-700 transition-colors w-full sm:w-auto shadow-sm">
                   Change Password
@@ -294,11 +241,7 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-<<<<<<< HEAD
-            <button onClick={() => onNavigate('vault')} className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
-=======
             <button onClick={() => onNavigate('vault')} className="bg-stone-950 p-8 rounded-[2.5rem] border border-stone-800 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-150 transition-transform duration-700">
                  <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               </div>
@@ -322,11 +265,7 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
               <div className="mt-8 text-xs font-black uppercase tracking-widest text-emerald-400 group-hover:translate-x-2 transition-transform">Start Chat →</div>
             </button>
             
-<<<<<<< HEAD
-            <button onClick={() => onNavigate('map')} className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-blue-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
-=======
             <button onClick={() => onNavigate('map')} className="bg-stone-950 p-8 rounded-[2.5rem] border border-stone-800 shadow-xl hover:border-blue-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
               </div>
@@ -334,11 +273,7 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
               <p className="text-xs text-stone-400 leading-relaxed font-medium relative z-10 flex-1">Interactive map of heritage sites.</p>
             </button>
             
-<<<<<<< HEAD
-            <button onClick={() => onNavigate('culture')} className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-rose-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
-=======
             <button onClick={() => onNavigate('culture')} className="bg-stone-950 p-8 rounded-[2.5rem] border border-stone-800 shadow-xl hover:border-rose-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
               </div>
@@ -362,11 +297,7 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
               </button>
            </div>
 
-<<<<<<< HEAD
-           <div className="bg-stone-50 rounded-[2.5rem] border border-stone-200 shadow-xl p-8">
-=======
            <div className="bg-stone-950 rounded-[2.5rem] border border-stone-800 shadow-xl p-8">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               <div className="flex items-center justify-between mb-8">
                  <h4 className="text-lg font-black text-stone-100">Recent Activity</h4>
                  <button onClick={() => onNavigate('reminders')} className="text-[10px] font-black uppercase tracking-widest text-amber-600 hover:text-stone-100">View All</button>
@@ -435,15 +366,9 @@ const UpdatePassword: React.FC<{ onComplete: () => void }> = ({ onComplete }) =>
   };
 
   return (
-<<<<<<< HEAD
-    <div className="text-center py-10 bg-stone-50 p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10">
-      <div className="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🔑</div>
-      <h2 className="text-xl font-black mb-6 text-stone-900">Set New Password</h2>
-=======
     <div className="text-center py-10 bg-stone-950 p-10 rounded-[2.5rem] border border-stone-800 shadow-xl max-w-md mx-auto mt-10">
       <div className="w-20 h-20 bg-stone-800 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🔑</div>
       <h2 className="text-xl font-black mb-6 text-stone-100">Set New Password</h2>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
       
       <form onSubmit={handleUpdatePassword} className="space-y-4">
         <div>
@@ -452,11 +377,7 @@ const UpdatePassword: React.FC<{ onComplete: () => void }> = ({ onComplete }) =>
             type="password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-<<<<<<< HEAD
-            className="w-full h-12 bg-stone-100 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-50 transition-all"
-=======
             className="w-full h-12 bg-stone-950 border border-stone-800 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-950 transition-all"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
             required
           />
         </div>
@@ -466,11 +387,7 @@ const UpdatePassword: React.FC<{ onComplete: () => void }> = ({ onComplete }) =>
             type="password" 
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-<<<<<<< HEAD
-            className="w-full h-12 bg-stone-100 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-50 transition-all"
-=======
             className="w-full h-12 bg-stone-950 border border-stone-800 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-950 transition-all"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
             required
           />
         </div>
@@ -584,15 +501,9 @@ const App: React.FC = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-stone-100 selection:bg-amber-200 flex flex-col pb-20 md:pb-0 font-sans">
-      {/* Dynamic Header */}
-      <header className="bg-stone-50/80 backdrop-blur-xl border-b border-stone-200 sticky top-0 z-40 shadow-sm transition-all">
-=======
     <div className="min-h-screen bg-stone-950 selection:bg-amber-200 flex flex-col pb-20 md:pb-0 font-sans">
       {/* Dynamic Header */}
       <header className="bg-stone-950/80 backdrop-blur-xl border-b border-stone-800 sticky top-0 z-40 shadow-sm transition-all">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 bg-stone-950 rounded-2xl flex items-center justify-center text-amber-500 font-black text-2xl shadow-2xl transition-all hover:rotate-6 hover:scale-110 cursor-pointer">
@@ -620,11 +531,7 @@ const App: React.FC = () => {
               <button 
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-<<<<<<< HEAD
-                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 ${activeTab === tab.id ? 'bg-stone-50 shadow-xl text-stone-900 border border-stone-100 scale-[1.02]' : 'text-stone-400 hover:text-stone-600'}`}
-=======
                 className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 ${activeTab === tab.id ? 'bg-stone-950 shadow-xl text-stone-100 border border-stone-800 scale-[1.02]' : 'text-stone-400 hover:text-stone-200'}`}
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               >
                 <span className="text-base">{tab.icon}</span>
                 {tab.id === 'account' ? 'Login' : tab.label}
@@ -658,11 +565,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Mobile Nav */}
-<<<<<<< HEAD
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-stone-50 border-t border-stone-200 z-50 px-6 h-20 flex items-center gap-8 overflow-x-auto shadow-2xl pb-2 pt-2">
-=======
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-stone-950 border-t border-stone-800 z-50 px-6 h-20 flex items-center gap-8 overflow-x-auto shadow-2xl pb-2 pt-2">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
         {[
           { id: 'home', label: 'Home', icon: '🏛️' },
           ...(user ? [
@@ -705,14 +608,8 @@ const App: React.FC = () => {
                      <span className="bg-stone-950 text-amber-500 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg">The Explorer</span>
                      <h2 className="text-6xl font-black text-stone-100 tracking-tighter leading-none">Heritage <span className="text-amber-600">Portal</span></h2>
                    </div>
-                   
-<<<<<<< HEAD
-                   <div className="bg-stone-50 p-6 rounded-3xl border border-stone-200 shadow-xl flex items-center gap-6">
-                      <div className="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center font-black text-2xl text-stone-900 shadow-xl">{todayInfo.eth.day}</div>
-=======
                    <div className="bg-stone-950 p-6 rounded-3xl border border-stone-800 shadow-xl flex items-center gap-6">
-                      <div className="w-12 h-12 bg-amber-900/200 rounded-2xl flex items-center justify-center font-black text-2xl text-stone-100 shadow-xl">{todayInfo.eth.day}</div>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
+                     <div className="w-12 h-12 bg-amber-900/200 rounded-2xl flex items-center justify-center font-black text-2xl text-stone-100 shadow-xl">{todayInfo.eth.day}</div>
                       <div>
                         <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest leading-none mb-1">Ethiopian Date</p>
                         <p className="text-stone-100 font-black text-base">{todayInfo.ethAmharic}</p>
@@ -727,22 +624,14 @@ const App: React.FC = () => {
                       placeholder="Search events, history, or locations..."
                       value={searchQuery}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-<<<<<<< HEAD
-                      className="w-full h-16 bg-stone-50 border-2 border-stone-100 rounded-[1.5rem] px-14 text-sm font-bold focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-sm"
-=======
                       className="w-full h-16 bg-stone-950 border-2 border-stone-800 rounded-[1.5rem] px-14 text-sm font-bold focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-sm"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                     />
                     <svg className="w-6 h-6 absolute left-6 top-5 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                   </div>
                   <select 
                     value={categoryFilter}
                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setCategoryFilter(e.target.value as any)}
-<<<<<<< HEAD
-                    className="h-16 bg-stone-50 border-2 border-stone-100 rounded-[1.5rem] px-6 text-xs font-black uppercase tracking-widest focus:border-amber-500 focus:outline-none shadow-sm cursor-pointer"
-=======
                     className="h-16 bg-stone-950 border-2 border-stone-800 rounded-[1.5rem] px-6 text-xs font-black uppercase tracking-widest focus:border-amber-500 focus:outline-none shadow-sm cursor-pointer"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                   >
                     <option value="All">All Categories</option>
                     <option value="Religious">Religious</option>
@@ -760,13 +649,8 @@ const App: React.FC = () => {
 
             <div className="lg:col-span-4">
               <div className="sticky top-28 space-y-8">
-<<<<<<< HEAD
-                <div className="bg-stone-50 p-10 rounded-[3rem] border border-stone-200 shadow-2xl relative overflow-hidden group">
-                  <div className="absolute top-0 left-0 w-2 h-full bg-stone-900 group-hover:bg-amber-500 transition-colors"></div>
-=======
                 <div className="bg-stone-950 p-10 rounded-[3rem] border border-stone-800 shadow-2xl relative overflow-hidden group">
                   <div className="absolute top-0 left-0 w-2 h-full bg-stone-950 group-hover:bg-amber-900/200 transition-colors"></div>
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                   
                   {selectedDay ? (
                     <div className="animate-in fade-in slide-in-from-right-4 duration-500">
@@ -782,11 +666,7 @@ const App: React.FC = () => {
                           selectedDay.events.map((event: EthiopianEvent) => (
                             <div 
                               key={event.id} 
-<<<<<<< HEAD
-                              className="group bg-stone-100 p-6 rounded-[2rem] border border-stone-100 hover:border-amber-400 hover:bg-stone-50 transition-all cursor-pointer shadow-sm hover:shadow-xl"
-=======
                               className="group bg-stone-950 p-6 rounded-[2rem] border border-stone-800 hover:border-amber-400 hover:bg-stone-950 transition-all cursor-pointer shadow-sm hover:shadow-xl"
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                               onClick={() => setSelectedEvent(event)}
                             >
                               <div className="relative h-44 rounded-[1.5rem] overflow-hidden mb-5">
@@ -799,13 +679,8 @@ const App: React.FC = () => {
                             </div>
                           ))
                         ) : (
-<<<<<<< HEAD
-                          <div className="py-24 text-center bg-stone-100/50 rounded-[2.5rem] border-2 border-dashed border-stone-100">
-                             <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-stone-100">
-=======
                           <div className="py-24 text-center bg-stone-950/50 rounded-[2.5rem] border-2 border-dashed border-stone-800">
                              <div className="w-16 h-16 bg-stone-950 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-stone-800">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                                <svg className="w-8 h-8 text-stone-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                              </div>
                              <p className="text-stone-300 font-black text-[10px] uppercase tracking-widest">No Heritage Records</p>
@@ -824,11 +699,7 @@ const App: React.FC = () => {
                     </div>
                   ) : (
                     <div className="py-32 text-center">
-<<<<<<< HEAD
-                      <div className="w-24 h-24 bg-stone-100 rounded-[2rem] flex items-center justify-center mx-auto mb-8 border border-stone-100 rotate-6 transition-transform shadow-sm">
-=======
                       <div className="w-24 h-24 bg-stone-950 rounded-[2rem] flex items-center justify-center mx-auto mb-8 border border-stone-800 rotate-6 transition-transform shadow-sm">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                         <svg className="w-12 h-12 text-stone-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                       </div>
                       <p className="text-stone-300 font-black text-[10px] uppercase tracking-widest max-w-[140px] mx-auto leading-relaxed">Select a portal date to explore history</p>
@@ -912,11 +783,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-<<<<<<< HEAD
-    <footer className="bg-stone-50 border-t border-stone-100 mt-12 py-6 px-6">
-=======
     <footer className="bg-stone-950 border-t border-stone-800 mt-12 py-6 px-6">
->>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6 items-center">
         
         {/* Left Column: About Website */}
