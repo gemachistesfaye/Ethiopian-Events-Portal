@@ -411,19 +411,19 @@ const CulturalMap: React.FC = () => {
   const renderDetailCard = (item: DetailItem, type: string) => (
     <div 
       onClick={() => setSelectedDetail({ ...item, category: item.category || type })}
-      className="bg-stone-50 border border-stone-200 p-6 rounded-[2rem] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col md:flex-row md:items-center gap-6"
+      className="bg-stone-50 border border-stone-200 p-4 rounded-[1.25rem] shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer group flex flex-col md:flex-row md:items-center gap-4"
     >
        <div className="flex-1">
-         <div className="flex items-center gap-3 mb-2">
-           <h4 className="text-lg font-black text-stone-900 group-hover:text-amber-600 transition-colors">{item.name}</h4>
+         <div className="flex items-center gap-2 mb-1">
+           <h4 className="text-base font-black text-stone-900 group-hover:text-amber-600 transition-colors">{item.name}</h4>
            {item.category && item.category === 'UNESCO World Heritage' && (
-             <span className="bg-amber-900/40 text-amber-800 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md">UNESCO</span>
+             <span className="bg-amber-950/10 text-amber-800 text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded-md">UNESCO</span>
            )}
          </div>
-         <p className="text-sm font-medium text-stone-500 leading-relaxed line-clamp-2">{item.description}</p>
+         <p className="text-xs font-medium text-stone-500 leading-relaxed line-clamp-2">{item.description}</p>
        </div>
-       <div className="md:w-48 text-right">
-          <span className="inline-block text-center bg-stone-100 group-hover:bg-amber-50 border border-stone-100 group-hover:border-amber-200 text-stone-600 group-hover:text-amber-700 transition-colors text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-xl">
+       <div className="md:w-32 text-right">
+          <span className="inline-block text-center bg-stone-100 group-hover:bg-amber-50 border border-stone-100 group-hover:border-amber-200 text-stone-600 group-hover:text-amber-700 transition-colors text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg">
             View Detail &rarr;
           </span>
        </div>
@@ -501,21 +501,21 @@ const CulturalMap: React.FC = () => {
         )}
       </AnimatePresence>
 
-      <div className="grid xl:grid-cols-12 gap-8 items-start">
+      <div className="grid xl:grid-cols-12 gap-6 items-start">
         
-        <div className="xl:col-span-5 bg-stone-50 rounded-[3rem] border border-stone-200 shadow-2xl relative sticky top-28 h-[85vh] overflow-hidden flex flex-col">
-          <div className="p-8 absolute top-0 left-0 z-[400] w-full flex justify-between items-start pointer-events-none bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm">
+        <div className="xl:col-span-5 bg-stone-50 rounded-[2rem] border border-stone-200 shadow-xl relative sticky top-24 h-[65vh] max-h-[550px] overflow-hidden flex flex-col">
+          <div className="p-5 absolute top-0 left-0 z-[400] w-full flex justify-between items-start pointer-events-none bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm">
             <div>
-              <h3 className="text-xl font-black text-stone-900 tracking-tight">Interactive Map</h3>
-              <p className="text-xs font-bold text-stone-500 uppercase tracking-widest mt-1">Select a Region</p>
+              <h3 className="text-lg font-black text-stone-900 tracking-tight">Interactive Map</h3>
+              <p className="text-[10px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">Select a Region</p>
             </div>
-            <div className="flex items-center gap-2 bg-stone-50 px-3 py-1.5 rounded-full shadow-sm border border-stone-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-[10px] font-black text-stone-700 uppercase tracking-widest">GPS Active</span>
+            <div className="flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 rounded-full shadow-sm border border-stone-200">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-[9px] font-black text-stone-700 uppercase tracking-widest">GPS Active</span>
             </div>
           </div>
           
-          <div className="flex-1 w-full h-full relative z-0 min-h-[500px]">
+          <div className="flex-1 w-full h-full relative z-0">
              <MapContainerAny center={[9.145, 40.489]} zoom={5} scrollWheelZoom={true} style={{ height: '100%', width: '100%', zIndex: 0 }}>
                <TileLayerAny
                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -580,9 +580,9 @@ const CulturalMap: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="bg-stone-50 rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden"
+              className="bg-stone-50 rounded-[2rem] border border-stone-200 shadow-xl overflow-hidden"
             >
-              <div className="h-72 relative flex items-end p-10">
+              <div className="h-48 relative flex items-end p-6">
                  <div className="absolute inset-0 bg-stone-50">
                    <img src={activeData.images[0]} alt={activeData.name} className="w-full h-full object-cover opacity-50 mix-blend-overlay" />
                    <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/60 to-transparent"></div>
@@ -590,19 +590,19 @@ const CulturalMap: React.FC = () => {
                  
                  <div className="relative z-10 w-full flex justify-between items-end">
                    <div>
-                     <span className="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg backdrop-blur-md border border-white/20" style={{ backgroundColor: activeData.color, color: '#fff' }}>
+                     <span className="px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-[0.2em] mb-2 inline-block shadow-lg backdrop-blur-md border border-white/20" style={{ backgroundColor: activeData.color, color: '#fff' }}>
                        Territory Profile
                      </span>
-                     <h2 className="text-5xl md:text-6xl font-black text-stone-900 tracking-tighter leading-none shadow-sm">{activeData.name}</h2>
+                     <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tighter leading-none shadow-sm">{activeData.name}</h2>
                    </div>
                    <div className="hidden md:block text-right">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-stone-900/70 mb-1">Population</p>
-                      <p className="text-2xl font-black text-stone-900">{activeData.population}</p>
+                      <p className="text-[9px] font-black uppercase tracking-widest text-stone-900/70 mb-0.5">Population</p>
+                      <p className="text-xl font-black text-stone-900">{activeData.population}</p>
                    </div>
                  </div>
               </div>
 
-              <div className="flex overflow-x-auto border-b border-stone-100 px-6 pt-2 bg-stone-100 custom-scrollbar">
+              <div className="flex overflow-x-auto border-b border-stone-100 px-4 pt-1 bg-stone-100 custom-scrollbar">
                  {[
                    { id: 'overview', label: 'Overview' },
                    { id: 'heritages', label: 'All Heritages' },
@@ -612,42 +612,42 @@ const CulturalMap: React.FC = () => {
                    <button
                      key={tab.id}
                      onClick={() => setActiveTab(tab.id as any)}
-                     className={`px-6 py-5 text-xs font-black uppercase tracking-widest border-b-4 transition-colors whitespace-nowrap \${activeTab === tab.id ? 'border-stone-200 text-stone-900' : 'border-transparent text-stone-500 hover:text-stone-700'}`}
+                     className={`px-4 py-3 text-xs font-black uppercase tracking-widest border-b-4 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-stone-200 text-stone-900' : 'border-transparent text-stone-500 hover:text-stone-700'}`}
                    >
                      {tab.label}
                    </button>
                  ))}
               </div>
 
-              <div className="p-8 md:p-10 min-h-[500px]">
+              <div className="p-6 md:p-8 min-h-0">
                 
                 {activeTab === 'overview' && (
-                  <div className="animate-in fade-in duration-500 space-y-8">
-                     <p className="text-lg text-stone-600 font-medium leading-relaxed bg-stone-100 p-6 rounded-[2rem] border border-stone-100">{activeData.summary}</p>
+                  <div className="animate-in fade-in duration-500 space-y-4">
+                     <p className="text-sm text-stone-600 font-medium leading-relaxed bg-stone-100 p-4 rounded-[1.5rem] border border-stone-100">{activeData.summary}</p>
                      
-                     <div className="grid grid-cols-2 gap-6">
-                       <div className="bg-stone-50 rounded-[2rem] p-6 border border-stone-100 shadow-sm flex items-center gap-4">
-                         <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">🏛️</div>
+                     <div className="grid grid-cols-2 gap-4">
+                       <div className="bg-stone-50 rounded-[1.5rem] p-4 border border-stone-100 shadow-sm flex items-center gap-3">
+                         <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-xl">🏛️</div>
                          <div>
-                           <h4 className="text-[10px] font-black uppercase tracking-widest text-stone-500 mb-1">Capital City</h4>
-                           <p className="text-lg font-black text-stone-900 leading-none">{activeData.capital}</p>
+                           <h4 className="text-[9px] font-black uppercase tracking-widest text-stone-500 mb-0.5">Capital City</h4>
+                           <p className="text-base font-black text-stone-900 leading-none">{activeData.capital}</p>
                          </div>
                        </div>
-                       <div className="bg-stone-50 rounded-[2rem] p-6 border border-stone-100 shadow-sm flex items-center gap-4">
-                         <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">🗣️</div>
+                       <div className="bg-stone-50 rounded-[1.5rem] p-4 border border-stone-100 shadow-sm flex items-center gap-3">
+                         <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-xl">🗣️</div>
                          <div>
-                           <h4 className="text-[10px] font-black uppercase tracking-widest text-stone-500 mb-1">Languages</h4>
-                           <p className="text-sm font-black text-stone-900 leading-tight">{activeData.languages.join(', ')}</p>
+                           <h4 className="text-[9px] font-black uppercase tracking-widest text-stone-500 mb-0.5">Languages</h4>
+                           <p className="text-xs font-black text-stone-900 leading-tight">{activeData.languages.join(', ')}</p>
                          </div>
                        </div>
                      </div>
 
-                     <div className="bg-stone-50 rounded-[2rem] p-8 text-stone-900 relative overflow-hidden group shadow-xl">
-                       <div className="absolute top-0 right-0 p-8 opacity-5 transform group-hover:scale-110 transition-transform duration-700">
-                          <svg className="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                     <div className="bg-stone-50 rounded-[1.5rem] p-6 text-stone-900 relative overflow-hidden group shadow-xl border border-stone-100">
+                       <div className="absolute top-0 right-0 p-6 opacity-5 transform group-hover:scale-110 transition-transform duration-700">
+                          <svg className="w-20 h-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
                        </div>
-                       <h4 className="text-xs font-black text-stone-500 uppercase tracking-widest mb-2">Historical Significance</h4>
-                       <p className="text-base font-medium leading-relaxed relative z-10">{activeData.history}</p>
+                       <h4 className="text-[9px] font-black text-stone-500 uppercase tracking-widest mb-1">Historical Significance</h4>
+                       <p className="text-xs font-medium leading-relaxed relative z-10">{activeData.history}</p>
                      </div>
                   </div>
                 )}
