@@ -1,6 +1,7 @@
-import { ChatMessage } from "../types";
+import { ChatMessage, CulturalTrivia } from "../types";
 import { EVENTS_DATA } from "../constants";
 import { TIMELINE_DATA } from "../components/HistoricalTimeline";
+import { getNextTrivia } from "./triviaPool";
 
 
 /* ================================
@@ -70,9 +71,10 @@ async function fetchWithRetry(
 }
 
 /* ================================
-   TRIVIA
+   TRIVIA — uses 100-question shuffled pool from triviaPool.ts
 ================================ */
-export async function generateCulturalTrivia(): Promise<Trivia> {
+
+export async function generateCulturalTrivia(): Promise<CulturalTrivia> {
   try {
     const result = await fetchWithRetry(
       `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${getApiKey()}`,
@@ -108,17 +110,11 @@ Return STRICT JSON:
 
     return JSON.parse(text.replace(/```json|```/g, "").trim());
   } catch {
-    console.warn("⚠️ Using fallback trivia");
-
-    return {
-      question:
-        "Which Ethiopian city is known as the political capital of Africa?",
-      answer: "Addis Ababa",
-      explanation:
-        "Addis Ababa hosts the African Union headquarters and many international organizations."
-    };
+    console.warn("⚠️ Using offline trivia pool (100 questions, shuffled)");
+    return getNextTrivia();
   }
 }
+
 
 /* ================================
    CULTURAL INSIGHT
