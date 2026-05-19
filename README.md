@@ -34,11 +34,11 @@ A secure, client-side reminder system for personal cultural planning:
 
 ## 🛠️ Technical Stack
 
-- **Frontend:** React 19 (ES6 Modules)
-- **Styling:** Tailwind CSS (Modern, mobile-first, luxury aesthetic)
+- **Frontend:** React 19 (JavaScript / ES6 Modules / JSX)
+- **Styling:** Tailwind CSS (Modern, mobile-first, warm 'stone' palette and refined typography)
 - **Intelligence:** Google Gemini 3 Flash & Gemini 2.5 Flash (TTS)
-- **Date Logic:** Custom-built JDN conversion utilities
-- **State Management:** React Hooks (UseMemo, UseEffect, UseState)
+- **Date Logic:** Custom JDN conversion algorithms
+- **State Management:** Native React Hooks (`useMemo`, `useEffect`, `useState`)
 
 ---
 
@@ -46,12 +46,11 @@ A secure, client-side reminder system for personal cultural planning:
 
 ```text
 ethiopian-heritage-portal/
-├── components/          # Modular UI components (Calendar, Chat, Trivia)
+├── components/          # Modular UI components (Calendar, Chat, Trivia) in JS/JSX
 ├── services/            # Gemini API integration and AI logic
 ├── utils/               # Calendar conversion and JDN utilities
-├── constants/           # Heritage data and event definitions
-├── types.ts             # Strict TypeScript definitions
-└── App.tsx              # Main application architecture
+├── constants.js         # Heritage data and event definitions
+└── App.jsx              # Main application entry and architecture
 ```
 
 ---
@@ -66,10 +65,10 @@ ethiopian-heritage-portal/
 
 Contact for collaborations or inquiries:
 
-- **Telegram:** [Connect on Telegram](https://t.me/your_telegram) ✈️
-- **GitHub:** [Explore Code](https://github.com/your_github) 💻
-- **Email:** [Send an Inquiry](mailto:your_email@domain.com) 📧
-- **Phone:** [+251 900 000 000](tel:+251900000000) 📞
+- **Telegram:** [Connect on Telegram](https://t.me/urjiiko1) ✈️
+- **GitHub:** [Explore Code](https://github.com/gemachistesfaye) 💻
+- **Email:** [Send an Inquiry](mailto:gemachistesfaye36@gmail.com) 📧
+- **Phone:** [+251 97 660 1074](tel:+251976601074) 📞
 
 ---
 

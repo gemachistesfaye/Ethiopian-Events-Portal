@@ -11,7 +11,6 @@
   "dependencies": {
     "@google/genai": "^1.41.0",
     "@supabase/supabase-js": "^2.106.0",
-    "@types/topojson-client": "^3.1.5",
     "framer-motion": "^12.39.0",
     "i18next": "^26.2.0",
     "i18next-browser-languagedetector": "^8.2.1",
@@ -23,11 +22,7 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
 }
