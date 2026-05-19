@@ -321,3 +321,40 @@ export async function chatWithHeritageGuide(
 
   return "The guide is temporarily unavailable. Please try again in a moment.";
 }
+
+/* ================================
+   TRANSLATION HELPER
+================================ */
+export async function translateText(
+  text: string,
+  targetLang: 'en' | 'am' | 'om'
+): Promise<string> {
+  if (targetLang === 'en') return text;
+  
+  const langName = targetLang === 'am' ? 'Amharic' : 'Afaan Oromo';
+  try {
+    const result = await fetchWithRetry(
+      `${BASE_URL}/${TEXT_MODEL}:generateContent?key=${getApiKey()}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `Translate this text accurately into ${langName}. Do not add any introduction, explanations, or metadata. Output ONLY the translated text:\n\n${text}`
+                }
+              ]
+            }
+          ]
+        })
+      }
+    );
+
+    return result?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || text;
+  } catch (err) {
+    console.error("Translation error:", err);
+    return text;
+  }
+}

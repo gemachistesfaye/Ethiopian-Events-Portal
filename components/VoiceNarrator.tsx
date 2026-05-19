@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { speakAmharic } from '../services/geminiService';
+import { speakAmharic, translateText } from '../services/geminiService';
 
 interface VoiceNarratorProps {
   text?: string;
@@ -66,14 +66,20 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
 
     setLoading(true);
     try {
+      // Translate the text if the target language is Amharic or Afaan Oromo
+      let textToSpeak = text;
+      if (language !== 'en') {
+        textToSpeak = await translateText(text, language);
+      }
+
       // Prompt engineering based on style
-      let promptText = text;
+      let promptText = textToSpeak;
       if (style === 'storyteller') {
-        promptText = `[Speak as a dramatic storyteller] ${text}`;
+        promptText = `[Speak as a dramatic storyteller] ${textToSpeak}`;
       } else if (style === 'documentary') {
-        promptText = `[Speak as a deep documentary narrator] ${text}`;
+        promptText = `[Speak as a deep documentary narrator] ${textToSpeak}`;
       } else if (style === 'teacher') {
-        promptText = `[Speak as a clear teacher] ${text}`;
+        promptText = `[Speak as a clear teacher] ${textToSpeak}`;
       }
 
       const audioData = await speakAmharic(promptText);
@@ -106,7 +112,18 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
       // Fallback to browser SpeechSynthesis
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
+        
+        // Translate text for fallback if not already translated
+        let fallbackText = text;
+        try {
+          if (language !== 'en') {
+            fallbackText = await translateText(text, language);
+          }
+        } catch (_) {
+          fallbackText = text;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(fallbackText);
         
         // Match language code
         if (language === 'am') {
@@ -144,7 +161,7 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
         };
 
         // Estimate duration based on word count (~150 words per minute)
-        const wordCount = text.split(' ').length;
+        const wordCount = fallbackText.split(' ').length;
         const estDuration = Math.ceil((wordCount / 150) * 60) || 30;
 
         window.speechSynthesis.speak(utterance);
