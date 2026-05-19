@@ -515,7 +515,7 @@ const App: React.FC = () => {
             </div>
           </div>
           
-          <nav className="hidden lg:flex gap-1 bg-stone-100 p-1.5 rounded-2xl border border-stone-200 shadow-inner">
+          <nav className="hidden lg:flex gap-0.5 bg-stone-100 p-1 rounded-2xl border border-stone-200 shadow-inner">
             {[
               { id: 'home', label: 'Home', icon: '🏛️' },
               ...(user ? [
@@ -531,7 +531,7 @@ const App: React.FC = () => {
               <button 
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${activeTab === tab.id ? 'bg-white shadow-xl text-stone-900 border border-stone-100 scale-[1.02]' : 'text-stone-400 hover:text-stone-600'}`}
+                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 ${activeTab === tab.id ? 'bg-white shadow-xl text-stone-900 border border-stone-100 scale-[1.02]' : 'text-stone-400 hover:text-stone-600'}`}
               >
                 <span className="text-base">{tab.icon}</span>
                 {tab.id === 'account' ? 'Login' : tab.label}
