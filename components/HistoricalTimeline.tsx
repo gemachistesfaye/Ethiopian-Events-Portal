@@ -708,30 +708,30 @@ const HistoricalTimeline: React.FC = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header - Holographic Style */}
-        <header className="mb-16 text-center pt-8">
+        <header className="mb-14 text-center pt-8">
           <div className="inline-block relative">
              <span className="absolute -inset-1 bg-amber-500/20 blur-lg rounded-full"></span>
-             <span className="relative bg-stone-50 border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
+             <span className="relative bg-stone-50 border border-amber-200 text-amber-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
                Animus Archive System
              </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-stone-900 tracking-wide leading-none mb-4 uppercase drop-shadow-sm font-serif">
+          <h1 className="text-3xl md:text-5xl font-bold text-stone-900 tracking-wide leading-none mb-4 uppercase drop-shadow-sm font-serif">
             Chronicles of <span className="gold-text-gradient">Ethiopia</span>
           </h1>
-          <p className="text-stone-500 text-base md:text-lg font-medium max-w-2xl mx-auto uppercase tracking-widest text-[10px]">
+          <p className="text-stone-500 text-xs md:text-sm font-medium max-w-2xl mx-auto uppercase tracking-widest text-[9px]">
             Unlock the epic eras, legendary battles, and ancient secrets of the Horn of Africa.
           </p>
         </header>
 
         {/* HUD Filters - Light Mode */}
-        <div className="flex flex-wrap justify-center gap-3 mb-20 relative z-20">
+        <div className="flex flex-wrap justify-center gap-2.5 mb-14 relative z-20">
           {CATEGORIES.map(c => (
             <button
               key={c}
               onClick={() => setFilter(c)}
-              className={`relative overflow-hidden px-6 py-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all duration-300 group shadow-sm ${
+              className={`relative overflow-hidden px-5 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all duration-300 group shadow-sm ${
                 filter === c 
-                  ? 'bg-amber-500 text-stone-900 shadow-[0_4px_15px_rgba(245,158,11,0.3)] border border-amber-400' 
+                  ? 'bg-amber-500 text-stone-900 shadow-[0_4px_12px_rgba(245,158,11,0.25)] border border-amber-400' 
                   : 'bg-stone-50 border border-stone-200 text-stone-500 hover:border-amber-300 hover:text-amber-600'
               }`}
             >
@@ -741,7 +741,7 @@ const HistoricalTimeline: React.FC = () => {
         </div>
 
         {/* Tech Tree Timeline */}
-        <div className="relative pb-24">
+        <div className="relative pb-20">
           {/* Glowing Central Power Line */}
           <div className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-stone-100 rounded-full overflow-hidden shadow-inner">
              <motion.div 
@@ -751,7 +751,7 @@ const HistoricalTimeline: React.FC = () => {
              ></motion.div>
           </div>
 
-          <div className="space-y-16 md:space-y-24">
+          <div className="space-y-12 md:space-y-20">
             {filteredEvents.map((event, index) => (
               <motion.div
                 key={event.id}
@@ -764,7 +764,7 @@ const HistoricalTimeline: React.FC = () => {
                 {/* Content Card (Gaming Style - Light) */}
                 <div className="w-full md:w-[42%] ml-16 md:ml-0 group perspective-1000">
                   <div 
-                    className="relative bg-stone-50/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-200 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
+                    className="relative bg-stone-50/90 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-stone-200 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
                     onClick={() => setSelectedEvent(event)}
                   >
                     {/* Corner accents */}
@@ -772,19 +772,19 @@ const HistoricalTimeline: React.FC = () => {
                     <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-stone-300 group-hover:border-amber-500 transition-colors"></div>
 
                     <div className="flex items-center gap-4 mb-4">
-                      <span className="text-sm font-black text-amber-600">{event.year}</span>
+                      <span className="text-xs font-bold text-amber-600">{event.year}</span>
                       <div className="h-px flex-1 bg-gradient-to-r from-amber-200 to-transparent"></div>
-                      <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-100 border border-stone-200 text-stone-500 px-3 py-1.5 rounded-sm">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] bg-stone-100 border border-stone-200 text-stone-500 px-3 py-1 rounded-sm">
                         {event.category}
                       </span>
                     </div>
                     
-                    <h3 className="text-2xl font-bold text-stone-900 mb-3 tracking-wide group-hover:text-amber-600 transition-colors font-serif">{event.title}</h3>
-                    <p className="text-stone-700 text-sm leading-relaxed font-medium">{event.description}</p>
+                    <h3 className="text-lg font-bold text-stone-900 mb-2 tracking-wide group-hover:text-amber-600 transition-colors font-serif">{event.title}</h3>
+                    <p className="text-stone-600 text-xs md:text-sm leading-relaxed font-normal">{event.description}</p>
                     
-                    <div className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-stone-500 group-hover:text-amber-600 transition-colors">
+                    <div className="mt-5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-500 group-hover:text-amber-600 transition-colors">
                       <span>Access Archive</span>
-                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                      <svg className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </div>
                   </div>
                 </div>
@@ -879,14 +879,14 @@ const HistoricalTimeline: React.FC = () => {
                     ✕
                   </button>
 
-                  {/* Header Title with Decryption Effect */}
+                   {/* Header Title with Decryption Effect */}
                   <div className="mb-6 pr-6">
                     <span className="text-[10px] text-amber-500 font-mono font-bold uppercase tracking-[0.2em] bg-amber-950/20 border border-amber-500/25 px-3 py-1 rounded">
                       {selectedEvent.category} Records
                     </span>
-                    <h2 className="text-2xl md:text-3xl font-black text-stone-100 leading-tight mt-3 tracking-tight uppercase">
+                    <h2 className="text-xl md:text-2xl font-bold text-stone-100 leading-tight mt-3 tracking-wide uppercase font-serif">
                       {isDecrypting ? (
-                        <span className="font-mono text-stone-400 text-xl tracking-widest uppercase">
+                        <span className="font-mono text-stone-400 text-lg tracking-widest uppercase">
                           Decrypting Memory Log...
                         </span>
                       ) : (

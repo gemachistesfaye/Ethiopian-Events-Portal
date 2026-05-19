@@ -40,16 +40,16 @@ const Calendar: React.FC<CalendarProps> = ({ onSelectDate, selectedDate }) => {
     
     return (
       <div className="flex flex-col items-start">
-        <h2 className="text-2xl font-black tracking-tighter leading-tight uppercase">
+        <h2 className="text-lg md:text-xl font-bold tracking-tight leading-tight uppercase font-serif">
           {gregTitle}
         </h2>
         <div className="flex items-center gap-2 mt-0.5">
-          <span className="text-amber-600 text-[9px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Integrated Calendar</span>
+          <span className="text-amber-600 text-[8px] font-bold uppercase tracking-[0.2em] whitespace-nowrap">Integrated Calendar</span>
           <div className="h-3 w-[1px] bg-stone-700 mx-1"></div>
           <span className="text-stone-500 text-[11px] font-bold ethiopic-font">
             {ethRangeAmharic} {firstDayEth.year}
           </span>
-          <span className="text-stone-700 text-[9px] font-black uppercase tracking-widest hidden sm:inline-block">
+          <span className="text-stone-700 text-[8px] font-bold uppercase tracking-widest hidden sm:inline-block">
             ({ethRangeEnglish})
           </span>
         </div>
@@ -95,7 +95,7 @@ const Calendar: React.FC<CalendarProps> = ({ onSelectDate, selectedDate }) => {
       </div>
 
       <div className="p-6">
-        <div className="grid grid-cols-7 w-full text-center text-[10px] font-black text-stone-700 uppercase tracking-[0.2em] mb-4">
+        <div className="grid grid-cols-7 w-full text-center text-[9px] font-bold text-stone-700 uppercase tracking-[0.2em] mb-4">
           {dayNames.map((d, i) => <div key={`${d}-${i}`}>{d}</div>)}
         </div>
 
@@ -126,12 +126,12 @@ const Calendar: React.FC<CalendarProps> = ({ onSelectDate, selectedDate }) => {
                 )}
                 
                 {/* Gregorian Day (Primary) */}
-                <span className={`text-xl font-black leading-none mb-1 ${isSelected ? 'text-amber-600' : 'text-stone-900'}`}>
+                <span className={`text-lg font-bold leading-none mb-1 font-serif ${isSelected ? 'text-amber-600' : 'text-stone-900'}`}>
                   {day.gregorian.getDate()}
                 </span>
                 
                 {/* Ethiopian Date (Secondary) */}
-                <span className={`text-[9px] font-black uppercase tracking-tight text-center px-1 leading-tight ethiopic-font ${isSelected ? 'text-stone-500' : 'text-stone-500'}`}>
+                <span className={`text-[8px] font-bold uppercase tracking-tight text-center px-1 leading-tight ethiopic-font ${isSelected ? 'text-stone-500' : 'text-stone-500'}`}>
                   {day.ethiopian.day} {day.ethiopian.monthNameAmharic}
                 </span>
                 
@@ -144,7 +144,7 @@ const Calendar: React.FC<CalendarProps> = ({ onSelectDate, selectedDate }) => {
                 )}
                 
                 {hasEvent && (
-                   <div className={`mt-1 text-[7px] font-black truncate px-2 max-w-full uppercase tracking-tighter ${isSelected ? 'text-amber-400' : 'text-stone-500'}`}>
+                   <div className={`mt-1 text-[7px] font-bold truncate px-2 max-w-full uppercase tracking-tighter ${isSelected ? 'text-amber-400' : 'text-stone-500'}`}>
                      {day.events[0].name.substring(0, 10)}
                    </div>
                 )}

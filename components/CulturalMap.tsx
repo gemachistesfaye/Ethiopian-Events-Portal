@@ -415,15 +415,15 @@ const CulturalMap: React.FC = () => {
     >
        <div className="flex-1">
          <div className="flex items-center gap-2 mb-1">
-           <h4 className="text-base font-black text-stone-900 group-hover:text-amber-600 transition-colors">{item.name}</h4>
+           <h4 className="text-[15px] font-bold text-stone-900 group-hover:text-amber-600 transition-colors font-serif">{item.name}</h4>
            {item.category && item.category === 'UNESCO World Heritage' && (
-             <span className="bg-amber-950/10 text-amber-800 text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded-md">UNESCO</span>
+             <span className="bg-amber-950/10 text-amber-800 text-[8px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-md">UNESCO</span>
            )}
          </div>
-         <p className="text-sm font-medium text-stone-500 leading-relaxed line-clamp-2">{item.description}</p>
+         <p className="text-xs font-normal text-stone-500 leading-relaxed line-clamp-2">{item.description}</p>
        </div>
        <div className="md:w-32 text-right">
-          <span className="inline-block text-center bg-stone-100 group-hover:bg-amber-50 border border-stone-100 group-hover:border-amber-200 text-stone-600 group-hover:text-amber-700 transition-colors text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg">
+          <span className="inline-block text-center bg-stone-100 group-hover:bg-amber-50 border border-stone-100 group-hover:border-amber-200 text-stone-600 group-hover:text-amber-700 transition-colors text-[8px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-lg">
             View Detail &rarr;
           </span>
        </div>
@@ -476,17 +476,17 @@ const CulturalMap: React.FC = () => {
               </button>
 
               <div className="relative z-10">
-                <span className="bg-amber-900/40 text-amber-400 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block">
+                <span className="bg-amber-950/40 text-amber-400 px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] mb-6 inline-block">
                   {selectedDetail.category || 'Cultural Detail'}
                 </span>
                 
-                <h2 className="text-4xl md:text-5xl font-black text-stone-100 tracking-tighter leading-none mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-stone-100 tracking-wide leading-none mb-6 font-serif">
                   {selectedDetail.name}
                 </h2>
                 
-                <div className="w-20 h-1.5 bg-amber-600 rounded-full mb-8"></div>
+                <div className="w-16 h-1 bg-amber-600 rounded-full mb-6"></div>
                 
-                <p className="text-base text-stone-300 font-medium leading-relaxed bg-stone-950 p-5 rounded-[1.5rem] border border-stone-850">
+                <p className="text-sm text-stone-300 font-normal leading-relaxed bg-stone-950 p-5 rounded-[1.5rem] border border-stone-850">
                   {selectedDetail.description}
                 </p>
               </div>
@@ -500,12 +500,12 @@ const CulturalMap: React.FC = () => {
         <div className="xl:col-span-6 bg-stone-50 rounded-[2rem] border border-stone-200 shadow-xl relative sticky top-24 h-[65vh] max-h-[550px] overflow-hidden flex flex-col">
           <div className="p-5 absolute top-0 left-0 z-[400] w-full flex justify-between items-start pointer-events-none bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm">
             <div>
-              <h3 className="text-lg font-black text-stone-900 tracking-tight">Interactive Map</h3>
+              <h3 className="text-base font-bold text-stone-900 tracking-tight font-serif">Interactive Map</h3>
               <p className="text-[10px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">Select a Region</p>
             </div>
             <div className="flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 rounded-full shadow-sm border border-stone-200">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-[9px] font-black text-stone-700 uppercase tracking-widest">GPS Active</span>
+              <span className="text-[9px] font-bold text-stone-700 uppercase tracking-widest">GPS Active</span>
             </div>
           </div>
           
@@ -537,7 +537,7 @@ const CulturalMap: React.FC = () => {
                    onEachFeature={(feature: any, layer: any) => {
                      const regionId = REGION_NAME_MAP[feature?.properties?.name || ''];
                      if (regionId) {
-                       layer.bindTooltip(`<div class="font-black text-xs uppercase tracking-widest">${REGIONS_DATA[regionId].name}</div>`, { sticky: true, className: 'bg-stone-50 border-none shadow-xl rounded-xl px-3 py-1' });
+                       layer.bindTooltip(`<div class="font-bold text-[10px] uppercase tracking-widest">${REGIONS_DATA[regionId].name}</div>`, { sticky: true, className: 'bg-stone-50 border-none shadow-xl rounded-xl px-3 py-1' });
                        
                        layer.on({
                          click: () => {
@@ -584,14 +584,14 @@ const CulturalMap: React.FC = () => {
                  
                  <div className="relative z-10 w-full flex justify-between items-end">
                    <div>
-                     <span className="px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-[0.2em] mb-2 inline-block shadow-lg backdrop-blur-md border border-white/20" style={{ backgroundColor: activeData.color, color: '#fff' }}>
+                     <span className="px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-[0.2em] mb-2 inline-block shadow-lg backdrop-blur-md border border-white/20" style={{ backgroundColor: activeData.color, color: '#fff' }}>
                        Territory Profile
                      </span>
-                     <h2 className="text-3xl md:text-4xl font-black text-stone-100 tracking-tighter leading-none shadow-sm">{activeData.name}</h2>
+                     <h2 className="text-xl md:text-2xl font-bold text-stone-100 tracking-wide leading-none shadow-sm font-serif">{activeData.name}</h2>
                    </div>
                    <div className="hidden md:block text-right">
-                      <p className="text-[9px] font-black uppercase tracking-widest text-stone-200/80 mb-0.5">Population</p>
-                      <p className="text-xl font-black text-stone-100">{activeData.population}</p>
+                      <p className="text-[8px] font-bold uppercase tracking-widest text-stone-200/80 mb-0.5">Population</p>
+                      <p className="text-lg font-bold text-stone-100">{activeData.population}</p>
                    </div>
                  </div>
               </div>
@@ -606,7 +606,7 @@ const CulturalMap: React.FC = () => {
                    <button
                      key={tab.id}
                      onClick={() => setActiveTab(tab.id as any)}
-                     className={`px-4 py-3 text-xs font-black uppercase tracking-widest border-b-4 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-stone-200 text-stone-900' : 'border-transparent text-stone-500 hover:text-stone-700'}`}
+                     className={`px-4 py-3 text-[11px] font-bold uppercase tracking-widest border-b-4 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-stone-200 text-stone-900' : 'border-transparent text-stone-500 hover:text-stone-700'}`}
                    >
                      {tab.label}
                    </button>
@@ -617,21 +617,21 @@ const CulturalMap: React.FC = () => {
                 
                 {activeTab === 'overview' && (
                   <div className="animate-in fade-in duration-500 space-y-4">
-                     <p className="text-base text-stone-600 font-medium leading-relaxed bg-stone-100 p-4 rounded-[1.5rem] border border-stone-100">{activeData.summary}</p>
+                     <p className="text-sm text-stone-600 font-normal leading-relaxed bg-stone-100 p-4 rounded-[1.5rem] border border-stone-100">{activeData.summary}</p>
                      
                      <div className="grid grid-cols-2 gap-4">
                        <div className="bg-stone-50 rounded-[1.5rem] p-4 border border-stone-100 shadow-sm flex items-center gap-3">
                          <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-xl">🏛️</div>
                          <div>
-                           <h4 className="text-[9px] font-black uppercase tracking-widest text-stone-500 mb-0.5">Capital City</h4>
-                           <p className="text-base font-black text-stone-900 leading-none">{activeData.capital}</p>
+                           <h4 className="text-[8px] font-bold uppercase tracking-widest text-stone-500 mb-0.5">Capital City</h4>
+                           <p className="text-sm font-bold text-stone-900 leading-none font-serif">{activeData.capital}</p>
                          </div>
                        </div>
                        <div className="bg-stone-50 rounded-[1.5rem] p-4 border border-stone-100 shadow-sm flex items-center gap-3">
                          <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-xl">🗣️</div>
                          <div>
-                           <h4 className="text-[9px] font-black uppercase tracking-widest text-stone-500 mb-0.5">Languages</h4>
-                           <p className="text-xs font-black text-stone-900 leading-tight">{activeData.languages.join(', ')}</p>
+                           <h4 className="text-[8px] font-bold uppercase tracking-widest text-stone-500 mb-0.5">Languages</h4>
+                           <p className="text-xs font-bold text-stone-900 leading-tight">{activeData.languages.join(', ')}</p>
                          </div>
                        </div>
                      </div>
@@ -640,8 +640,8 @@ const CulturalMap: React.FC = () => {
                        <div className="absolute top-0 right-0 p-6 opacity-5 transform group-hover:scale-110 transition-transform duration-700">
                           <svg className="w-20 h-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
                        </div>
-                       <h4 className="text-[9px] font-black text-stone-500 uppercase tracking-widest mb-1">Historical Significance</h4>
-                       <p className="text-sm font-medium leading-relaxed relative z-10">{activeData.history}</p>
+                       <h4 className="text-[8px] font-bold text-stone-500 uppercase tracking-widest mb-1">Historical Significance</h4>
+                       <p className="text-xs md:text-sm font-normal leading-relaxed relative z-10">{activeData.history}</p>
                      </div>
                   </div>
                 )}
@@ -649,8 +649,8 @@ const CulturalMap: React.FC = () => {
                 {activeTab === 'heritages' && (
                   <div className="animate-in fade-in duration-500">
                     <div className="mb-6 flex items-center justify-between">
-                       <h3 className="text-xl font-black text-stone-900">Exhaustive Heritage Index</h3>
-                       <span className="bg-stone-100 text-stone-700 px-3 py-1 rounded-lg text-xs font-bold">{activeData.heritages.length} Official Sites</span>
+                       <h3 className="text-lg font-bold text-stone-900 font-serif">Exhaustive Heritage Index</h3>
+                       <span className="bg-stone-100 text-stone-700 px-3 py-1 rounded-lg text-[10px] font-bold">{activeData.heritages.length} Official Sites</span>
                     </div>
                     
                     <div className="space-y-4">
@@ -667,7 +667,7 @@ const CulturalMap: React.FC = () => {
                   <div className="animate-in fade-in duration-500 space-y-10">
                      
                      <div>
-                       <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🎪</span> Cultural Traditions</h4>
+                       <h4 className="text-xs font-bold text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-2.5 font-serif"><span className="text-xl">🎪</span> Cultural Traditions</h4>
                        <div className="grid sm:grid-cols-2 gap-4">
                          {activeData.traditions.map((item, idx) => (
                             <div key={idx}>
@@ -678,7 +678,7 @@ const CulturalMap: React.FC = () => {
                      </div>
 
                      <div>
-                       <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🍲</span> Culinary Heritage</h4>
+                       <h4 className="text-xs font-bold text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-2.5 font-serif"><span className="text-xl">🍲</span> Culinary Heritage</h4>
                        <div className="grid sm:grid-cols-2 gap-4">
                          {activeData.foods.map((item, idx) => (
                             <div key={idx}>
@@ -690,7 +690,7 @@ const CulturalMap: React.FC = () => {
 
                      <div className="grid sm:grid-cols-2 gap-6">
                        <div>
-                         <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">🎵</span> Music & Dance</h4>
+                         <h4 className="text-xs font-bold text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-2.5 font-serif"><span className="text-xl">🎵</span> Music & Dance</h4>
                          <div className="space-y-4">
                            {activeData.music.map((item, idx) => (
                               <div key={idx}>
@@ -701,7 +701,7 @@ const CulturalMap: React.FC = () => {
                        </div>
                        
                        <div>
-                         <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-3"><span className="text-2xl">👗</span> Traditional Clothing</h4>
+                         <h4 className="text-xs font-bold text-stone-900 uppercase tracking-widest mb-4 flex items-center gap-2.5 font-serif"><span className="text-xl">👗</span> Traditional Clothing</h4>
                          <div className="space-y-4">
                            {activeData.clothing.map((item, idx) => (
                               <div key={idx}>
@@ -720,10 +720,10 @@ const CulturalMap: React.FC = () => {
                     {activeData.images.map((img, i) => (
                       <div key={i} className="group relative h-64 rounded-[2.5rem] overflow-hidden shadow-lg border border-stone-200">
                         <img src={img} alt={`${activeData.name} heritage`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
                            <div>
-                             <span className="text-amber-400 text-[10px] font-black uppercase tracking-widest block mb-1">Archive View</span>
-                             <span className="text-stone-900 text-lg font-bold">{activeData.name}</span>
+                             <span className="text-amber-400 text-[9px] font-bold uppercase tracking-widest block mb-1">Archive View</span>
+                             <span className="text-stone-100 text-base font-bold font-serif">{activeData.name}</span>
                            </div>
                         </div>
                       </div>

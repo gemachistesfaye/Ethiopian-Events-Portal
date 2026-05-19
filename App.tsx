@@ -39,10 +39,10 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 font-sans">
       <div className="mb-8">
-         <h2 className="text-4xl font-black text-stone-900 tracking-tight">Account Settings</h2>
-         <p className="text-stone-500 font-medium mt-2">Manage your portal identity, preferences, and security settings.</p>
+         <h2 className="text-2xl md:text-3xl font-bold text-stone-900 tracking-tight font-serif">Account Settings</h2>
+         <p className="text-stone-500 font-normal mt-2 text-sm md:text-base">Manage your portal identity, preferences, and security settings.</p>
       </div>
 
       <div className="grid lg:grid-cols-12 gap-8">
@@ -51,19 +51,19 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
            <div className="bg-stone-100 rounded-3xl border border-stone-200 shadow-sm p-4 sticky top-28 space-y-2">
              <button 
                onClick={() => setActiveSettingsTab('profile')}
-               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'profile' ? 'bg-stone-100 text-stone-900 shadow-md' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
-            >
+               className={`w-full text-left px-5 py-3.5 rounded-2xl text-[11px] font-bold uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'profile' ? 'bg-stone-105 text-stone-900 shadow-md border border-stone-200/50' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
+             >
                <span className="text-lg">👤</span> Profile
              </button>
              <button 
                onClick={() => setActiveSettingsTab('preferences')}
-               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'preferences' ? 'bg-stone-100 text-stone-900 shadow-md' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
+               className={`w-full text-left px-5 py-3.5 rounded-2xl text-[11px] font-bold uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'preferences' ? 'bg-stone-105 text-stone-900 shadow-md border border-stone-200/50' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
              >
                <span className="text-lg">⚙️</span> Preferences
              </button>
              <button 
                onClick={() => setActiveSettingsTab('security')}
-               className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'security' ? 'bg-stone-100 text-stone-900 shadow-md' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
+               className={`w-full text-left px-5 py-3.5 rounded-2xl text-[11px] font-bold uppercase tracking-widest transition-all flex items-center gap-3 ${activeSettingsTab === 'security' ? 'bg-stone-105 text-stone-900 shadow-md border border-stone-200/50' : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'}`}
              >
                <span className="text-lg">🛡️</span> Security
              </button>
@@ -71,7 +71,7 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
              <div className="pt-4 mt-4 border-t border-stone-200">
                <button 
                  onClick={() => supabase.auth.signOut()}
-                 className="w-full text-left px-5 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest text-rose-500 hover:bg-rose-950/30 transition-all flex items-center gap-3"
+                 className="w-full text-left px-5 py-3.5 rounded-2xl text-[11px] font-bold uppercase tracking-widest text-rose-500 hover:bg-rose-950/30 transition-all flex items-center gap-3"
                >
                  <span className="text-lg">🚪</span> Sign Out
                </button>
@@ -98,29 +98,29 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
                    </div>
                    <div className="flex-1">
                      <div className="flex items-center gap-3 mb-1">
-                       <h3 className="text-3xl font-black text-stone-900">{user.email?.split('@')[0]}</h3>
-                       <span className="bg-amber-900/20 text-stone-900 px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest shadow-sm">Verified</span>
+                       <h3 className="text-xl md:text-2xl font-bold text-stone-900 font-serif">{user.email?.split('@')[0]}</h3>
+                       <span className="bg-amber-900/20 text-stone-900 px-2.5 py-0.5 rounded-lg text-[8px] font-bold uppercase tracking-widest shadow-sm">Verified</span>
                      </div>
-                     <p className="text-stone-500 font-medium">{user.email}</p>
+                     <p className="text-stone-500 font-normal text-sm">{user.email}</p>
                    </div>
                 </div>
 
                 <form onSubmit={handleUpdateEmail} className="space-y-6 max-w-xl">
                   <div>
-                    <label className="text-xs font-black text-stone-500 uppercase tracking-widest mb-2 block">Email Address</label>
+                    <label className="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-2 block">Email Address</label>
                     <div className="flex flex-col sm:flex-row gap-4">
                       <input 
                         type="email" 
                         value={newEmail}
                         onChange={(e) => setNewEmail(e.target.value)}
                         placeholder={user.email}
-                        className="flex-1 h-14 bg-stone-100 border border-stone-200 rounded-xl px-5 text-sm font-medium focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
+                        className="flex-1 h-14 bg-stone-100 border border-stone-200 rounded-xl px-5 text-sm font-normal focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-500/10 transition-all shadow-inner"
                         required
                       />
                       <button 
                         type="submit" 
                         disabled={loading}
-                        className="h-14 px-8 bg-stone-100 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-100 transition-colors disabled:opacity-50 whitespace-nowrap shadow-lg hover:shadow-stone-900/20"
+                        className="h-14 px-6 bg-stone-105 text-stone-900 rounded-xl font-bold uppercase text-[11px] tracking-widest hover:bg-stone-200 transition-colors disabled:opacity-50 whitespace-nowrap shadow-lg border border-stone-200/50"
                       >
                         {loading ? 'Saving...' : 'Update Email'}
                       </button>
@@ -134,10 +134,10 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
 
           {activeSettingsTab === 'preferences' && (
             <div className="bg-stone-100 rounded-[2.5rem] border border-stone-200 shadow-xl p-10 animate-in fade-in zoom-in-95 duration-300">
-              <h3 className="text-2xl font-black text-stone-900 mb-8">Platform Preferences</h3>
+              <h3 className="text-lg md:text-xl font-bold text-stone-900 mb-8 font-serif">Platform Preferences</h3>
               
-              <div className="space-y-8">
-                <div className="flex items-center justify-between border-b border-stone-200 pb-8">
+              <div className="space-y-8 font-normal text-xs md:text-sm">
+                <div className="flex items-center justify-between border-b border-stone-200 pb-8">r-stone-200 pb-8">
                    <div>
                      <h4 className="font-bold text-stone-900 mb-1">Email Notifications</h4>
                      <p className="text-sm text-stone-500 font-medium">Receive alerts for upcoming Ethiopian holidays and events.</p>
@@ -172,21 +172,21 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
           )}
 
           {activeSettingsTab === 'security' && (
-            <div className="space-y-8 animate-in fade-in zoom-in-95 duration-300">
+            <div className="space-y-8 animate-in fade-in zoom-in-95 duration-300 font-sans">
               <div className="bg-stone-100 rounded-[2.5rem] border border-stone-200 shadow-xl p-10">
-                <h3 className="text-2xl font-black text-stone-900 mb-2">Security Hub</h3>
-                <p className="text-sm text-stone-500 font-medium mb-8">Manage your password and authentication methods.</p>
+                <h3 className="text-lg font-bold text-stone-900 mb-2 font-serif">Security Hub</h3>
+                <p className="text-sm text-stone-500 font-normal mb-8">Manage your password and authentication methods.</p>
                 
-                <button className="h-14 px-8 bg-stone-100 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-700 transition-colors w-full sm:w-auto shadow-sm">
+                <button className="h-12 px-6 bg-stone-105 border border-stone-200/50 text-stone-900 rounded-xl font-bold uppercase text-[11px] tracking-widest hover:bg-stone-200 transition-colors w-full sm:w-auto shadow-sm">
                   Change Password
                 </button>
               </div>
 
               <div className="bg-rose-950/30 rounded-[2.5rem] border border-rose-900/50 p-10">
-                <h3 className="text-2xl font-black text-rose-900 mb-2">Danger Zone</h3>
-                <p className="text-sm text-rose-700/80 font-medium mb-8">Permanently delete your account and all saved heritage data.</p>
+                <h3 className="text-lg font-bold text-rose-900 mb-2 font-serif">Danger Zone</h3>
+                <p className="text-sm text-rose-700/80 font-normal mb-8">Permanently delete your account and all saved heritage data.</p>
                 
-                <button className="h-14 px-8 bg-rose-600 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-rose-700 transition-colors shadow-lg shadow-rose-600/20">
+                <button className="h-12 px-6 bg-rose-600 text-stone-950 rounded-xl font-bold uppercase text-[11px] tracking-widest hover:bg-rose-700 transition-colors shadow-lg shadow-rose-600/20">
                   Delete Account
                 </button>
               </div>
@@ -201,7 +201,7 @@ const ProfileSettings: React.FC<{ user: any }> = ({ user }) => {
 
 const Dashboard: React.FC<{ user: any, onNavigate: (tab: any) => void }> = ({ user, onNavigate }) => {
   return (
-    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto">
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto font-sans">
       {/* Welcome Header */}
       <div className="bg-stone-100 rounded-[3rem] p-10 md:p-16 text-stone-900 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
         <div className="absolute top-0 right-0 p-10 opacity-5">
@@ -213,21 +213,21 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: any) => void }> = ({ us
         </div>
         
         <div className="relative z-10 text-center md:text-left flex-1">
-          <span className="bg-amber-900/20/20 text-amber-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-4 inline-block">Pro Explorer</span>
-          <h2 className="text-4xl md:text-5xl font-black mb-2 tracking-tight">Welcome back!</h2>
-          <p className="text-stone-500 font-medium text-lg mb-4">{user.email}</p>
-          <p className="text-sm text-stone-500 max-w-md">Your gateway to Ethiopian heritage is ready. Discover deep historical insights and upcoming events.</p>
+          <span className="bg-amber-900/20 text-amber-500 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-[0.2em] mb-4 inline-block">Pro Explorer</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight font-serif">Welcome back!</h2>
+          <p className="text-stone-500 font-normal text-base md:text-lg mb-4">{user.email}</p>
+          <p className="text-sm text-stone-500 max-w-md leading-relaxed font-normal">Your gateway to Ethiopian heritage is ready. Discover deep historical insights and upcoming events.</p>
         </div>
 
         <div className="hidden lg:flex gap-6 relative z-10 bg-stone-100/50 p-6 rounded-[2rem] border border-stone-200 backdrop-blur-sm">
            <div className="text-center">
-             <div className="text-3xl font-black text-amber-400 mb-1">12</div>
-             <div className="text-[9px] text-stone-500 font-black uppercase tracking-widest">Events<br/>Saved</div>
+             <div className="text-2xl font-bold text-amber-500 mb-1">12</div>
+             <div className="text-[8px] text-stone-500 font-bold uppercase tracking-widest leading-normal">Events<br/>Saved</div>
            </div>
-           <div className="w-px bg-stone-700"></div>
+           <div className="w-px bg-stone-200"></div>
            <div className="text-center">
-             <div className="text-3xl font-black text-amber-400 mb-1">LV.4</div>
-             <div className="text-[9px] text-stone-500 font-black uppercase tracking-widest">Heritage<br/>Scholar</div>
+             <div className="text-2xl font-bold text-amber-500 mb-1">LV.4</div>
+             <div className="text-[8px] text-stone-500 font-bold uppercase tracking-widest leading-normal">Heritage<br/>Scholar</div>
            </div>
         </div>
       </div>
@@ -237,7 +237,7 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: any) => void }> = ({ us
         {/* Quick Access Grid */}
         <div className="lg:col-span-8 space-y-8">
           <div className="flex items-center justify-between">
-             <h3 className="text-2xl font-black text-stone-900 tracking-tight">Explore Platform</h3>
+             <h3 className="text-lg md:text-xl font-bold text-stone-900 tracking-tight font-serif">Explore Platform</h3>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -248,9 +248,9 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: any) => void }> = ({ us
               <div className="w-16 h-16 bg-amber-900/40 text-amber-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               </div>
-              <h3 className="text-2xl font-black text-stone-900 mb-3 relative z-10">Heritage Calendar</h3>
-              <p className="text-sm text-stone-500 leading-relaxed font-medium relative z-10 flex-1">Explore upcoming events, festivals, and religious holidays synchronized across Gregorian and Ethiopian dates.</p>
-              <div className="mt-8 text-xs font-black uppercase tracking-widest text-amber-600 group-hover:translate-x-2 transition-transform">Launch →</div>
+              <h3 className="text-lg font-bold text-stone-900 mb-3 relative z-10 font-serif">Heritage Calendar</h3>
+              <p className="text-xs md:text-sm text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Explore upcoming events, festivals, and religious holidays synchronized across Gregorian and Ethiopian dates.</p>
+              <div className="mt-8 text-xs font-bold uppercase tracking-widest text-amber-600 group-hover:translate-x-2 transition-transform">Launch →</div>
             </button>
 
             <button onClick={() => onNavigate('chat')} className="bg-stone-100 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-emerald-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
@@ -260,25 +260,25 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: any) => void }> = ({ us
               <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
               </div>
-              <h3 className="text-2xl font-black text-stone-900 mb-3 relative z-10">AI Storyteller</h3>
-              <p className="text-sm text-stone-500 leading-relaxed font-medium relative z-10 flex-1">Chat with our intelligent guide. Uncover ancient Ethiopian history, myths, and deep cultural insights.</p>
-              <div className="mt-8 text-xs font-black uppercase tracking-widest text-emerald-400 group-hover:translate-x-2 transition-transform">Start Chat →</div>
+              <h3 className="text-lg font-bold text-stone-900 mb-3 relative z-10 font-serif">AI Storyteller</h3>
+              <p className="text-xs md:text-sm text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Chat with our intelligent guide. Uncover ancient Ethiopian history, myths, and deep cultural insights.</p>
+              <div className="mt-8 text-xs font-bold uppercase tracking-widest text-emerald-400 group-hover:translate-x-2 transition-transform">Start Chat →</div>
             </button>
             
             <button onClick={() => onNavigate('map')} className="bg-stone-100 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-blue-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
               <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
               </div>
-              <h3 className="text-xl font-black text-stone-900 mb-2 relative z-10">Cultural Atlas</h3>
-              <p className="text-xs text-stone-500 leading-relaxed font-medium relative z-10 flex-1">Interactive map of heritage sites.</p>
+              <h3 className="text-base font-bold text-stone-900 mb-2 relative z-10 font-serif">Cultural Atlas</h3>
+              <p className="text-xs text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Interactive map of heritage sites.</p>
             </button>
             
             <button onClick={() => onNavigate('culture')} className="bg-stone-100 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-rose-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
               <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
               </div>
-              <h3 className="text-xl font-black text-stone-900 mb-2 relative z-10">Culture Zone</h3>
-              <p className="text-xs text-stone-500 leading-relaxed font-medium relative z-10 flex-1">Food, music, and traditions.</p>
+              <h3 className="text-base font-bold text-stone-900 mb-2 relative z-10 font-serif">Culture Zone</h3>
+              <p className="text-xs text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Food, music, and traditions.</p>
             </button>
           </div>
         </div>
@@ -289,40 +289,40 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: any) => void }> = ({ us
               <div className="absolute -right-4 -bottom-4 opacity-20 transform rotate-12">
                  <span className="text-9xl">✨</span>
               </div>
-              <h4 className="text-sm font-black uppercase tracking-widest mb-2 relative z-10">Next Big Event</h4>
-              <h3 className="text-3xl font-black tracking-tight mb-2 relative z-10">Fichee-Chambalaalla</h3>
-              <p className="text-sm font-bold mb-6 relative z-10">Sidama New Year celebration of unity and peace.</p>
-              <button onClick={() => onNavigate('vault')} className="bg-stone-100 text-stone-900 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl hover:bg-stone-100 transition-colors relative z-10">
+              <h4 className="text-xs font-bold uppercase tracking-widest mb-2 relative z-10">Next Big Event</h4>
+              <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2 relative z-10 font-serif">Fichee-Chambalaalla</h3>
+              <p className="text-xs md:text-sm font-normal mb-6 relative z-10 leading-relaxed text-stone-700">Sidama New Year celebration of unity and peace.</p>
+              <button onClick={() => onNavigate('vault')} className="bg-stone-100 text-stone-900 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest shadow-xl hover:bg-stone-100 transition-colors relative z-10">
                  View Details
               </button>
            </div>
 
            <div className="bg-stone-100 rounded-[2.5rem] border border-stone-200 shadow-xl p-8">
               <div className="flex items-center justify-between mb-8">
-                 <h4 className="text-lg font-black text-stone-900">Recent Activity</h4>
-                 <button onClick={() => onNavigate('reminders')} className="text-[10px] font-black uppercase tracking-widest text-amber-600 hover:text-stone-900">View All</button>
+                 <h4 className="text-base font-bold text-stone-900 font-serif">Recent Activity</h4>
+                 <button onClick={() => onNavigate('reminders')} className="text-[9px] font-bold uppercase tracking-widest text-amber-600 hover:text-stone-900">View All</button>
               </div>
 
               <div className="space-y-6">
                  <div className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-lg flex-shrink-0">💬</div>
+                    <div className="w-10 h-10 rounded-xl bg-stone-100 border border-stone-200/50 flex items-center justify-center text-lg flex-shrink-0">💬</div>
                     <div>
-                       <p className="text-sm font-bold text-stone-900">Asked about Axumite Kingdom</p>
-                       <p className="text-[10px] font-black uppercase tracking-widest text-stone-500 mt-1">2 days ago</p>
+                       <p className="text-xs md:text-sm font-bold text-stone-900">Asked about Axumite Kingdom</p>
+                       <p className="text-[9px] font-bold uppercase tracking-widest text-stone-500 mt-1">2 days ago</p>
                     </div>
                  </div>
                  <div className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-lg flex-shrink-0">🔖</div>
+                    <div className="w-10 h-10 rounded-xl bg-stone-100 border border-stone-200/50 flex items-center justify-center text-lg flex-shrink-0">🔖</div>
                     <div>
-                       <p className="text-sm font-bold text-stone-900">Saved Timkat Event</p>
-                       <p className="text-[10px] font-black uppercase tracking-widest text-stone-500 mt-1">1 week ago</p>
+                       <p className="text-xs md:text-sm font-bold text-stone-900">Saved Timkat Event</p>
+                       <p className="text-[9px] font-bold uppercase tracking-widest text-stone-500 mt-1">1 week ago</p>
                     </div>
                  </div>
                  <div className="flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-lg flex-shrink-0">🗺️</div>
+                    <div className="w-10 h-10 rounded-xl bg-stone-100 border border-stone-200/50 flex items-center justify-center text-lg flex-shrink-0">🗺️</div>
                     <div>
-                       <p className="text-sm font-bold text-stone-900">Explored Lalibela Map</p>
-                       <p className="text-[10px] font-black uppercase tracking-widest text-stone-500 mt-1">2 weeks ago</p>
+                       <p className="text-xs md:text-sm font-bold text-stone-900">Explored Lalibela Map</p>
+                       <p className="text-[9px] font-bold uppercase tracking-widest text-stone-500 mt-1">2 weeks ago</p>
                     </div>
                  </div>
               </div>
@@ -361,42 +361,40 @@ const UpdatePassword: React.FC<{ onComplete: () => void }> = ({ onComplete }) =>
     } catch (error: any) {
       setMessage(error.message || 'An error occurred');
     } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="text-center py-10 bg-stone-100 p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10">
-      <div className="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🔑</div>
-      <h2 className="text-xl font-black mb-6 text-stone-900">Set New Password</h2>
+     return (
+    <div className="text-center py-10 bg-stone-105 p-10 rounded-[2.5rem] border border-stone-200 shadow-xl max-w-md mx-auto mt-10 font-sans">
+      <div className="w-20 h-20 bg-stone-100 border border-stone-200/50 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🔑</div>
+      <h2 className="text-lg font-bold mb-6 text-stone-900 font-serif">Set New Password</h2>
       
       <form onSubmit={handleUpdatePassword} className="space-y-4">
         <div>
-          <label className="text-xs font-black text-stone-500 uppercase tracking-widest mb-1 block text-left">New Password</label>
+          <label className="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1 block text-left">New Password</label>
           <input 
             type="password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full h-12 bg-stone-100 border border-stone-200 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-100 transition-all"
+            className="w-full h-12 bg-stone-100 border border-stone-200 rounded-xl px-4 text-sm font-normal focus:border-amber-500 focus:outline-none focus:bg-stone-100 transition-all"
             required
           />
         </div>
         <div>
-          <label className="text-xs font-black text-stone-500 uppercase tracking-widest mb-1 block text-left">Confirm Password</label>
+          <label className="text-[10px] font-bold text-stone-500 uppercase tracking-widest mb-1 block text-left">Confirm Password</label>
           <input 
             type="password" 
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full h-12 bg-stone-100 border border-stone-200 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-100 transition-all"
+            className="w-full h-12 bg-stone-100 border border-stone-200 rounded-xl px-4 text-sm font-normal focus:border-amber-500 focus:outline-none focus:bg-stone-100 transition-all"
             required
           />
         </div>
         <button 
           type="submit" 
           disabled={loading}
-          className="w-full h-12 bg-amber-900/20 text-stone-900 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
+          className="w-full h-12 bg-amber-900/20 text-stone-900 rounded-xl font-bold uppercase text-[11px] tracking-widest hover:bg-amber-600 transition-colors disabled:opacity-50"
         >
           {loading ? 'Updating...' : 'Update Password'}
+        </button>
+      </form>sword'}
         </button>
       </form>
 

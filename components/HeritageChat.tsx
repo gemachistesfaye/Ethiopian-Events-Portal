@@ -125,7 +125,7 @@ const HeritageChat: React.FC = () => {
           <button
             key={m.id}
             onClick={() => setMode(m.id)}
-            className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border ${mode === m.id ? 'bg-amber-950/40 text-amber-500 border-amber-900/30 shadow-md' : 'bg-stone-900/20 border-transparent text-stone-400 hover:text-stone-200'}`}
+            className={`px-4 py-2 rounded-xl text-[9px] font-bold uppercase tracking-widest transition-all flex items-center gap-2 border ${mode === m.id ? 'bg-amber-950/40 text-amber-500 border-amber-900/30 shadow-md' : 'bg-stone-900/20 border-transparent text-stone-400 hover:text-stone-200'}`}
           >
             <span>{m.icon}</span>
             {m.label}
@@ -136,15 +136,15 @@ const HeritageChat: React.FC = () => {
       {/* HEADER */}
       <div className="bg-stone-900 p-6 border-b border-stone-850 flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-black text-stone-100 tracking-tight">
+          <h3 className="text-lg font-bold text-stone-100 tracking-tight font-serif">
             {MODES.find(m => m.id === mode)?.label}
           </h3>
-          <p className="text-xs text-stone-400 font-medium mt-1">Immersive Heritage Experience</p>
+          <p className="text-xs text-stone-400 font-normal mt-1">Immersive Heritage Experience</p>
         </div>
 
         <button
           onClick={() => { if(confirm("Clear history?")) { localStorage.removeItem(STORAGE_KEY); setMessages([]); } }}
-          className="text-xs font-black uppercase text-stone-400 hover:text-red-400 transition-colors"
+          className="text-xs font-bold uppercase text-stone-400 hover:text-red-400 transition-colors"
         >
           Clear History
         </button>
@@ -156,7 +156,7 @@ const HeritageChat: React.FC = () => {
         {messages.length === 0 && (
           <div className="text-center py-10">
             <div className="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl border border-stone-800">🤖</div>
-            <p className="text-stone-400 font-black text-xs uppercase tracking-widest mb-6">Choose a mode or try a quick action</p>
+            <p className="text-stone-400 font-bold text-[10px] uppercase tracking-widest mb-6">Choose a mode or try a quick action</p>
             
             <div className="grid gap-3 max-w-md mx-auto">
               {quickActions.map((action, i) => (
@@ -166,7 +166,7 @@ const HeritageChat: React.FC = () => {
                   className="bg-stone-900 p-4 rounded-xl border border-stone-800 hover:border-amber-500 hover:bg-stone-850/50 text-left transition-all flex items-center gap-3 group"
                 >
                   <span className="text-xl">{action.icon}</span>
-                  <span className="text-sm font-bold text-stone-300 group-hover:text-stone-100">{action.text}</span>
+                  <span className="text-xs md:text-sm font-medium text-stone-300 group-hover:text-stone-100">{action.text}</span>
                 </button>
               ))}
             </div>
@@ -179,9 +179,9 @@ const HeritageChat: React.FC = () => {
             className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[85%] p-6 rounded-[2rem] text-sm shadow-sm relative group ${
+              className={`max-w-[85%] p-5 rounded-[2rem] text-xs md:text-sm shadow-sm relative group ${
                 m.role === 'user'
-                  ? 'bg-amber-500 text-stone-950 font-bold'
+                  ? 'bg-amber-500 text-stone-950 font-medium'
                   : 'bg-stone-900 border border-stone-800 text-stone-250 leading-relaxed'
               }`}
             >
@@ -200,7 +200,7 @@ const HeritageChat: React.FC = () => {
                     }
                     parts.push(
                       <strong 
-                        className={`font-black ${m.role === 'user' ? 'text-stone-950 underline' : 'text-stone-100 bg-amber-950/60 px-1 py-0.5 rounded border border-amber-900/30'}`} 
+                        className={`font-bold ${m.role === 'user' ? 'text-stone-950 underline' : 'text-stone-100 bg-amber-950/60 px-1 py-0.5 rounded border border-amber-900/30'}`} 
                         key={match.index}
                       >
                         {match[2]}
@@ -219,12 +219,12 @@ const HeritageChat: React.FC = () => {
               </div>
               
               <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-800">
-                <span className="text-[10px] opacity-50 font-black">{m.time}</span>
+                <span className="text-[9px] opacity-50 font-bold">{m.time}</span>
                 
                 {m.role === 'model' && (
                   <button
                     onClick={() => handleSpeak(m.text, m.id)}
-                    className={`text-xs flex items-center gap-1 font-black uppercase tracking-widest ${speakingId === m.id ? 'text-amber-500 animate-pulse' : 'text-stone-400 hover:text-stone-200'}`}
+                    className={`text-[10px] flex items-center gap-1 font-bold uppercase tracking-widest ${speakingId === m.id ? 'text-amber-500 animate-pulse' : 'text-stone-400 hover:text-stone-200'}`}
                     disabled={speakingId !== null && speakingId !== m.id}
                   >
                     {speakingId === m.id ? '🔊 Speaking...' : '🔈 Listen'}
@@ -237,33 +237,33 @@ const HeritageChat: React.FC = () => {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-stone-900 border border-stone-800 p-6 rounded-[2rem] flex items-center gap-3">
+            <div className="bg-stone-900 border border-stone-800 p-5 rounded-[2rem] flex items-center gap-3">
               <div className="flex gap-1">
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce"></span>
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
               </div>
-              <span className="text-xs font-black text-stone-400 uppercase tracking-widest">Storyteller is composing...</span>
+              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Storyteller is composing...</span>
             </div>
           </div>
         )}
       </div>
 
       {/* INPUT */}
-      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-6 border-t border-stone-850 bg-stone-900 flex gap-3">
+      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-5 border-t border-stone-850 bg-stone-900 flex gap-3">
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask the Storyteller..."
-          className="flex-1 h-14 px-6 rounded-xl bg-stone-950 border-2 border-stone-850 focus:border-amber-500 focus:outline-none focus:bg-stone-900 text-stone-100 font-medium transition-all"
+          className="flex-1 h-12 px-5 rounded-xl bg-stone-950 border-2 border-stone-850 focus:border-amber-500 focus:outline-none focus:bg-stone-900 text-stone-100 text-xs md:text-sm font-normal transition-all"
         />
 
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="bg-stone-950 border border-stone-850 text-stone-100 px-6 rounded-xl font-black uppercase text-xs tracking-widest disabled:opacity-40 hover:bg-stone-900 hover:text-amber-500 transition-colors"
+          className="bg-stone-950 border border-stone-850 text-stone-100 px-5 rounded-xl font-bold uppercase text-[11px] tracking-widest disabled:opacity-40 hover:bg-stone-900 hover:text-amber-500 transition-colors"
         >
           Send
         </button>
