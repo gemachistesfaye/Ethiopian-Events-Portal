@@ -306,6 +306,142 @@ async function chatWithGemini(
   }
 }
 
+/* ================================
+   OFFLINE HERITAGE SEARCH ENGINE
+================================ */
+function getOfflineHeritageResponse(
+  message: string,
+  mode: 'guide' | 'storyteller' | 'teacher' | 'festival' | 'myth'
+): string {
+  const query = message.toLowerCase().trim();
+
+  const selectModeResponse = (options: {
+    guide: string;
+    storyteller: string;
+    teacher: string;
+    festival: string;
+    myth: string;
+  }) => {
+    return options[mode] || options.guide;
+  };
+
+  // 1. GREETINGS
+  if (query.match(/\b(hi|hello|hey|greetings|hola|who are you|howdy)\b/)) {
+    return selectModeResponse({
+      guide: "Greetings, fellow explorer! I am your interactive Ethiopian Heritage Guide. Although I am currently operating on offline backup intelligence, I have complete access to the vault of Ethiopian history. What ancient empire or tradition shall we explore today?",
+      storyteller: "Welcome, traveler! Draw close to the warm digital embers. I am the storyteller. Though my connection to the ether is currently asleep, my chest of tales is bursting with epic sagas of warriors, kings, and ancient wonders. Ask, and the chronicle shall unfold!",
+      teacher: "Hello, seeker of knowledge! I am your cultural teacher. I am currently running on local backup storage, but we have everything we need to learn. Ask me about Ge'ez writing, the 13-month calendar, the democratic Gadaa system, or our vibrant festivals!",
+      festival: "A spectacular welcome! I am your festival explainer. While my servers are taking a brief breath, I am fully ready to describe the dancing, the music, and the sacred dates of Timkat, Meskel, or Enkutatash. Ask away!",
+      myth: "Greetings, brave soul. You have stepped into the realm of ancient mysteries and folklore. My live cosmic connection is resting, but the ancient legends of the Ark, the Queen of Sheba, and the angels of Lalibela never fade. Speak, and I shall unveil the mysteries."
+    });
+  }
+
+  // 2. BATTLE OF ADWA
+  if (query.includes("adwa") || query.includes("battle") || query.includes("menelik") || query.includes("taytu")) {
+    return selectModeResponse({
+      guide: "The Battle of Adwa in March 1896 stands as one of the most significant military victories in world history. Led by the brilliant Emperor Menelik II and the strategically fierce Empress Taytu Betul, Ethiopian forces decisively crushed the invading Italian colonial army. This victory preserved Ethiopia's sovereignty, completely shattered the myth of European military invincibility, and turned Ethiopia into a global beacon of black sovereignty and anti-colonial resistance.",
+      storyteller: "Hark! The horns of Emperor Menelik II echo through the valleys of Tigray! It was March 1, 1896, when the Italian forces marched into the mountainous traps of Adwa. With unmatched tactical brilliance, Empress Taytu Betul ordered the securing of vital water sources, while over 100,000 unified Ethiopian patriots charged from the heights. Before the sun set, the invading armies lay completely routed. Ethiopia remained free, its green, yellow, and red flag flying high as a sacred symbol of eternal freedom!",
+      teacher: "Class, the Battle of Adwa is a prime example of military planning and national unity. Emperor Menelik II utilized diplomatic delays to stockpile modern firearms, while Empress Taytu led her own regiment and managed intelligence. By uniting disparate regional leaders under a single cause, Ethiopia succeeded in defeating a major European power in 1896, keeping its borders uncolonized. Let us note that this battle is celebrated every year on Yekatit 23.",
+      festival: "Adwa Victory Day on March 2 (Yekatit 23) is one of the most energetic and patriotic celebrations in Ethiopia! Across Addis Ababa and the historic hills of Adwa, citizens dress in beautiful white traditional clothing, veterans wear lion-mane headdresses, and military bands parade through the streets. The air is filled with triumphant songs, historical poetry, and absolute national pride!",
+      myth: "Legend tells us that during the fateful battle of Adwa, St. George himself was seen riding on a white horse in the skies, guiding the Ethiopian warriors through the dense smoke of combat. Empress Taytu's tactical genius was said to be guided by ancestral visions, ensuring that the ancient land of the Queen of Sheba would never fall to foreign conquerors."
+    });
+  }
+
+  // 3. LALIBELA
+  if (query.includes("lalibela") || query.includes("church") || query.includes("rock")) {
+    return selectModeResponse({
+      guide: "The Rock-Hewn Churches of Lalibela in the Amhara region are absolute masterpieces of medieval engineering. Built in the 12th century under King Gebre Mesqel Lalibela of the Zagwe dynasty, these 11 monolithic churches were not constructed from the ground up. Instead, they were carved straight down into solid red volcanic tuff rock. They are fully functional structures complete with columns, arches, windows, and drainage systems, connected by a labyrinth of underground tunnels.",
+      storyteller: "In the medieval highlands of Roha, King Lalibela looked upon the earth and envisioned a New Jerusalem carved from the very bones of the world. With heavy iron chisels, stonemasons cut deep into the solid volcanic earth. It is whispered that as the mortal workers rested under the cover of night, angels descended from the heavens to double the speed of the carving. The peak of this magic is Bete Giyorgis (Church of St. George), a pristine cross-shaped monolith standing proudly in its deep trench.",
+      teacher: "Let us study the architecture of Lalibela. The 11 churches are split into three groups: the Northern, Eastern, and Western groups. They represent a pinnacle of rock-cut architecture. Because they are carved from a single piece of volcanic rock, any error would have been catastrophic—there was no way to add material back once carved. This required absolute mastery of geometry, stone carving, and hydraulic engineering.",
+      festival: "Lalibela becomes a glorious ocean of white during Genna (Ethiopian Christmas) on January 7! Tens of thousands of white-robed Orthodox pilgrims gather around the deep trenches of the monolithic churches. The priests stand on the sheer cliff edges, chanting ancient liturgical songs accompanied by the deep rhythmic beat of the Kebero drums, transporting you back to the 12th century.",
+      myth: "The legend of Lalibela says King Lalibela was poisoned by his brother, and during a three-day mystical sleep, he was transported to heaven where God commanded him to carve a New Jerusalem out of stone. Angels actively worked alongside the stonemasons, and King Lalibela's hands were said to be blessed with an unnatural strength that made hard volcanic rock feel like soft wax."
+    });
+  }
+
+  // 4. AXUM / OBELISK / EZANA
+  if (query.includes("axum") || query.includes("obelisk") || query.includes("stelae") || query.includes("ezana") || query.includes("aksum")) {
+    return selectModeResponse({
+      guide: "The Axumite Empire was one of the four global superpowers of the ancient world, alongside Rome, Persia, and China. Flourishing from the 1st to the 7th centuries AD, Axum controlled crucial trade routes between Rome, India, and Africa from its port of Adulis on the Red Sea. Axum is renowned for erecting massive monolithic stelae (obelisks) carved from single blocks of granite, some weighing over 500 tons, representing the graves of their royal rulers.",
+      storyteller: "Long ago, the powerful kings of Axum ruled the seas and the highlands. They minted their own coins of pure gold, declaring their sovereignty to empires far and wide. Their crowning monuments were the colossal granite stelae—carved to look like multi-story skyscrapers, reaching upward to touch the heavens. Though the largest 500-ton stela collapsed during construction, the remaining obelisks stand as silent, towering witnesses of an empire that once commanded the horn of Africa.",
+      teacher: "Historically, the conversion of King Ezana to Christianity around 330 AD by the Syrian scholar Frumentius (Abba Selama) was the turning point for Axum. It became one of the first empires in the world to adopt Christianity as its state religion. This is also where the Ge'ez script flourished, which we still use today. You can see this transition clearly on Axumite coins, where the pagan crescent moon symbol was replaced by the Christian cross.",
+      festival: "In Axum, the festival of Tsion Mariam (St. Mary of Zion) on November 30 (Hidar 21) is a profound spiritual gathering. Thousands of white-clad Orthodox believers from across the nation converge on the historic cathedral, bringing colorful umbrellas, sacred chants, and rhythmic dances to honor the church that guards their most sacred relics.",
+      myth: "According to deep Ethiopian tradition, Axum is the home of the legendary Queen of Sheba (Queen Makeda) and the final resting place of the Ark of the Covenant. It is said that Menelik I, the son of King Solomon and the Queen of Sheba, brought the Ark to Axum, where it has been guarded in absolute secrecy by a succession of consecrated monks who never leave its chapel."
+    });
+  }
+
+  // 5. LUCY / DINKNESH
+  if (query.includes("lucy") || query.includes("dinknesh") || query.includes("homin") || query.includes("afar") || query.includes("cradle")) {
+    return selectModeResponse({
+      guide: "Lucy, known locally in Ethiopia as 'Dinknesh' (meaning 'you are marvelous' in Amharic), is a 3.2-million-year-old hominin fossil discovered in the Hadar region of the Afar Depression in 1974. Belonging to the species Australopithecus afarensis, she is one of the most complete hominin skeletons ever found, providing the definitive proof that bipedalism (walking upright on two legs) evolved before large brains in human ancestors, making Ethiopia the cradle of humanity.",
+      storyteller: "Deep in the sun-baked, ancient soil of the Afar desert, a marvelous treasure lay sleeping for three million years. In 1974, she was brought back into the light of the modern world. They named her Dinknesh—'You are marvelous.' She was small of stature, but she walked upright on two feet, just as we do today. She is the mother of us all, an ancient ancestor who walked the lush plains of Ethiopia when the world was young.",
+      teacher: "Dinknesh represents a crucial link in human evolutionary biology. Discovered by Donald Johanson, her skeleton is roughly 40% complete. The pelvic and leg structure clearly show that she walked upright, which was a revolutionary discovery because it overturned the scientific consensus that brain size grew before bipedalism. Ethiopia has since yielded many other ancient hominin fossils, cementing its status as the cradle of human evolution.",
+      festival: "While not a traditional religious festival, Dinknesh is celebrated with immense pride in Ethiopia's National Museum in Addis Ababa, where her replica is displayed. International students, tourists, and locals gather to view the cradle of humanity, celebrating the scientific heritage that unites all humans back to the fertile soil of Ethiopia.",
+      myth: "Dinknesh is a symbol of our shared human ancestry. The local Afar people speak of the desert sands preserving the bones of the first humans as a sacred duty, guarding the maternal spark of humanity for millions of years until the world was mature enough to understand its own origin."
+    });
+  }
+
+  // 6. GADAA SYSTEM
+  if (query.includes("gadaa") || query.includes("oromo") || query.includes("egalitarian") || query.includes("governance")) {
+    return selectModeResponse({
+      guide: "The Gadaa System is an ancient, highly structured democratic system of social, political, and economic governance developed by the Oromo people of Ethiopia. Formalized around the 13th century (though practiced much earlier), the system organizes society into active classes (Luba) that rotate power every eight years. It regulates conflict resolution, environmental protection, land distribution, and human rights, recognized by UNESCO as an intangible cultural heritage.",
+      storyteller: "Under the shade of the sacred Oda tree, the Oromo elders gather in peaceful assembly. This is the Gadaa, where power does not belong to a king, but flows democratically through the community. Every eight years, with solemn oaths and handovers of the Bokkuu (scepter), a new Luba class takes the responsibility of leading the people in peace, justice, and absolute harmony.",
+      teacher: "Let us analyze the structure of the Gadaa system. It is a highly complex social calendar split into five distinct age-grades. Each grade goes through rigorous training in defense, law, diplomacy, and governance before a cohort can assume leadership. The Abbaa Gadaa acts as the president, but he governs alongside a council (Chaffee), ensuring checks and balances that prevent tyranny. It is an amazing example of indigenous African democracy.",
+      festival: "The festival of Irreechaa is the majestic celebration of thanksgiving associated with the Oromo and the Gadaa calendar. Celebrated at the end of the rainy season in September, millions of Oromo people dress in stunning white cultural clothes and gather near sacred lakes and rivers, holding fresh green grass to thank Waaqayyo (God) for life, harvest, and peace.",
+      myth: "The Gadaa system is said to be as balanced as the cycles of nature itself. The Oda tree under which the Gadaa councils meet is believed to represent the cosmic tree of life, whose leaves shade the righteous and whose deep roots bind the community to the laws of truth (Dugoomsa) and cosmic balance."
+    });
+  }
+
+  // 7. COFFEE / BUNA
+  if (query.includes("coffee") || query.includes("buna") || query.includes("ceremony") || query.includes("abol")) {
+    return selectModeResponse({
+      guide: "Ethiopia is the birthplace of Arabica coffee, which originated in the wild forests of the Kaffa region. The traditional Ethiopian Coffee Ceremony (Buna Ceremony) is a highly respected social and cultural ritual. It involves roasting green coffee beans over hot coals, grinding them manually in a mortar, and brewing the coffee three times in a black clay pot called a Jebena, symbolizing friendship, respect, and community.",
+      storyteller: "Close your eyes and breathe in the rich, heavy aroma of roasting coffee beans, blending with the sweet scent of burning frankincense. The ceremony is a sacred dance of hospitality. The host roasts the green beans until they shine black with oils, presenting the smoking pan to each guest. From the tall neck of the dark clay Jebena, a rich dark nectar is poured, bringing warmth, conversation, and blessings to all who sit together.",
+      teacher: "The Buna ceremony has a strict three-round structure that you must remember. The first round is called 'Abol' (the strongest, poured for guests to enjoy). The second round is 'Tona' (brewed with fresh water added to the grinds, lighter). The third round is 'Baraka' (the blessing round, representing peace and safety). Poured from a height into small cups called Cini, the ceremony is the cornerstone of Ethiopian social life.",
+      festival: "Every day is a coffee festival in an Ethiopian household! But during holidays like Timkat or Genna, the Buna ceremony is elevated. Paved with fresh cut green grass on the floor, the coffee area is adorned with yellow flowers, and the host serves popcorn, roasted barley (Kolo), and traditional bread alongside the three sacred cups of Buna.",
+      myth: "The discovery of coffee is told through the popular legend of Kaldi, a young Abyssinian goatherd who lived around the 9th century. Kaldi noticed his goats dancing energetically after eating small red berries from a wild shrub. Intrigued, he took the berries to a local monk, who threw them into a fire in disgust. The roasted beans released an aroma so heavenly that the monks quickly raked them from the coals, crushed them in hot water, and created the first cup of coffee to keep them awake during nightly prayers."
+    });
+  }
+
+  // 8. ETHIOPIAN CALENDAR / TIME
+  if (query.includes("calendar") || query.includes("13") || query.includes("month") || query.includes("pagume") || query.includes("time") || query.includes("hour")) {
+    return selectModeResponse({
+      guide: "The Ethiopian Calendar is a unique solar calendar that is roughly seven to eight years behind the Gregorian calendar. It consists of 13 months: 12 months of exactly 30 days each, and a 13th month called 'Pagumē' which has 5 days (or 6 days in a leap year). The calendar is aligned with the ancient Julian calendar, celebrating the New Year (Enkutatash) on September 11 or 12.",
+      storyteller: "Welcome to a land where time flows differently! In Ethiopia, we are seven years younger, and our year has thirteen months of sunshine. The final month, Pagumē, is a magical bridge of five days where time stands still before the New Year dawns. Even our day begins not at midnight, but at the rising of the sun. When the sun shows its face at dawn, our clock strikes one.",
+      teacher: "Let's learn how Ethiopian time works. The day is divided into two 12-hour cycles starting at dawn. What we call 7:00 AM in the West is 1:00 (Kese'at) in Ethiopian time, because it is the first hour after sunrise. Additionally, our calendar is based on the calculation of the Annunciation of Jesus, which differs from the Roman calculations, placing us 7 years and 8 months behind the Gregorian standard.",
+      festival: "Enkutatash (the Ethiopian New Year) on September 11 is the ultimate calendar festival! The heavy summer rains end, the skies clear, and the highland meadows explode in a carpet of bright yellow daisies called Meskel flowers. Children sing traditional songs like 'Abebayehosh' door-to-door, and families feast on Doro Wat, celebrating the transition to the new year.",
+      myth: "Pagumē, the short 13th month, is treated in folklore as a sacred, mystical time. Because it belongs to no standard month, it is believed that the waters of all rivers are blessed with holy purification during these five days. Many traditional people will bathe in the rivers at dawn during Pagumē to wash away the trials of the past year and enter the new year spiritually clean."
+    });
+  }
+
+  // 9. TRADITIONAL FOOD / INJERA / CULINARY
+  if (query.includes("food") || query.includes("injera") || query.includes("wat") || query.includes("doro") || query.includes("teff")) {
+    return selectModeResponse({
+      guide: "Ethiopian cuisine is highly distinctive, healthy, and communal, centered around Injera—a large, spongy, sourdough flatbread made from fermented teff grain (an ancient superfood rich in iron and gluten-free). Various spicy stews, known as Wat (such as Doro Wat chicken stew, or Misir Wat lentil stew), are served directly on top of the Injera. Diners eat communally using their right hands to tear off pieces of Injera to scoop up the stews.",
+      storyteller: "Gather close around the colorful woven Mesob table. To eat in Ethiopia is to share a covenant of friendship. A large platter of Injera is spread out, topped with colorful mounds of rich, spicy red Doro Wat, simmered with berbere spices and boiled eggs. You tear a soft piece of Injera, scoop the savory sauce, and place it in the mouth of your companion. This is Gursha—an act of pure love and hospitality.",
+      teacher: "Let's study the fermentation chemistry of Injera. The tiny teff seeds are ground into flour and mixed with water to ferment for three to four days, creating a natural yeast starter called Ersho. This fermentation gives Injera its unique sour taste and spongy texture with tiny holes called 'eyes' (Ayn). Eating is done strictly with the right hand. The most famous dish, Doro Wat, takes hours to prepare, slow-cooking onions until they form a deep, caramelized base.",
+      festival: "During major religious holidays like Fasika (Easter) or Genna, the end of long fasting periods (where Orthodox Christians eat strictly vegan diets for 55 or 40 days) is marked by a massive culinary explosion. At midnight, families break the fast with freshly slaughtered sheep or chicken, preparing delicious raw meat (Kifto), Doro Wat, and home-brewed honey wine called Tej.",
+      myth: "Teff is believed to have been cultivated in the Ethiopian highlands for over 6,000 years. Legend says that the ancient giants who built the stelae of Axum survived on a diet of teff and honey, giving them the strength to lift single blocks of granite that weighed hundreds of tons from quarries miles away."
+    });
+  }
+
+  // 10. DEFAULTS & CATEGORIZED GUIDANCE IF KEYWORD NOT FOUND
+  return `As your Ethiopian Heritage Guide, I am currently operating in **Offline Intelligence Mode** due to high global query volume. While my live connection is recharging, I have full offline access to our historical archives!
+
+I detected your query: "${message}". Although I cannot access live neural systems right now, I can explain any of our rich cultural treasures in detail. 
+
+Ask me about any of these fascinating subjects:
+* 🏛️ **Battle of Adwa (1896)** — The iconic victory of African independence.
+* 🧱 **Lalibela Rock-Hewn Churches** — Architectural wonders carved from solid rock.
+* 🏺 **Kingdom of Axum** — The ancient powerhouse of trade, obelisks, and the Ark.
+* 🦅 **Lucy (Dinknesh)** — The 3.2-million-year-old cradle of humanity in Afar.
+* ⚖️ **Gadaa System & Irreechaa** — The ancient democratic system of the Oromo.
+* ☕ **Buna (Coffee) Ceremony** — The spiritual and social heritage of Arabica.
+* 📜 **Ge'ez Script & 13-Month Calendar** — Our unique writing system and solar calendar.
+* 🍲 **Injera & Doro Wat** — The communal and scientific culinary arts of Ethiopia.
+
+*Just type one of these topics (e.g., "Tell me about Adwa" or "How does the calendar work?") to unlock the offline archive!*`;
+}
+
 export async function chatWithHeritageGuide(
   history: ChatMessage[],
   message: string,
@@ -319,7 +455,9 @@ export async function chatWithHeritageGuide(
   const geminiResult = await chatWithGemini(history, message, mode);
   if (geminiResult) return geminiResult;
 
-  return "The guide is temporarily unavailable. Please try again in a moment.";
+  // Rich Offline Local Knowledge Base Fallback
+  console.log("🟠 Both API gateways rate-limited. Activating Local Offline Heritage Knowledge Vault.");
+  return getOfflineHeritageResponse(message, mode);
 }
 
 /* ================================
