@@ -59,7 +59,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
 
   return (
     <div className="fixed inset-0 bg-stone-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-3xl rounded-[3rem] overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-500 flex flex-col md:flex-row max-h-[90vh]">
+      <div className="bg-stone-50 w-full max-w-3xl rounded-[3rem] overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-500 flex flex-col md:flex-row max-h-[90vh]">
         {/* Left Side: Visuals */}
         <div className="md:w-1/3 relative h-64 md:h-auto overflow-hidden">
           <img src={event.imageUrl} alt={event.name} className="w-full h-full object-cover" />
@@ -74,7 +74,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
                <button 
                 onClick={handleSpeak}
                 disabled={isSpeaking}
-                className={`p-2 rounded-full bg-white/20 hover:bg-white/40 transition-all ${isSpeaking ? 'animate-pulse' : ''}`}
+                className={`p-2 rounded-full bg-stone-50/20 hover:bg-stone-50/40 transition-all ${isSpeaking ? 'animate-pulse' : ''}`}
                >
                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 14.657a1 1 0 01-1.414-1.414A5 5 0 0011 8.586V7.172a7 7 0 013.657 7.485z" clipRule="evenodd" /></svg>
                </button>
@@ -83,7 +83,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
         </div>
 
         {/* Right Side: Content */}
-        <div className="md:w-2/3 p-10 overflow-y-auto bg-stone-50/30">
+        <div className="md:w-2/3 p-10 overflow-y-auto bg-stone-100/30">
           <div className="flex justify-between items-start mb-8">
             <div>
               <p className="text-amber-600 text-xs font-black uppercase tracking-[0.2em] mb-1">Festival Schedule</p>
@@ -100,7 +100,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
           <div className="space-y-10">
             <section>
               <h3 className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-3">Historical Context</h3>
-              <p className="text-stone-600 text-sm leading-relaxed font-medium bg-white p-6 rounded-3xl border border-stone-200 shadow-sm">
+              <p className="text-stone-600 text-sm leading-relaxed font-medium bg-stone-50 p-6 rounded-3xl border border-stone-200 shadow-sm">
                 {event.description}
               </p>
             </section>
@@ -121,14 +121,14 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
 
             <section>
               {showReminderForm ? (
-                <form onSubmit={handleSubmitReminder} className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-2xl animate-in slide-in-from-bottom-4">
+                <form onSubmit={handleSubmitReminder} className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-2xl animate-in slide-in-from-bottom-4">
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div>
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-2 block">Priority</label>
                       <select 
                         value={priority}
                         onChange={(e) => setPriority(e.target.value as ReminderPriority)}
-                        className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        className="w-full bg-stone-100 border border-stone-200 p-3 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-500"
                       >
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
@@ -140,7 +140,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
                       <select 
                         value={category}
                         onChange={(e) => setCategory(e.target.value as ReminderCategory)}
-                        className="w-full bg-stone-50 border border-stone-200 p-3 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        className="w-full bg-stone-100 border border-stone-200 p-3 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-500"
                       >
                         <option value="General">General</option>
                         <option value="Travel">Travel</option>
@@ -154,7 +154,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
                     value={reminderNote}
                     onChange={(e) => setReminderNote(e.target.value)}
                     placeholder="Add a private note about your plans..."
-                    className="w-full p-5 bg-stone-50 border border-stone-200 rounded-2xl text-stone-900 text-sm focus:ring-2 focus:ring-amber-500 mb-6 min-h-[120px]"
+                    className="w-full p-5 bg-stone-100 border border-stone-200 rounded-2xl text-stone-900 text-sm focus:ring-2 focus:ring-amber-500 mb-6 min-h-[120px]"
                     required
                   />
                   

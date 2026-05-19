@@ -79,7 +79,7 @@ const Calendar: React.FC<CalendarProps> = ({ onSelectDate, selectedDate }) => {
   const firstDayOffset = days[0]?.gregorian.getDay() || 0;
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl shadow-stone-200/50 overflow-hidden border border-stone-200 animate-in fade-in duration-500">
+    <div className="bg-stone-50 rounded-3xl shadow-xl shadow-stone-200/50 overflow-hidden border border-stone-200 animate-in fade-in duration-500">
       <div className="bg-stone-900 px-6 py-6 text-white flex flex-row justify-between items-center border-b border-stone-800">
         <div className="flex-1">
           {headerContent}
@@ -102,7 +102,7 @@ const Calendar: React.FC<CalendarProps> = ({ onSelectDate, selectedDate }) => {
         <div className="grid grid-cols-7 gap-2">
           {/* Padding for the start of the month */}
           {Array.from({ length: firstDayOffset }).map((_, i) => (
-            <div key={`empty-${i}`} className="h-24 bg-stone-50/50 rounded-2xl border border-dashed border-stone-100" />
+            <div key={`empty-${i}`} className="h-24 bg-stone-100/50 rounded-2xl border border-dashed border-stone-100" />
           ))}
           
           {days.map((day) => {
@@ -114,7 +114,7 @@ const Calendar: React.FC<CalendarProps> = ({ onSelectDate, selectedDate }) => {
                 key={day.gregorian.toISOString()}
                 onClick={() => onSelectDate(day)}
                 className={`h-24 rounded-2xl border flex flex-col items-center justify-center relative transition-all group overflow-hidden
-                  ${isSelected ? 'bg-stone-900 border-stone-900 text-white shadow-2xl scale-[1.05] z-10' : 'bg-white border-stone-100 hover:border-amber-400 hover:bg-stone-50/50'}
+                  ${isSelected ? 'bg-stone-900 border-stone-900 text-white shadow-2xl scale-[1.05] z-10' : 'bg-stone-50 border-stone-100 hover:border-amber-400 hover:bg-stone-100/50'}
                   ${day.isToday ? 'ring-2 ring-amber-500 ring-offset-2' : ''}
                 `}
               >

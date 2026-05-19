@@ -55,7 +55,7 @@ const ReminderItem: React.FC<{
   };
 
   return (
-    <div className="bg-white p-6 rounded-[2rem] border border-stone-200 shadow-sm hover:shadow-xl transition-all flex flex-col md:flex-row justify-between items-start group animate-in fade-in duration-300 relative overflow-hidden">
+    <div className="bg-stone-50 p-6 rounded-[2rem] border border-stone-200 shadow-sm hover:shadow-xl transition-all flex flex-col md:flex-row justify-between items-start group animate-in fade-in duration-300 relative overflow-hidden">
       <div className="flex gap-6 w-full">
         <div className="w-14 h-14 rounded-2xl bg-stone-900 text-amber-500 flex items-center justify-center font-black text-2xl shadow-xl shrink-0 group-hover:scale-110 transition-transform duration-500">
           <CategoryIcon category={reminder.category} />
@@ -77,7 +77,7 @@ const ReminderItem: React.FC<{
               <textarea
                 value={editNote}
                 onChange={(e) => setEditNote(e.target.value)}
-                className="w-full p-5 text-sm text-stone-900 bg-white border-2 border-amber-300 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 focus:outline-none font-medium shadow-inner min-h-[120px]"
+                className="w-full p-5 text-sm text-stone-900 bg-stone-50 border-2 border-amber-300 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 focus:outline-none font-medium shadow-inner min-h-[120px]"
                 autoFocus
               />
               <div className="flex gap-2">
@@ -87,7 +87,7 @@ const ReminderItem: React.FC<{
             </form>
           ) : (
             <div className="relative">
-              <p className="text-stone-700 text-base mt-2 font-medium leading-relaxed break-words bg-stone-50/50 p-4 rounded-2xl border border-stone-100 italic">
+              <p className="text-stone-700 text-base mt-2 font-medium leading-relaxed break-words bg-stone-100/50 p-4 rounded-2xl border border-stone-100 italic">
                 "{reminder.note}"
               </p>
             </div>
@@ -108,13 +108,13 @@ const ReminderItem: React.FC<{
         <div className="flex md:flex-col gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity mt-4 md:mt-0 ml-auto md:ml-4">
           <button 
             onClick={() => setIsEditing(true)}
-            className="p-3 text-stone-400 hover:text-amber-500 transition-all bg-stone-50 hover:bg-amber-50 rounded-xl border border-stone-200"
+            className="p-3 text-stone-400 hover:text-amber-500 transition-all bg-stone-100 hover:bg-amber-50 rounded-xl border border-stone-200"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
           </button>
           <button 
             onClick={() => onDelete(reminder.id)}
-            className="p-3 text-stone-400 hover:text-red-500 transition-all bg-stone-50 hover:bg-red-50 rounded-xl border border-stone-200"
+            className="p-3 text-stone-400 hover:text-red-500 transition-all bg-stone-100 hover:bg-red-50 rounded-xl border border-stone-200"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
           </button>
@@ -127,8 +127,8 @@ const ReminderItem: React.FC<{
 const MyReminders: React.FC<MyRemindersProps> = ({ reminders, events, onDelete, onUpdate, onClearAll }) => {
   if (reminders.length === 0) {
     return (
-      <div className="bg-white rounded-[3rem] p-24 text-center border border-stone-200 shadow-sm animate-in fade-in duration-700">
-        <div className="bg-stone-50 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10 border border-stone-100 shadow-inner">
+      <div className="bg-stone-50 rounded-[3rem] p-24 text-center border border-stone-200 shadow-sm animate-in fade-in duration-700">
+        <div className="bg-stone-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10 border border-stone-100 shadow-inner">
           <svg className="w-16 h-16 text-stone-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         </div>
         <h3 className="text-3xl font-black text-stone-900 mb-4 tracking-tight">Your Heritage Box is Empty</h3>
@@ -141,7 +141,7 @@ const MyReminders: React.FC<MyRemindersProps> = ({ reminders, events, onDelete, 
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto pb-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-sm">
         <div className="flex items-center gap-5">
           <div className="w-16 h-16 bg-amber-500 rounded-[1.25rem] flex items-center justify-center text-stone-900 text-2xl font-black shadow-xl shadow-amber-200/50">
             {reminders.length}

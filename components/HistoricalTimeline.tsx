@@ -657,7 +657,7 @@ const HistoricalTimeline: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 p-6 lg:p-10 font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-stone-100 p-6 lg:p-10 font-sans relative overflow-hidden">
       
       {/* Inject custom styled animations inside a style tag */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -711,7 +711,7 @@ const HistoricalTimeline: React.FC = () => {
         <header className="mb-16 text-center pt-8">
           <div className="inline-block relative">
              <span className="absolute -inset-1 bg-amber-500/20 blur-lg rounded-full"></span>
-             <span className="relative bg-white border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
+             <span className="relative bg-stone-50 border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
                Animus Archive System
              </span>
           </div>
@@ -732,7 +732,7 @@ const HistoricalTimeline: React.FC = () => {
               className={`relative overflow-hidden px-6 py-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all duration-300 group shadow-sm ${
                 filter === c 
                   ? 'bg-amber-500 text-white shadow-[0_4px_15px_rgba(245,158,11,0.3)] border border-amber-400' 
-                  : 'bg-white border border-stone-200 text-stone-500 hover:border-amber-300 hover:text-amber-600'
+                  : 'bg-stone-50 border border-stone-200 text-stone-500 hover:border-amber-300 hover:text-amber-600'
               }`}
             >
               <span className="relative z-10">{c}</span>
@@ -764,7 +764,7 @@ const HistoricalTimeline: React.FC = () => {
                 {/* Content Card (Gaming Style - Light) */}
                 <div className="w-full md:w-[42%] ml-16 md:ml-0 group perspective-1000">
                   <div 
-                    className="relative bg-white/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-200 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
+                    className="relative bg-stone-50/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-200 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
                     onClick={() => setSelectedEvent(event)}
                   >
                     {/* Corner accents */}
@@ -774,7 +774,7 @@ const HistoricalTimeline: React.FC = () => {
                     <div className="flex items-center gap-4 mb-4">
                       <span className="text-sm font-black text-amber-600">{event.year}</span>
                       <div className="h-px flex-1 bg-gradient-to-r from-amber-200 to-transparent"></div>
-                      <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-50 border border-stone-200 text-stone-500 px-3 py-1.5 rounded-sm">
+                      <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-100 border border-stone-200 text-stone-500 px-3 py-1.5 rounded-sm">
                         {event.category}
                       </span>
                     </div>

@@ -200,7 +200,7 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-2xl font-sans">
+    <div className="max-w-2xl mx-auto bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-2xl font-sans">
       <div className="text-center mb-6">
         <span className="bg-stone-900 text-amber-500 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg">AI Voice Narration</span>
         <h2 className="text-3xl font-black text-stone-900 tracking-tighter leading-none">{title}</h2>
@@ -232,7 +232,7 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
         </div>
 
         {/* Player UI */}
-        <div className="bg-stone-50 p-6 rounded-2xl border border-stone-100">
+        <div className="bg-stone-100 p-6 rounded-2xl border border-stone-100">
           <p className="text-stone-700 text-sm leading-relaxed mb-6 font-medium">"{text}"</p>
 
           <div className="flex items-center gap-4">

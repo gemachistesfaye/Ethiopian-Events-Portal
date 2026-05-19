@@ -117,7 +117,7 @@ const HeritageChat: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-white rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden font-sans">
+    <div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-stone-50 rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden font-sans">
       
       {/* MODES SELECTOR */}
       <div className="bg-stone-900 p-4 flex flex-wrap gap-2 justify-center border-b border-stone-800">
@@ -134,7 +134,7 @@ const HeritageChat: React.FC = () => {
       </div>
 
       {/* HEADER */}
-      <div className="bg-white p-6 border-b border-stone-100 flex justify-between items-center">
+      <div className="bg-stone-50 p-6 border-b border-stone-100 flex justify-between items-center">
         <div>
           <h3 className="text-xl font-black text-stone-900 tracking-tight">
             {MODES.find(m => m.id === mode)?.label}
@@ -151,7 +151,7 @@ const HeritageChat: React.FC = () => {
       </div>
 
       {/* CHAT BODY */}
-      <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6 bg-stone-50/50">
+      <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6 bg-stone-100/50">
 
         {messages.length === 0 && (
           <div className="text-center py-10">
@@ -163,7 +163,7 @@ const HeritageChat: React.FC = () => {
                 <button
                   key={i}
                   onClick={() => handleSend(action.text)}
-                  className="bg-white p-4 rounded-xl border border-stone-200 hover:border-amber-500 hover:bg-amber-50/50 text-left transition-all flex items-center gap-3 group"
+                  className="bg-stone-50 p-4 rounded-xl border border-stone-200 hover:border-amber-500 hover:bg-amber-50/50 text-left transition-all flex items-center gap-3 group"
                 >
                   <span className="text-xl">{action.icon}</span>
                   <span className="text-sm font-bold text-stone-700 group-hover:text-stone-900">{action.text}</span>
@@ -182,7 +182,7 @@ const HeritageChat: React.FC = () => {
               className={`max-w-[85%] p-6 rounded-[2rem] text-sm shadow-sm relative group ${
                 m.role === 'user'
                   ? 'bg-amber-500 text-stone-900 font-bold'
-                  : 'bg-white border border-stone-200 text-stone-800 leading-relaxed'
+                  : 'bg-stone-50 border border-stone-200 text-stone-800 leading-relaxed'
               }`}
             >
               <div style={{ whiteSpace: 'pre-wrap' }}>
@@ -237,7 +237,7 @@ const HeritageChat: React.FC = () => {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-white border border-stone-200 p-6 rounded-[2rem] flex items-center gap-3">
+            <div className="bg-stone-50 border border-stone-200 p-6 rounded-[2rem] flex items-center gap-3">
               <div className="flex gap-1">
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce"></span>
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
@@ -250,14 +250,14 @@ const HeritageChat: React.FC = () => {
       </div>
 
       {/* INPUT */}
-      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-6 border-t bg-white flex gap-3">
+      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-6 border-t bg-stone-50 flex gap-3">
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask the Storyteller..."
-          className="flex-1 h-14 px-6 rounded-xl bg-stone-100 border-2 border-transparent focus:border-amber-500 focus:outline-none focus:bg-white font-medium transition-all"
+          className="flex-1 h-14 px-6 rounded-xl bg-stone-100 border-2 border-transparent focus:border-amber-500 focus:outline-none focus:bg-stone-50 font-medium transition-all"
         />
 
         <button

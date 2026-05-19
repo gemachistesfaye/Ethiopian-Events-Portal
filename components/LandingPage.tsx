@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
   return (
-    <div className="bg-stone-50 text-stone-900 font-sans overflow-hidden">
+    <div className="bg-stone-100 text-stone-900 font-sans overflow-hidden">
       
       {/* HERO SECTION */}
       <section className="relative min-h-screen flex flex-col justify-center items-center text-center p-6 bg-stone-900 text-white overflow-hidden">
@@ -38,7 +38,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             >
               Begin Journey
             </button>
-            <button className="bg-white/10 backdrop-blur-sm text-white border border-white/20 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest hover:bg-white/20 transition-all">
+            <button className="bg-stone-50/10 backdrop-blur-sm text-white border border-white/20 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest hover:bg-stone-50/20 transition-all">
               Watch Trailer
             </button>
           </div>
@@ -49,7 +49,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           <motion.div 
             animate={{ y: [0, -10, 0] }}
             transition={{ repeat: Infinity, duration: 4 }}
-            className="bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 text-xs w-48"
+            className="bg-stone-50/5 backdrop-blur-md p-4 rounded-xl border border-white/10 text-xs w-48"
           >
             <p className="text-amber-500 font-black">TODAY IN HISTORY</p>
             <p className="text-white mt-1">The Battle of Adwa victory was secured.</p>
@@ -68,7 +68,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           {/* Card 1 */}
           <motion.div 
             whileHover={{ y: -5 }}
-            className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
+            className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
           >
             <div className="w-14 h-14 bg-amber-500 text-stone-900 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-amber-500/20">🗺️</div>
             <h3 className="text-2xl font-black text-stone-900 mb-2">Interactive Atlas</h3>
@@ -78,7 +78,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           {/* Card 2 */}
           <motion.div 
             whileHover={{ y: -5 }}
-            className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
+            className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
           >
             <div className="w-14 h-14 bg-stone-900 text-amber-500 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg">📜</div>
             <h3 className="text-2xl font-black text-stone-900 mb-2">Living Timeline</h3>
@@ -88,7 +88,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           {/* Card 3 */}
           <motion.div 
             whileHover={{ y: -5 }}
-            className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
+            className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
           >
             <div className="w-14 h-14 bg-amber-500 text-stone-900 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-amber-500/20">🤖</div>
             <h3 className="text-2xl font-black text-stone-900 mb-2">AI Storyteller</h3>
@@ -108,7 +108,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Event 1: Timkat */}
-            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+            <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                 style={{ backgroundImage: `url('/timkat.png')` }}
@@ -121,7 +121,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             </div>
 
             {/* Event 2: Meskel */}
-            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+            <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                 style={{ backgroundImage: `url('/meskel.png')` }}
@@ -134,7 +134,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             </div>
 
             {/* Event 3: Irreecha */}
-            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+            <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                 style={{ backgroundImage: `url('/irreecha.png')` }}
@@ -147,7 +147,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             </div>
 
             {/* Event 4: Eid al-Fitr */}
-            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+            <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                 style={{ backgroundImage: `url('/eid_fitr.png')` }}
@@ -160,7 +160,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             </div>
 
             {/* Event 5: Eid al-Adha */}
-            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+            <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                 style={{ backgroundImage: `url('/eid_adha.png')` }}
@@ -173,7 +173,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             </div>
 
             {/* Event 6: Fichee Chambalaalla */}
-            <div className="bg-white rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
+            <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
               <div 
                 className="h-48 bg-stone-200 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                 style={{ backgroundImage: `url('/fichee.png')` }}

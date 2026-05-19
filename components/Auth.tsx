@@ -69,7 +69,7 @@ const Auth: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl font-sans mt-10">
+    <div className="max-w-md mx-auto bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl font-sans mt-10">
       <div className="text-center mb-6">
         <span className="bg-stone-900 text-amber-500 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] mb-3 inline-block shadow-lg">Secure Access</span>
         <h2 className="text-3xl font-black text-stone-900 tracking-tighter leading-none">
@@ -85,7 +85,7 @@ const Auth: React.FC = () => {
               type="text" 
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+              className="w-full h-12 bg-stone-100 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-50 transition-all"
               required={isSignUp}
             />
           </div>
@@ -97,7 +97,7 @@ const Auth: React.FC = () => {
             type="email" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+            className="w-full h-12 bg-stone-100 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-50 transition-all"
             required
           />
         </div>
@@ -109,7 +109,7 @@ const Auth: React.FC = () => {
               type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+              className="w-full h-12 bg-stone-100 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-50 transition-all"
               required={!isForgotPassword}
             />
           </div>
@@ -122,7 +122,7 @@ const Auth: React.FC = () => {
               type="password" 
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full h-12 bg-stone-50 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-white transition-all"
+              className="w-full h-12 bg-stone-100 border border-stone-100 rounded-xl px-4 text-sm font-medium focus:border-amber-500 focus:outline-none focus:bg-stone-50 transition-all"
               required={isSignUp}
             />
           </div>
@@ -155,13 +155,13 @@ const Auth: React.FC = () => {
         <>
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-stone-100"></div></div>
-            <div className="relative flex justify-center text-xs uppercase font-black text-stone-300"><span className="bg-white px-4">Or continue with</span></div>
+            <div className="relative flex justify-center text-xs uppercase font-black text-stone-300"><span className="bg-stone-50 px-4">Or continue with</span></div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <button 
               onClick={handleGoogleLogin}
-              className="w-full h-12 bg-white border border-stone-200 text-stone-700 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-50 transition-colors flex items-center justify-center gap-2"
+              className="w-full h-12 bg-stone-50 border border-stone-200 text-stone-700 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-stone-100 transition-colors flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" viewBox="0 0 48 48">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
