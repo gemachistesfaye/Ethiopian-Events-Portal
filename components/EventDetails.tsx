@@ -68,7 +68,7 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, onClose, onAddRemind
              <span className="bg-amber-950/60 text-amber-300 px-3 py-1 rounded-xl text-[9px] font-black uppercase tracking-widest mb-3 inline-block shadow-lg border border-amber-900/30">
                {event.category}
              </span>
-             <h2 className="text-3xl font-black leading-none mb-2">{event.name}</h2>
+             <h2 className="text-3xl font-bold leading-none mb-2 font-serif text-stone-100">{event.name}</h2>
              <div className="flex items-center gap-2">
                <span className="text-lg font-bold ethiopic-font text-amber-400">{event.nameAmharic}</span>
                <button 

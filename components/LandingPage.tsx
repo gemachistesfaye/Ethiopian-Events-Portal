@@ -23,9 +23,9 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           <span className="bg-amber-950/60 text-amber-400 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block shadow-lg border border-amber-900/30">
             Welcome to the Future of Heritage
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none mb-6 text-stone-100">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-wide leading-none mb-6 text-stone-100 font-serif">
             Experience Ethiopian <br />
-            <span className="text-amber-500">Culture & History</span>
+            <span className="gold-text-gradient">Culture & History</span>
           </h1>
           <p className="text-stone-400 text-base md:text-lg max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
             Discover the ancient traditions, epic stories, and vibrant festivals of Ethiopia through cutting-edge AI and interactive experiences.
@@ -61,7 +61,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-xs font-black text-amber-600 uppercase tracking-widest">Core Modules</span>
-          <h2 className="text-4xl font-black text-stone-900 tracking-tight mt-1">Immersive Exploration</h2>
+          <h2 className="text-4xl font-bold text-stone-900 tracking-wide mt-1 font-serif">Immersive Exploration</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -71,7 +71,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
           >
             <div className="w-14 h-14 bg-amber-900/20 text-stone-900 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-amber-500/20">🗺️</div>
-            <h3 className="text-2xl font-black text-stone-900 mb-2">Interactive Atlas</h3>
+            <h3 className="text-2xl font-bold text-stone-900 mb-2 font-serif">Interactive Atlas</h3>
             <p className="text-stone-500 text-sm leading-relaxed">Explore regions, traditions, and local heritage through a stylized interactive map.</p>
           </motion.div>
 
@@ -81,7 +81,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
           >
             <div className="w-14 h-14 bg-stone-50 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg">📜</div>
-            <h3 className="text-2xl font-black text-stone-900 mb-2">Living Timeline</h3>
+            <h3 className="text-2xl font-bold text-stone-900 mb-2 font-serif">Living Timeline</h3>
             <p className="text-stone-500 text-sm leading-relaxed">Scroll through centuries of epic history, from Axum to modern eras.</p>
           </motion.div>
 
@@ -91,7 +91,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
             className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
           >
             <div className="w-14 h-14 bg-amber-900/20 text-stone-900 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-amber-500/20">🤖</div>
-            <h3 className="text-2xl font-black text-stone-900 mb-2">AI Storyteller</h3>
+            <h3 className="text-2xl font-bold text-stone-900 mb-2 font-serif">AI Storyteller</h3>
             <p className="text-stone-500 text-sm leading-relaxed">Chat with an advanced AI guide that narrates history with emotional depth.</p>
           </motion.div>
         </div>
@@ -102,7 +102,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-xs font-black text-amber-600 uppercase tracking-widest">Glimpse of Heritage</span>
-            <h2 className="text-4xl font-black text-stone-900 tracking-tight mt-1">Featured Festivals</h2>
+            <h2 className="text-4xl font-bold text-stone-900 tracking-wide mt-1 font-serif">Featured Festivals</h2>
             <p className="text-stone-500 text-sm font-medium mt-2">Discover some of the most vibrant celebrations in Ethiopia.</p>
           </div>
 
@@ -115,7 +115,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               ></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">January 19</span>
-                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Timkat (Epiphany)</h3>
+                <h3 className="text-xl font-bold text-stone-900 mt-2 mb-1 font-serif">Timkat (Epiphany)</h3>
                 <p className="text-stone-500 text-xs leading-relaxed">The most important festival of the Ethiopian Orthodox Church, celebrating the baptism of Jesus.</p>
               </div>
             </div>
@@ -128,7 +128,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               ></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">September 27</span>
-                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Meskel</h3>
+                <h3 className="text-xl font-bold text-stone-900 mt-2 mb-1 font-serif">Meskel</h3>
                 <p className="text-stone-500 text-xs leading-relaxed">The commemoration of the discovery of the True Cross, marked by the lighting of a massive bonfire.</p>
               </div>
             </div>
@@ -141,7 +141,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               ></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Sep / Oct</span>
-                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Irreecha</h3>
+                <h3 className="text-xl font-bold text-stone-900 mt-2 mb-1 font-serif">Irreecha</h3>
                 <p className="text-stone-500 text-xs leading-relaxed">Oromo thanksgiving festival marking the end of the rainy season and the arrival of spring.</p>
               </div>
             </div>
@@ -154,7 +154,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               ></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
-                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Eid al-Fitr</h3>
+                <h3 className="text-xl font-bold text-stone-900 mt-2 mb-1 font-serif">Eid al-Fitr</h3>
                 <p className="text-stone-500 text-xs leading-relaxed">Celebrates the end of Ramadan with prayers, feasting, and community charity.</p>
               </div>
             </div>
@@ -167,7 +167,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               ></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
-                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Eid al-Adha</h3>
+                <h3 className="text-xl font-bold text-stone-900 mt-2 mb-1 font-serif">Eid al-Adha</h3>
                 <p className="text-stone-500 text-xs leading-relaxed">The Feast of Sacrifice, honoring Abraham's willingness to sacrifice his son.</p>
               </div>
             </div>
@@ -180,7 +180,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
               ></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Moveable</span>
-                <h3 className="text-xl font-black text-stone-900 mt-2 mb-1">Fichee-Chambalaalla</h3>
+                <h3 className="text-xl font-bold text-stone-900 mt-2 mb-1 font-serif">Fichee-Chambalaalla</h3>
                 <p className="text-stone-500 text-xs leading-relaxed">The traditional New Year festival of the Sidama people, promoting social cohesion and peace.</p>
               </div>
             </div>
@@ -213,7 +213,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
       {/* CTA SECTION */}
       <section className="py-24 px-6 text-center">
         <div className="max-w-3xl mx-auto bg-stone-950 text-stone-100 p-12 rounded-[3rem] shadow-2xl border border-stone-900">
-          <h2 className="text-4xl font-black tracking-tight mb-4 text-stone-100">Ready to Explore?</h2>
+          <h2 className="text-4xl font-bold tracking-wide mb-4 text-stone-100 font-serif">Ready to Explore?</h2>
           <p className="text-stone-400 text-sm font-medium mb-8 max-w-xl mx-auto">Join thousands of cultural enthusiasts discovering the rich heritage of Ethiopia.</p>
           <button 
             onClick={onExplore}

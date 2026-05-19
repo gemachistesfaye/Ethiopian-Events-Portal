@@ -506,11 +506,11 @@ const App: React.FC = () => {
       <header className="bg-stone-50/85 backdrop-blur-xl border-b border-amber-500/20 sticky top-0 z-40 shadow-sm transition-all">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-11 h-11 bg-stone-50 border border-stone-200/60 rounded-2xl flex items-center justify-center text-amber-600 font-black text-2xl shadow-md transition-all hover:rotate-6 hover:scale-110 cursor-pointer">
+            <div className="w-11 h-11 bg-stone-50 border border-stone-200/60 rounded-2xl flex items-center justify-center text-amber-600 font-bold text-2xl shadow-md transition-all hover:rotate-6 hover:scale-110 cursor-pointer font-serif">
               E
             </div>
             <div>
-              <h1 className="text-xl font-black tracking-tighter text-stone-900 leading-none">{t('app.title')}</h1>
+              <h1 className="text-xl font-bold tracking-wide text-stone-900 leading-none font-serif">{t('app.title')}</h1>
               <p className="text-[9px] text-amber-600 font-black uppercase tracking-[0.3em] mt-1">{t('app.subtitle')}</p>
             </div>
           </div>

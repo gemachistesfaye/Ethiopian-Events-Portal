@@ -715,8 +715,8 @@ const HistoricalTimeline: React.FC = () => {
                Animus Archive System
              </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter leading-none mb-4 uppercase drop-shadow-sm">
-            Chronicles of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500">Ethiopia</span>
+          <h1 className="text-5xl md:text-7xl font-bold text-stone-900 tracking-wide leading-none mb-4 uppercase drop-shadow-sm font-serif">
+            Chronicles of <span className="gold-text-gradient">Ethiopia</span>
           </h1>
           <p className="text-stone-500 text-base md:text-lg font-medium max-w-2xl mx-auto uppercase tracking-widest text-[10px]">
             Unlock the epic eras, legendary battles, and ancient secrets of the Horn of Africa.
@@ -779,7 +779,7 @@ const HistoricalTimeline: React.FC = () => {
                       </span>
                     </div>
                     
-                    <h3 className="text-2xl font-black text-stone-900 mb-3 tracking-tight group-hover:text-amber-600 transition-colors">{event.title}</h3>
+                    <h3 className="text-2xl font-bold text-stone-900 mb-3 tracking-wide group-hover:text-amber-600 transition-colors font-serif">{event.title}</h3>
                     <p className="text-stone-700 text-sm leading-relaxed font-medium">{event.description}</p>
                     
                     <div className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-stone-500 group-hover:text-amber-600 transition-colors">
