@@ -1,9 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
-  return (
-    <div className="bg-stone-100 text-stone-900 font-sans overflow-hidden">
+const LandingPage = ({ onExplore }) => {
+    return (<div className="bg-stone-100 text-stone-900 font-sans overflow-hidden">
       
       {/* HERO SECTION */}
       <section className="relative min-h-[90vh] flex flex-col justify-center items-center text-center p-6 bg-stone-950 text-stone-100 overflow-hidden border-b border-stone-900">
@@ -14,12 +12,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]"></div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="relative z-10 max-w-4xl mx-auto"
-        >
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="relative z-10 max-w-4xl mx-auto">
           <span className="bg-amber-950/60 text-amber-400 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6 inline-block shadow-lg border border-amber-900/30">
             Welcome to the Future of Heritage
           </span>
@@ -32,10 +25,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <button 
-              onClick={onExplore}
-              className="bg-amber-500 text-stone-950 px-6 py-3 rounded-2xl font-bold uppercase text-[11px] tracking-widest hover:bg-amber-400 transition-all transform hover:scale-105 shadow-xl shadow-amber-500/20"
-            >
+            <button onClick={onExplore} className="bg-amber-500 text-stone-950 px-6 py-3 rounded-2xl font-bold uppercase text-[11px] tracking-widest hover:bg-amber-400 transition-all transform hover:scale-105 shadow-xl shadow-amber-500/20">
               Begin Journey
             </button>
             <button className="bg-stone-900 border border-stone-800 text-stone-100 px-6 py-3 rounded-2xl font-bold uppercase text-[11px] tracking-widest hover:bg-stone-800 transition-all">
@@ -46,11 +36,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
         {/* Floating Cards Mockup */}
         <div className="absolute bottom-10 left-10 hidden lg:block">
-          <motion.div 
-            animate={{ y: [0, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 4 }}
-            className="bg-stone-900/40 backdrop-blur-md p-4 rounded-xl border border-stone-850 text-xs w-48 text-stone-300"
-          >
+          <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="bg-stone-900/40 backdrop-blur-md p-4 rounded-xl border border-stone-850 text-xs w-48 text-stone-300">
             <p className="text-amber-500 font-bold">TODAY IN HISTORY</p>
             <p className="text-stone-300 mt-1 font-normal">The Battle of Adwa victory was secured.</p>
           </motion.div>
@@ -66,30 +52,21 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
-          >
+          <motion.div whileHover={{ y: -5 }} className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all">
             <div className="w-12 h-12 bg-amber-900/20 text-stone-900 rounded-2xl flex items-center justify-center text-xl mb-6 shadow-lg shadow-amber-500/20">🗺️</div>
             <h3 className="text-xl font-bold text-stone-900 mb-2 font-serif">Interactive Atlas</h3>
             <p className="text-stone-500 text-xs md:text-sm leading-relaxed font-normal">Explore regions, traditions, and local heritage through a stylized interactive map.</p>
           </motion.div>
 
           {/* Card 2 */}
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
-          >
+          <motion.div whileHover={{ y: -5 }} className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all">
             <div className="w-12 h-12 bg-stone-50 text-amber-600 rounded-2xl flex items-center justify-center text-xl mb-6 shadow-lg">📜</div>
             <h3 className="text-xl font-bold text-stone-900 mb-2 font-serif">Living Timeline</h3>
             <p className="text-stone-500 text-xs md:text-sm leading-relaxed font-normal">Scroll through centuries of epic history, from Axum to modern eras.</p>
           </motion.div>
 
           {/* Card 3 */}
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all"
-          >
+          <motion.div whileHover={{ y: -5 }} className="bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:shadow-2xl transition-all">
             <div className="w-12 h-12 bg-amber-900/20 text-stone-900 rounded-2xl flex items-center justify-center text-xl mb-6 shadow-lg shadow-amber-500/20">🤖</div>
             <h3 className="text-xl font-bold text-stone-900 mb-2 font-serif">AI Storyteller</h3>
             <p className="text-stone-500 text-xs md:text-sm leading-relaxed font-normal">Chat with an advanced AI guide that narrates history with emotional depth.</p>
@@ -109,10 +86,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Event 1: Timkat */}
             <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div 
-                className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('/timkat.png')` }}
-              ></div>
+              <div className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('/timkat.png')` }}></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">January 19</span>
                 <h3 className="text-lg font-bold text-stone-900 mt-2 mb-1 font-serif">Timkat (Epiphany)</h3>
@@ -122,10 +96,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
             {/* Event 2: Meskel */}
             <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div 
-                className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('/meskel.png')` }}
-              ></div>
+              <div className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('/meskel.png')` }}></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">September 27</span>
                 <h3 className="text-lg font-bold text-stone-900 mt-2 mb-1 font-serif">Meskel</h3>
@@ -135,10 +106,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
             {/* Event 3: Irreecha */}
             <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div 
-                className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('/irreecha.png')` }}
-              ></div>
+              <div className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('/irreecha.png')` }}></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">Sep / Oct</span>
                 <h3 className="text-lg font-bold text-stone-900 mt-2 mb-1 font-serif">Irreecha</h3>
@@ -148,10 +116,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
             {/* Event 4: Eid al-Fitr */}
             <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div 
-                className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('/eid_fitr.png')` }}
-              ></div>
+              <div className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('/eid_fitr.png')` }}></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">Moveable</span>
                 <h3 className="text-lg font-bold text-stone-900 mt-2 mb-1 font-serif">Eid al-Fitr</h3>
@@ -161,10 +126,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
             {/* Event 5: Eid al-Adha */}
             <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div 
-                className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('/eid_adha.png')` }}
-              ></div>
+              <div className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('/eid_adha.png')` }}></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">Moveable</span>
                 <h3 className="text-lg font-bold text-stone-900 mt-2 mb-1 font-serif">Eid al-Adha</h3>
@@ -174,10 +136,7 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
             {/* Event 6: Fichee Chambalaalla */}
             <div className="bg-stone-50 rounded-[2rem] overflow-hidden border border-stone-200 shadow-xl group">
-              <div 
-                className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
-                style={{ backgroundImage: `url('/fichee.png')` }}
-              ></div>
+              <div className="h-48 bg-stone-100 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style={{ backgroundImage: `url('/fichee.png')` }}></div>
               <div className="p-6">
                 <span className="bg-amber-900/40 text-amber-600 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">Moveable</span>
                 <h3 className="text-lg font-bold text-stone-900 mt-2 mb-1 font-serif">Fichee-Chambalaalla</h3>
@@ -215,16 +174,11 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
         <div className="max-w-3xl mx-auto bg-stone-950 text-stone-100 p-10 rounded-[3rem] shadow-2xl border border-stone-900">
           <h2 className="text-2xl md:text-3xl font-bold tracking-wide mb-4 text-stone-100 font-serif">Ready to Explore?</h2>
           <p className="text-stone-400 text-xs md:text-sm font-normal mb-8 max-w-xl mx-auto">Join thousands of cultural enthusiasts discovering the rich heritage of Ethiopia.</p>
-          <button 
-            onClick={onExplore}
-            className="bg-amber-500 text-stone-950 px-6 py-3 rounded-2xl font-bold uppercase text-[11px] tracking-widest hover:bg-amber-400 transition-colors shadow-xl shadow-amber-500/10"
-          >
+          <button onClick={onExplore} className="bg-amber-500 text-stone-950 px-6 py-3 rounded-2xl font-bold uppercase text-[11px] tracking-widest hover:bg-amber-400 transition-colors shadow-xl shadow-amber-500/10">
             Get Started Free
           </button>
         </div>
       </section>
-    </div>
-  );
+    </div>);
 };
-
 export default LandingPage;
