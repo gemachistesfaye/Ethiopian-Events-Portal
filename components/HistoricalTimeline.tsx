@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { speakAmharic } from '../services/geminiService';
 
 interface TimelineEvent {
   id: string;
@@ -491,9 +492,31 @@ const HistoricalTimeline: React.FC = () => {
   const [audioTime, setAudioTime] = useState(0);
   const [activeMilestoneIndex, setActiveMilestoneIndex] = useState<number | null>(null);
 
+  // Audio References
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [loadingAudio, setLoadingAudio] = useState(false);
+
   const filteredEvents = filter === 'All' 
     ? TIMELINE_DATA 
     : TIMELINE_DATA.filter(e => e.category === filter);
+
+  // Clean up audio on event change or active tab change
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl);
+      setAudioUrl(null);
+    }
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    setIsAudioPlaying(false);
+    setAudioTime(0);
+  }, [selectedEvent, activeTab]);
 
   // Decryption loading simulator
   useEffect(() => {
@@ -501,8 +524,6 @@ const HistoricalTimeline: React.FC = () => {
       setIsDecrypting(true);
       setDecryptProgress(0);
       setActiveTab('codex');
-      setIsAudioPlaying(false);
-      setAudioTime(0);
       setActiveMilestoneIndex(null);
 
       const interval = setInterval(() => {
@@ -520,18 +541,87 @@ const HistoricalTimeline: React.FC = () => {
     }
   }, [selectedEvent]);
 
-  // Audio timer simulator
-  useEffect(() => {
-    let timer: any;
-    if (isAudioPlaying) {
-      timer = setInterval(() => {
-        setAudioTime((t) => (t + 1) % 90);
-      }, 1000);
-    } else {
-      clearInterval(timer);
+  // Audio play/pause toggler
+  const handleToggleAudio = async () => {
+    if (!selectedEvent) return;
+
+    // If audio is already loaded and ready
+    if (audioRef.current && audioUrl) {
+      if (isAudioPlaying) {
+        audioRef.current.pause();
+        setIsAudioPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsAudioPlaying(true);
+      }
+      return;
     }
-    return () => clearInterval(timer);
-  }, [isAudioPlaying]);
+
+    setLoadingAudio(true);
+    try {
+      // 1. Attempt Gemini TTS
+      const textToSpeak = `${selectedEvent.title}. ${selectedEvent.detailedDescription}`;
+      const audioData = await speakAmharic(`[Speak as a deep database narrator] ${textToSpeak}`);
+      
+      if (audioData) {
+        const blob = new Blob([audioData], { type: 'audio/mp3' });
+        const url = URL.createObjectURL(blob);
+        setAudioUrl(url);
+
+        const audio = new Audio(url);
+        audioRef.current = audio;
+
+        audio.onended = () => {
+          setIsAudioPlaying(false);
+          setAudioTime(0);
+        };
+
+        audio.ontimeupdate = () => {
+          setAudioTime(Math.floor(audio.currentTime));
+        };
+
+        audio.play();
+        setIsAudioPlaying(true);
+      } else {
+        throw new Error("No audio data returned from Gemini TTS");
+      }
+    } catch (err) {
+      console.warn("Gemini TTS failed or rate-limited. Falling back to browser SpeechSynthesis.", err);
+      
+      // 2. Fallback to Browser SpeechSynthesis (Web Speech API)
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(selectedEvent.detailedDescription);
+        
+        utterance.onend = () => {
+          setIsAudioPlaying(false);
+          setAudioTime(0);
+        };
+
+        // Estimate duration based on word count (~150 words per minute)
+        const wordCount = selectedEvent.detailedDescription.split(' ').length;
+        const estDuration = Math.ceil((wordCount / 150) * 60);
+
+        window.speechSynthesis.speak(utterance);
+        setIsAudioPlaying(true);
+        
+        // Simulating the time progress since speechSynthesis doesn't have an ontimeupdate in all browsers
+        let elapsed = 0;
+        const progressTimer = setInterval(() => {
+          if (!window.speechSynthesis.speaking) {
+            clearInterval(progressTimer);
+            return;
+          }
+          elapsed += 1;
+          setAudioTime(Math.min(elapsed, estDuration));
+        }, 1000);
+      } else {
+        alert("Audio narration is not supported on this browser.");
+      }
+    } finally {
+      setLoadingAudio(false);
+    }
+  };
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -1036,20 +1126,30 @@ const HistoricalTimeline: React.FC = () => {
                                 </div>
                                 <div className="flex flex-col text-right">
                                   <span className="text-[10px] text-stone-500 uppercase">SYNC TIMELINE</span>
-                                  <span className="text-amber-500 font-bold">{formatTime(audioTime)} / 01:30</span>
+                                  <span className="text-amber-500 font-bold">
+                                    {formatTime(audioTime)} / {audioRef.current ? formatTime(Math.floor(audioRef.current.duration)) : '00:45'}
+                                  </span>
                                 </div>
                               </div>
 
-                              {/* Playback simulation controls */}
+                              {/* Playback controls */}
                               <button 
-                                onClick={() => setIsAudioPlaying(!isAudioPlaying)}
+                                onClick={handleToggleAudio}
+                                disabled={loadingAudio}
                                 className={`w-full py-3 px-4 font-mono text-xs uppercase tracking-widest font-bold rounded-lg border transition-all flex items-center justify-center gap-3 ${
-                                  isAudioPlaying 
-                                    ? 'bg-rose-500/10 border-rose-500/30 text-rose-500 hover:bg-rose-500/20' 
-                                    : 'bg-amber-500 text-stone-950 border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                                  loadingAudio 
+                                    ? 'bg-amber-500/10 border-amber-500/30 text-amber-500/50 cursor-wait'
+                                    : isAudioPlaying 
+                                      ? 'bg-rose-500/10 border-rose-500/30 text-rose-500 hover:bg-rose-500/20' 
+                                      : 'bg-amber-500 text-stone-950 border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'
                                 }`}
                               >
-                                {isAudioPlaying ? (
+                                {loadingAudio ? (
+                                  <>
+                                    <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+                                    SYNCHRONIZING AI VOICE VOCALS...
+                                  </>
+                                ) : isAudioPlaying ? (
                                   <>
                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                                     PAUSE TRANSMISSION RECALL
