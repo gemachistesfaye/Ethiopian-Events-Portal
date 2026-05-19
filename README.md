@@ -1,4 +1,3 @@
-
 # 🌍 Ethiopian Heritage Portal: A Cultural Intelligence Platform
 
 **Developed by Gemachis | Data & Dev**
@@ -46,11 +45,18 @@ A secure, client-side reminder system for personal cultural planning:
 
 ```text
 ethiopian-heritage-portal/
-├── components/          # Modular UI components (Calendar, Chat, Trivia) in JS/JSX
-├── services/            # Gemini API integration and AI logic
-├── utils/               # Calendar conversion and JDN utilities
-├── constants.js         # Heritage data and event definitions
-└── App.jsx              # Main application entry and architecture
+├── src/
+│   ├── components/      # Modular UI components (Calendar, Chat, Trivia) in JS/JSX
+│   ├── services/        # Gemini API integration and AI logic
+│   ├── utils/           # Calendar conversion and JDN utilities
+│   ├── locales/         # Translation JSON files for en, am, and om
+│   ├── App.jsx          # Main application component
+│   ├── constants.js     # Heritage data and event definitions
+│   ├── i18n.js          # Localization framework configuration
+│   ├── index.css        # Global CSS / styling
+│   └── index.jsx        # React root mount entry point
+├── index.html           # Main HTML document
+└── vite.config.js       # Vite build tool config
 ```
 
 ---
