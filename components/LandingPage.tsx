@@ -6,13 +6,13 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
     <div className="bg-stone-100 text-stone-900 font-sans overflow-hidden">
       
       {/* HERO SECTION */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center text-center p-6 bg-stone-50 text-stone-900 overflow-hidden">
+      <section className="relative min-h-[90vh] flex flex-col justify-center items-center text-center p-6 bg-stone-950 text-stone-100 overflow-hidden border-b border-stone-900">
         {/* Glowing Gradients */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-900/20/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-stone-700/30 rounded-full blur-3xl animate-pulse [animation-delay:2s]"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-900/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-stone-800/30 rounded-full blur-3xl animate-pulse [animation-delay:2s]"></div>
         
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]"></div>
+        <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]"></div>
 
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -20,25 +20,25 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           transition={{ duration: 1 }}
           className="relative z-10 max-w-5xl mx-auto"
         >
-          <span className="bg-amber-900/20 text-stone-900 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block shadow-xl">
+          <span className="bg-amber-950/60 text-amber-400 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block shadow-lg border border-amber-900/30">
             Welcome to the Future of Heritage
           </span>
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-6">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none mb-6 text-stone-100">
             Experience Ethiopian <br />
-            <span className="text-amber-600">Culture & History</span>
+            <span className="text-amber-500">Culture & History</span>
           </h1>
-          <p className="text-stone-500 text-lg md:text-xl max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
+          <p className="text-stone-400 text-base md:text-lg max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
             Discover the ancient traditions, epic stories, and vibrant festivals of Ethiopia through cutting-edge AI and interactive experiences.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
             <button 
               onClick={onExplore}
-              className="bg-amber-900/20 text-stone-900 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest hover:bg-amber-400 transition-all transform hover:scale-105 shadow-xl shadow-amber-500/20"
+              className="bg-amber-500 text-stone-950 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-amber-400 transition-all transform hover:scale-105 shadow-xl shadow-amber-500/20"
             >
               Begin Journey
             </button>
-            <button className="bg-stone-50/10 backdrop-blur-sm text-stone-900 border border-white/20 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest hover:bg-stone-50/20 transition-all">
+            <button className="bg-stone-900 border border-stone-800 text-stone-100 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-stone-800 transition-all">
               Watch Trailer
             </button>
           </div>
@@ -49,10 +49,10 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
           <motion.div 
             animate={{ y: [0, -10, 0] }}
             transition={{ repeat: Infinity, duration: 4 }}
-            className="bg-stone-50/5 backdrop-blur-md p-4 rounded-xl border border-white/10 text-xs w-48"
+            className="bg-stone-900/40 backdrop-blur-md p-4 rounded-xl border border-stone-850 text-xs w-48 text-stone-300"
           >
-            <p className="text-amber-600 font-black">TODAY IN HISTORY</p>
-            <p className="text-stone-900 mt-1">The Battle of Adwa victory was secured.</p>
+            <p className="text-amber-500 font-black">TODAY IN HISTORY</p>
+            <p className="text-stone-300 mt-1">The Battle of Adwa victory was secured.</p>
           </motion.div>
         </div>
       </section>
@@ -212,12 +212,12 @@ const LandingPage: React.FC<{ onExplore: () => void }> = ({ onExplore }) => {
 
       {/* CTA SECTION */}
       <section className="py-24 px-6 text-center">
-        <div className="max-w-3xl mx-auto bg-amber-900/20 text-stone-900 p-12 rounded-[3rem] shadow-2xl shadow-amber-500/10">
-          <h2 className="text-4xl font-black tracking-tight mb-4">Ready to Explore?</h2>
-          <p className="text-stone-900/80 text-sm font-medium mb-8 max-w-xl mx-auto">Join thousands of cultural enthusiasts discovering the rich heritage of Ethiopia.</p>
+        <div className="max-w-3xl mx-auto bg-stone-950 text-stone-100 p-12 rounded-[3rem] shadow-2xl border border-stone-900">
+          <h2 className="text-4xl font-black tracking-tight mb-4 text-stone-100">Ready to Explore?</h2>
+          <p className="text-stone-400 text-sm font-medium mb-8 max-w-xl mx-auto">Join thousands of cultural enthusiasts discovering the rich heritage of Ethiopia.</p>
           <button 
             onClick={onExplore}
-            className="bg-stone-50 text-stone-900 px-8 py-4 rounded-2xl font-black uppercase text-sm tracking-widest hover:bg-stone-100 transition-colors"
+            className="bg-amber-500 text-stone-950 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors shadow-xl shadow-amber-500/10"
           >
             Get Started Free
           </button>

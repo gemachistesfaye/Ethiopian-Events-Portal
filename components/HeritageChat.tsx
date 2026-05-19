@@ -117,15 +117,15 @@ const HeritageChat: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-stone-50 rounded-[3rem] border border-stone-200 shadow-2xl overflow-hidden font-sans">
+    <div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-stone-900 rounded-[3rem] border border-stone-850 shadow-2xl overflow-hidden font-sans text-stone-100">
       
       {/* MODES SELECTOR */}
-      <div className="bg-stone-50 p-4 flex flex-wrap gap-2 justify-center border-b border-stone-200">
+      <div className="bg-stone-950 p-4 flex flex-wrap gap-2 justify-center border-b border-stone-850">
         {MODES.map(m => (
           <button
             key={m.id}
             onClick={() => setMode(m.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center gap-2 ${mode === m.id ? 'bg-amber-900/20 text-stone-900' : 'text-stone-500 hover:text-stone-900'}`}
+            className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border ${mode === m.id ? 'bg-amber-950/40 text-amber-500 border-amber-900/30 shadow-md' : 'bg-stone-900/20 border-transparent text-stone-400 hover:text-stone-200'}`}
           >
             <span>{m.icon}</span>
             {m.label}
@@ -134,39 +134,39 @@ const HeritageChat: React.FC = () => {
       </div>
 
       {/* HEADER */}
-      <div className="bg-stone-50 p-6 border-b border-stone-100 flex justify-between items-center">
+      <div className="bg-stone-900 p-6 border-b border-stone-850 flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-black text-stone-900 tracking-tight">
+          <h3 className="text-xl font-black text-stone-100 tracking-tight">
             {MODES.find(m => m.id === mode)?.label}
           </h3>
-          <p className="text-xs text-stone-500 font-medium mt-1">Immersive Heritage Experience</p>
+          <p className="text-xs text-stone-400 font-medium mt-1">Immersive Heritage Experience</p>
         </div>
 
         <button
           onClick={() => { if(confirm("Clear history?")) { localStorage.removeItem(STORAGE_KEY); setMessages([]); } }}
-          className="text-xs font-black uppercase text-stone-500 hover:text-red-500 transition-colors"
+          className="text-xs font-black uppercase text-stone-400 hover:text-red-400 transition-colors"
         >
           Clear History
         </button>
       </div>
 
       {/* CHAT BODY */}
-      <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6 bg-stone-100/50">
+      <div ref={scrollRef} className="flex-grow overflow-y-auto p-8 space-y-6 bg-stone-950">
 
         {messages.length === 0 && (
           <div className="text-center py-10">
-            <div className="w-16 h-16 bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">🤖</div>
-            <p className="text-stone-500 font-black text-xs uppercase tracking-widest mb-6">Choose a mode or try a quick action</p>
+            <div className="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl border border-stone-800">🤖</div>
+            <p className="text-stone-400 font-black text-xs uppercase tracking-widest mb-6">Choose a mode or try a quick action</p>
             
             <div className="grid gap-3 max-w-md mx-auto">
               {quickActions.map((action, i) => (
                 <button
                   key={i}
                   onClick={() => handleSend(action.text)}
-                  className="bg-stone-50 p-4 rounded-xl border border-stone-200 hover:border-amber-500 hover:bg-amber-50/50 text-left transition-all flex items-center gap-3 group"
+                  className="bg-stone-900 p-4 rounded-xl border border-stone-800 hover:border-amber-500 hover:bg-stone-850/50 text-left transition-all flex items-center gap-3 group"
                 >
                   <span className="text-xl">{action.icon}</span>
-                  <span className="text-sm font-bold text-stone-700 group-hover:text-stone-900">{action.text}</span>
+                  <span className="text-sm font-bold text-stone-300 group-hover:text-stone-100">{action.text}</span>
                 </button>
               ))}
             </div>
@@ -181,8 +181,8 @@ const HeritageChat: React.FC = () => {
             <div
               className={`max-w-[85%] p-6 rounded-[2rem] text-sm shadow-sm relative group ${
                 m.role === 'user'
-                  ? 'bg-amber-500 text-stone-900 font-bold'
-                  : 'bg-stone-50 border border-stone-200 text-stone-800 leading-relaxed'
+                  ? 'bg-amber-500 text-stone-950 font-bold'
+                  : 'bg-stone-900 border border-stone-800 text-stone-250 leading-relaxed'
               }`}
             >
               <div style={{ whiteSpace: 'pre-wrap' }}>
@@ -200,7 +200,7 @@ const HeritageChat: React.FC = () => {
                     }
                     parts.push(
                       <strong 
-                        className={`font-black ${m.role === 'user' ? 'text-stone-900 underline' : 'text-stone-950 bg-amber-900/20/70 px-1 py-0.5 rounded'}`} 
+                        className={`font-black ${m.role === 'user' ? 'text-stone-950 underline' : 'text-stone-100 bg-amber-950/60 px-1 py-0.5 rounded border border-amber-900/30'}`} 
                         key={match.index}
                       >
                         {match[2]}
@@ -218,13 +218,13 @@ const HeritageChat: React.FC = () => {
                 })()}
               </div>
               
-              <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-200/20">
+              <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-800">
                 <span className="text-[10px] opacity-50 font-black">{m.time}</span>
                 
                 {m.role === 'model' && (
                   <button
                     onClick={() => handleSpeak(m.text, m.id)}
-                    className={`text-xs flex items-center gap-1 font-black uppercase tracking-widest ${speakingId === m.id ? 'text-amber-600 animate-pulse' : 'text-stone-500 hover:text-stone-700'}`}
+                    className={`text-xs flex items-center gap-1 font-black uppercase tracking-widest ${speakingId === m.id ? 'text-amber-500 animate-pulse' : 'text-stone-400 hover:text-stone-200'}`}
                     disabled={speakingId !== null && speakingId !== m.id}
                   >
                     {speakingId === m.id ? '🔊 Speaking...' : '🔈 Listen'}
@@ -237,33 +237,33 @@ const HeritageChat: React.FC = () => {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-stone-50 border border-stone-200 p-6 rounded-[2rem] flex items-center gap-3">
+            <div className="bg-stone-900 border border-stone-800 p-6 rounded-[2rem] flex items-center gap-3">
               <div className="flex gap-1">
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce"></span>
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
                 <span className="w-2 h-2 bg-stone-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
               </div>
-              <span className="text-xs font-black text-stone-500 uppercase tracking-widest">Storyteller is composing...</span>
+              <span className="text-xs font-black text-stone-400 uppercase tracking-widest">Storyteller is composing...</span>
             </div>
           </div>
         )}
       </div>
 
       {/* INPUT */}
-      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-6 border-t bg-stone-50 flex gap-3">
+      <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="p-6 border-t border-stone-850 bg-stone-900 flex gap-3">
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask the Storyteller..."
-          className="flex-1 h-14 px-6 rounded-xl bg-stone-100 border-2 border-transparent focus:border-amber-500 focus:outline-none focus:bg-stone-50 font-medium transition-all"
+          className="flex-1 h-14 px-6 rounded-xl bg-stone-950 border-2 border-stone-850 focus:border-amber-500 focus:outline-none focus:bg-stone-900 text-stone-100 font-medium transition-all"
         />
 
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="bg-stone-50 text-stone-900 px-6 rounded-xl font-black uppercase text-xs tracking-widest disabled:opacity-40 hover:bg-stone-100 transition-colors"
+          className="bg-stone-950 border border-stone-850 text-stone-100 px-6 rounded-xl font-black uppercase text-xs tracking-widest disabled:opacity-40 hover:bg-stone-900 hover:text-amber-500 transition-colors"
         >
           Send
         </button>
