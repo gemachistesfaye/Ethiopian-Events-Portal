@@ -812,21 +812,21 @@ const HistoricalTimeline: React.FC = () => {
               className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6"
             >
               {/* Dark transparent blur backdrop */}
-              <div className="absolute inset-0 bg-stone-100/80 backdrop-blur-md" onClick={() => setSelectedEvent(null)}></div>
+              <div className="absolute inset-0 bg-stone-950/80 backdrop-blur-md" onClick={() => setSelectedEvent(null)}></div>
               
               <motion.div
                 initial={{ scale: 0.9, opacity: 0, y: 30 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 30 }}
                 transition={{ type: "spring", damping: 25, stiffness: 220 }}
-                className="relative w-full max-w-5xl bg-stone-100/90 text-stone-900 border border-stone-200 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.2)] flex flex-col md:flex-row max-h-[92vh] z-10"
+                className="relative w-full max-w-5xl bg-stone-900 text-stone-100 border border-stone-800 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.35)] flex flex-col md:flex-row max-h-[92vh] z-10"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Cyberpunk Grid scan effect */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#f59e0b 1px, transparent 1px), linear-gradient(90deg, #f59e0b 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#f59e0b 1px, transparent 1px), linear-gradient(90deg, #f59e0b 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
 
                 {/* Left Section: Image and Holographic Diagnostics */}
-                <div className="w-full md:w-[45%] h-64 md:h-auto relative border-b md:border-b-0 md:border-r border-stone-200 overflow-hidden flex flex-col justify-end">
+                <div className="w-full md:w-[45%] h-64 md:h-auto relative border-b md:border-b-0 md:border-r border-stone-800 overflow-hidden flex flex-col justify-end">
                   
                   {/* Event Image */}
                   <img src={selectedEvent.imageUrl} alt={selectedEvent.title} className="absolute inset-0 w-full h-full object-cover filter brightness-[0.45] contrast-[1.25] saturate-[0.8]" />
@@ -839,30 +839,30 @@ const HistoricalTimeline: React.FC = () => {
 
                   {/* Diagnostic details on image */}
                   <div className="relative p-6 z-10 flex flex-col gap-4 font-mono">
-                    <div className="flex items-center justify-between text-[10px] text-amber-600/80 uppercase tracking-widest border-b border-stone-200 pb-2">
+                    <div className="flex items-center justify-between text-[10px] text-amber-500 font-bold uppercase tracking-widest border-b border-stone-800 pb-2">
                       <span>Database ID: {selectedEvent.id.padStart(4, '0')}</span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-amber-900/20 animate-pulse"></span>
+                      <span className="flex items-center gap-1.5 text-amber-400">
+                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
                         SYNCHRONIZED
                       </span>
                     </div>
 
                     <div className="space-y-1 text-xs">
-                      <div className="text-stone-500 uppercase text-[9px] tracking-wider">GEO-LOCATION INTEGRITY</div>
-                      <div className="text-stone-900 font-semibold">{selectedEvent.location}</div>
+                      <div className="text-stone-400 uppercase text-[9px] tracking-wider font-bold">GEO-LOCATION INTEGRITY</div>
+                      <div className="text-stone-100 font-semibold">{selectedEvent.location}</div>
                     </div>
 
                     <div className="space-y-1 text-xs">
-                      <div className="text-stone-500 uppercase text-[9px] tracking-wider">CHRONOLOGICAL NODE</div>
-                      <div className="text-amber-600 font-bold text-lg">{selectedEvent.year}</div>
+                      <div className="text-stone-400 uppercase text-[9px] tracking-wider font-bold">CHRONOLOGICAL NODE</div>
+                      <div className="text-amber-500 font-bold text-lg">{selectedEvent.year}</div>
                     </div>
 
-                    <div className="mt-2 pt-3 border-t border-stone-200/60 flex items-center justify-between">
-                      <span className="text-[9px] text-stone-500 uppercase tracking-wider">System: Animus OS v4.8</span>
+                    <div className="mt-2 pt-3 border-t border-stone-800 flex items-center justify-between">
+                      <span className="text-[9px] text-stone-400 uppercase tracking-wider">System: Animus OS v4.8</span>
                       <div className="flex gap-1">
-                        <span className="w-1.5 h-3 bg-amber-900/20/30"></span>
-                        <span className="w-1.5 h-3 bg-amber-900/20/50"></span>
-                        <span className="w-1.5 h-3 bg-amber-900/20"></span>
+                        <span className="w-1.5 h-3 bg-amber-500/20"></span>
+                        <span className="w-1.5 h-3 bg-amber-500/50"></span>
+                        <span className="w-1.5 h-3 bg-amber-500"></span>
                       </div>
                     </div>
                   </div>
@@ -874,19 +874,19 @@ const HistoricalTimeline: React.FC = () => {
                   {/* Close button */}
                   <button 
                     onClick={() => setSelectedEvent(null)}
-                    className="absolute top-5 right-5 w-8 h-8 bg-stone-50 border border-stone-200 hover:border-amber-500 hover:text-amber-600 text-stone-500 rounded-full flex items-center justify-center transition-all z-20 font-mono text-sm"
+                    className="absolute top-5 right-5 w-8 h-8 bg-stone-950 border border-stone-800 hover:border-amber-500 hover:text-amber-500 text-stone-400 rounded-full flex items-center justify-center transition-all z-20 font-mono text-sm"
                   >
                     ✕
                   </button>
 
                   {/* Header Title with Decryption Effect */}
                   <div className="mb-6 pr-6">
-                    <span className="text-[10px] text-amber-600 font-mono font-bold uppercase tracking-[0.2em] bg-amber-900/20/10 border border-amber-500/20 px-3 py-1 rounded">
+                    <span className="text-[10px] text-amber-500 font-mono font-bold uppercase tracking-[0.2em] bg-amber-950/20 border border-amber-500/25 px-3 py-1 rounded">
                       {selectedEvent.category} Records
                     </span>
-                    <h2 className="text-2xl md:text-3xl font-black text-stone-900 leading-tight mt-3 tracking-tight uppercase">
+                    <h2 className="text-2xl md:text-3xl font-black text-stone-100 leading-tight mt-3 tracking-tight uppercase">
                       {isDecrypting ? (
-                        <span className="font-mono text-stone-500 text-xl tracking-widest uppercase">
+                        <span className="font-mono text-stone-400 text-xl tracking-widest uppercase">
                           Decrypting Memory Log...
                         </span>
                       ) : (
@@ -902,18 +902,18 @@ const HistoricalTimeline: React.FC = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="flex-1 flex flex-col justify-center items-center py-16 font-mono text-stone-500"
+                        className="flex-1 flex flex-col justify-center items-center py-16 font-mono text-stone-400"
                       >
-                        <div className="relative w-48 h-1.5 bg-stone-50 border border-stone-200 rounded-full overflow-hidden mb-4">
+                        <div className="relative w-48 h-1.5 bg-stone-950 border border-stone-850 rounded-full overflow-hidden mb-4">
                           <motion.div 
                             className="h-full bg-gradient-to-r from-amber-500 to-rose-500" 
                             style={{ width: `${decryptProgress}%` }}
                           />
                         </div>
-                        <div className="text-[10px] uppercase tracking-widest text-amber-600 animate-pulse">
+                        <div className="text-[10px] uppercase tracking-widest text-amber-500 animate-pulse">
                           INITIALIZING DNA STREAM RECONSTRUCTION ... {decryptProgress}%
                         </div>
-                        <div className="text-[8px] text-stone-700 mt-2">
+                        <div className="text-[8px] text-stone-500 mt-2">
                           SYS.LOC.COGNITIVE_RECALL: CONNECTED TO CORE DATABANK
                         </div>
                       </motion.div>
@@ -925,13 +925,13 @@ const HistoricalTimeline: React.FC = () => {
                         className="flex-1 flex flex-col"
                       >
                         {/* Interactive Navigation HUD Tabs */}
-                        <div className="flex border-b border-stone-200 gap-1 mb-6 font-mono text-xs">
+                        <div className="flex border-b border-stone-800 gap-1 mb-6 font-mono text-xs">
                           <button
                             onClick={() => setActiveTab('codex')}
                             className={`px-4 py-2 border-b-2 transition-all uppercase tracking-wider ${
                               activeTab === 'codex'
-                                ? 'border-amber-500 text-amber-600 bg-amber-900/20/[0.03]'
-                                : 'border-transparent text-stone-500 hover:text-stone-800'
+                                ? 'border-amber-500 text-amber-500 bg-amber-950/20'
+                                : 'border-transparent text-stone-400 hover:text-stone-200'
                             }`}
                           >
                             Memory Codex
@@ -940,8 +940,8 @@ const HistoricalTimeline: React.FC = () => {
                             onClick={() => setActiveTab('tactical')}
                             className={`px-4 py-2 border-b-2 transition-all uppercase tracking-wider ${
                               activeTab === 'tactical'
-                                ? 'border-amber-500 text-amber-600 bg-amber-900/20/[0.03]'
-                                : 'border-transparent text-stone-500 hover:text-stone-800'
+                                ? 'border-amber-500 text-amber-500 bg-amber-950/20'
+                                : 'border-transparent text-stone-400 hover:text-stone-200'
                             }`}
                           >
                             Milestones
@@ -950,8 +950,8 @@ const HistoricalTimeline: React.FC = () => {
                             onClick={() => setActiveTab('stream')}
                             className={`px-4 py-2 border-b-2 transition-all uppercase tracking-wider ${
                               activeTab === 'stream'
-                                ? 'border-amber-500 text-amber-600 bg-amber-900/20/[0.03]'
-                                : 'border-transparent text-stone-500 hover:text-stone-800'
+                                ? 'border-amber-500 text-amber-500 bg-amber-950/20'
+                                : 'border-transparent text-stone-400 hover:text-stone-200'
                             }`}
                           >
                             Cognitive Sync
@@ -965,27 +965,27 @@ const HistoricalTimeline: React.FC = () => {
                           {activeTab === 'codex' && (
                             <div className="space-y-6">
                               {/* Detailed narrative ( guaranteed 40+ words ) */}
-                              <div className="relative p-4 bg-stone-50/40 border border-stone-200 rounded-xl">
-                                <span className="absolute top-0 left-4 -translate-y-1/2 bg-stone-100 px-2 font-mono text-[9px] text-amber-600">HISTORICAL NARRATIVE // LORE</span>
-                                <p className="text-stone-700 text-sm leading-relaxed font-medium pt-2">
+                              <div className="relative p-4 bg-stone-950/40 border border-stone-850 rounded-xl">
+                                <span className="absolute top-0 left-4 -translate-y-1/2 bg-stone-900 px-2 font-mono text-[9px] text-amber-500">HISTORICAL NARRATIVE // LORE</span>
+                                <p className="text-stone-200 text-sm leading-relaxed font-medium pt-2">
                                   {selectedEvent.detailedDescription}
                                 </p>
                               </div>
 
                               {/* Interactive Tactical Dials (Gauges) */}
                               <div>
-                                <h4 className="font-mono text-[10px] text-stone-500 uppercase tracking-widest mb-3">SYSTEM INFLUENCE ANALYTICS</h4>
+                                <h4 className="font-mono text-[10px] text-stone-400 uppercase tracking-widest mb-3">SYSTEM INFLUENCE ANALYTICS</h4>
                                 <div className="grid grid-cols-3 gap-3">
                                   
                                   {/* Metric 1 */}
-                                  <div className="bg-stone-50/50 border border-stone-200 p-3 rounded-lg flex flex-col items-center justify-center relative group cursor-pointer hover:border-amber-500/30 transition-all">
-                                    <span className="text-[9px] text-stone-500 font-mono uppercase mb-2">GEOPOLITICAL IMPACT</span>
+                                  <div className="bg-stone-950/50 border border-stone-800 p-3 rounded-lg flex flex-col items-center justify-center relative group cursor-pointer hover:border-amber-500/50 transition-all">
+                                    <span className="text-[9px] text-stone-400 font-mono uppercase mb-2">GEOPOLITICAL IMPACT</span>
                                     <div className="relative w-14 h-14 flex items-center justify-center">
                                       {/* SVG Circle meter */}
                                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                                         <path className="text-stone-800" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                         <motion.path 
-                                          className="text-amber-600" 
+                                          className="text-amber-500" 
                                           strokeWidth="2.5" 
                                           strokeDasharray={`${selectedEvent.stats.impact}, 100`} 
                                           strokeLinecap="round" 
@@ -997,13 +997,13 @@ const HistoricalTimeline: React.FC = () => {
                                           transition={{ duration: 1, ease: "easeOut" }}
                                         />
                                       </svg>
-                                      <span className="absolute font-mono text-[11px] font-bold text-stone-800">{selectedEvent.stats.impact}%</span>
+                                      <span className="absolute font-mono text-[11px] font-bold text-stone-100">{selectedEvent.stats.impact}%</span>
                                     </div>
                                   </div>
 
                                   {/* Metric 2 */}
-                                  <div className="bg-stone-50/50 border border-stone-200 p-3 rounded-lg flex flex-col items-center justify-center relative group cursor-pointer hover:border-amber-500/30 transition-all">
-                                    <span className="text-[9px] text-stone-500 font-mono uppercase mb-2">LEGACY DURATION</span>
+                                  <div className="bg-stone-950/50 border border-stone-800 p-3 rounded-lg flex flex-col items-center justify-center relative group cursor-pointer hover:border-amber-500/50 transition-all">
+                                    <span className="text-[9px] text-stone-400 font-mono uppercase mb-2">LEGACY DURATION</span>
                                     <div className="relative w-14 h-14 flex items-center justify-center">
                                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                                         <path className="text-stone-800" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -1020,13 +1020,13 @@ const HistoricalTimeline: React.FC = () => {
                                           transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
                                         />
                                       </svg>
-                                      <span className="absolute font-mono text-[11px] font-bold text-stone-800">{selectedEvent.stats.legacy}%</span>
+                                      <span className="absolute font-mono text-[11px] font-bold text-stone-100">{selectedEvent.stats.legacy}%</span>
                                     </div>
                                   </div>
 
                                   {/* Metric 3 */}
-                                  <div className="bg-stone-50/50 border border-stone-200 p-3 rounded-lg flex flex-col items-center justify-center relative group cursor-pointer hover:border-amber-500/30 transition-all">
-                                    <span className="text-[9px] text-stone-500 font-mono uppercase mb-2">REGIONAL REACH</span>
+                                  <div className="bg-stone-950/50 border border-stone-800 p-3 rounded-lg flex flex-col items-center justify-center relative group cursor-pointer hover:border-amber-500/50 transition-all">
+                                    <span className="text-[9px] text-stone-400 font-mono uppercase mb-2">REGIONAL REACH</span>
                                     <div className="relative w-14 h-14 flex items-center justify-center">
                                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
                                         <path className="text-stone-800" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
@@ -1043,7 +1043,7 @@ const HistoricalTimeline: React.FC = () => {
                                           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                                         />
                                       </svg>
-                                      <span className="absolute font-mono text-[11px] font-bold text-stone-800">{selectedEvent.stats.reach}%</span>
+                                      <span className="absolute font-mono text-[11px] font-bold text-stone-100">{selectedEvent.stats.reach}%</span>
                                     </div>
                                   </div>
 
@@ -1055,10 +1055,10 @@ const HistoricalTimeline: React.FC = () => {
                           {/* TAB 2: MILESTONES / PROCESS TREE */}
                           {activeTab === 'tactical' && (
                             <div className="space-y-4">
-                              <p className="text-[10px] text-stone-500 font-mono uppercase tracking-wider mb-2">
+                              <p className="text-[10px] text-stone-400 font-mono uppercase tracking-wider mb-2">
                                 SELECT MILESTONE NODE TO RETRIEVE TACTICAL CORE LOGS
                               </p>
-                              <div className="relative border-l border-stone-200 pl-6 ml-2 space-y-5">
+                              <div className="relative border-l border-stone-850 pl-6 ml-2 space-y-5">
                                 {selectedEvent.milestones.map((milestone, idx) => {
                                   const parts = milestone.split(':');
                                   const title = parts[0];
@@ -1071,22 +1071,22 @@ const HistoricalTimeline: React.FC = () => {
                                       onClick={() => setActiveMilestoneIndex(isActive ? null : idx)}
                                       className={`relative cursor-pointer transition-all duration-300 p-3 rounded-lg border ${
                                         isActive 
-                                          ? 'bg-amber-900/20/10 border-amber-500/30' 
-                                          : 'bg-stone-50/35 border-transparent hover:border-stone-200 hover:bg-stone-50/60'
+                                          ? 'bg-amber-950/20 border-amber-500/30' 
+                                          : 'bg-stone-950/40 border-transparent hover:border-stone-800 hover:bg-stone-950/60'
                                       }`}
                                     >
                                       {/* Node Dot Indicator */}
                                       <div className={`absolute -left-[31px] top-4 w-4 h-4 rounded-full border-2 flex items-center justify-center z-10 transition-all ${
                                         isActive 
-                                          ? 'border-amber-500 bg-stone-100 scale-110 shadow-[0_0_8px_rgba(245,158,11,0.5)]' 
-                                          : 'border-stone-200 bg-stone-50'
+                                          ? 'border-amber-500 bg-stone-900 scale-110 shadow-[0_0_8px_rgba(245,158,11,0.5)]' 
+                                          : 'border-stone-850 bg-stone-900'
                                       }`}>
-                                        <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-amber-900/20' : 'bg-transparent'}`} />
+                                        <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-amber-500' : 'bg-transparent'}`} />
                                       </div>
 
                                       <div className="flex justify-between items-center">
-                                        <span className="font-mono text-xs font-bold text-amber-600">{title}</span>
-                                        <span className="text-[9px] text-stone-500 uppercase tracking-widest font-mono">
+                                        <span className="font-mono text-xs font-bold text-amber-500">{title}</span>
+                                        <span className="text-[9px] text-stone-400 uppercase tracking-widest font-mono">
                                           {isActive ? 'COLLAPSE LOG' : 'EXPAND LOG'}
                                         </span>
                                       </div>
@@ -1097,9 +1097,9 @@ const HistoricalTimeline: React.FC = () => {
                                             initial={{ opacity: 0, height: 0 }}
                                             animate={{ opacity: 1, height: 'auto' }}
                                             exit={{ opacity: 0, height: 0 }}
-                                            className="overflow-hidden mt-2 text-stone-700 text-xs leading-relaxed"
+                                            className="overflow-hidden mt-2 text-stone-300 text-xs leading-relaxed"
                                           >
-                                            <div className="h-px bg-stone-100 my-2" />
+                                            <div className="h-px bg-stone-800 my-2" />
                                             {text.trim()}
                                           </motion.div>
                                         )}
@@ -1113,8 +1113,8 @@ const HistoricalTimeline: React.FC = () => {
 
                           {/* TAB 3: COGNITIVE SYNC (Audio log simulator) */}
                           {activeTab === 'stream' && (
-                            <div className="bg-stone-50/30 border border-stone-200/60 p-4 rounded-xl flex flex-col justify-between items-center text-center space-y-4">
-                              <div className="relative w-full max-w-xs aspect-video bg-stone-100/80 rounded-lg overflow-hidden border border-stone-200 flex items-center justify-center font-mono">
+                            <div className="bg-stone-950/30 border border-stone-850 p-4 rounded-xl flex flex-col justify-between items-center text-center space-y-4">
+                              <div className="relative w-full max-w-xs aspect-video bg-stone-950/80 rounded-lg overflow-hidden border border-stone-850 flex items-center justify-center font-mono">
                                 
                                 {/* Futuristic radar grid circles */}
                                 <div className="absolute w-24 h-24 border border-amber-500/10 rounded-full animate-pulse"></div>
@@ -1129,7 +1129,7 @@ const HistoricalTimeline: React.FC = () => {
                                     {[...Array(12)].map((_, i) => (
                                       <div 
                                         key={i}
-                                        className="w-1.5 bg-amber-900/20 rounded-full origin-bottom animate-bounce-slow"
+                                        className="w-1.5 bg-amber-500 rounded-full origin-bottom animate-bounce-slow"
                                         style={{ 
                                           height: `${30 + Math.random() * 70}%`, 
                                           animationDelay: `${i * 0.07}s`,
@@ -1140,20 +1140,20 @@ const HistoricalTimeline: React.FC = () => {
                                   </div>
                                 ) : (
                                   <div className="text-center p-3">
-                                    <div className="text-[10px] text-stone-500 uppercase tracking-widest">COGNITIVE DECODER</div>
-                                    <div className="text-[9px] text-amber-600/70 uppercase tracking-widest mt-1">TRANSMISSION STANDBY</div>
+                                    <div className="text-[10px] text-stone-400 uppercase tracking-widest">COGNITIVE DECODER</div>
+                                    <div className="text-[9px] text-amber-500/70 uppercase tracking-widest mt-1">TRANSMISSION STANDBY</div>
                                   </div>
                                 )}
                               </div>
 
-                              <div className="w-full flex items-center justify-between font-mono text-xs px-2 border-b border-stone-200 pb-3">
+                              <div className="w-full flex items-center justify-between font-mono text-xs px-2 border-b border-stone-800 pb-3">
                                 <div className="flex flex-col text-left">
-                                  <span className="text-[10px] text-stone-500 uppercase">MEMORY CHANNEL</span>
-                                  <span className="text-stone-700 font-semibold uppercase">{selectedEvent.category} FEED</span>
+                                  <span className="text-[10px] text-stone-400 uppercase">MEMORY CHANNEL</span>
+                                  <span className="text-stone-200 font-semibold uppercase">{selectedEvent.category} FEED</span>
                                 </div>
                                 <div className="flex flex-col text-right">
-                                  <span className="text-[10px] text-stone-500 uppercase">SYNC TIMELINE</span>
-                                  <span className="text-amber-600 font-bold">
+                                  <span className="text-[10px] text-stone-400 uppercase">SYNC TIMELINE</span>
+                                  <span className="text-amber-500 font-bold">
                                     {formatTime(audioTime)} / {audioRef.current ? formatTime(Math.floor(audioRef.current.duration)) : '00:45'}
                                   </span>
                                 </div>
@@ -1165,10 +1165,10 @@ const HistoricalTimeline: React.FC = () => {
                                 disabled={loadingAudio}
                                 className={`w-full py-3 px-4 font-mono text-xs uppercase tracking-widest font-bold rounded-lg border transition-all flex items-center justify-center gap-3 ${
                                   loadingAudio 
-                                    ? 'bg-amber-900/20/10 border-amber-500/30 text-amber-600/50 cursor-wait'
+                                    ? 'bg-amber-950/20 border-amber-500/30 text-amber-500/50 cursor-wait'
                                     : isAudioPlaying 
-                                      ? 'bg-rose-950/300/10 border-rose-500/30 text-rose-500 hover:bg-rose-950/300/20' 
-                                      : 'bg-amber-900/20 text-stone-950 border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                                      ? 'bg-rose-950/20 border-rose-500/30 text-rose-500 hover:bg-rose-950/35' 
+                                      : 'bg-amber-500 text-stone-950 border-amber-500 hover:bg-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'
                                 }`}
                               >
                                 {loadingAudio ? (
@@ -1194,22 +1194,22 @@ const HistoricalTimeline: React.FC = () => {
                         </div>
 
                         {/* Interactive Key Figures Sidebar Section */}
-                        <div className="mt-8 pt-6 border-t border-stone-200 font-mono">
-                          <h4 className="text-[9px] text-stone-500 uppercase tracking-widest mb-3">KEY ASSOCIATED IDENTITIES</h4>
+                        <div className="mt-8 pt-6 border-t border-stone-850 font-mono">
+                          <h4 className="text-[9px] text-stone-400 uppercase tracking-widest mb-3">KEY ASSOCIATED IDENTITIES</h4>
                           <div className="flex flex-wrap gap-2">
                             {selectedEvent.keyFigures.map((figure, idx) => (
                               <div 
                                 key={idx}
-                                className="flex items-center gap-2 bg-stone-50 border border-stone-200/80 px-3 py-1.5 rounded-md hover:border-amber-500/40 hover:bg-stone-50/80 transition-all cursor-help group relative"
+                                className="flex items-center gap-2 bg-stone-950 border border-stone-850 px-3 py-1.5 rounded-md hover:border-amber-500/40 hover:bg-stone-900/60 transition-all cursor-help group relative"
                               >
-                                <div className="w-4 h-4 rounded-full bg-amber-900/20/10 text-amber-600 text-[8px] font-bold flex items-center justify-center border border-amber-500/20">
+                                <div className="w-4 h-4 rounded-full bg-amber-950/20 text-amber-500 text-[8px] font-bold flex items-center justify-center border border-amber-500/20">
                                   {figure.charAt(0)}
                                 </div>
-                                <span className="text-[10px] text-stone-700 font-semibold">{figure}</span>
+                                <span className="text-[10px] text-stone-200 font-semibold">{figure}</span>
                                 
                                 {/* Hover interactive bio tooltip */}
-                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-stone-100 border border-stone-200 text-stone-700 text-[9px] p-2.5 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 leading-normal">
-                                  <div className="font-bold text-amber-600 mb-1">{figure}</div>
+                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-stone-950 border border-stone-800 text-stone-300 text-[9px] p-2.5 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 leading-normal">
+                                  <div className="font-bold text-amber-500 mb-1">{figure}</div>
                                   Verified catalog entity recorded inside the database logs for the {selectedEvent.title}.
                                 </div>
                               </div>
@@ -1221,14 +1221,14 @@ const HistoricalTimeline: React.FC = () => {
                   </AnimatePresence>
 
                   {/* Modal Footer status log */}
-                  <div className="mt-auto pt-6 border-t border-stone-200/60 flex items-center justify-between text-[9px] text-stone-500 font-mono">
+                  <div className="mt-auto pt-6 border-t border-stone-850 flex items-center justify-between text-[9px] text-stone-400 font-mono">
                     <span className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-900/20 animate-ping"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span>
                       SECURE SIGNAL LINK // DATA STEADY
                     </span>
                     <button 
                       onClick={() => setSelectedEvent(null)}
-                      className="text-amber-600/70 hover:text-amber-600 uppercase tracking-widest text-[9px] transition-colors"
+                      className="text-amber-500/70 hover:text-amber-500 uppercase tracking-widest text-[9px] transition-colors"
                     >
                       DISCONNECT ARCHIVE CARD [-]
                     </button>
