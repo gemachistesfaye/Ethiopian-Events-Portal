@@ -61,9 +61,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Tilfi', description: 'Elegant white cotton dresses adorned with intricate cross patterns and colorful embroidery at the borders, entirely handwoven by local artisans.' }
     ],
     languages: ['Tigrinya', 'Saho', 'Kunama'],
-    history: 'Heart of the ancient Aksumite Empire. Home to the Ark of the Covenant according to Ethiopian Orthodox tradition. Tigray has historically been the epicenter of ancient Ethiopian civilization.',
+    history: 'Heart of the ancient Aksumite Empire. Home to the Ark of the Covenant according to Ethiopian Orthodox tradition. Tigray has historically been the epicenter of ancient Ethiopian civilization, featuring dozens of cliffside rock-hewn sanctuaries, medieval stelae, and a legacy of resilient monastic life.',
     images: ['https://images.unsplash.com/photo-1548651877-3e11400e930f?q=80&w=800', 'https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800'],
-    summary: 'The northernmost region of Ethiopia, rich in ancient history, majestic mountains, and the cradle of the Aksumite civilization.',
+    summary: 'The northernmost region of Ethiopia, rich in ancient history, majestic mountains, and the cradle of the Aksumite civilization. Known for its rock-hewn churches and deep monastic heritage.',
     color: '#F59E0B'
   },
   amhara: {
@@ -93,9 +93,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Habesha Kemis', description: 'The iconic Ethiopian elegant white woven dress. It features a colorful, heavily embroidered border known as "Tibeb" and is paired with a matching shawl (Netela).' }
     ],
     languages: ['Amharic', 'Awngi', 'Oromo'],
-    history: 'The historic center of the Solomonic dynasty. Features the medieval castles of Gondar and the source of the Blue Nile at Lake Tana.',
+    history: 'The historic center of the Solomonic dynasty. Features the medieval castles of Gondar and the source of the Blue Nile at Lake Tana. It played a central role in unifying the modern nation under various emperors.',
     images: ['https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800', 'https://images.unsplash.com/photo-1651493638407-742bc54e2bc5?q=80&w=800'],
-    summary: 'A dramatic region characterized by high mountains, medieval castles, and deep Christian orthodox traditions.',
+    summary: 'A dramatic region characterized by high mountains, medieval castles, and deep Christian orthodox traditions, forming the cultural heartland of northern Ethiopia.',
     color: '#3B82F6'
   },
   afar: {
@@ -123,9 +123,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Sanafil & Jile', description: 'Traditional wraparound skirts (sanafil) suited for the extreme heat. Men famously carry the "Jile", a sharply curved, double-edged traditional dagger worn at the waist.' }
     ],
     languages: ['Afar'],
-    history: 'The Danakil Depression is the cradle of humanity. Historically, the Afar people controlled the vital salt trade connecting the coast to the highlands.',
+    history: 'The Danakil Depression is the cradle of humanity. Historically, the Afar people controlled the vital salt trade connecting the coast to the highlands, navigating some of the most unforgiving terrain on the planet.',
     images: ['https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800', 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'],
-    summary: 'A land of extremes, featuring active volcanoes, neon acid lakes, salt flats, and the cradle of humanity.',
+    summary: 'A land of extremes, featuring active volcanoes, neon acid lakes, salt flats, and the cradle of humanity where early hominids walked.',
     color: '#EF4444'
   },
   benishangul: {
@@ -151,9 +151,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Lowland Fabrics', description: 'Colorful, lightweight fabrics designed for breathability in the humid, tropical climate of the western borderlands.' }
     ],
     languages: ['Berta', 'Gumuz', 'Amharic'],
-    history: 'A historically significant region for gold mining. Now famous globally as the home of the monumental GERD project.',
+    history: 'A historically significant region for gold mining. Now famous globally as the home of the monumental GERD project, representing the engineering power and future energy independence of Ethiopia.',
     images: ['https://images.unsplash.com/photo-1624640166291-a1e621ec3694?q=80&w=800', 'https://images.unsplash.com/photo-1533414443058-293e62057639?q=80&w=800'],
-    summary: 'A frontier region defined by the Blue Nile river, rich in gold and modern energy marvels.',
+    summary: 'A frontier region defined by the Blue Nile river, rich in gold, unique lowland agricultural systems, and modern energy marvels.',
     color: '#F97316'
   },
   addis: {
@@ -181,9 +181,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Urban & Traditional Blend', description: 'A mix of fast-paced modern urban wear during the week, switching dramatically to pristine traditional white Habesha clothing on Sundays and holidays.' }
     ],
     languages: ['Amharic', 'Oromo', 'English'],
-    history: 'Founded in 1886 by Emperor Menelik II and Empress Taytu. It is the diplomatic capital of Africa, hosting the African Union headquarters.',
+    history: 'Founded in 1886 by Emperor Menelik II and Empress Taytu. It is the diplomatic capital of Africa, hosting the African Union headquarters, and is the focal point of the nation\'s political, economic, and cultural transition.',
     images: ['https://images.unsplash.com/photo-1596700075591-9e2b92abf480?q=80&w=800', 'https://images.unsplash.com/photo-1620023414963-39da9b8f2cce?q=80&w=800'],
-    summary: 'The bustling capital city, acting as the diplomatic hub of Africa and a melting pot of all Ethiopian cultures.',
+    summary: 'The bustling capital city, acting as the diplomatic hub of Africa, a melting pot of all Ethiopian cultures, and a modern metropolis.',
     color: '#64748B'
   },
   dire_dawa: {
@@ -209,9 +209,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Macawiis & Dirac', description: 'Men frequently wear the comfortable, colorful Somali Macawiis (sarong), while women wear the elegant, flowing Dirac.' }
     ],
     languages: ['Oromo', 'Somali', 'Amharic'],
-    history: 'Created directly as a result of the Addis Ababa-Djibouti railway bypassing Harar. It became Ethiopia\'s first modern planned city.',
+    history: 'Created directly as a result of the Addis Ababa-Djibouti railway bypassing Harar. It became Ethiopia\'s first modern planned city, hosting French architecture and thriving multicultural trade routes.',
     images: ['https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800', 'https://images.unsplash.com/photo-1506505494950-8438ebccba56?q=80&w=800'],
-    summary: 'A vibrant, culturally diverse railway city born out of trade and modern transport.',
+    summary: 'A vibrant, culturally diverse railway city born out of trade, modern transport, and a distinct cosmopolitan atmosphere.',
     color: '#84CC16'
   },
   harari: {
@@ -238,9 +238,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Harari Garments', description: 'Women wear vibrantly colored, distinctly patterned garments often paired with elaborate gold jewelry.' }
     ],
     languages: ['Harari', 'Oromo', 'Amharic'],
-    history: 'It served as a major commercial hub linking African and Islamic trade routes for centuries. Surrounded by walls built between the 13th and 16th centuries.',
+    history: 'It served as a major commercial hub linking African and Islamic trade routes for centuries. Surrounded by walls built between the 13th and 16th centuries, preserving 82 mosques and unique social traditions.',
     images: ['https://images.unsplash.com/photo-1588612143491-0fcf05a6efc1?q=80&w=800', 'https://images.unsplash.com/photo-1550993510-9b0f48039600?q=80&w=800'],
-    summary: 'A small but historically massive region centered around the ancient, walled Islamic city of Harar.',
+    summary: 'A small but historically massive region centered around the ancient, walled Islamic city of Harar, the holy city of peace.',
     color: '#EC4899'
   },
   gambela: {
@@ -267,9 +267,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Minimalist Attire', description: 'Historically minimalist clothing suited for the extremely hot and humid lowland climate, often accented with intricate beadwork.' }
     ],
     languages: ['Nuer', 'Anywaa', 'Majang'],
-    history: 'A lush, low-lying region that shares strong cultural and ecological ties with South Sudan. Historically a major river port.',
+    history: 'A lush, low-lying region that shares strong cultural and ecological ties with South Sudan. Historically a major river port for British steamships traveling along the Baro River.',
     images: ['https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800', 'https://images.unsplash.com/photo-1532585227763-7e4b2d39df16?q=80&w=800'],
-    summary: 'A hot, lush lowland region famous for massive wildlife migrations and majestic rivers.',
+    summary: 'A hot, lush lowland region famous for massive wildlife migrations, majestic navigable rivers, and rich riverine traditions.',
     color: '#06B6D4'
   },
   oromiya: {
@@ -298,9 +298,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Aadaa Oromoo', description: 'Distinctive traditional attire often featuring bold red, black, and white colors, completed with culturally significant wooden staffs and jewelry.' }
     ],
     languages: ['Afaan Oromoo'],
-    history: 'Birthplace of Arabica coffee (Kaffa/Jimma regions). Home to the egalitarian Gadaa system, a framework that predates modern democracy.',
+    history: 'Birthplace of Arabica coffee (Kaffa/Jimma regions). Home to the egalitarian Gadaa system, a framework that predates modern democracy and serves as a model of peace and social cohesion.',
     images: ['https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=800', 'https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?q=80&w=800'],
-    summary: 'The largest and most populous region in Ethiopia, known for its diverse landscapes, the origin of coffee, and rich Gadaa heritage.',
+    summary: 'The largest and most populous region in Ethiopia, known for its diverse landscapes, the origin of Arabica coffee, and rich Gadaa heritage.',
     color: '#10B981'
   },
   somali: {
@@ -328,9 +328,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Koofiyad & Dirac', description: 'Men wear the Koofiyad (traditional cap) with a Macawiis (sarong). Women wear the Dirac, a lightweight, brilliantly colored flowing dress.' }
     ],
     languages: ['Somali'],
-    history: 'Historically part of vital ancient trade routes connecting the Horn of Africa to the Arabian peninsula. Known for deep Islamic heritage and poetic traditions.',
+    history: 'Historically part of vital ancient trade routes connecting the Horn of Africa to the Arabian peninsula. Known for deep Islamic heritage, camel caravans, and legendary poetic traditions.',
     images: ['https://images.unsplash.com/photo-1549471013-3364d7220b75?q=80&w=800', 'https://images.unsplash.com/photo-1506505494950-8438ebccba56?q=80&w=800'],
-    summary: 'An expansive, arid region dominated by pastoralist culture, camels, and vibrant trade history.',
+    summary: 'An expansive, arid region dominated by pastoralist culture, camels, and vibrant trade history across the Horn of Africa.',
     color: '#EAB308'
   },
   southern: {
@@ -360,9 +360,9 @@ const REGIONS_DATA: Record<string, RegionData> = {
       { name: 'Diverse Tribal Attire', description: 'Ranging from intricately woven cotton garments of the Dorze, to the spectacular beadwork and animal skin garments of the Omo Valley tribes.' }
     ],
     languages: ['Sidama', 'Wolaytta', 'Gurage', 'Hamer', '40+ others'],
-    history: 'The most ethnically diverse region of Ethiopia, home to over 45 distinct ethnic groups, preserving ancient tribal customs and agro-pastoralist systems.',
+    history: 'The most ethnically diverse region of Ethiopia, home to over 45 distinct ethnic groups, preserving ancient tribal customs, Konso stone terrace systems, and prehistoric Omo Valley hominid sites.',
     images: ['https://images.unsplash.com/photo-1616428236750-f8d2239d1b11?q=80&w=800', 'https://images.unsplash.com/photo-1532585227763-7e4b2d39df16?q=80&w=800'],
-    summary: 'A melting pot of over 45 distinct ethnic groups, featuring ancient megaliths, the Great Rift Valley, and vibrant tribal cultures.',
+    summary: 'A melting pot of over 45 distinct ethnic groups, featuring ancient megaliths, the Great Rift Valley, and vibrant tribal cultures of the Omo Valley.',
     color: '#8B5CF6'
   }
 };
@@ -420,7 +420,7 @@ const CulturalMap: React.FC = () => {
              <span className="bg-amber-950/10 text-amber-800 text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded-md">UNESCO</span>
            )}
          </div>
-         <p className="text-xs font-medium text-stone-500 leading-relaxed line-clamp-2">{item.description}</p>
+         <p className="text-sm font-medium text-stone-500 leading-relaxed line-clamp-2">{item.description}</p>
        </div>
        <div className="md:w-32 text-right">
           <span className="inline-block text-center bg-stone-100 group-hover:bg-amber-50 border border-stone-100 group-hover:border-amber-200 text-stone-600 group-hover:text-amber-700 transition-colors text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg">
@@ -486,15 +486,9 @@ const CulturalMap: React.FC = () => {
                 
                 <div className="w-20 h-1.5 bg-amber-600 rounded-full mb-8"></div>
                 
-                <p className="text-lg text-stone-300 font-medium leading-relaxed bg-stone-950 p-8 rounded-[2rem] border border-stone-850">
+                <p className="text-base text-stone-300 font-medium leading-relaxed bg-stone-950 p-5 rounded-[1.5rem] border border-stone-850">
                   {selectedDetail.description}
                 </p>
-
-                <div className="mt-8 flex justify-end">
-                  <button onClick={() => setSelectedDetail(null)} className="px-8 py-4 bg-stone-950 text-white hover:bg-stone-800 rounded-2xl text-sm font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all border border-stone-850">
-                    Close Profile
-                  </button>
-                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -623,7 +617,7 @@ const CulturalMap: React.FC = () => {
                 
                 {activeTab === 'overview' && (
                   <div className="animate-in fade-in duration-500 space-y-4">
-                     <p className="text-sm text-stone-600 font-medium leading-relaxed bg-stone-100 p-4 rounded-[1.5rem] border border-stone-100">{activeData.summary}</p>
+                     <p className="text-base text-stone-600 font-medium leading-relaxed bg-stone-100 p-4 rounded-[1.5rem] border border-stone-100">{activeData.summary}</p>
                      
                      <div className="grid grid-cols-2 gap-4">
                        <div className="bg-stone-50 rounded-[1.5rem] p-4 border border-stone-100 shadow-sm flex items-center gap-3">
@@ -647,7 +641,7 @@ const CulturalMap: React.FC = () => {
                           <svg className="w-20 h-20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
                        </div>
                        <h4 className="text-[9px] font-black text-stone-500 uppercase tracking-widest mb-1">Historical Significance</h4>
-                       <p className="text-xs font-medium leading-relaxed relative z-10">{activeData.history}</p>
+                       <p className="text-sm font-medium leading-relaxed relative z-10">{activeData.history}</p>
                      </div>
                   </div>
                 )}
