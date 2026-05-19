@@ -241,7 +241,7 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <button onClick={() => onNavigate('calendar')} className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
+            <button onClick={() => onNavigate('vault')} className="bg-white p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-150 transition-transform duration-700">
                  <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               </div>
@@ -292,7 +292,7 @@ const Dashboard: React.FC<{ user: any, onNavigate: (tab: string) => void }> = ({
               <h4 className="text-sm font-black uppercase tracking-widest mb-2 relative z-10">Next Big Event</h4>
               <h3 className="text-3xl font-black tracking-tight mb-2 relative z-10">Fichee-Chambalaalla</h3>
               <p className="text-sm font-bold mb-6 relative z-10">Sidama New Year celebration of unity and peace.</p>
-              <button onClick={() => onNavigate('calendar')} className="bg-stone-900 text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl hover:bg-stone-800 transition-colors relative z-10">
+              <button onClick={() => onNavigate('vault')} className="bg-stone-900 text-white px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest shadow-xl hover:bg-stone-800 transition-colors relative z-10">
                  View Details
               </button>
            </div>
@@ -410,7 +410,7 @@ const App: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EthiopianEvent | null>(null);
   const [selectedDay, setSelectedDay] = useState<CalendarDay | null>(null);
   const [reminders, setReminders] = useState<UserReminder[]>([]);
-  const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'map' | 'timeline' | 'reminders' | 'culture' | 'chat' | 'account'>(() => {
+  const [activeTab, setActiveTab] = useState<'home' | 'vault' | 'map' | 'timeline' | 'culture' | 'chat' | 'account'>(() => {
     return (localStorage.getItem('ethio_active_tab') as any) || 'home';
   });
 
@@ -519,8 +519,7 @@ const App: React.FC = () => {
             {[
               { id: 'home', label: 'Home', icon: '🏛️' },
               ...(user ? [
-                { id: 'calendar', label: t('nav.explore'), icon: '🌍' },
-                { id: 'reminders', label: t('nav.saved'), icon: '🏺' },
+                { id: 'vault', label: 'Vault', icon: '🏺' },
               ] : [
                 { id: 'account', label: 'Login', icon: '👤' }
               ])
@@ -602,8 +601,7 @@ const App: React.FC = () => {
         {[
           { id: 'home', label: 'Home', icon: '🏛️' },
           ...(user ? [
-            { id: 'calendar', label: 'Explore', icon: '🌍' },
-            { id: 'reminders', label: 'Saved', icon: '🏺' },
+            { id: 'vault', label: 'Vault', icon: '🏺' },
           ] : [
             { id: 'account', label: 'Login', icon: '👤' }
           ])
@@ -662,7 +660,7 @@ const App: React.FC = () => {
           ) : (
             <LandingPage onExplore={() => setActiveTab('account')} />
           )
-        ) : activeTab === 'calendar' ? (
+        ) : activeTab === 'vault' ? (
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-8 space-y-12">
               <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -784,16 +782,17 @@ const App: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        ) : activeTab === 'reminders' ? (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <MyReminders 
-              reminders={reminders} 
-              events={EVENTS_DATA} 
-              onDelete={handleDeleteReminder} 
-              onUpdate={handleUpdateReminder}
-              onClearAll={handleClearAllReminders}
-            />
+
+            {/* Combined Reminders/Saved Section in Vault */}
+            <div className="lg:col-span-12 mt-12 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+              <MyReminders 
+                reminders={reminders} 
+                events={EVENTS_DATA} 
+                onDelete={handleDeleteReminder} 
+                onUpdate={handleUpdateReminder}
+                onClearAll={handleClearAllReminders}
+              />
+            </div>
           </div>
         ) : activeTab === 'home' ? (
           user ? <Dashboard user={user} onNavigate={setActiveTab} /> : <LandingPage onExplore={() => setActiveTab('account')} />

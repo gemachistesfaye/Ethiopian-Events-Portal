@@ -105,7 +105,7 @@ const RAW_TRIVIA_POOL: CulturalTrivia[] = [
 
   // === NATIONAL IDENTITY ===
   { question: "What does the star on the Ethiopian flag represent?", answer: "Unity of all Ethiopian peoples", explanation: "The blue circle and golden star with rays on the Ethiopian flag represent the unity of all nationalities and peoples of Ethiopia and the bright future of the country." },
-  { question: "What does the word 'Ethiopia' mean in Greek?", answer: "Land of the Burnt Faces (Aithiops)", explanation: "The ancient Greek term 'Aithiops' (Αἰθίοψ) means 'burned face' or 'sun-burned face', used broadly for dark-skinned peoples south of Egypt. It later became the name for the nation." },
+
   { question: "What country is Ethiopia the oldest ally of, dating back to 615 AD?", answer: "The Muslim world (particularly Saudi Arabia / Hejaz)", explanation: "Since King Armah sheltered the companions of Prophet Muhammad in 615 AD, Ethiopia has been recognized as a land of justice in Islamic tradition, creating an early bond with the Muslim world." },
   { question: "What is the motto of Ethiopia?", answer: "Ethiopia Prevails (Ethiopia Stands / ኢትዮጵያ ትቅደም)", explanation: "'Ethiopia Prevails' (Ethiopia Tikdem) reflects the national spirit of resilience and sovereignty. Ethiopia is one of only two African nations never fully colonized." },
   { question: "What is the Amharic word for Ethiopia?", answer: "ኢትዮጵያ (Ityop'iya)", explanation: "In Amharic, Ethiopia is written as ኢትዮጵያ. The country is also historically called 'Abyssinia', derived from the Habesha people's name for themselves." },
