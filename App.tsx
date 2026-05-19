@@ -503,19 +503,19 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-stone-100 selection:bg-amber-200 flex flex-col pb-20 md:pb-0 font-sans">
       {/* Dynamic Header */}
-      <header className="bg-stone-100/80 backdrop-blur-xl border-b border-stone-200 sticky top-0 z-40 shadow-sm transition-all">
+      <header className="bg-stone-50/85 backdrop-blur-xl border-b border-amber-500/20 sticky top-0 z-40 shadow-sm transition-all">
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-11 h-11 bg-stone-100 rounded-2xl flex items-center justify-center text-amber-600 font-black text-2xl shadow-2xl transition-all hover:rotate-6 hover:scale-110 cursor-pointer">
+            <div className="w-11 h-11 bg-stone-50 border border-stone-200/60 rounded-2xl flex items-center justify-center text-amber-600 font-black text-2xl shadow-md transition-all hover:rotate-6 hover:scale-110 cursor-pointer">
               E
             </div>
             <div>
               <h1 className="text-xl font-black tracking-tighter text-stone-900 leading-none">{t('app.title')}</h1>
-              <p className="text-[9px] text-stone-500 font-black uppercase tracking-[0.3em] mt-1">{t('app.subtitle')}</p>
+              <p className="text-[9px] text-amber-600 font-black uppercase tracking-[0.3em] mt-1">{t('app.subtitle')}</p>
             </div>
           </div>
           
-          <nav className="hidden lg:flex gap-0.5 bg-stone-100 p-1 rounded-2xl border border-stone-200 shadow-inner">
+          <nav className="hidden lg:flex gap-0.5 bg-stone-50/40 p-1 rounded-2xl border border-stone-200/80 shadow-inner">
             {[
               { id: 'home', label: 'Home', icon: '🏛️' },
               ...(user ? [
@@ -531,12 +531,12 @@ const App: React.FC = () => {
               <button 
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 ${activeTab === tab.id ? 'bg-stone-100 shadow-xl text-stone-900 border border-stone-200 scale-[1.02]' : 'text-stone-500 hover:text-stone-800'}`}
+                className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 ${activeTab === tab.id ? 'bg-stone-900 shadow-xl text-stone-50 border border-stone-950 scale-[1.02]' : 'text-stone-500 hover:text-stone-900'}`}
               >
                 <span className="text-base">{tab.icon}</span>
                 {tab.id === 'account' ? 'Login' : tab.label}
                 {tab.id === 'reminders' && reminders.length > 0 && (
-                   <span className="bg-amber-900/20 text-stone-900 w-5 h-5 flex items-center justify-center rounded-lg shadow-sm font-bold ml-1">{reminders.length}</span>
+                   <span className="bg-amber-900/20 text-stone-950 w-5 h-5 flex items-center justify-center rounded-lg shadow-sm font-bold ml-1">{reminders.length}</span>
                 )}
               </button>
             ))}
@@ -547,7 +547,7 @@ const App: React.FC = () => {
             <select 
               onChange={(e) => i18n.changeLanguage(e.target.value)}
               value={i18n.language}
-              className="bg-stone-100 border border-stone-200 rounded-xl px-3 py-2 text-xs font-black cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+              className="bg-stone-50 border border-stone-200/80 rounded-xl px-3 py-2 text-xs font-black cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500/20"
             >
               <option value="en">EN</option>
               <option value="am">አማ</option>
@@ -555,7 +555,7 @@ const App: React.FC = () => {
             </select>
             <button 
                onClick={() => setActiveTab('account')}
-               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${activeTab === 'account' ? 'bg-amber-600 border-amber-700 text-stone-900 shadow-lg' : 'bg-stone-100 border-stone-200 text-stone-500 hover:bg-stone-700 hover:text-stone-800'}`}
+               className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all ${activeTab === 'account' ? 'bg-amber-600 border-amber-700 text-stone-950 shadow-lg' : 'bg-stone-50 border-stone-200/80 text-stone-500 hover:bg-stone-900 hover:text-stone-50 hover:border-stone-950'}`}
                title="Profile"
             >
                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
@@ -565,7 +565,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Mobile Nav */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-stone-100 border-t border-stone-200 z-50 px-6 h-20 flex items-center gap-8 overflow-x-auto shadow-2xl pb-2 pt-2">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-stone-50/90 backdrop-blur-xl border-t border-amber-500/20 z-50 px-6 h-20 flex items-center justify-around shadow-[0_-10px_30px_rgba(0,0,0,0.05)] pb-2 pt-2">
         {[
           { id: 'home', label: 'Home', icon: '🏛️' },
           ...(user ? [
@@ -581,7 +581,7 @@ const App: React.FC = () => {
           <button 
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`flex flex-col items-center gap-1 transition-all flex-shrink-0 min-w-[60px] ${activeTab === tab.id ? 'text-amber-600 scale-110 font-bold' : 'text-stone-500'}`}
+            className={`flex flex-col items-center gap-1 transition-all flex-shrink-0 min-w-[60px] ${activeTab === tab.id ? 'text-amber-600 scale-110 font-bold' : 'text-stone-500 hover:text-stone-800'}`}
           >
             <span className="text-xl">{tab.icon}</span>
             <span className="text-[8px] font-black uppercase tracking-widest">{tab.label}</span>
