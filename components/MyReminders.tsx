@@ -22,7 +22,7 @@ const CategoryIcon: React.FC<{ category: ReminderCategory }> = ({ category }) =>
 const PriorityBadge: React.FC<{ priority: ReminderPriority }> = ({ priority }) => {
   const colors = {
     Low: 'bg-emerald-50 text-emerald-600 border-emerald-100',
-    Medium: 'bg-amber-50 text-amber-600 border-amber-100',
+    Medium: 'bg-amber-900/20 text-amber-600 border-amber-100',
     High: 'bg-red-50 text-red-600 border-red-100',
   };
   return (
@@ -55,7 +55,11 @@ const ReminderItem: React.FC<{
   };
 
   return (
+<<<<<<< HEAD
     <div className="bg-stone-50 p-6 rounded-[2rem] border border-stone-200 shadow-sm hover:shadow-xl transition-all flex flex-col md:flex-row justify-between items-start group animate-in fade-in duration-300 relative overflow-hidden">
+=======
+    <div className="bg-stone-900 p-6 rounded-[2rem] border border-stone-800 shadow-sm hover:shadow-xl transition-all flex flex-col md:flex-row justify-between items-start group animate-in fade-in duration-300 relative overflow-hidden">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
       <div className="flex gap-6 w-full">
         <div className="w-14 h-14 rounded-2xl bg-stone-900 text-amber-500 flex items-center justify-center font-black text-2xl shadow-xl shrink-0 group-hover:scale-110 transition-transform duration-500">
           <CategoryIcon category={reminder.category} />
@@ -63,11 +67,11 @@ const ReminderItem: React.FC<{
         
         <div className="min-w-0 flex-grow">
           <div className="flex items-center gap-3 mb-2 flex-wrap">
-            <h4 className="font-black text-stone-900 truncate pr-4 text-lg leading-tight">
+            <h4 className="font-black text-stone-100 truncate pr-4 text-lg leading-tight">
               {event ? event.name : `Note - ${displayDate}`}
             </h4>
             <PriorityBadge priority={reminder.priority} />
-            <span className="text-[9px] font-black text-stone-400 bg-stone-100 px-2 py-0.5 rounded uppercase tracking-widest border border-stone-200">
+            <span className="text-[9px] font-black text-stone-400 bg-stone-800 px-2 py-0.5 rounded uppercase tracking-widest border border-stone-800">
               {reminder.category}
             </span>
           </div>
@@ -77,17 +81,25 @@ const ReminderItem: React.FC<{
               <textarea
                 value={editNote}
                 onChange={(e) => setEditNote(e.target.value)}
+<<<<<<< HEAD
                 className="w-full p-5 text-sm text-stone-900 bg-stone-50 border-2 border-amber-300 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 focus:outline-none font-medium shadow-inner min-h-[120px]"
+=======
+                className="w-full p-5 text-sm text-stone-100 bg-stone-900 border-2 border-amber-300 rounded-2xl focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 focus:outline-none font-medium shadow-inner min-h-[120px]"
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                 autoFocus
               />
               <div className="flex gap-2">
-                <button type="submit" className="bg-amber-500 text-stone-900 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-600 shadow-lg">Save Changes</button>
-                <button type="button" onClick={() => setIsEditing(false)} className="bg-stone-100 text-stone-500 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-stone-200">Cancel</button>
+                <button type="submit" className="bg-amber-900/200 text-stone-100 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-600 shadow-lg">Save Changes</button>
+                <button type="button" onClick={() => setIsEditing(false)} className="bg-stone-800 text-stone-400 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-stone-800">Cancel</button>
               </div>
             </form>
           ) : (
             <div className="relative">
+<<<<<<< HEAD
               <p className="text-stone-700 text-base mt-2 font-medium leading-relaxed break-words bg-stone-100/50 p-4 rounded-2xl border border-stone-100 italic">
+=======
+              <p className="text-stone-300 text-base mt-2 font-medium leading-relaxed break-words bg-stone-950/50 p-4 rounded-2xl border border-stone-800 italic">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                 "{reminder.note}"
               </p>
             </div>
@@ -96,7 +108,7 @@ const ReminderItem: React.FC<{
           <div className="flex items-center gap-4 mt-5">
             <div className="flex items-center gap-1.5">
                <svg className="w-3 h-3 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-               <span className="text-[10px] font-bold text-stone-500">{displayDate}</span>
+               <span className="text-[10px] font-bold text-stone-400">{displayDate}</span>
             </div>
             <div className="w-1 h-1 bg-stone-300 rounded-full"></div>
             <span className="text-[10px] font-bold text-stone-400">Created on {new Date(reminder.createdAt).toLocaleDateString()}</span>
@@ -108,13 +120,21 @@ const ReminderItem: React.FC<{
         <div className="flex md:flex-col gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity mt-4 md:mt-0 ml-auto md:ml-4">
           <button 
             onClick={() => setIsEditing(true)}
+<<<<<<< HEAD
             className="p-3 text-stone-400 hover:text-amber-500 transition-all bg-stone-100 hover:bg-amber-50 rounded-xl border border-stone-200"
+=======
+            className="p-3 text-stone-400 hover:text-amber-500 transition-all bg-stone-950 hover:bg-amber-900/20 rounded-xl border border-stone-800"
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
           </button>
           <button 
             onClick={() => onDelete(reminder.id)}
+<<<<<<< HEAD
             className="p-3 text-stone-400 hover:text-red-500 transition-all bg-stone-100 hover:bg-red-50 rounded-xl border border-stone-200"
+=======
+            className="p-3 text-stone-400 hover:text-red-500 transition-all bg-stone-950 hover:bg-red-50 rounded-xl border border-stone-800"
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
           </button>
@@ -127,12 +147,17 @@ const ReminderItem: React.FC<{
 const MyReminders: React.FC<MyRemindersProps> = ({ reminders, events, onDelete, onUpdate, onClearAll }) => {
   if (reminders.length === 0) {
     return (
+<<<<<<< HEAD
       <div className="bg-stone-50 rounded-[3rem] p-24 text-center border border-stone-200 shadow-sm animate-in fade-in duration-700">
         <div className="bg-stone-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10 border border-stone-100 shadow-inner">
+=======
+      <div className="bg-stone-900 rounded-[3rem] p-24 text-center border border-stone-800 shadow-sm animate-in fade-in duration-700">
+        <div className="bg-stone-950 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-10 border border-stone-800 shadow-inner">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
           <svg className="w-16 h-16 text-stone-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         </div>
-        <h3 className="text-3xl font-black text-stone-900 mb-4 tracking-tight">Your Heritage Box is Empty</h3>
-        <p className="text-stone-500 max-w-sm mx-auto text-sm font-medium leading-relaxed mb-8">
+        <h3 className="text-3xl font-black text-stone-100 mb-4 tracking-tight">Your Heritage Box is Empty</h3>
+        <p className="text-stone-400 max-w-sm mx-auto text-sm font-medium leading-relaxed mb-8">
           Save festival dates, travel plans, and cultural notes to keep your journey organized.
         </p>
       </div>
@@ -141,19 +166,23 @@ const MyReminders: React.FC<MyRemindersProps> = ({ reminders, events, onDelete, 
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto pb-12">
+<<<<<<< HEAD
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-stone-50 p-8 rounded-[2.5rem] border border-stone-200 shadow-sm">
+=======
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-stone-900 p-8 rounded-[2.5rem] border border-stone-800 shadow-sm">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
         <div className="flex items-center gap-5">
-          <div className="w-16 h-16 bg-amber-500 rounded-[1.25rem] flex items-center justify-center text-stone-900 text-2xl font-black shadow-xl shadow-amber-200/50">
+          <div className="w-16 h-16 bg-amber-900/200 rounded-[1.25rem] flex items-center justify-center text-stone-100 text-2xl font-black shadow-xl shadow-amber-200/50">
             {reminders.length}
           </div>
           <div>
-             <h3 className="text-2xl font-black text-stone-900 uppercase tracking-tighter">Your Saved Moments</h3>
+             <h3 className="text-2xl font-black text-stone-100 uppercase tracking-tighter">Your Saved Moments</h3>
              <p className="text-stone-400 text-xs font-bold tracking-widest uppercase">Syncing to local storage</p>
           </div>
         </div>
         <button 
           onClick={onClearAll}
-          className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 hover:text-red-500 transition-all px-6 py-3 rounded-2xl hover:bg-red-50 border border-stone-100 hover:border-red-100"
+          className="text-[10px] font-black uppercase tracking-[0.2em] text-stone-400 hover:text-red-500 transition-all px-6 py-3 rounded-2xl hover:bg-red-50 border border-stone-800 hover:border-red-100"
         >
           Destroy All Records
         </button>

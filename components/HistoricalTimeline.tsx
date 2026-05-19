@@ -657,7 +657,11 @@ const HistoricalTimeline: React.FC = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-stone-100 p-6 lg:p-10 font-sans relative overflow-hidden">
+=======
+    <div className="min-h-screen bg-stone-950 p-6 lg:p-10 font-sans relative overflow-hidden">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
       
       {/* Inject custom styled animations inside a style tag */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -710,15 +714,20 @@ const HistoricalTimeline: React.FC = () => {
         {/* Header - Holographic Style */}
         <header className="mb-16 text-center pt-8">
           <div className="inline-block relative">
+<<<<<<< HEAD
              <span className="absolute -inset-1 bg-amber-500/20 blur-lg rounded-full"></span>
              <span className="relative bg-stone-50 border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
+=======
+             <span className="absolute -inset-1 bg-amber-900/200/20 blur-lg rounded-full"></span>
+             <span className="relative bg-stone-900 border border-amber-200 text-amber-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-4 inline-block shadow-sm backdrop-blur-md">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                Animus Archive System
              </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-stone-900 tracking-tighter leading-none mb-4 uppercase drop-shadow-sm">
+          <h1 className="text-5xl md:text-7xl font-black text-stone-100 tracking-tighter leading-none mb-4 uppercase drop-shadow-sm">
             Chronicles of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500">Ethiopia</span>
           </h1>
-          <p className="text-stone-500 text-base md:text-lg font-medium max-w-2xl mx-auto uppercase tracking-widest text-[10px]">
+          <p className="text-stone-400 text-base md:text-lg font-medium max-w-2xl mx-auto uppercase tracking-widest text-[10px]">
             Unlock the epic eras, legendary battles, and ancient secrets of the Horn of Africa.
           </p>
         </header>
@@ -731,8 +740,13 @@ const HistoricalTimeline: React.FC = () => {
               onClick={() => setFilter(c)}
               className={`relative overflow-hidden px-6 py-3 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all duration-300 group shadow-sm ${
                 filter === c 
+<<<<<<< HEAD
                   ? 'bg-amber-500 text-white shadow-[0_4px_15px_rgba(245,158,11,0.3)] border border-amber-400' 
                   : 'bg-stone-50 border border-stone-200 text-stone-500 hover:border-amber-300 hover:text-amber-600'
+=======
+                  ? 'bg-amber-900/200 text-white shadow-[0_4px_15px_rgba(245,158,11,0.3)] border border-amber-400' 
+                  : 'bg-stone-900 border border-stone-800 text-stone-400 hover:border-amber-300 hover:text-amber-600'
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
               }`}
             >
               <span className="relative z-10">{c}</span>
@@ -743,7 +757,7 @@ const HistoricalTimeline: React.FC = () => {
         {/* Tech Tree Timeline */}
         <div className="relative pb-24">
           {/* Glowing Central Power Line */}
-          <div className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-stone-200 rounded-full overflow-hidden shadow-inner">
+          <div className="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-stone-800 rounded-full overflow-hidden shadow-inner">
              <motion.div 
                className="w-full h-1/3 bg-gradient-to-b from-transparent via-amber-400 to-transparent blur-[2px]"
                animate={{ y: ["-100%", "300%"] }}
@@ -764,7 +778,11 @@ const HistoricalTimeline: React.FC = () => {
                 {/* Content Card (Gaming Style - Light) */}
                 <div className="w-full md:w-[42%] ml-16 md:ml-0 group perspective-1000">
                   <div 
+<<<<<<< HEAD
                     className="relative bg-stone-50/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-200 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
+=======
+                    className="relative bg-stone-950/90 backdrop-blur-xl p-8 rounded-2xl border border-stone-800 shadow-xl transition-all duration-500 cursor-pointer overflow-hidden transform-gpu group-hover:scale-[1.02] group-hover:border-amber-400 group-hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)]"
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                     onClick={() => setSelectedEvent(event)}
                   >
                     {/* Corner accents */}
@@ -774,13 +792,17 @@ const HistoricalTimeline: React.FC = () => {
                     <div className="flex items-center gap-4 mb-4">
                       <span className="text-sm font-black text-amber-600">{event.year}</span>
                       <div className="h-px flex-1 bg-gradient-to-r from-amber-200 to-transparent"></div>
+<<<<<<< HEAD
                       <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-100 border border-stone-200 text-stone-500 px-3 py-1.5 rounded-sm">
+=======
+                      <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-stone-950 border border-stone-800 text-stone-400 px-3 py-1.5 rounded-sm">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                         {event.category}
                       </span>
                     </div>
                     
-                    <h3 className="text-2xl font-black text-stone-900 mb-3 tracking-tight group-hover:text-amber-600 transition-colors">{event.title}</h3>
-                    <p className="text-stone-600 text-sm leading-relaxed font-medium">{event.description}</p>
+                    <h3 className="text-2xl font-black text-stone-100 mb-3 tracking-tight group-hover:text-amber-600 transition-colors">{event.title}</h3>
+                    <p className="text-stone-300 text-sm leading-relaxed font-medium">{event.description}</p>
                     
                     <div className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-stone-400 group-hover:text-amber-600 transition-colors">
                       <span>Access Archive</span>
@@ -790,8 +812,8 @@ const HistoricalTimeline: React.FC = () => {
                 </div>
 
                 {/* Cyberpunk Node - Light */}
-                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full border-[3px] border-white bg-stone-100 flex items-center justify-center shadow-md z-10 group cursor-pointer" onClick={() => setSelectedEvent(event)}>
-                   <div className="w-3 h-3 bg-stone-300 rounded-full transition-all duration-300 group-hover:bg-amber-500 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.6)]"></div>
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full border-[3px] border-white bg-stone-800 flex items-center justify-center shadow-md z-10 group cursor-pointer" onClick={() => setSelectedEvent(event)}>
+                   <div className="w-3 h-3 bg-stone-300 rounded-full transition-all duration-300 group-hover:bg-amber-900/200 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.6)]"></div>
                    <div className="absolute inset-0 rounded-full border border-amber-500/0 group-hover:border-amber-500/50 group-hover:animate-ping"></div>
                 </div>
 
@@ -842,7 +864,7 @@ const HistoricalTimeline: React.FC = () => {
                     <div className="flex items-center justify-between text-[10px] text-amber-500/80 uppercase tracking-widest border-b border-stone-800 pb-2">
                       <span>Database ID: {selectedEvent.id.padStart(4, '0')}</span>
                       <span className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        <span className="w-2 h-2 rounded-full bg-amber-900/200 animate-pulse"></span>
                         SYNCHRONIZED
                       </span>
                     </div>
@@ -858,11 +880,11 @@ const HistoricalTimeline: React.FC = () => {
                     </div>
 
                     <div className="mt-2 pt-3 border-t border-stone-900/60 flex items-center justify-between">
-                      <span className="text-[9px] text-stone-500 uppercase tracking-wider">System: Animus OS v4.8</span>
+                      <span className="text-[9px] text-stone-400 uppercase tracking-wider">System: Animus OS v4.8</span>
                       <div className="flex gap-1">
-                        <span className="w-1.5 h-3 bg-amber-500/30"></span>
-                        <span className="w-1.5 h-3 bg-amber-500/50"></span>
-                        <span className="w-1.5 h-3 bg-amber-500"></span>
+                        <span className="w-1.5 h-3 bg-amber-900/200/30"></span>
+                        <span className="w-1.5 h-3 bg-amber-900/200/50"></span>
+                        <span className="w-1.5 h-3 bg-amber-900/200"></span>
                       </div>
                     </div>
                   </div>
@@ -881,7 +903,7 @@ const HistoricalTimeline: React.FC = () => {
 
                   {/* Header Title with Decryption Effect */}
                   <div className="mb-6 pr-6">
-                    <span className="text-[10px] text-amber-500 font-mono font-bold uppercase tracking-[0.2em] bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded">
+                    <span className="text-[10px] text-amber-500 font-mono font-bold uppercase tracking-[0.2em] bg-amber-900/200/10 border border-amber-500/20 px-3 py-1 rounded">
                       {selectedEvent.category} Records
                     </span>
                     <h2 className="text-2xl md:text-3xl font-black text-stone-100 leading-tight mt-3 tracking-tight uppercase">
@@ -913,7 +935,7 @@ const HistoricalTimeline: React.FC = () => {
                         <div className="text-[10px] uppercase tracking-widest text-amber-500 animate-pulse">
                           INITIALIZING DNA STREAM RECONSTRUCTION ... {decryptProgress}%
                         </div>
-                        <div className="text-[8px] text-stone-600 mt-2">
+                        <div className="text-[8px] text-stone-300 mt-2">
                           SYS.LOC.COGNITIVE_RECALL: CONNECTED TO CORE DATABANK
                         </div>
                       </motion.div>
@@ -930,7 +952,7 @@ const HistoricalTimeline: React.FC = () => {
                             onClick={() => setActiveTab('codex')}
                             className={`px-4 py-2 border-b-2 transition-all uppercase tracking-wider ${
                               activeTab === 'codex'
-                                ? 'border-amber-500 text-amber-500 bg-amber-500/[0.03]'
+                                ? 'border-amber-500 text-amber-500 bg-amber-900/200/[0.03]'
                                 : 'border-transparent text-stone-400 hover:text-stone-200'
                             }`}
                           >
@@ -940,7 +962,7 @@ const HistoricalTimeline: React.FC = () => {
                             onClick={() => setActiveTab('tactical')}
                             className={`px-4 py-2 border-b-2 transition-all uppercase tracking-wider ${
                               activeTab === 'tactical'
-                                ? 'border-amber-500 text-amber-500 bg-amber-500/[0.03]'
+                                ? 'border-amber-500 text-amber-500 bg-amber-900/200/[0.03]'
                                 : 'border-transparent text-stone-400 hover:text-stone-200'
                             }`}
                           >
@@ -950,7 +972,7 @@ const HistoricalTimeline: React.FC = () => {
                             onClick={() => setActiveTab('stream')}
                             className={`px-4 py-2 border-b-2 transition-all uppercase tracking-wider ${
                               activeTab === 'stream'
-                                ? 'border-amber-500 text-amber-500 bg-amber-500/[0.03]'
+                                ? 'border-amber-500 text-amber-500 bg-amber-900/200/[0.03]'
                                 : 'border-transparent text-stone-400 hover:text-stone-200'
                             }`}
                           >
@@ -983,7 +1005,7 @@ const HistoricalTimeline: React.FC = () => {
                                     <div className="relative w-14 h-14 flex items-center justify-center">
                                       {/* SVG Circle meter */}
                                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                        <path className="text-stone-800" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path className="text-stone-200" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                         <motion.path 
                                           className="text-amber-500" 
                                           strokeWidth="2.5" 
@@ -1006,7 +1028,7 @@ const HistoricalTimeline: React.FC = () => {
                                     <span className="text-[9px] text-stone-400 font-mono uppercase mb-2">LEGACY DURATION</span>
                                     <div className="relative w-14 h-14 flex items-center justify-center">
                                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                        <path className="text-stone-800" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path className="text-stone-200" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                         <motion.path 
                                           className="text-orange-500" 
                                           strokeWidth="2.5" 
@@ -1029,7 +1051,7 @@ const HistoricalTimeline: React.FC = () => {
                                     <span className="text-[9px] text-stone-400 font-mono uppercase mb-2">REGIONAL REACH</span>
                                     <div className="relative w-14 h-14 flex items-center justify-center">
                                       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                        <path className="text-stone-800" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path className="text-stone-200" strokeWidth="2.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                         <motion.path 
                                           className="text-rose-500" 
                                           strokeWidth="2.5" 
@@ -1071,7 +1093,7 @@ const HistoricalTimeline: React.FC = () => {
                                       onClick={() => setActiveMilestoneIndex(isActive ? null : idx)}
                                       className={`relative cursor-pointer transition-all duration-300 p-3 rounded-lg border ${
                                         isActive 
-                                          ? 'bg-amber-500/10 border-amber-500/30' 
+                                          ? 'bg-amber-900/200/10 border-amber-500/30' 
                                           : 'bg-stone-900/35 border-transparent hover:border-stone-800 hover:bg-stone-900/60'
                                       }`}
                                     >
@@ -1081,12 +1103,12 @@ const HistoricalTimeline: React.FC = () => {
                                           ? 'border-amber-500 bg-stone-950 scale-110 shadow-[0_0_8px_rgba(245,158,11,0.5)]' 
                                           : 'border-stone-700 bg-stone-900'
                                       }`}>
-                                        <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-amber-500' : 'bg-transparent'}`} />
+                                        <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-amber-900/200' : 'bg-transparent'}`} />
                                       </div>
 
                                       <div className="flex justify-between items-center">
                                         <span className="font-mono text-xs font-bold text-amber-500">{title}</span>
-                                        <span className="text-[9px] text-stone-500 uppercase tracking-widest font-mono">
+                                        <span className="text-[9px] text-stone-400 uppercase tracking-widest font-mono">
                                           {isActive ? 'COLLAPSE LOG' : 'EXPAND LOG'}
                                         </span>
                                       </div>
@@ -1129,7 +1151,7 @@ const HistoricalTimeline: React.FC = () => {
                                     {[...Array(12)].map((_, i) => (
                                       <div 
                                         key={i}
-                                        className="w-1.5 bg-amber-500 rounded-full origin-bottom animate-bounce-slow"
+                                        className="w-1.5 bg-amber-900/200 rounded-full origin-bottom animate-bounce-slow"
                                         style={{ 
                                           height: `${30 + Math.random() * 70}%`, 
                                           animationDelay: `${i * 0.07}s`,
@@ -1140,7 +1162,7 @@ const HistoricalTimeline: React.FC = () => {
                                   </div>
                                 ) : (
                                   <div className="text-center p-3">
-                                    <div className="text-[10px] text-stone-500 uppercase tracking-widest">COGNITIVE DECODER</div>
+                                    <div className="text-[10px] text-stone-400 uppercase tracking-widest">COGNITIVE DECODER</div>
                                     <div className="text-[9px] text-amber-500/70 uppercase tracking-widest mt-1">TRANSMISSION STANDBY</div>
                                   </div>
                                 )}
@@ -1148,11 +1170,11 @@ const HistoricalTimeline: React.FC = () => {
 
                               <div className="w-full flex items-center justify-between font-mono text-xs px-2 border-b border-stone-900 pb-3">
                                 <div className="flex flex-col text-left">
-                                  <span className="text-[10px] text-stone-500 uppercase">MEMORY CHANNEL</span>
+                                  <span className="text-[10px] text-stone-400 uppercase">MEMORY CHANNEL</span>
                                   <span className="text-stone-300 font-semibold uppercase">{selectedEvent.category} FEED</span>
                                 </div>
                                 <div className="flex flex-col text-right">
-                                  <span className="text-[10px] text-stone-500 uppercase">SYNC TIMELINE</span>
+                                  <span className="text-[10px] text-stone-400 uppercase">SYNC TIMELINE</span>
                                   <span className="text-amber-500 font-bold">
                                     {formatTime(audioTime)} / {audioRef.current ? formatTime(Math.floor(audioRef.current.duration)) : '00:45'}
                                   </span>
@@ -1165,10 +1187,10 @@ const HistoricalTimeline: React.FC = () => {
                                 disabled={loadingAudio}
                                 className={`w-full py-3 px-4 font-mono text-xs uppercase tracking-widest font-bold rounded-lg border transition-all flex items-center justify-center gap-3 ${
                                   loadingAudio 
-                                    ? 'bg-amber-500/10 border-amber-500/30 text-amber-500/50 cursor-wait'
+                                    ? 'bg-amber-900/200/10 border-amber-500/30 text-amber-500/50 cursor-wait'
                                     : isAudioPlaying 
-                                      ? 'bg-rose-500/10 border-rose-500/30 text-rose-500 hover:bg-rose-500/20' 
-                                      : 'bg-amber-500 text-stone-950 border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                                      ? 'bg-rose-950/300/10 border-rose-500/30 text-rose-500 hover:bg-rose-950/300/20' 
+                                      : 'bg-amber-900/200 text-stone-950 border-amber-400 hover:bg-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.3)]'
                                 }`}
                               >
                                 {loadingAudio ? (
@@ -1195,14 +1217,14 @@ const HistoricalTimeline: React.FC = () => {
 
                         {/* Interactive Key Figures Sidebar Section */}
                         <div className="mt-8 pt-6 border-t border-stone-900 font-mono">
-                          <h4 className="text-[9px] text-stone-500 uppercase tracking-widest mb-3">KEY ASSOCIATED IDENTITIES</h4>
+                          <h4 className="text-[9px] text-stone-400 uppercase tracking-widest mb-3">KEY ASSOCIATED IDENTITIES</h4>
                           <div className="flex flex-wrap gap-2">
                             {selectedEvent.keyFigures.map((figure, idx) => (
                               <div 
                                 key={idx}
                                 className="flex items-center gap-2 bg-stone-900 border border-stone-800/80 px-3 py-1.5 rounded-md hover:border-amber-500/40 hover:bg-stone-900/80 transition-all cursor-help group relative"
                               >
-                                <div className="w-4 h-4 rounded-full bg-amber-500/10 text-amber-500 text-[8px] font-bold flex items-center justify-center border border-amber-500/20">
+                                <div className="w-4 h-4 rounded-full bg-amber-900/200/10 text-amber-500 text-[8px] font-bold flex items-center justify-center border border-amber-500/20">
                                   {figure.charAt(0)}
                                 </div>
                                 <span className="text-[10px] text-stone-300 font-semibold">{figure}</span>
@@ -1221,9 +1243,9 @@ const HistoricalTimeline: React.FC = () => {
                   </AnimatePresence>
 
                   {/* Modal Footer status log */}
-                  <div className="mt-auto pt-6 border-t border-stone-900/60 flex items-center justify-between text-[9px] text-stone-500 font-mono">
+                  <div className="mt-auto pt-6 border-t border-stone-900/60 flex items-center justify-between text-[9px] text-stone-400 font-mono">
                     <span className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-900/200 animate-ping"></span>
                       SECURE SIGNAL LINK // DATA STEADY
                     </span>
                     <button 

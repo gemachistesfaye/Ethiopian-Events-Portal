@@ -31,7 +31,7 @@ const CultureZone: React.FC = () => {
 
         <div className="relative z-10 max-w-2xl">
           <div className="flex items-center gap-3 mb-6">
-            <span className="bg-amber-500 text-stone-900 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Culture Trivia</span>
+            <span className="bg-amber-900/200 text-stone-100 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Culture Trivia</span>
             <div className="h-4 w-[1px] bg-stone-700"></div>
             <span className="text-stone-400 text-xs font-bold">Powered by Gemini AI</span>
           </div>
@@ -50,7 +50,11 @@ const CultureZone: React.FC = () => {
               {!showAnswer ? (
                 <button 
                   onClick={() => setShowAnswer(true)}
+<<<<<<< HEAD
                   className="bg-stone-50 text-stone-900 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-500 transition-all shadow-xl active:scale-95"
+=======
+                  className="bg-stone-900 text-stone-100 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-900/200 transition-all shadow-xl active:scale-95"
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
                 >
                   Reveal Correct Answer
                 </button>
@@ -72,7 +76,7 @@ const CultureZone: React.FC = () => {
           <div className="mt-10">
             <button 
               onClick={fetchTrivia}
-              className="text-stone-500 hover:text-white transition-colors text-xs font-black uppercase tracking-widest flex items-center gap-2 group"
+              className="text-stone-400 hover:text-white transition-colors text-xs font-black uppercase tracking-widest flex items-center gap-2 group"
             >
               <svg className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
               Generate New Question
@@ -87,10 +91,14 @@ const CultureZone: React.FC = () => {
           { title: 'Music & Dance', icon: '💃', desc: 'Discover Eskista and the traditional instruments of the highlands.' },
           { title: 'History & Kings', icon: '👑', desc: 'Trace the lineage from Axum to the Solomonic dynasty.' }
         ].map((item, i) => (
+<<<<<<< HEAD
           <div key={i} className="bg-stone-50 p-8 rounded-[2rem] border border-stone-200 shadow-sm hover:shadow-xl transition-all cursor-pointer group">
+=======
+          <div key={i} className="bg-stone-900 p-8 rounded-[2rem] border border-stone-800 shadow-sm hover:shadow-xl transition-all cursor-pointer group">
+>>>>>>> 8e595acb9bebecb852d174592b19d072ae677393
             <div className="text-4xl mb-4 group-hover:scale-125 transition-transform duration-500">{item.icon}</div>
-            <h4 className="font-black text-stone-900 mb-2">{item.title}</h4>
-            <p className="text-stone-500 text-xs font-medium leading-relaxed">{item.desc}</p>
+            <h4 className="font-black text-stone-100 mb-2">{item.title}</h4>
+            <p className="text-stone-400 text-xs font-medium leading-relaxed">{item.desc}</p>
           </div>
         ))}
       </div>
