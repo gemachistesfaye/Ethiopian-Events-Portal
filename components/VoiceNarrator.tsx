@@ -117,23 +117,23 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
           utterance.lang = 'en-US';
         }
 
-        // Find a female voice
+        // Find a male voice
         const voices = window.speechSynthesis.getVoices();
-        const femaleVoiceNames = ['samantha', 'zira', 'karen', 'hazel', 'google us english', 'microsoft zira', 'en-us-x-sfg-local', 'female'];
-        let femaleVoice = null;
+        const maleVoiceNames = ['david', 'mark', 'george', 'male', 'google uk english male', 'microsoft david'];
+        let maleVoice = null;
         
-        for (const name of femaleVoiceNames) {
+        for (const name of maleVoiceNames) {
           const found = voices.find(v => v.name.toLowerCase().includes(name) && v.lang.startsWith(utterance.lang.substring(0, 2)));
           if (found) {
-            femaleVoice = found;
+            maleVoice = found;
             break;
           }
         }
-        if (!femaleVoice) {
-          femaleVoice = voices.find(v => v.lang.startsWith(utterance.lang.substring(0, 2)));
+        if (!maleVoice) {
+          maleVoice = voices.find(v => v.lang.startsWith(utterance.lang.substring(0, 2)));
         }
-        if (femaleVoice) {
-          utterance.voice = femaleVoice;
+        if (maleVoice) {
+          utterance.voice = maleVoice;
         }
 
         utterance.rate = speed;

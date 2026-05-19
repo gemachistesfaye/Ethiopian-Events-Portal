@@ -175,14 +175,14 @@ export async function speakAmharic(
             speech_config: {
               voice_config: {
                 prebuilt_voice_config: {
-                  voice_name: "Aoede"
+                  voice_name: "Puck"
                 }
               }
             },
             speechConfig: {
               voiceConfig: {
                 prebuiltVoiceConfig: {
-                  voiceName: "Aoede"
+                  voiceName: "Puck"
                 }
               }
             }

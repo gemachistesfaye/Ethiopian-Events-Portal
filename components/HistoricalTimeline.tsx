@@ -600,24 +600,24 @@ const HistoricalTimeline: React.FC = () => {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(selectedEvent.detailedDescription);
         
-        // Find a female voice
+        // Find a male voice
         const voices = window.speechSynthesis.getVoices();
-        const femaleVoiceNames = ['samantha', 'zira', 'karen', 'hazel', 'google us english', 'microsoft zira', 'en-us-x-sfg-local', 'female'];
-        let femaleVoice = null;
+        const maleVoiceNames = ['david', 'mark', 'george', 'male', 'google uk english male', 'microsoft david'];
+        let maleVoice = null;
         
-        for (const name of femaleVoiceNames) {
+        for (const name of maleVoiceNames) {
           const found = voices.find(v => v.name.toLowerCase().includes(name) && v.lang.startsWith('en'));
           if (found) {
-            femaleVoice = found;
+            maleVoice = found;
             break;
           }
         }
-        if (!femaleVoice) {
-          // If no specific female voice match, try any english voice
-          femaleVoice = voices.find(v => v.lang.startsWith('en'));
+        if (!maleVoice) {
+          // If no specific male voice match, try any english voice
+          maleVoice = voices.find(v => v.lang.startsWith('en'));
         }
-        if (femaleVoice) {
-          utterance.voice = femaleVoice;
+        if (maleVoice) {
+          utterance.voice = maleVoice;
         }
         
         utterance.onend = () => {
