@@ -5,6 +5,10 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import * as topojson from 'topojson-client';
 
+const MapContainerAny = MapContainer as any;
+const TileLayerAny = TileLayer as any;
+const GeoJSONAny = GeoJSON as any;
+
 interface DetailItem {
   name: string;
   description: string;
@@ -454,7 +458,7 @@ const CulturalMap: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-stone-50/80 backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-stone-950/80 backdrop-blur-md"
             onClick={() => setSelectedDetail(null)}
           >
             <motion.div 
@@ -462,32 +466,32 @@ const CulturalMap: React.FC = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-stone-50 rounded-[3rem] p-10 md:p-14 max-w-2xl w-full shadow-2xl relative border border-stone-200 overflow-hidden"
+              className="bg-stone-900 rounded-[3rem] p-10 md:p-14 max-w-2xl w-full shadow-2xl relative border border-stone-800 overflow-hidden text-stone-100"
             >
               <button 
                 onClick={() => setSelectedDetail(null)}
-                className="absolute top-8 right-8 w-12 h-12 bg-stone-100 text-stone-700 hover:bg-stone-50 hover:text-stone-900 rounded-full flex items-center justify-center transition-colors z-20"
+                className="absolute top-8 right-8 w-12 h-12 bg-stone-800 text-stone-400 hover:bg-stone-950 hover:text-white rounded-full flex items-center justify-center transition-colors z-20 border border-stone-700"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
 
               <div className="relative z-10">
-                <span className="bg-amber-900/40 text-amber-800 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block">
+                <span className="bg-amber-900/40 text-amber-400 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-[0.2em] mb-6 inline-block">
                   {selectedDetail.category || 'Cultural Detail'}
                 </span>
                 
-                <h2 className="text-4xl md:text-5xl font-black text-stone-900 tracking-tighter leading-none mb-6">
+                <h2 className="text-4xl md:text-5xl font-black text-stone-100 tracking-tighter leading-none mb-6">
                   {selectedDetail.name}
                 </h2>
                 
-                <div className="w-20 h-1.5 bg-amber-900/20 rounded-full mb-8"></div>
+                <div className="w-20 h-1.5 bg-amber-600 rounded-full mb-8"></div>
                 
-                <p className="text-lg text-stone-600 font-medium leading-relaxed bg-stone-100 p-8 rounded-[2rem] border border-stone-100">
+                <p className="text-lg text-stone-300 font-medium leading-relaxed bg-stone-950 p-8 rounded-[2rem] border border-stone-850">
                   {selectedDetail.description}
                 </p>
 
                 <div className="mt-8 flex justify-end">
-                  <button onClick={() => setSelectedDetail(null)} className="px-8 py-4 bg-stone-50 text-stone-900 rounded-2xl text-sm font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+                  <button onClick={() => setSelectedDetail(null)} className="px-8 py-4 bg-stone-950 text-white hover:bg-stone-800 rounded-2xl text-sm font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all border border-stone-850">
                     Close Profile
                   </button>
                 </div>
@@ -512,15 +516,15 @@ const CulturalMap: React.FC = () => {
           </div>
           
           <div className="flex-1 w-full h-full relative z-0 min-h-[500px]">
-             <MapContainer center={[9.145, 40.489]} zoom={5} scrollWheelZoom={true} style={{ height: '100%', width: '100%', zIndex: 0 }}>
-               <TileLayer
+             <MapContainerAny center={[9.145, 40.489]} zoom={5} scrollWheelZoom={true} style={{ height: '100%', width: '100%', zIndex: 0 }}>
+               <TileLayerAny
                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                />
                <MapController />
                
                {geoData && (
-                 <GeoJSON 
+                 <GeoJSONAny 
                    key={`geojson-${selectedRegion}`}
                    data={geoData}
                    style={(feature: any) => {
@@ -536,7 +540,7 @@ const CulturalMap: React.FC = () => {
                        dashArray: isSelected ? '' : '4',
                      };
                    }}
-                   onEachFeature={(feature, layer) => {
+                   onEachFeature={(feature: any, layer: any) => {
                      const regionId = REGION_NAME_MAP[feature?.properties?.name || ''];
                      if (regionId) {
                        layer.bindTooltip(`<div class="font-black text-xs uppercase tracking-widest">${REGIONS_DATA[regionId].name}</div>`, { sticky: true, className: 'bg-stone-50 border-none shadow-xl rounded-xl px-3 py-1' });
@@ -546,14 +550,14 @@ const CulturalMap: React.FC = () => {
                            setSelectedRegion(regionId);
                            setActiveTab('overview');
                          },
-                         mouseover: (e) => {
+                         mouseover: (e: any) => {
                            const l = e.target;
                            if (regionId !== selectedRegion) {
                              l.setStyle({ fillOpacity: 0.3, weight: 2, color: '#a8a29e' });
                            }
                            l.bringToFront();
                          },
-                         mouseout: (e) => {
+                         mouseout: (e: any) => {
                            const l = e.target;
                            if (regionId !== selectedRegion) {
                              l.setStyle({ fillOpacity: 0.1, weight: 1, color: '#d6d3d1', dashArray: '4' });
@@ -564,7 +568,7 @@ const CulturalMap: React.FC = () => {
                    }}
                  />
                )}
-             </MapContainer>
+             </MapContainerAny>
           </div>
         </div>
 
