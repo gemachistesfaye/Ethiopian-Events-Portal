@@ -185,7 +185,38 @@ const HeritageChat: React.FC = () => {
                   : 'bg-white border border-stone-200 text-stone-800 leading-relaxed'
               }`}
             >
-              <div>{m.text}</div>
+              <div style={{ whiteSpace: 'pre-wrap' }}>
+                {(() => {
+                  const text = m.text;
+                  const regex = /(\*\*|<b>)(.*?)(?:\*\*|<\/b>)/g;
+                  const parts = [];
+                  let lastIndex = 0;
+                  let match;
+                  
+                  while ((match = regex.exec(text)) !== null) {
+                    const textBefore = text.slice(lastIndex, match.index);
+                    if (textBefore) {
+                      parts.push(textBefore);
+                    }
+                    parts.push(
+                      <strong 
+                        className={`font-black ${m.role === 'user' ? 'text-stone-900 underline' : 'text-stone-950 bg-amber-50/70 px-1 py-0.5 rounded'}`} 
+                        key={match.index}
+                      >
+                        {match[2]}
+                      </strong>
+                    );
+                    lastIndex = regex.lastIndex;
+                  }
+                  
+                  const textAfter = text.slice(lastIndex);
+                  if (textAfter) {
+                    parts.push(textAfter);
+                  }
+                  
+                  return parts.length > 0 ? parts : text;
+                })()}
+              </div>
               
               <div className="flex justify-between items-center mt-3 pt-2 border-t border-stone-100/20">
                 <span className="text-[10px] opacity-50 font-black">{m.time}</span>

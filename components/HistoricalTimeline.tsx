@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { speakAmharic } from '../services/geminiService';
 
-interface TimelineEvent {
+export interface TimelineEvent {
   id: string;
   year: string;
   title: string;
@@ -20,7 +20,7 @@ interface TimelineEvent {
   milestones: string[];
 }
 
-const TIMELINE_DATA: TimelineEvent[] = [
+export const TIMELINE_DATA: TimelineEvent[] = [
   {
     id: '1',
     year: 'c. 3.2M BC',
