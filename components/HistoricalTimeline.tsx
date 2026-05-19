@@ -545,15 +545,22 @@ const HistoricalTimeline: React.FC = () => {
   const handleToggleAudio = async () => {
     if (!selectedEvent) return;
 
-    // If audio is already loaded and ready
-    if (audioRef.current && audioUrl) {
-      if (isAudioPlaying) {
+    // If currently playing, stop/pause immediately
+    if (isAudioPlaying) {
+      if (audioRef.current) {
         audioRef.current.pause();
-        setIsAudioPlaying(false);
-      } else {
-        audioRef.current.play();
-        setIsAudioPlaying(true);
       }
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      setIsAudioPlaying(false);
+      return;
+    }
+
+    // If we already loaded the audio stream, but it was paused/stopped, play it again
+    if (audioRef.current && audioUrl && !isAudioPlaying) {
+      audioRef.current.play();
+      setIsAudioPlaying(true);
       return;
     }
 
@@ -592,6 +599,26 @@ const HistoricalTimeline: React.FC = () => {
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(selectedEvent.detailedDescription);
+        
+        // Find a female voice
+        const voices = window.speechSynthesis.getVoices();
+        const femaleVoiceNames = ['samantha', 'zira', 'karen', 'hazel', 'google us english', 'microsoft zira', 'en-us-x-sfg-local', 'female'];
+        let femaleVoice = null;
+        
+        for (const name of femaleVoiceNames) {
+          const found = voices.find(v => v.name.toLowerCase().includes(name) && v.lang.startsWith('en'));
+          if (found) {
+            femaleVoice = found;
+            break;
+          }
+        }
+        if (!femaleVoice) {
+          // If no specific female voice match, try any english voice
+          femaleVoice = voices.find(v => v.lang.startsWith('en'));
+        }
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
+        }
         
         utterance.onend = () => {
           setIsAudioPlaying(false);

@@ -170,7 +170,22 @@ export async function speakAmharic(
         body: JSON.stringify({
           contents: [{ parts: [{ text }] }],
           generationConfig: {
-            responseModalities: ["AUDIO"]
+            response_modalities: ["AUDIO"],
+            responseModalities: ["AUDIO"],
+            speech_config: {
+              voice_config: {
+                prebuilt_voice_config: {
+                  voice_name: "Aoede"
+                }
+              }
+            },
+            speechConfig: {
+              voiceConfig: {
+                prebuiltVoiceConfig: {
+                  voiceName: "Aoede"
+                }
+              }
+            }
           }
         })
       }

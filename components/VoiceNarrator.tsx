@@ -20,21 +20,47 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
+  // Clean up audio on changes to text, style, or language, or when component unmounts
   useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl);
+      setAudioUrl(null);
+    }
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    setIsPlaying(false);
+    setProgress(0);
+
     return () => {
-      if (audioUrl) URL.revokeObjectURL(audioUrl);
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
     };
-  }, [audioUrl]);
+  }, [text, language, style]);
 
   const handlePlay = async () => {
-    if (audioRef.current && audioUrl) {
-      if (isPlaying) {
+    // If audio is currently playing, stop/pause immediately (either HTML5 Audio or Web Speech API)
+    if (isPlaying) {
+      if (audioRef.current) {
         audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        audioRef.current.play();
-        setIsPlaying(true);
       }
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      setIsPlaying(false);
+      return;
+    }
+
+    // If audio stream is already loaded but paused, play it
+    if (audioRef.current && audioUrl && !isPlaying) {
+      audioRef.current.playbackRate = speed;
+      audioRef.current.play();
+      setIsPlaying(true);
       return;
     }
 
@@ -71,10 +97,71 @@ const VoiceNarrator: React.FC<VoiceNarratorProps> = ({
         audio.playbackRate = speed;
         audio.play();
         setIsPlaying(true);
+      } else {
+        throw new Error("No audio data from Gemini TTS");
       }
     } catch (err) {
-      console.error(err);
-      alert("Failed to generate narration.");
+      console.warn("Gemini TTS failed or rate-limited. Falling back to browser SpeechSynthesis.", err);
+      
+      // Fallback to browser SpeechSynthesis
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        
+        // Match language code
+        if (language === 'am') {
+          utterance.lang = 'am-ET';
+        } else if (language === 'om') {
+          utterance.lang = 'om-ET';
+        } else {
+          utterance.lang = 'en-US';
+        }
+
+        // Find a female voice
+        const voices = window.speechSynthesis.getVoices();
+        const femaleVoiceNames = ['samantha', 'zira', 'karen', 'hazel', 'google us english', 'microsoft zira', 'en-us-x-sfg-local', 'female'];
+        let femaleVoice = null;
+        
+        for (const name of femaleVoiceNames) {
+          const found = voices.find(v => v.name.toLowerCase().includes(name) && v.lang.startsWith(utterance.lang.substring(0, 2)));
+          if (found) {
+            femaleVoice = found;
+            break;
+          }
+        }
+        if (!femaleVoice) {
+          femaleVoice = voices.find(v => v.lang.startsWith(utterance.lang.substring(0, 2)));
+        }
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
+        }
+
+        utterance.rate = speed;
+
+        utterance.onend = () => {
+          setIsPlaying(false);
+          setProgress(100);
+        };
+
+        // Estimate duration based on word count (~150 words per minute)
+        const wordCount = text.split(' ').length;
+        const estDuration = Math.ceil((wordCount / 150) * 60) || 30;
+
+        window.speechSynthesis.speak(utterance);
+        setIsPlaying(true);
+
+        let elapsed = 0;
+        const progressTimer = setInterval(() => {
+          if (!window.speechSynthesis.speaking) {
+            clearInterval(progressTimer);
+            return;
+          }
+          elapsed += 1;
+          setProgress(Math.min((elapsed / estDuration) * 100, 100));
+        }, 1000);
+      } else {
+        alert("Audio narration is not supported on this browser.");
+      }
     } finally {
       setLoading(false);
     }
