@@ -2,7 +2,7 @@
 
 ![Ethiopian Heritage Banner](assets/banner.svg)
 
-An advanced, interactive web portal designed to preserve and explore Ethiopian culture through a unique dual-calendar system, AI-powered insights, and private cultural planning. This project serves as a showcase of modern frontend engineering, complex state management, and seamless GenAI integration.
+An advanced, interactive web portal designed to preserve and explore Ethiopian culture through a unique dual-calendar system, AI-powered insights and private cultural planning. This project serves as a showcase of modern frontend engineering, complex state management and seamless GenAI integration.
 
 ---
 
@@ -11,7 +11,7 @@ An advanced, interactive web portal designed to preserve and explore Ethiopian c
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="assets/screenshot1.png" width="100%" height="320" style="object-fit:cover; border-radius:8px;" alt="Calendar View"/>
+      <img src="assets/screenshot1.png" width="100%" height="370" style="object-fit:cover; border-radius:8px;" alt="Calendar View"/>
       <br/><b>📅 Dual Calendar View</b>
     </td>
     <td align="center" width="50%">
@@ -49,11 +49,11 @@ An advanced, interactive web portal designed to preserve and explore Ethiopian c
 The heart of the portal is a high-precision calendar engine that synchronizes the **Gregorian** and **Ethiopian (Ge'ez)** calendars. 
 - **13-Month Support:** Full handling of the Ethiopian 13th month (*Pagumē*).
 - **Precise Conversion:** Implements the Julian Day Number (JDN) algorithm for zero-offset accuracy between calendar systems.
-- **Integrated Events:** View cultural, religious, and public holidays mapped across both timelines.
+- **Integrated Events:** View cultural, religious and public holidays mapped across both timelines.
 
 ### 🤖 AI Heritage Guide & Insights
 Leveraging the **Google Gemini API**, the portal provides deep cultural immersion:
-- **Heritage Guide (Chat):** A real-time AI assistant trained to answer complex questions about Ethiopian history, traditions, and geography.
+- **Heritage Guide (Chat):** A real-time AI assistant trained to answer complex questions about Ethiopian history, traditions and geography.
 - **Cultural Insights:** Automated generation of fascinating facts for every major festival.
 - **Amharic TTS:** High-fidelity text-to-speech for correct Amharic pronunciation of event names.
 
@@ -64,7 +64,7 @@ A secure, client-side reminder system for personal cultural planning:
 
 ### ✨ Culture Zone
 - **AI Trivia:** Dynamically generated multiple-choice questions about Ethiopian heritage.
-- **Interactive Exploration:** Thematic cards covering Food, Music, and History.
+- **Interactive Exploration:** Thematic cards covering Food, Music and History.
 
 ---
 
