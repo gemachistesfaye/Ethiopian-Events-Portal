@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="520" viewBox="0 0 1280 520">
+  <defs>
+    <!-- Background gradient -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#7c4f00" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Cross pattern tile -->
+    <pattern id="crosses" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="none"/>
+      <rect x="27" y="0" width="6" height="60" fill="#b8860b" opacity="0.07"/>
+      <rect x="0" y="27" width="60" height="6" fill="#b8860b" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="dividerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#F59E0B" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1280" height="520" fill="#0a0a0a"/>
+
+  <!-- Pattern overlay -->
+  <rect width="1280" height="520" fill="url(#crosses)"/>
+
+  <!-- Center glow -->
+  <rect width="1280" height="520" fill="url(#glow)"/>
+
+  <!-- Corner ornaments - top left -->
+  <polyline points="24,124 24,24 124,24" stroke="#b8860b" stroke-width="1.5" stroke-opacity="0.35" fill="none"/>
+  <!-- Corner ornaments - top right -->
+  <polyline points="1156,24 1256,24 1256,124" stroke="#b8860b" stroke-width="1.5" stroke-opacity="0.35" fill="none"/>
+  <!-- Corner ornaments - bottom left -->
+  <polyline points="24,396 24,496 124,496" stroke="#b8860b" stroke-width="1.5" stroke-opacity="0.35" fill="none"/>
+  <!-- Corner ornaments - bottom right -->
+  <polyline points="1156,496 1256,496 1256,396" stroke="#b8860b" stroke-width="1.5" stroke-opacity="0.35" fill="none"/>
+
+  <!-- Eyebrow text -->
+  <text x="640" y="190" font-family="Arial, sans-serif" font-size="12" font-weight="700"
+    letter-spacing="7" fill="#F59E0B" fill-opacity="0.65"
+    text-anchor="middle">CULTURAL INTELLIGENCE PLATFORM</text>
+
+  <!-- Main Title -->
+  <text x="640" y="270" font-family="Georgia, 'Times New Roman', serif" font-size="62" font-weight="700"
+    letter-spacing="3" fill="#F59E0B"
+    text-anchor="middle">Ethiopian Heritage Portal</text>
+
+  <!-- Amber divider line -->
+  <line x1="500" y1="296" x2="780" y2="296" stroke="url(#dividerGrad)" stroke-width="1"/>
+
+  <!-- Tagline -->
+  <text x="640" y="334" font-family="Arial, sans-serif" font-size="13" font-weight="400"
+    letter-spacing="6" fill="#ffffff" fill-opacity="0.45"
+    text-anchor="middle">EXPLORE  ·  PRESERVE  ·  EXPERIENCE</text>
+</svg>

@@ -1,6 +1,6 @@
 # 🌍 Ethiopian Heritage Portal: A Cultural Intelligence Platform
 
-![Ethiopian Heritage Banner](docs/banner.svg)
+![Ethiopian Heritage Banner](assets/banner.svg)
 
 An advanced, interactive web portal designed to preserve and explore Ethiopian culture through a unique dual-calendar system, AI-powered insights, and private cultural planning. This project serves as a showcase of modern frontend engineering, complex state management, and seamless GenAI integration.
 
