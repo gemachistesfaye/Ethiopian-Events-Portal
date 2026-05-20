@@ -114,16 +114,24 @@ ethiopian-heritage-portal/
 
 ## ⚠️ System Limitations & Fallbacks
 
-- **API Rate Limits & Connectivity**: The AI guide, translation helper, and text-to-speech components rely on cloud API endpoints. If rate limits are reached or a connection drops, the platform seamlessly activates a robust **local offline registry** covering key historical events, country statistics, language profiles, national symbols, and a shuffled pool of 100 offline trivia questions.
-- **Local Data Persistence**: The "Private Heritage Box" stores user reminders entirely client-side using `localStorage`. Plans are private and fast but do not synchronize across different browsers, devices, or private browsing sessions.
-- **Interactive Map Data Fetching**: Regional boundaries on the interactive map are rendered from GeoJSON fetched on page load. A continuous network connection is required to render the vector boundaries, though the region summaries and offline data remain interactive.
-- **Supabase Authentication**: Modifying account credentials, logging in, or resetting passwords requires an active internet connection to securely communicate with the Supabase authorization servers.
+> [!CAUTION]
+> **API Connectivity** — AI chat, trivia & TTS require an active internet connection. Falls back to a built-in offline registry with 100+ trivia questions & historical data.
+
+> [!CAUTION]
+> **Data Persistence** — Heritage vault reminders are stored in `localStorage` only. Does not sync across devices or private browsing sessions.
+
+> [!CAUTION]
+> **Map Boundaries** — Regional GeoJSON is fetched on page load and requires internet. Region summaries & cultural profiles remain interactive offline.
+
+> [!CAUTION]
+> **Supabase Auth** — Login, signup & password reset require an active internet connection. Session persists locally until expiry.
+
 ---
 
 ## 🚀 About the Developer
 
 **Gemachis Tesfaye**  
-*Software Engineer & Data Specialist*
+*Software Engineer*
 
 - **GitHub**: [@gemachistesfaye](https://github.com/gemachistesfaye)
 - **Telegram**: [@urjiiko1](https://t.me/urjiiko1)
