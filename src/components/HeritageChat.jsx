@@ -97,7 +97,7 @@ const HeritageChat = () => {
         { text: "Explain Timkat like a documentary", icon: "🎬" },
         { text: "Teach me Ethiopian history step-by-step", icon: "📚" }
     ];
-    return (<div className="max-w-4xl mx-auto h-[700px] flex flex-col bg-stone-900 rounded-[3rem] border border-stone-850 shadow-2xl overflow-hidden font-sans text-stone-100">
+    return (<div className="max-w-4xl mx-auto h-[550px] flex flex-col bg-stone-900 rounded-[3rem] border border-stone-850 shadow-2xl overflow-hidden font-sans text-stone-100">
       
       {/* MODES SELECTOR */}
       <div className="bg-stone-950 p-4 flex flex-wrap gap-2 justify-center border-b border-stone-850">
