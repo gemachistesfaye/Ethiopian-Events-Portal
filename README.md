@@ -8,11 +8,38 @@ An advanced, interactive web portal designed to preserve and explore Ethiopian c
 
 ## 📸 Platform Interface Preview
 
-| Calendar View | Heritage Map | AI Chatbot |
-| :---: | :---: | :---: |
-| ![Calendar View](assets/screenshot1.png) | ![Heritage Map](assets/screenshot2.png) | ![AI Chatbot](assets/screenshot3.png) |
-| **Culture Zone** | **Historical Timeline** | **Featured Festivals** |
-| ![Culture Zone](assets/screenshot4.png) | ![Historical Timeline](assets/screenshot5.png) | ![Featured Festivals](assets/screenshot6.png) |
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/screenshot1.png" width="100%" height="320" style="object-fit:cover; border-radius:8px;" alt="Calendar View"/>
+      <br/><b>📅 Dual Calendar View</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/screenshot2.png" width="100%" height="320" style="object-fit:cover; border-radius:8px;" alt="Heritage Map"/>
+      <br/><b>🗺️ Interactive Heritage Map</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/screenshot3.png" width="100%" height="320" style="object-fit:cover; border-radius:8px;" alt="AI Chatbot"/>
+      <br/><b>🤖 AI Heritage Guide</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/screenshot4.png" width="100%" height="320" style="object-fit:cover; border-radius:8px;" alt="Culture Zone"/>
+      <br/><b>🎉 Culture Zone & Trivia</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/screenshot5.png" width="100%" height="320" style="object-fit:cover; border-radius:8px;" alt="Historical Timeline"/>
+      <br/><b>📜 Historical Timeline Archive</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/screenshot6.png" width="100%" height="320" style="object-fit:cover; border-radius:8px;" alt="Featured Festivals"/>
+      <br/><b>🌄 Featured Festivals</b>
+    </td>
+  </tr>
+</table>
 
 ---
 
