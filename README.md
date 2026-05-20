@@ -8,14 +8,11 @@ An advanced, interactive web portal designed to preserve and explore Ethiopian c
 
 ## 📸 Platform Interface Preview
 
-| Feature | Screenshot |
-| --- | --- |
-| **Integrated Dual-Calendar System**<br>Interactive calendar view showing Gregorian dates paired with Ethiopian (Ge'ez) dates, custom JDN calculation engine, and integrated holiday markers. | ![Calendar View](docs/screenshot1.png) |
-| **Interactive Cultural Atlas**<br>High-fidelity maps of Ethiopia with selectable regional profiles showing local food, music, clothing, and landmarks. | ![Heritage Map](docs/screenshot2.png) |
-| **AI Heritage Guide Chatbot**<br>Context-aware conversational guide backed by Gemini API with role selections (storyteller, teacher, guide, etc.). | ![AI Chatbot](docs/screenshot3.png) |
-| **Culture Zone & AI Trivia**<br>Gamified trivia pool with multiple-choice questions on history and geography, plus thematic history cards. | ![Culture Zone](docs/screenshot4.png) |
-| **Secure Authentication**<br>Supabase-based user authorization flow including sign up, login, and password management cards. | ![Auth Interface](docs/screenshot5.png) |
-| **Unified Settings & Customizer**<br>Manage platform preferences, calendar systems, notification systems, and security settings. | ![Settings Page](docs/screenshot6.png) |
+| Calendar View | Heritage Map | AI Chatbot |
+| :---: | :---: | :---: |
+| ![Calendar View](assets/screenshot1.png) | ![Heritage Map](assets/screenshot2.png) | ![AI Chatbot](assets/screenshot3.png) |
+| **Culture Zone** | **Auth Interface** | **Settings Page** |
+| ![Culture Zone](assets/screenshot4.png) | ![Auth Interface](assets/screenshot5.png) | ![Settings Page](assets/screenshot6.png) |
 
 ---
 
