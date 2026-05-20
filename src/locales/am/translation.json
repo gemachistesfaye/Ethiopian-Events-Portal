@@ -21,8 +21,13 @@
   "nav": {
     "explore": "አስስ",
     "saved": "የተቀመጡ",
-    "zone": "ዞን",
-    "guide": "መመሪያ"
+    "zone": "ባህል",
+    "guide": "አጋዥ",
+    "home": "ዋና ገጽ",
+    "vault": "ማህደር",
+    "map": "ካርታ",
+    "timeline": "ታሪክ",
+    "login": "ግባ"
   },
   "footer": {
     "dev_profile": "የዴቭ ፕሮፋይል",
@@ -31,5 +36,46 @@
   },
   "reminders": {
     "clear_confirm": "ሁሉንም የባህል መዛግብት ያጥፉ? ይህ ድርጊት ቋሚ ነው።"
+  },
+  "dashboard": {
+    "welcome": "እንኳን ደህና መጡ!",
+    "pro_explorer": "ዋና ተመራማሪ",
+    "subtitle": "የኢትዮጵያ ቅርሶች መግቢያዎ ዝግጁ ነው። ጥልቅ ታሪካዊ ግንዛቤዎችን እና መጪ ክስተቶችን ያግኙ።",
+    "events_saved": "የተቀመጡ ክስተቶች",
+    "heritage_scholar": "የቅርስ ምሁር",
+    "explore_platform": "መድረኩን ያስሱ",
+    "heritage_calendar": "የቅርስ የቀን መቁጠሪያ",
+    "calendar_desc": "በጎርጎርዮስ እና በኢትዮጵያ ቀናት የተመሳሰሉ መጪ ክስተቶችን፣ በዓላትን እና ሃይማኖታዊ በዓላትን ያስሱ።",
+    "launch": "ጀምር →",
+    "ai_storyteller": "አይአይ (AI) ተራኪ",
+    "ai_desc": "ከእኛ ብልህ መመሪያ ጋር ይወያዩ። ጥንታዊ የኢትዮጵያ ታሪክን፣ አፈ ታሪኮችን እና ጥልቅ ባህላዊ ግንዛቤዎችን ያግኙ።",
+    "start_chat": "ውይይት ጀምር →",
+    "cultural_atlas": "ባህላዊ ካርታ",
+    "atlas_desc": "የቅርስ ቦታዎች በይነተገናኝ ካርታ።",
+    "culture_zone": "የባህል ዞን",
+    "zone_desc": "ምግብ፣ ሙዚቃ እና ወጎች።",
+    "next_event": "ቀጣዩ ትልቅ ክስተት",
+    "view_details": "ዝርዝሮችን ይመልከቱ",
+    "recent_activity": "የቅርብ ጊዜ እንቅስቃሴ",
+    "view_all": "ሁሉንም ይመልከቱ"
+  },
+  "landing": {
+    "welcome": "ወደ የቅርስ የወደፊት ዕጣ ፈንታ እንኳን በደህና መጡ",
+    "experience": "የኢትዮጵያን ይለማመዱ",
+    "culture": "ባህል እና ታሪክ",
+    "desc": "የኢትዮጵያን ጥንታዊ ወጎች፣ አስደናቂ ታሪኮች እና ደማቅ በዓላት በዘመናዊ AI እና በይነተገናኝ ልምዶች ያግኙ።",
+    "begin": "ጉዞ ይጀምሩ",
+    "watch": "የፊልም ማስታወቂያ ይመልከቱ",
+    "today": "ዛሬ በታሪክ",
+    "core_modules": "ዋና ሞጁሎች",
+    "immersive": "አስገራሚ ፍለጋ",
+    "glimpse": "የቅርስ ፍንጭ",
+    "featured": "ተለይተው የቀረቡ በዓላት",
+    "stats_years": "የታሪክ ዓመታት",
+    "stats_regions": "ባህላዊ ክልሎች",
+    "stats_festivals": "ዋና ዋና በዓላት",
+    "stats_ai": "AI እገዛ",
+    "ready": "ለማሰስ ዝግጁ ነዎት?",
+    "get_started": "በነጻ ይጀምሩ"
   }
 }

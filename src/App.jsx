@@ -164,6 +164,7 @@ const ProfileSettings = ({ user }) => {
     </div>);
 };
 const Dashboard = ({ user, onNavigate }) => {
+    const { t } = useTranslation();
     return (<div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto font-sans">
       {/* Welcome Header */}
       <div className="bg-stone-100 rounded-[3rem] p-10 md:p-16 text-stone-900 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
@@ -176,21 +177,21 @@ const Dashboard = ({ user, onNavigate }) => {
         </div>
         
         <div className="relative z-10 text-center md:text-left flex-1">
-          <span className="bg-amber-900/20 text-amber-500 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-[0.2em] mb-4 inline-block">Pro Explorer</span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight font-serif">Welcome back!</h2>
+          <span className="bg-amber-900/20 text-amber-500 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-[0.2em] mb-4 inline-block">{t('dashboard.pro_explorer')}</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight font-serif">{t('dashboard.welcome')}</h2>
           <p className="text-stone-500 font-normal text-base md:text-lg mb-4">{user.email}</p>
-          <p className="text-sm text-stone-500 max-w-md leading-relaxed font-normal">Your gateway to Ethiopian heritage is ready. Discover deep historical insights and upcoming events.</p>
+          <p className="text-sm text-stone-500 max-w-md leading-relaxed font-normal">{t('dashboard.subtitle')}</p>
         </div>
 
         <div className="hidden lg:flex gap-6 relative z-10 bg-stone-100/50 p-6 rounded-[2rem] border border-stone-200 backdrop-blur-sm">
            <div className="text-center">
              <div className="text-2xl font-bold text-amber-500 mb-1">12</div>
-             <div className="text-[8px] text-stone-500 font-bold uppercase tracking-widest leading-normal">Events<br />Saved</div>
+             <div className="text-[8px] text-stone-500 font-bold uppercase tracking-widest leading-normal">{t('dashboard.events_saved')}</div>
            </div>
            <div className="w-px bg-stone-200"></div>
            <div className="text-center">
              <div className="text-2xl font-bold text-amber-500 mb-1">LV.4</div>
-             <div className="text-[8px] text-stone-500 font-bold uppercase tracking-widest leading-normal">Heritage<br />Scholar</div>
+             <div className="text-[8px] text-stone-500 font-bold uppercase tracking-widest leading-normal">{t('dashboard.heritage_scholar')}</div>
            </div>
         </div>
       </div>
@@ -200,7 +201,7 @@ const Dashboard = ({ user, onNavigate }) => {
         {/* Quick Access Grid */}
         <div className="lg:col-span-8 space-y-8">
           <div className="flex items-center justify-between">
-             <h3 className="text-lg md:text-xl font-bold text-stone-900 tracking-tight font-serif">Explore Platform</h3>
+             <h3 className="text-lg md:text-xl font-bold text-stone-900 tracking-tight font-serif">{t('dashboard.explore_platform')}</h3>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -211,9 +212,9 @@ const Dashboard = ({ user, onNavigate }) => {
               <div className="w-16 h-16 bg-amber-900/40 text-amber-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
               </div>
-              <h3 className="text-lg font-bold text-stone-900 mb-3 relative z-10 font-serif">Heritage Calendar</h3>
-              <p className="text-xs md:text-sm text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Explore upcoming events, festivals, and religious holidays synchronized across Gregorian and Ethiopian dates.</p>
-              <div className="mt-8 text-xs font-bold uppercase tracking-widest text-amber-600 group-hover:translate-x-2 transition-transform">Launch →</div>
+              <h3 className="text-lg font-bold text-stone-900 mb-3 relative z-10 font-serif">{t('dashboard.heritage_calendar')}</h3>
+              <p className="text-xs md:text-sm text-stone-500 leading-relaxed font-normal relative z-10 flex-1">{t('dashboard.calendar_desc')}</p>
+              <div className="mt-8 text-xs font-bold uppercase tracking-widest text-amber-600 group-hover:translate-x-2 transition-transform">{t('dashboard.launch')}</div>
             </button>
 
             <button onClick={() => onNavigate('chat')} className="bg-stone-100 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-emerald-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
@@ -223,25 +224,25 @@ const Dashboard = ({ user, onNavigate }) => {
               <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
               </div>
-              <h3 className="text-lg font-bold text-stone-900 mb-3 relative z-10 font-serif">AI Storyteller</h3>
-              <p className="text-xs md:text-sm text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Chat with our intelligent guide. Uncover ancient Ethiopian history, myths, and deep cultural insights.</p>
-              <div className="mt-8 text-xs font-bold uppercase tracking-widest text-emerald-400 group-hover:translate-x-2 transition-transform">Start Chat →</div>
+              <h3 className="text-lg font-bold text-stone-900 mb-3 relative z-10 font-serif">{t('dashboard.ai_storyteller')}</h3>
+              <p className="text-xs md:text-sm text-stone-500 leading-relaxed font-normal relative z-10 flex-1">{t('dashboard.ai_desc')}</p>
+              <div className="mt-8 text-xs font-bold uppercase tracking-widest text-emerald-400 group-hover:translate-x-2 transition-transform">{t('dashboard.start_chat')}</div>
             </button>
             
             <button onClick={() => onNavigate('map')} className="bg-stone-100 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-blue-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
               <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
               </div>
-              <h3 className="text-base font-bold text-stone-900 mb-2 relative z-10 font-serif">Cultural Atlas</h3>
-              <p className="text-xs text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Interactive map of heritage sites.</p>
+              <h3 className="text-base font-bold text-stone-900 mb-2 relative z-10 font-serif">{t('dashboard.cultural_atlas')}</h3>
+              <p className="text-xs text-stone-500 leading-relaxed font-normal relative z-10 flex-1">{t('dashboard.atlas_desc')}</p>
             </button>
             
             <button onClick={() => onNavigate('culture')} className="bg-stone-100 p-8 rounded-[2.5rem] border border-stone-200 shadow-xl hover:border-rose-400 hover:shadow-2xl transition-all group text-left h-full flex flex-col relative overflow-hidden">
               <div className="w-16 h-16 bg-rose-100 text-rose-600 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform relative z-10">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
               </div>
-              <h3 className="text-base font-bold text-stone-900 mb-2 relative z-10 font-serif">Culture Zone</h3>
-              <p className="text-xs text-stone-500 leading-relaxed font-normal relative z-10 flex-1">Food, music, and traditions.</p>
+              <h3 className="text-base font-bold text-stone-900 mb-2 relative z-10 font-serif">{t('dashboard.culture_zone')}</h3>
+              <p className="text-xs text-stone-500 leading-relaxed font-normal relative z-10 flex-1">{t('dashboard.zone_desc')}</p>
             </button>
           </div>
         </div>
@@ -252,7 +253,7 @@ const Dashboard = ({ user, onNavigate }) => {
               <div className="absolute -right-4 -bottom-4 opacity-20 transform rotate-12">
                  <span className="text-9xl">✨</span>
               </div>
-              <h4 className="text-xs font-bold uppercase tracking-widest mb-2 relative z-10">Next Big Event</h4>
+              <h4 className="text-xs font-bold uppercase tracking-widest mb-2 relative z-10">{t('dashboard.next_event')}</h4>
               <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2 relative z-10 font-serif">Fichee-Chambalaalla</h3>
               <p className="text-xs md:text-sm font-normal mb-6 relative z-10 leading-relaxed text-stone-700">Sidama New Year celebration of unity and peace.</p>
               <button onClick={() => onNavigate('vault')} className="bg-stone-100 text-stone-900 px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-widest shadow-xl hover:bg-stone-100 transition-colors relative z-10">
@@ -262,8 +263,8 @@ const Dashboard = ({ user, onNavigate }) => {
 
            <div className="bg-stone-100 rounded-[2.5rem] border border-stone-200 shadow-xl p-8">
               <div className="flex items-center justify-between mb-8">
-                 <h4 className="text-base font-bold text-stone-900 font-serif">Recent Activity</h4>
-                 <button onClick={() => onNavigate('reminders')} className="text-[9px] font-bold uppercase tracking-widest text-amber-600 hover:text-stone-900">View All</button>
+                 <h4 className="text-base font-bold text-stone-900 font-serif">{t('dashboard.recent_activity')}</h4>
+                 <button onClick={() => onNavigate('reminders')} className="text-[9px] font-bold uppercase tracking-widest text-amber-600 hover:text-stone-900">{t('dashboard.view_all')}</button>
               </div>
 
               <div className="space-y-6">
@@ -439,15 +440,15 @@ const App = () => {
           
           <nav className="hidden lg:flex gap-0.5 bg-stone-50/40 p-1 rounded-2xl border border-stone-200/80 shadow-inner">
             {[
-            { id: 'home', label: 'Home', icon: '🏛️' },
+            { id: 'home', label: t('nav.home'), icon: '🏛️' },
             ...(user ? [
-                { id: 'vault', label: 'Vault', icon: '🏺' },
-                { id: 'map', label: 'Atlas', icon: '🗺️' },
-                { id: 'timeline', label: 'Timeline', icon: '📜' },
+                { id: 'vault', label: t('nav.vault'), icon: '🏺' },
+                { id: 'map', label: t('nav.map'), icon: '🗺️' },
+                { id: 'timeline', label: t('nav.timeline'), icon: '📜' },
                 { id: 'culture', label: t('nav.zone'), icon: '✨' },
                 { id: 'chat', label: t('nav.guide'), icon: '🤖' }
             ] : [
-                { id: 'account', label: 'Login', icon: '👤' }
+                { id: 'account', label: t('nav.login'), icon: '👤' }
             ])
         ].map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-1.5 ${activeTab === tab.id ? 'bg-stone-900 shadow-xl text-stone-50 border border-stone-950 scale-[1.02]' : 'text-stone-500 hover:text-stone-900'}`}>
                 <span className="text-base">{tab.icon}</span>
@@ -473,15 +474,15 @@ const App = () => {
       {/* Mobile Nav */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-stone-50/90 backdrop-blur-xl border-t border-amber-500/20 z-50 px-6 h-20 flex items-center justify-around shadow-[0_-10px_30px_rgba(0,0,0,0.05)] pb-2 pt-2">
         {[
-            { id: 'home', label: 'Home', icon: '🏛️' },
+            { id: 'home', label: t('nav.home'), icon: '🏛️' },
             ...(user ? [
-                { id: 'vault', label: 'Vault', icon: '🏺' },
-                { id: 'map', label: 'Atlas', icon: '🗺️' },
-                { id: 'timeline', label: 'Timeline', icon: '📜' },
-                { id: 'culture', label: 'Zone', icon: '✨' },
-                { id: 'chat', label: 'Guide', icon: '🤖' }
+                { id: 'vault', label: t('nav.vault'), icon: '🏺' },
+                { id: 'map', label: t('nav.map'), icon: '🗺️' },
+                { id: 'timeline', label: t('nav.timeline'), icon: '📜' },
+                { id: 'culture', label: t('nav.zone'), icon: '✨' },
+                { id: 'chat', label: t('nav.guide'), icon: '🤖' }
             ] : [
-                { id: 'account', label: 'Login', icon: '👤' }
+                { id: 'account', label: t('nav.login'), icon: '👤' }
             ])
         ].map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex flex-col items-center gap-1 transition-all flex-shrink-0 min-w-[60px] ${activeTab === tab.id ? 'text-amber-600 scale-110 font-bold' : 'text-stone-500 hover:text-stone-800'}`}>
             <span className="text-xl">{tab.icon}</span>

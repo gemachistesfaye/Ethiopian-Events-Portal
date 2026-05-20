@@ -19,10 +19,15 @@
     }
   },
   "nav": {
-    "explore": "Barbaadi",
-    "saved": "Kan Olkaa'ame",
-    "zone": "Zoonii",
-    "guide": "Qajeelcha"
+    "explore": "Qoradhu",
+    "saved": "Kuufame",
+    "zone": "Aadaa",
+    "guide": "Gargaaraa",
+    "home": "Qe'ee",
+    "vault": "Kuusaa",
+    "map": "Kaartaa",
+    "timeline": "Seenaa",
+    "login": "Seeni"
   },
   "footer": {
     "dev_profile": "Piroofayilii Dev",
@@ -31,5 +36,46 @@
   },
   "reminders": {
     "clear_confirm": "Galmeewwan aadaa hundaa balleessi? Tarkaanfiin kun dhaabbataadha."
+  },
+  "dashboard": {
+    "welcome": "Baga nagaan deebitan!",
+    "pro_explorer": "Qorataa Olaanaa",
+    "subtitle": "Karrawwan aadaa Itoophiyaa keessan qophiidha. Hubannoo seenaa gadi fagoof taatewwan dhufan bari'aa.",
+    "events_saved": "Taatewwan Kuufaman",
+    "heritage_scholar": "Hayyuu Aadaa",
+    "explore_platform": "Waltajjii Qoradhu",
+    "heritage_calendar": "Kalaandarii Aadaa",
+    "calendar_desc": "Taatewwan dhufan, ayyaanotaafi guyyoota kabaja amantaa guyyoota Giriigooriyaaniif Itoophiyaa walsimaniin qoradhaa.",
+    "launch": "Eegali →",
+    "ai_storyteller": "AI Seeneessaa",
+    "ai_desc": "Qajeelchaa keenya gamna waliin haasa'i. Seenaa Itoophiyaa durii, duri-durii fi hubannoo aadaa gadi fagoof bari'aa.",
+    "start_chat": "Haasa'a Eegali →",
+    "cultural_atlas": "Kaartaa Aadaa",
+    "atlas_desc": "Kaartaa wal-qunnamsiisaa bakkeewwan aadaa.",
+    "culture_zone": "Zoonii Aadaa",
+    "zone_desc": "Nyaata, muuziqaa, fi aadaa.",
+    "next_event": "Taatee Guddaa Itti Aanu",
+    "view_details": "Bal'inaan Ilaali",
+    "recent_activity": "Hojii Dhihoo",
+    "view_all": "Hunda Ilaali"
+  },
+  "landing": {
+    "welcome": "Baga gara aadaa yeroo dhuufuu dhuftan",
+    "experience": "Muuxannoo Itoophiyaa",
+    "culture": "Aadaa fi Seenaa",
+    "desc": "Aadaa Itoophiyaa durii, seenaa gootummaa fi ayyaanota miidhagoo AI ammayyaa fi muuxannoo wal-qunnamsiisuun argadhaa.",
+    "begin": "Imala Eegali",
+    "watch": "Viidiyoo Ilaali",
+    "today": "HAR'A SEENAA KEESSATTI",
+    "core_modules": "Kutaalee Ijoo",
+    "immersive": "Qorannoo Gadi Fago",
+    "glimpse": "Ilaalcha Aadaa",
+    "featured": "Ayyaanota Bebbeekkamoo",
+    "stats_years": "Waggaa Seenaa",
+    "stats_regions": "Naannoo Aadaa",
+    "stats_festivals": "Ayyaanota Guguddaa",
+    "stats_ai": "Gargaarsa AI",
+    "ready": "Qorachuuf Qophiidhaa?",
+    "get_started": "Tolaan Eegali"
   }
 }

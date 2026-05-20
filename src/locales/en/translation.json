@@ -22,7 +22,12 @@
     "explore": "Explore",
     "saved": "Saved",
     "zone": "Zone",
-    "guide": "Guide"
+    "guide": "Guide",
+    "home": "Home",
+    "vault": "Vault",
+    "map": "Atlas",
+    "timeline": "Timeline",
+    "login": "Login"
   },
   "footer": {
     "dev_profile": "Dev Profile",
@@ -31,5 +36,46 @@
   },
   "reminders": {
     "clear_confirm": "Destroy all cultural records? This action is permanent."
+  },
+  "dashboard": {
+    "welcome": "Welcome back!",
+    "pro_explorer": "Pro Explorer",
+    "subtitle": "Your gateway to Ethiopian heritage is ready. Discover deep historical insights and upcoming events.",
+    "events_saved": "Events Saved",
+    "heritage_scholar": "Heritage Scholar",
+    "explore_platform": "Explore Platform",
+    "heritage_calendar": "Heritage Calendar",
+    "calendar_desc": "Explore upcoming events, festivals, and religious holidays synchronized across Gregorian and Ethiopian dates.",
+    "launch": "Launch →",
+    "ai_storyteller": "AI Storyteller",
+    "ai_desc": "Chat with our intelligent guide. Uncover ancient Ethiopian history, myths, and deep cultural insights.",
+    "start_chat": "Start Chat →",
+    "cultural_atlas": "Cultural Atlas",
+    "atlas_desc": "Interactive map of heritage sites.",
+    "culture_zone": "Culture Zone",
+    "zone_desc": "Food, music, and traditions.",
+    "next_event": "Next Big Event",
+    "view_details": "View Details",
+    "recent_activity": "Recent Activity",
+    "view_all": "View All"
+  },
+  "landing": {
+    "welcome": "Welcome to the Future of Heritage",
+    "experience": "Experience Ethiopian",
+    "culture": "Culture & History",
+    "desc": "Discover the ancient traditions, epic stories, and vibrant festivals of Ethiopia through cutting-edge AI and interactive experiences.",
+    "begin": "Begin Journey",
+    "watch": "Watch Trailer",
+    "today": "TODAY IN HISTORY",
+    "core_modules": "Core Modules",
+    "immersive": "Immersive Exploration",
+    "glimpse": "Glimpse of Heritage",
+    "featured": "Featured Festivals",
+    "stats_years": "Years of History",
+    "stats_regions": "Cultural Regions",
+    "stats_festivals": "Major Festivals",
+    "stats_ai": "AI Assistance",
+    "ready": "Ready to Explore?",
+    "get_started": "Get Started Free"
   }
 }

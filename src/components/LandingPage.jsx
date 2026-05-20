@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 const LandingPage = ({ onExplore }) => {
+  const { t } = useTranslation();
     return (<div className="bg-stone-100 text-stone-900 font-sans overflow-hidden">
       
       {/* HERO SECTION */}
@@ -14,14 +16,14 @@ const LandingPage = ({ onExplore }) => {
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="relative z-10 max-w-4xl mx-auto">
           <span className="bg-amber-950/60 text-amber-400 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6 inline-block shadow-lg border border-amber-900/30">
-            Welcome to the Future of Heritage
+            {t('landing.welcome')}
           </span>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-wide leading-tight mb-6 text-stone-100 font-serif">
-            Experience Ethiopian <br />
-            <span className="gold-text-gradient">Culture & History</span>
+            {t('landing.experience')} <br />
+            <span className="gold-text-gradient">{t('landing.culture')}</span>
           </h1>
           <p className="text-stone-400 text-sm md:text-base max-w-2xl mx-auto mb-10 font-normal leading-relaxed">
-            Discover the ancient traditions, epic stories, and vibrant festivals of Ethiopia through cutting-edge AI and interactive experiences.
+            {t('landing.desc')}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -37,7 +39,7 @@ const LandingPage = ({ onExplore }) => {
         {/* Floating Cards Mockup */}
         <div className="absolute bottom-10 left-10 hidden lg:block">
           <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="bg-stone-900/40 backdrop-blur-md p-4 rounded-xl border border-stone-850 text-xs w-48 text-stone-300">
-            <p className="text-amber-500 font-bold">TODAY IN HISTORY</p>
+            <p className="text-amber-500 font-bold">{t('landing.today')}</p>
             <p className="text-stone-300 mt-1 font-normal">The Battle of Adwa victory was secured.</p>
           </motion.div>
         </div>
@@ -46,8 +48,8 @@ const LandingPage = ({ onExplore }) => {
       {/* FEATURES SECTION */}
       <section className="py-20 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <span className="text-[11px] font-bold text-amber-600 uppercase tracking-widest">Core Modules</span>
-          <h2 className="text-2xl md:text-3xl font-bold text-stone-900 tracking-wide mt-1 font-serif">Immersive Exploration</h2>
+          <span className="text-[11px] font-bold text-amber-600 uppercase tracking-widest">{t('landing.core_modules')}</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-stone-900 tracking-wide mt-1 font-serif">{t('landing.immersive')}</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -78,8 +80,8 @@ const LandingPage = ({ onExplore }) => {
       <section className="py-20 px-6 bg-stone-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <span className="text-[11px] font-bold text-amber-600 uppercase tracking-widest">Glimpse of Heritage</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 tracking-wide mt-1 font-serif">Featured Festivals</h2>
+            <span className="text-[11px] font-bold text-amber-600 uppercase tracking-widest">{t('landing.glimpse')}</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-stone-900 tracking-wide mt-1 font-serif">{t('landing.featured')}</h2>
             <p className="text-stone-500 text-xs md:text-sm font-medium mt-2">Discover some of the most vibrant celebrations in Ethiopia.</p>
           </div>
 
@@ -152,19 +154,19 @@ const LandingPage = ({ onExplore }) => {
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
           <div>
             <p className="text-3xl md:text-4xl font-bold text-amber-600 mb-2">3000+</p>
-            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">Years of History</p>
+            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">{t('landing.stats_years')}</p>
           </div>
           <div>
             <p className="text-3xl md:text-4xl font-bold text-stone-900 mb-2">12+</p>
-            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">Cultural Regions</p>
+            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">{t('landing.stats_regions')}</p>
           </div>
           <div>
             <p className="text-3xl md:text-4xl font-bold text-amber-600 mb-2">50+</p>
-            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">Major Festivals</p>
+            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">{t('landing.stats_festivals')}</p>
           </div>
           <div>
             <p className="text-3xl md:text-4xl font-bold text-stone-900 mb-2">24/7</p>
-            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">AI Assistance</p>
+            <p className="text-stone-500 text-[10px] font-bold uppercase tracking-widest">{t('landing.stats_ai')}</p>
           </div>
         </div>
       </section>
@@ -172,10 +174,10 @@ const LandingPage = ({ onExplore }) => {
       {/* CTA SECTION */}
       <section className="py-20 px-6 text-center">
         <div className="max-w-3xl mx-auto bg-stone-950 text-stone-100 p-10 rounded-[3rem] shadow-2xl border border-stone-900">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-wide mb-4 text-stone-100 font-serif">Ready to Explore?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-wide mb-4 text-stone-100 font-serif">{t('landing.ready')}</h2>
           <p className="text-stone-400 text-xs md:text-sm font-normal mb-8 max-w-xl mx-auto">Join thousands of cultural enthusiasts discovering the rich heritage of Ethiopia.</p>
           <button onClick={onExplore} className="bg-amber-500 text-stone-950 px-6 py-3 rounded-2xl font-bold uppercase text-[11px] tracking-widest hover:bg-amber-400 transition-colors shadow-xl shadow-amber-500/10">
-            Get Started Free
+            {t('landing.get_started')}
           </button>
         </div>
       </section>
