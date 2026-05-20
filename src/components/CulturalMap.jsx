@@ -406,6 +406,13 @@ const CulturalMap = () => {
                 map.flyTo(activeData.coordinates, 6, { duration: 1.5 });
             }
         }, [activeData, map]);
+        useEffect(() => {
+            // Fix for map tiles not loading fully
+            const timer = setTimeout(() => {
+                map.invalidateSize();
+            }, 250);
+            return () => clearTimeout(timer);
+        }, [map]);
         return null;
     };
     return (<div className="min-h-screen p-4 lg:p-8 font-sans animate-in fade-in slide-in-from-bottom-4 duration-700 relative bg-stone-100">
