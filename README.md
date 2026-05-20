@@ -70,11 +70,25 @@ A secure, client-side reminder system for personal cultural planning:
 
 ## 🛠️ Technical Stack
 
-- **Frontend:** React 19 (JavaScript / ES6 Modules / JSX)
-- **Styling:** Tailwind CSS (Modern, mobile-first, warm 'stone' palette and refined typography)
-- **Intelligence:** Google Gemini 3 Flash & Gemini 2.5 Flash (TTS)
-- **Date Logic:** Custom JDN conversion algorithms
-- **State Management:** Native React Hooks (`useMemo`, `useEffect`, `useState`)
+| Category | Technology | Version | Purpose |
+|---|---|---|---|
+| **UI Framework** | React | ^19.2.4 | Component-based UI rendering with JSX |
+| **DOM Renderer** | React DOM | ^19.2.4 | React rendering into the browser DOM |
+| **Build Tool** | Vite | ^6.2.0 | Lightning-fast dev server & production bundler |
+| **Vite Plugin** | @vitejs/plugin-react | ^5.0.0 | JSX transformation & React Fast Refresh |
+| **AI Engine** | @google/genai | ^1.41.0 | Gemini API — chat, trivia generation & Amharic TTS |
+| **Authentication** | @supabase/supabase-js | ^2.106.0 | User auth, session management & database |
+| **Mapping** | Leaflet | ^1.9.4 | Core interactive map rendering engine |
+| **Map Components** | React-Leaflet | ^5.0.0 | React wrapper for Leaflet map integration |
+| **Geo Data** | topojson-client | ^3.1.0 | Converts TopoJSON → GeoJSON for regional boundaries |
+| **Animations** | Framer Motion | ^12.39.0 | Premium UI transitions and micro-animations |
+| **Localization** | i18next | ^26.2.0 | Multi-language framework (EN / AM / OM) |
+| **Lang Detection** | i18next-browser-languagedetector | ^8.2.1 | Auto-detects user's browser language |
+| **React i18n** | react-i18next | ^17.0.8 | React hooks & components for i18next |
+| **Styling** | Tailwind CSS | (via CDN) | Utility-first responsive styling — warm stone palette |
+| **Date Logic** | Custom JDN Algorithm | — | Ethiopian ↔ Gregorian calendar conversion |
+| **State Management** | React Hooks | built-in | `useState`, `useEffect`, `useMemo`, `useRef` |
+| **Persistence** | localStorage | built-in | Private heritage vault & chat history |
 
 ---
 
