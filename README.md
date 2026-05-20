@@ -11,8 +11,8 @@ An advanced, interactive web portal designed to preserve and explore Ethiopian c
 | Calendar View | Heritage Map | AI Chatbot |
 | :---: | :---: | :---: |
 | ![Calendar View](assets/screenshot1.png) | ![Heritage Map](assets/screenshot2.png) | ![AI Chatbot](assets/screenshot3.png) |
-| **Culture Zone** | **Auth Interface** | **Settings Page** |
-| ![Culture Zone](assets/screenshot4.png) | ![Auth Interface](assets/screenshot5.png) | ![Settings Page](assets/screenshot6.png) |
+| **Culture Zone** | **Auth Interface** | **Featured Festivals** |
+| ![Culture Zone](assets/screenshot4.png) | ![Auth Interface](assets/screenshot5.png) | ![Featured Festivals](assets/screenshot6.png) |
 
 ---
 
